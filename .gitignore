@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Environment secrets — NEVER commit these
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build output
+dist/
+build/
+
+# OS artefacts
+.DS_Store
+Thumbs.db
+
+# Docker volumes / local DB data
+mongo-data/

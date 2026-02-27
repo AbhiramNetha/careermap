@@ -1,0 +1,187 @@
+🧩 UI COMPONENT HIERARCHY 
+CareerMap India (React-Based Structure) 
+ 
+1️⃣ Root Structure 
+App 
+ ├── Router 
+ │    ├── HomePage 
+ │    ├── QuizPage 
+ │    ├── QuizResultPage 
+ │    ├── CareerCategoryPage 
+ │    ├── CareerDetailPage 
+ │    ├── ComparePage 
+ │    ├── BranchSelectionPage 
+ │    ├── BranchDetailPage 
+ │    └── RoadmapPage 
+ ├── Navbar 
+ └── Footer 
+ 
+ 
+2️⃣ Global Components (Reusable) 
+These are used across multiple pages. 
+Common Components 
+ ├── Button 
+ ├── Card 
+ ├── Tag 
+ ├── Badge 
+ ├── ProgressBar 
+ ├── Modal 
+ ├── Loader 
+ ├── ChartComponent 
+ ├── ComparisonTable 
+ └── Timeline 
+ 
+These make your UI scalable and modular. 
+ 
+3️⃣ Home Page Component Hierarchy 
+HomePage 
+ ├── HeroSection 
+ │    ├── Heading 
+ │    ├── SubHeading 
+ │    └── CTAButtons 
+ ├── CareerCategoryGrid 
+ │    ├── CategoryCard (x4) 
+ ├── TrendingCareersSection 
+ │    ├── CareerCard (horizontal scroll) 
+ └── Footer 
+ 
+ 
+4️⃣ Career Category Page Structure 
+CareerCategoryPage 
+ ├── FilterPanel 
+ │    ├── BranchFilter 
+ │    ├── SalaryFilter 
+ │    ├── RiskFilter 
+ │    └── StudyPreferenceFilter 
+ ├── CareerGrid 
+ │    ├── CareerCard (dynamic list) 
+ └── Pagination (optional) 
+ 
+ 
+5️⃣ Career Detail Page Structure 
+CareerDetailPage 
+ ├── CareerHeader 
+ │    ├── CareerTitle 
+ │    ├── CategoryTag 
+ │    └── CompareButton 
+ ├── OverviewSection 
+ ├── SalarySection 
+ │    └── SalaryChart 
+ ├── SkillsSection 
+ │    └── SkillTagList 
+ ├── RiskStudySection 
+ ├── RoadmapPreviewSection 
+ │    └── TimelineComponent 
+ └── RelatedCareersSection 
+ 
+ 
+6️⃣ Quiz Page Component Hierarchy 
+QuizPage 
+ ├── QuizProgressBar 
+ ├── QuizQuestionCard 
+ │    ├── QuestionText 
+ │    ├── OptionCard (multiple) 
+ ├── NavigationButtons 
+ │    ├── BackButton 
+ │    └── NextButton 
+ └── SubmitButton (final step) 
+ 
+ 
+7️⃣ Quiz Result Page 
+QuizResultPage 
+ ├── ResultHeader 
+ ├── RecommendedCareerList 
+ │    ├── MatchCard 
+ │         ├── CareerName 
+ │         ├── MatchPercentage 
+ │         ├── ExplanationText 
+ │         ├── ViewDetailsButton 
+ │         └── CompareButton 
+ └── RetakeQuizButton 
+ 
+ 
+8️⃣ Comparison Page 
+ComparePage 
+ ├── SelectedCareerSummary 
+ ├── ComparisonTable 
+ │    ├── SalaryRow 
+ │    ├── StudyTimeRow 
+ │    ├── RiskRow 
+ │    ├── GrowthRow 
+ │    ├── StabilityRow 
+ └── HighlightBestOption 
+ 
+ 
+9️⃣ Branch Selection Page 
+BranchSelectionPage 
+ ├── BranchGrid 
+ │    ├── BranchCard (CSE, ECE, Mech, Civil, EEE) 
+ 
+ 
+🔟 Branch Detail Page 
+BranchDetailPage 
+ ├── BranchHeader 
+ ├── CareerDistributionChart 
+ ├── CoreCareersSection 
+ │    ├── CareerCard 
+ ├── ITSwitchCareersSection 
+ │    ├── CareerCard 
+ ├── GovtCareersSection 
+ │    ├── CareerCard 
+ └── HigherStudiesSection 
+      ├── CareerCard 
+ 
+ 
+1️⃣1️⃣ Roadmap Page 
+RoadmapPage 
+ ├── RoadmapHeader 
+ ├── TimelineView 
+ │    ├── MonthBlock 
+ │         ├── SkillsList 
+ │         ├── ToolsList 
+ │         ├── ProjectList 
+ │         └── InterviewPrepSection 
+ └── ResourceLinks 
+ 
+ 
+🔁 State Management (Important for 
+Portfolio) 
+Global States: 
+●​ SelectedCareers (for comparison)​
+ 
+●​ QuizAnswers​
+ 
+●​ QuizResults​
+ 
+●​ SelectedBranch​
+ 
+●​ FiltersState​
+ 
+Can be handled using: 
+●​ React Context API (MVP)​
+ OR​
+ 
+●​ Redux (Advanced)​
+ 
+ 
+🧠 Component Layer Architecture 
+Presentation Layer (UI Components) 
+Business Logic Layer (Quiz Scoring Engine) 
+Data Layer (API Calls / MongoDB) 
+ 
+This shows layered architecture thinking. 
+ 
+🎯 Why This Is Strong for Portfolio 
+This demonstrates: 
+●​ Component modularity​
+ 
+●​ Reusability​
+ 
+●​ Clean separation of concerns​
+ 
+●​ Scalable frontend design​
+ 
+●​ Real-world project architecture​
+ 
+This is much stronger than basic CRUD apps. 
+ 

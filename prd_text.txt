@@ -1,0 +1,392 @@
+📘 PRODUCT REQUIREMENTS 
+DOCUMENT (PRD) 
+Product Name: CareerMap India 
+Version: 1.0​
+ Document Owner: Product Team​
+ Target Audience: B.Tech Students (India) 
+ 
+1️⃣ Product Overview 
+1.1 Vision 
+To help B.Tech students in India make informed, structured, and personalized career decisions 
+using guided exploration, intelligent quizzes, and detailed roadmaps. 
+ 
+1.2 Problem Statement 
+Many B.Tech students: 
+●​ Are confused about career options after graduation​
+ 
+●​ Lack structured comparison between career paths​
+ 
+●​ Follow trends blindly (e.g., everyone moving to IT)​
+ 
+●​ Do not understand risk, salary reality, or study requirements​
+ 
+●​ Have financial constraints affecting higher studies​
+ 
+Existing blogs provide information but lack: 
+●​ Personalization​
+ 
+●​ Structured comparison​
+ 
+●​ Branch-based clarity​
+ 
+●​ Decision-making support tools​
+ 
+ 
+1.3 Solution 
+CareerMap India provides: 
+●​ Career category exploration​
+ 
+●​ Branch-specific career pages​
+ 
+●​ Personalized career recommendation quiz​
+ 
+●​ Detailed structured roadmaps​
+ 
+●​ Career comparison tool​
+ 
+ 
+2️⃣ Goals & Objectives 
+Primary Goals 
+●​ Reduce career confusion​
+ 
+●​ Provide structured decision support​
+ 
+●​ Improve clarity within 10 minutes of usage​
+ 
+●​ Enable informed decision-making​
+ 
+Success Metrics (KPIs) 
+●​ Quiz completion rate ≥ 70%​
+ 
+●​ Average session time ≥ 5 minutes​
+ 
+●​ 40% users view at least 2 career detail pages​
+ 
+●​ 25% use comparison feature​
+ 
+ 
+3️⃣ Target Users 
+3.1 Primary User Persona 
+🎓 Final Year B.Tech Student 
+●​ Age: 20–24​
+ 
+●​ Branch: CSE / ECE / Mech / Civil / EEE​
+ 
+●​ Confused about career direction​
+ 
+●​ Concerned about salary and stability​
+ 
+●​ May or may not afford higher studies​
+ 
+ 
+3.2 Secondary Users 
+●​ 2nd/3rd Year Students​
+ 
+●​ Parents​
+ 
+●​ College counselors​
+ 
+ 
+4️⃣ Feature Requirements 
+ 
+4.1 Career Categories 
+Description 
+Categorized career groups for easy exploration. 
+Categories 
+1.​ IT & Software​
+ 
+2.​ Core Engineering​
+ 
+3.​ Government Jobs​
+ 
+4.​ Management & Business​
+ 
+5.​ Higher Studies & Research​
+ 
+ 
+Functional Requirements 
+●​ Display category cards on homepage​
+ 
+●​ Clicking category navigates to filtered career list​
+ 
+●​ Each category contains 8–20 careers​
+ 
+●​ Filter support within category​
+ 
+ 
+4.2 Branch-Specific Pages 
+Description 
+Dedicated pages for each engineering branch. 
+Supported Branches (MVP) 
+●​ CSE​
+ 
+●​ ECE​
+ 
+●​ Mechanical​
+ 
+●​ Civil​
+ 
+●​ EEE​
+ 
+ 
+Functional Requirements 
+●​ Show:​
+ 
+○​ Core careers​
+ 
+○​ IT switch careers​
+ 
+○​ Govt jobs​
+ 
+○​ Higher studies​
+ 
+●​ Career distribution visualization (chart)​
+ 
+●​ Branch-specific recommendations​
+ 
+ 
+4.3 Career Detail Page 
+Each career must include: 
+Mandatory Fields 
+●​ Overview​
+ 
+●​ Required Skills​
+ 
+●​ Average Salary (India)​
+ 
+●​ Risk Level (Low/Medium/High)​
+ 
+●​ Study Requirement (Yes/No)​
+ 
+●​ Work-life balance rating​
+ 
+●​ Growth potential​
+ 
+●​ Roadmap preview​
+ 
+●​ Related careers​
+ 
+ 
+4.4 Career Roadmap 
+Structured timeline: 
+Example (Software Developer): 
+●​ 0–3 Months: Basics (DSA, Language)​
+ 
+●​ 3–6 Months: Projects​
+ 
+●​ 6–9 Months: Advanced concepts​
+ 
+●​ 9–12 Months: Interview prep​
+ 
+ 
+Functional Requirements 
+●​ Timeline visualization​
+ 
+●​ Expandable milestone blocks​
+ 
+●​ Resource references (optional future)​
+ 
+ 
+4.5 Career Recommendation Quiz 
+Purpose 
+Provide personalized career suggestions. 
+ 
+Quiz Parameters 
+●​ Branch (CSE, ECE, Mech, Civil, etc.)​
+ 
+●​ Interest (Coding, Management, Govt, Research)​
+ 
+●​ Risk tolerance (Low/Medium/High)​
+ 
+●​ Salary expectation​
+ 
+●​ Study preference (Yes/No)​
+ 
+●​ Work-life balance importance​
+ 
+●​ Financial condition (Can afford MS/MBA?)​
+ 
+ 
+Functional Requirements 
+●​ One question per screen​
+ 
+●​ Progress bar​
+ 
+●​ Save answers in state​
+ 
+●​ Submit triggers scoring engine​
+ 
+●​ Return top 3 recommended careers​
+ 
+●​ Show match percentage​
+ 
+ 
+4.6 Career Comparison Tool 
+Purpose 
+Help users compare 2–3 careers side by side. 
+ 
+Comparison Fields 
+●​ Salary​
+ 
+●​ Study duration​
+ 
+●​ Risk level​
+ 
+●​ Stability​
+ 
+●​ Growth​
+ 
+●​ Work-life balance​
+ 
+ 
+Functional Requirements 
+●​ Add career to compare​
+ 
+●​ Max 3 careers​
+ 
+●​ Tabular comparison​
+ 
+●​ Highlight best option per category​
+ 
+ 
+5️⃣ Non-Functional Requirements 
+ 
+5.1 Performance 
+●​ Page load under 3 seconds​
+ 
+●​ Smooth transitions​
+ 
+●​ Responsive on mobile​
+ 
+ 
+5.2 Security (Future Phase) 
+●​ Secure API endpoints​
+ 
+●​ Basic authentication (optional phase 2)​
+ 
+ 
+5.3 Scalability 
+●​ Modular component structure​
+ 
+●​ API-ready architecture​
+ 
+●​ Expandable career database​
+ 
+ 
+6️⃣ Technical Requirements 
+ 
+Frontend 
+●​ React.js​
+ 
+●​ Responsive CSS (Tailwind or custom CSS)​
+ 
+●​ Chart library (Recharts/Chart.js)​
+ 
+ 
+Backend (Future) 
+●​ Node.js + Express​
+ 
+●​ MongoDB​
+ 
+ 
+State Management 
+●​ Context API (MVP)​
+ 
+●​ Redux (Phase 2)​
+ 
+ 
+7️⃣ User Flow (High-Level) 
+1.​ User lands on homepage​
+ 
+2.​ Either:​
+ 
+○​ Takes quiz​
+ OR​
+ 
+○​ Explores categories​
+ 
+3.​ Views career details​
+ 
+4.​ Compares careers​
+ 
+5.​ Reads roadmap​
+ 
+6.​ Makes informed decision​
+ 
+ 
+8️⃣ Assumptions 
+●​ Users are first-time visitors​
+ 
+●​ Users have basic internet literacy​
+ 
+●​ Data shown is indicative (not guaranteed)​
+ 
+ 
+9️⃣ Constraints 
+●​ Salary data varies by region​
+ 
+●​ Career outcomes not guaranteed​
+ 
+●​ Initial MVP static data-based​
+ 
+ 
+🔟 Future Enhancements 
+●​ AI-based recommendation engine​
+ 
+●​ Save user profile​
+ 
+●​ College recommendations​
+ 
+●​ Internship tracker​
+ 
+●​ Placement statistics integration​
+ 
+●​ Admin dashboard​
+ 
+ 
+11️⃣ Risks & Mitigation 
+Risk 
+Mitigation 
+Incorrect salary data Add disclaimer 
+Over-simplified quiz 
+Improve scoring logic 
+Users skip quiz 
+Promote CTA strongly 
+Data outdated 
+Quarterly update plan 
+ 
+12️⃣ MVP Scope (Phase 1) 
+Included: 
+●​ Homepage​
+ 
+●​ Categories​
+ 
+●​ 15–20 careers​
+ 
+●​ Quiz (basic scoring)​
+ 
+●​ Comparison tool​
+ 
+●​ Roadmaps​
+ 
+●​ 5 branches​
+ 
+Excluded: 
+●​ Login system​
+ 
+●​ AI personalization​
+ 
+●​ Backend database​
+ 
+●​ Payment features​
+ 
+ 
+🎯 Product Positioning 
+CareerMap India is not: 
+●​ Just another blog​
+ 
+●​ Random career article site​
+ 
+It is: 
+A structured decision-support platform for engineering students. 
+ 
