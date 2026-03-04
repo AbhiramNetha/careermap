@@ -17,7 +17,7 @@ services:
     volumes:
       - mongo-data:/data/db
     healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -44,26 +44,20 @@ services:
       - ./backend:/app
       - backend-node-modules:/app/node_modules
 
-  # ── Frontend (React + Vite) ───────────────────
+  # ── Frontend (React + Vite — Production Build via nginx) ──
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        VITE_API_URL: http://localhost:5000/api
     container_name: careermap-frontend
     restart: unless-stopped
     ports:
-      - "5173:5173"
-    environment:
-      # The browser (on the host) calls localhost:5000 — so this stays as-is
-      VITE_API_URL: http://localhost:5000/api
+      - "80:80"
     depends_on:
       - backend
-    volumes:
-      # Hot-reload: mount source; keep container node_modules separate
-      - ./frontend:/app
-      - frontend-node-modules:/app/node_modules
 
 volumes:
   mongo-data:
   backend-node-modules:
-  frontend-node-modules:
