@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
+import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -12,6 +13,9 @@ import ComparePage from './pages/ComparePage';
 import BranchSelectionPage from './pages/BranchSelectionPage';
 import BranchDetailPage from './pages/BranchDetailPage';
 import RoadmapPage from './pages/RoadmapPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import ProtectedRoute from './components/ProtectedRoute';
 import './index.css';
 
 /* ── Global rising-particle background (matches original app.js createParticles) ── */
@@ -72,28 +76,34 @@ function ParticleBackground() {
 
 function App() {
   return (
-    <AppProvider>
-      <BrowserRouter>
-        <div className="page-wrapper">
-          <ParticleBackground />
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/quiz" element={<QuizPage />} />
-            <Route path="/quiz/results" element={<QuizResultPage />} />
-            <Route path="/careers" element={<CareerCategoryPage />} />
-            <Route path="/careers/:id" element={<CareerDetailPage />} />
-            <Route path="/compare" element={<ComparePage />} />
-            <Route path="/branches" element={<BranchSelectionPage />} />
-            <Route path="/branches/:branch" element={<BranchDetailPage />} />
-            <Route path="/roadmap/:id" element={<RoadmapPage />} />
-          </Routes>
-          <Footer />
-        </div>
-      </BrowserRouter>
-    </AppProvider>
+    <AuthProvider>
+      <AppProvider>
+        <BrowserRouter>
+          <div className="page-wrapper">
+            <ParticleBackground />
+            <Navbar />
+            <Routes>
+              {/* ── Public routes ── */}
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/careers" element={<CareerCategoryPage />} />
+              <Route path="/branches" element={<BranchSelectionPage />} />
+
+              {/* ── Protected routes (login required) ── */}
+              <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
+              <Route path="/quiz/results" element={<ProtectedRoute><QuizResultPage /></ProtectedRoute>} />
+              <Route path="/careers/:id" element={<ProtectedRoute><CareerDetailPage /></ProtectedRoute>} />
+              <Route path="/compare" element={<ProtectedRoute><ComparePage /></ProtectedRoute>} />
+              <Route path="/branches/:branch" element={<ProtectedRoute><BranchDetailPage /></ProtectedRoute>} />
+              <Route path="/roadmap/:id" element={<ProtectedRoute><RoadmapPage /></ProtectedRoute>} />
+            </Routes>
+            <Footer />
+          </div>
+        </BrowserRouter>
+      </AppProvider>
+    </AuthProvider>
   );
 }
 
 export default App;
-
