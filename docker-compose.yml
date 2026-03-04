@@ -1,5 +1,3 @@
-version: '3.9'
-
 # ─────────────────────────────────────────────
 #  CareerMap India — Docker Compose (Dev)
 #  Run:  docker compose up --build
