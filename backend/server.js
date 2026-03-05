@@ -5,6 +5,8 @@ require('dotenv').config();
 
 const careerRoutes = require('./routes/careerRoutes');
 const quizRoutes = require('./routes/quizRoutes');
+const courseRoutes = require('./routes/courseRoutes');
+const analyticsRoutes = require('./routes/analyticsRoutes');
 
 const app = express();
 
@@ -15,6 +17,8 @@ app.use(express.json());
 // Routes
 app.use('/api/careers', careerRoutes);
 app.use('/api/quiz', quizRoutes);
+app.use('/api', courseRoutes);           // /api/courses, /api/admin/...
+app.use('/api/analytics', analyticsRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

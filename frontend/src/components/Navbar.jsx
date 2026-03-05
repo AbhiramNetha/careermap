@@ -26,6 +26,7 @@ export default function Navbar() {
             <ul className="navbar-links">
                 <li><NavLink to="/">Home</NavLink></li>
                 <li><NavLink to="/careers">Explore Careers</NavLink></li>
+                <li><NavLink to="/courses">Courses</NavLink></li>
                 <li><NavLink to="/branches">Branch Guide</NavLink></li>
                 <li><NavLink to="/quiz">Career Quiz</NavLink></li>
                 <li><NavLink to="/compare">Compare</NavLink></li>
