@@ -1,3 +1,5 @@
+const { Op } = require('sequelize');
+const sequelize = require('../config/database');
 const { DailyStats, CourseClick } = require('../models/Analytics');
 const Course = require('../models/Course');
 
@@ -5,11 +7,11 @@ const Course = require('../models/Course');
 async function trackVisit(req, res) {
     try {
         const today = new Date().toISOString().split('T')[0];
-        await DailyStats.findOneAndUpdate(
-            { date: today },
-            { $inc: { visitors: 1, pageViews: 1 } },
-            { upsert: true, new: true }
-        );
+        const [dailyStat] = await DailyStats.findOrCreate({
+            where: { date: today },
+            defaults: { date: today, visitors: 0, pageViews: 0, courseClicks: 0, newUsers: 0 },
+        });
+        await dailyStat.increment({ visitors: 1, pageViews: 1 });
         res.json({ success: true });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -24,32 +26,39 @@ async function getAnalyticsSummary(req, res) {
         thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
         const startDate = thirtyDaysAgo.toISOString().split('T')[0];
 
-        const dailyData = await DailyStats.find({ date: { $gte: startDate } }).sort({ date: 1 });
+        const dailyData = await DailyStats.findAll({
+            where: { date: { [Op.gte]: startDate } },
+            order: [['date', 'ASC']],
+        });
 
         // Totals from all-time daily stats
-        const allStats = await DailyStats.aggregate([
-            {
-                $group: {
-                    _id: null,
-                    totalVisitors: { $sum: '$visitors' },
-                    totalPageViews: { $sum: '$pageViews' },
-                    totalCourseClicks: { $sum: '$courseClicks' },
-                }
-            }
-        ]);
+        const allStats = await DailyStats.findOne({
+            attributes: [
+                [sequelize.fn('COALESCE', sequelize.fn('SUM', sequelize.col('visitors')), 0), 'totalVisitors'],
+                [sequelize.fn('COALESCE', sequelize.fn('SUM', sequelize.col('pageViews')), 0), 'totalPageViews'],
+                [sequelize.fn('COALESCE', sequelize.fn('SUM', sequelize.col('courseClicks')), 0), 'totalCourseClicks'],
+            ],
+            raw: true,
+        });
 
         // Top clicked courses
-        const topCourses = await CourseClick.aggregate([
-            { $group: { _id: '$courseId', title: { $first: '$courseTitle' }, clicks: { $sum: 1 } } },
-            { $sort: { clicks: -1 } },
-            { $limit: 5 }
-        ]);
+        const topCourses = await CourseClick.findAll({
+            attributes: [
+                'courseId',
+                [sequelize.fn('MIN', sequelize.col('courseTitle')), 'title'],
+                [sequelize.fn('COUNT', '*'), 'clicks'],
+            ],
+            group: ['courseId'],
+            order: [[sequelize.fn('COUNT', '*'), 'DESC']],
+            limit: 5,
+            raw: true,
+        });
 
         // Total courses
-        const totalCourses = await Course.countDocuments({ isActive: true });
+        const totalCourses = await Course.count({ where: { isActive: true } });
 
         res.json({
-            summary: allStats[0] || { totalVisitors: 0, totalPageViews: 0, totalCourseClicks: 0 },
+            summary: allStats || { totalVisitors: 0, totalPageViews: 0, totalCourseClicks: 0 },
             dailyData,
             topCourses,
             totalCourses,
@@ -67,7 +76,10 @@ async function getTrafficData(req, res) {
         startDate.setDate(startDate.getDate() - parseInt(days));
         const startStr = startDate.toISOString().split('T')[0];
 
-        const data = await DailyStats.find({ date: { $gte: startStr } }).sort({ date: 1 });
+        const data = await DailyStats.findAll({
+            where: { date: { [Op.gte]: startStr } },
+            order: [['date', 'ASC']],
+        });
         res.json(data);
     } catch (err) {
         res.status(500).json({ error: err.message });

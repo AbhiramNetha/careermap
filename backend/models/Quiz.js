@@ -1,18 +1,34 @@
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
 
-const OptionSchema = new mongoose.Schema({
-    id: String,
-    label: String,
-    value: String,
-}, { _id: false });
+const QuizQuestion = sequelize.define('QuizQuestion', {
+    step: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    field: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    question: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    subtitle: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    icon: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    options: {
+        type: DataTypes.JSONB,   // array of { id, label, value }
+        defaultValue: [],
+    },
+}, {
+    tableName: 'quiz_questions',
+    timestamps: true,
+});
 
-const QuizQuestionSchema = new mongoose.Schema({
-    step: { type: Number, required: true },
-    field: { type: String, required: true },     // e.g. "branch", "interest"
-    question: { type: String, required: true },
-    subtitle: String,
-    icon: String,
-    options: [OptionSchema],
-}, { timestamps: true });
-
-module.exports = mongoose.model('QuizQuestion', QuizQuestionSchema);
+module.exports = QuizQuestion;

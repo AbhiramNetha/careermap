@@ -1,5 +1,6 @@
 const QuizQuestion = require('../models/Quiz');
 const Career = require('../models/Career');
+const { Op } = require('sequelize');
 const { calculateQuizResults } = require('../services/scoringService');
 
 /**
@@ -7,7 +8,7 @@ const { calculateQuizResults } = require('../services/scoringService');
  */
 exports.getQuizQuestions = async (req, res) => {
     try {
-        const questions = await QuizQuestion.find().sort('step');
+        const questions = await QuizQuestion.findAll({ order: [['step', 'ASC']] });
         res.json({ success: true, count: questions.length, data: questions });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
@@ -36,7 +37,10 @@ exports.submitQuiz = async (req, res) => {
 
         // Fetch career data for top results
         const careerIds = topResults.map(r => r.careerId);
-        const careers = await Career.find({ id: { $in: careerIds } }).select('-quizScoring');
+        const careers = await Career.findAll({
+            where: { id: { [Op.in]: careerIds } },
+            attributes: { exclude: ['quizScoring'] },
+        });
 
         // Build response with match data
         const recommendations = topResults.map(result => {

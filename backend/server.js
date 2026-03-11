@@ -1,8 +1,8 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
+const sequelize = require('./config/database');
 const careerRoutes = require('./routes/careerRoutes');
 const quizRoutes = require('./routes/quizRoutes');
 const courseRoutes = require('./routes/courseRoutes');
@@ -22,30 +22,37 @@ app.use('/api/analytics', analyticsRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'CareerMap India API is running 🚀', timestamp: new Date() });
+    res.json({ status: 'CareerMap India API is running 🚀', db: 'PostgreSQL', timestamp: new Date() });
 });
 
-// MongoDB connection
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/careermap';
+// PostgreSQL connection + sync tables + start server
 const PORT = process.env.PORT || 5000;
 
-mongoose
-    .connect(MONGO_URI)
-    .then(async () => {
-        console.log('✅ MongoDB connected');
+async function startServer() {
+    try {
+        await sequelize.authenticate();
+        console.log('✅ PostgreSQL connected');
+
+        // Sync all models (creates tables if they don't exist)
+        await sequelize.sync({ alter: false });
+        console.log('✅ Database tables synced');
+
         // Seed data on first run
         const { seedDatabase } = require('./seedData');
         await seedDatabase();
+
         app.listen(PORT, () => {
             console.log(`🚀 Server running on port ${PORT}`);
         });
-    })
-    .catch((err) => {
-        console.error('❌ MongoDB connection failed:', err.message);
+    } catch (err) {
+        console.error('❌ PostgreSQL connection failed:', err.message);
         // Start server anyway so frontend isn't blocked
         app.listen(PORT, () => {
             console.log(`🚀 Server running on port ${PORT} (without DB)`);
         });
-    });
+    }
+}
+
+startServer();
 
 module.exports = app;

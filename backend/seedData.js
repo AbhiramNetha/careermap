@@ -33,55 +33,13 @@ const careerData = [
             'Want corporate career without expensive degree',
         ],
         roadmap: [
-            {
-                month: 'Month 1–2',
-                skills: ['Advanced Excel', 'Data Cleaning', 'Pivot Tables', 'VLOOKUP'],
-                tools: ['Microsoft Excel', 'Google Sheets'],
-                projects: ['Basic sales data analysis dashboard'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 3–4',
-                skills: ['SQL SELECT, JOIN, GROUP BY', 'Subqueries', 'Database fundamentals'],
-                tools: ['MySQL', 'PostgreSQL', 'SQLite'],
-                projects: ['E-commerce database analysis'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 5–6',
-                skills: ['Power BI basics', 'Tableau basics', 'Dashboard design principles'],
-                tools: ['Power BI', 'Tableau Public'],
-                projects: ['HR Analytics Dashboard', 'Sales KPI Dashboard'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 7–8',
-                skills: ['Python basics', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn'],
-                tools: ['Jupyter Notebook', 'VS Code', 'Anaconda'],
-                projects: ['Python-based data analysis report'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 9–10',
-                skills: ['End-to-end project development', 'Storytelling with data'],
-                tools: ['GitHub', 'Streamlit'],
-                projects: ['Sales Dashboard', 'HR Analytics', 'E-commerce Analysis'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 11',
-                skills: ['Resume building', 'LinkedIn optimization', 'Portfolio creation'],
-                tools: ['LinkedIn', 'GitHub Pages', 'Notion'],
-                projects: [],
-                interviewPrep: ['SQL interview questions', 'Excel proficiency test'],
-            },
-            {
-                month: 'Month 12',
-                skills: [],
-                tools: [],
-                projects: [],
-                interviewPrep: ['Apply to 200+ companies', 'Mock interviews', 'Case study preparation', 'Salary negotiation'],
-            },
+            { month: 'Month 1–2', skills: ['Advanced Excel', 'Data Cleaning', 'Pivot Tables', 'VLOOKUP'], tools: ['Microsoft Excel', 'Google Sheets'], projects: ['Basic sales data analysis dashboard'], interviewPrep: [] },
+            { month: 'Month 3–4', skills: ['SQL SELECT, JOIN, GROUP BY', 'Subqueries', 'Database fundamentals'], tools: ['MySQL', 'PostgreSQL', 'SQLite'], projects: ['E-commerce database analysis'], interviewPrep: [] },
+            { month: 'Month 5–6', skills: ['Power BI basics', 'Tableau basics', 'Dashboard design principles'], tools: ['Power BI', 'Tableau Public'], projects: ['HR Analytics Dashboard', 'Sales KPI Dashboard'], interviewPrep: [] },
+            { month: 'Month 7–8', skills: ['Python basics', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn'], tools: ['Jupyter Notebook', 'VS Code', 'Anaconda'], projects: ['Python-based data analysis report'], interviewPrep: [] },
+            { month: 'Month 9–10', skills: ['End-to-end project development', 'Storytelling with data'], tools: ['GitHub', 'Streamlit'], projects: ['Sales Dashboard', 'HR Analytics', 'E-commerce Analysis'], interviewPrep: [] },
+            { month: 'Month 11', skills: ['Resume building', 'LinkedIn optimization', 'Portfolio creation'], tools: ['LinkedIn', 'GitHub Pages', 'Notion'], projects: [], interviewPrep: ['SQL interview questions', 'Excel proficiency test'] },
+            { month: 'Month 12', skills: [], tools: [], projects: [], interviewPrep: ['Apply to 200+ companies', 'Mock interviews', 'Case study preparation', 'Salary negotiation'] },
         ],
         eligibleBranches: ['CSE', 'IT', 'ECE', 'EEE'],
         moderateBranches: ['Mechanical', 'Civil'],
@@ -89,21 +47,13 @@ const careerData = [
         tags: ['analytics', 'data', 'coding', 'corporate'],
         relatedCareers: ['software-developer', 'data-scientist', 'business-analyst'],
     },
-
     {
         id: 'software-developer',
         name: 'Software Developer',
         category: 'private',
         subCategory: 'IT & Software',
         overview: 'Software Developers design, build, and maintain software applications. From mobile apps to web platforms, this is the backbone of the modern tech industry and one of the highest-paying entry-level roles in India.',
-        salary: {
-            fresher: '₹5–12 LPA',
-            threeYears: '₹12–25 LPA',
-            fiveYears: '₹25–50 LPA',
-            fresherMin: 5, fresherMax: 12,
-            threeYearsMin: 12, threeYearsMax: 25,
-            fiveYearsMin: 25, fiveYearsMax: 50,
-        },
+        salary: { fresher: '₹5–12 LPA', threeYears: '₹12–25 LPA', fiveYears: '₹25–50 LPA', fresherMin: 5, fresherMax: 12, threeYearsMin: 12, threeYearsMax: 25, fiveYearsMin: 25, fiveYearsMax: 50 },
         demandLevel: 'Very High',
         skills: ['DSA', 'JavaScript', 'React', 'Node.js', 'Python', 'Java', 'System Design', 'Git'],
         riskLevel: 'Medium',
@@ -114,62 +64,15 @@ const careerData = [
         stabilityLevel: 'High',
         growthPotential: 'Very High',
         workLifeBalance: 'Medium',
-        whoShouldChoose: [
-            'Passionate about coding and problem solving',
-            'Enjoy building products and applications',
-            'Ready for competitive coding interviews',
-            'Want high salary early in career',
-        ],
+        whoShouldChoose: ['Passionate about coding and problem solving', 'Enjoy building products and applications', 'Ready for competitive coding interviews', 'Want high salary early in career'],
         roadmap: [
-            {
-                month: 'Month 1–2',
-                skills: ['Programming fundamentals', 'One language (Python/Java/C++)'],
-                tools: ['VS Code', 'GitHub'],
-                projects: ['Console-based mini projects'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 3–4',
-                skills: ['Data Structures', 'Arrays, Linked Lists, Trees, Graphs'],
-                tools: ['LeetCode', 'HackerRank'],
-                projects: ['DSA implementations'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 5–6',
-                skills: ['Web Development basics', 'HTML/CSS/JavaScript', 'React or equivalent'],
-                tools: ['React', 'Node.js', 'Postman'],
-                projects: ['Portfolio website', 'Basic CRUD app'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 7–8',
-                skills: ['Backend development', 'REST APIs', 'Databases (SQL + MongoDB)'],
-                tools: ['Express.js', 'MongoDB', 'MySQL'],
-                projects: ['Full-stack web application'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 9–10',
-                skills: ['Advanced Algorithms', 'System Design basics', 'Cloud fundamentals'],
-                tools: ['AWS/GCP basics', 'Docker basics'],
-                projects: ['E-commerce app', 'Social media clone'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 11',
-                skills: ['Interview preparation', 'Mock coding rounds'],
-                tools: ['LeetCode Premium', 'GeeksforGeeks'],
-                projects: [],
-                interviewPrep: ['500+ LeetCode problems', 'System Design interviews', 'HR rounds'],
-            },
-            {
-                month: 'Month 12',
-                skills: [],
-                tools: [],
-                projects: [],
-                interviewPrep: ['Campus placements', 'Off-campus applications', 'Startup applications', 'FAANG preparation'],
-            },
+            { month: 'Month 1–2', skills: ['Programming fundamentals', 'One language (Python/Java/C++)'], tools: ['VS Code', 'GitHub'], projects: ['Console-based mini projects'], interviewPrep: [] },
+            { month: 'Month 3–4', skills: ['Data Structures', 'Arrays, Linked Lists, Trees, Graphs'], tools: ['LeetCode', 'HackerRank'], projects: ['DSA implementations'], interviewPrep: [] },
+            { month: 'Month 5–6', skills: ['Web Development basics', 'HTML/CSS/JavaScript', 'React or equivalent'], tools: ['React', 'Node.js', 'Postman'], projects: ['Portfolio website', 'Basic CRUD app'], interviewPrep: [] },
+            { month: 'Month 7–8', skills: ['Backend development', 'REST APIs', 'Databases (SQL + MongoDB)'], tools: ['Express.js', 'MongoDB', 'MySQL'], projects: ['Full-stack web application'], interviewPrep: [] },
+            { month: 'Month 9–10', skills: ['Advanced Algorithms', 'System Design basics', 'Cloud fundamentals'], tools: ['AWS/GCP basics', 'Docker basics'], projects: ['E-commerce app', 'Social media clone'], interviewPrep: [] },
+            { month: 'Month 11', skills: ['Interview preparation', 'Mock coding rounds'], tools: ['LeetCode Premium', 'GeeksforGeeks'], projects: [], interviewPrep: ['500+ LeetCode problems', 'System Design interviews', 'HR rounds'] },
+            { month: 'Month 12', skills: [], tools: [], projects: [], interviewPrep: ['Campus placements', 'Off-campus applications', 'Startup applications', 'FAANG preparation'] },
         ],
         eligibleBranches: ['CSE', 'IT', 'ECE'],
         moderateBranches: ['EEE', 'Mechanical', 'Civil'],
@@ -177,21 +80,13 @@ const careerData = [
         tags: ['coding', 'web', 'tech', 'full-stack'],
         relatedCareers: ['data-analyst', 'devops-engineer', 'product-manager'],
     },
-
     {
         id: 'mba-cat',
         name: 'MBA via CAT',
         category: 'higher-studies',
         subCategory: 'Business Management',
         overview: 'An MBA from a top IIM or business school transforms engineers into business leaders. CAT is the primary entrance exam with cutoffs from 85–99+ percentile for top colleges.',
-        salary: {
-            fresher: '₹10–25 LPA',
-            threeYears: '₹20–40 LPA',
-            fiveYears: '₹35–80 LPA',
-            fresherMin: 10, fresherMax: 25,
-            threeYearsMin: 20, threeYearsMax: 40,
-            fiveYearsMin: 35, fiveYearsMax: 80,
-        },
+        salary: { fresher: '₹10–25 LPA', threeYears: '₹20–40 LPA', fiveYears: '₹35–80 LPA', fresherMin: 10, fresherMax: 25, threeYearsMin: 20, threeYearsMax: 40, fiveYearsMin: 35, fiveYearsMax: 80 },
         demandLevel: 'High',
         skills: ['Leadership', 'Quantitative Aptitude', 'Verbal Ability', 'Data Interpretation', 'Logical Reasoning'],
         riskLevel: 'High',
@@ -202,41 +97,12 @@ const careerData = [
         stabilityLevel: 'High',
         growthPotential: 'Very High',
         workLifeBalance: 'Low',
-        whoShouldChoose: [
-            'Want leadership and management roles',
-            'Interested in consulting, finance, or marketing',
-            'Strong aptitude for problem solving',
-            'Can afford 2-year MBA investment',
-        ],
+        whoShouldChoose: ['Want leadership and management roles', 'Interested in consulting, finance, or marketing', 'Strong aptitude for problem solving', 'Can afford 2-year MBA investment'],
         roadmap: [
-            {
-                month: 'Month 1–3',
-                skills: ['CAT syllabus overview', 'Quantitative Aptitude basics'],
-                tools: ['TIME', 'IMS', 'CL online platforms'],
-                projects: [],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 4–6',
-                skills: ['Verbal Ability', 'Reading Comprehension', 'Data Interpretation'],
-                tools: ['Mock tests', 'CAT previous papers'],
-                projects: [],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 7–9',
-                skills: ['Logical Reasoning', 'Advanced QA', 'Speed math'],
-                tools: ['Full-length mocks', '2IIM', 'Cracku'],
-                projects: [],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 10–12',
-                skills: ['Mock exam strategy', 'Section-wise time management'],
-                tools: ['Sectional tests', 'Analysis tools'],
-                projects: [],
-                interviewPrep: ['GD/PI preparation', 'WAT essays', 'Profile building'],
-            },
+            { month: 'Month 1–3', skills: ['CAT syllabus overview', 'Quantitative Aptitude basics'], tools: ['TIME', 'IMS', 'CL online platforms'], projects: [], interviewPrep: [] },
+            { month: 'Month 4–6', skills: ['Verbal Ability', 'Reading Comprehension', 'Data Interpretation'], tools: ['Mock tests', 'CAT previous papers'], projects: [], interviewPrep: [] },
+            { month: 'Month 7–9', skills: ['Logical Reasoning', 'Advanced QA', 'Speed math'], tools: ['Full-length mocks', '2IIM', 'Cracku'], projects: [], interviewPrep: [] },
+            { month: 'Month 10–12', skills: ['Mock exam strategy', 'Section-wise time management'], tools: ['Sectional tests', 'Analysis tools'], projects: [], interviewPrep: ['GD/PI preparation', 'WAT essays', 'Profile building'] },
         ],
         eligibleBranches: ['CSE', 'ECE', 'Mechanical', 'Civil', 'EEE'],
         moderateBranches: [],
@@ -244,21 +110,13 @@ const careerData = [
         tags: ['management', 'business', 'leadership', 'cat'],
         relatedCareers: ['entrepreneurship', 'ms-abroad', 'psu-engineer'],
     },
-
     {
         id: 'psu-engineer',
         name: 'PSU Engineer (via GATE)',
         category: 'government',
         subCategory: 'Public Sector Undertaking',
         overview: 'PSU (Public Sector Undertaking) jobs via GATE offer excellent job security, salary, and work-life balance. Companies like ONGC, BHEL, NTPC, IOCL recruit through GATE scores.',
-        salary: {
-            fresher: '₹6–10 LPA',
-            threeYears: '₹10–15 LPA',
-            fiveYears: '₹15–20 LPA',
-            fresherMin: 6, fresherMax: 10,
-            threeYearsMin: 10, threeYearsMax: 15,
-            fiveYearsMin: 15, fiveYearsMax: 20,
-        },
+        salary: { fresher: '₹6–10 LPA', threeYears: '₹10–15 LPA', fiveYears: '₹15–20 LPA', fresherMin: 6, fresherMax: 10, threeYearsMin: 10, threeYearsMax: 15, fiveYearsMin: 15, fiveYearsMax: 20 },
         demandLevel: 'Medium',
         skills: ['GATE subject knowledge', 'Core engineering concepts', 'Aptitude', 'Technical writing'],
         riskLevel: 'Low',
@@ -269,34 +127,11 @@ const careerData = [
         stabilityLevel: 'Very High',
         growthPotential: 'Medium',
         workLifeBalance: 'High',
-        whoShouldChoose: [
-            'Value job security and stability',
-            'Want government employee benefits',
-            'Good in core engineering subjects',
-            'Prefer structured work hours',
-        ],
+        whoShouldChoose: ['Value job security and stability', 'Want government employee benefits', 'Good in core engineering subjects', 'Prefer structured work hours'],
         roadmap: [
-            {
-                month: 'Month 1–3',
-                skills: ['GATE syllabus mapping', 'Engineering Mathematics', 'Core subject fundamentals'],
-                tools: ['Made Easy', 'ACE Academy', 'NPTEL'],
-                projects: [],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 4–8',
-                skills: ['Subject-wise deep study', 'Previous year papers', 'Weekly mock tests'],
-                tools: ['GATE Virtual Calculator', 'GATE Cloud', 'Testbook'],
-                projects: [],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 9–12',
-                skills: ['Full syllabus revision', 'Time management under exam conditions'],
-                tools: ['GATE full-length mocks', 'Formula sheets'],
-                projects: [],
-                interviewPrep: ['GATE exam (Feb)', 'PSU application process', 'Document preparation'],
-            },
+            { month: 'Month 1–3', skills: ['GATE syllabus mapping', 'Engineering Mathematics', 'Core subject fundamentals'], tools: ['Made Easy', 'ACE Academy', 'NPTEL'], projects: [], interviewPrep: [] },
+            { month: 'Month 4–8', skills: ['Subject-wise deep study', 'Previous year papers', 'Weekly mock tests'], tools: ['GATE Virtual Calculator', 'GATE Cloud', 'Testbook'], projects: [], interviewPrep: [] },
+            { month: 'Month 9–12', skills: ['Full syllabus revision', 'Time management under exam conditions'], tools: ['GATE full-length mocks', 'Formula sheets'], projects: [], interviewPrep: ['GATE exam (Feb)', 'PSU application process', 'Document preparation'] },
         ],
         eligibleBranches: ['ECE', 'EEE', 'Mechanical', 'Civil', 'CSE'],
         moderateBranches: [],
@@ -304,21 +139,13 @@ const careerData = [
         tags: ['government', 'gate', 'psu', 'stability'],
         relatedCareers: ['mtech-gate', 'govt-ssc-je'],
     },
-
     {
         id: 'mtech-gate',
         name: 'M.Tech via GATE',
         category: 'higher-studies',
         subCategory: 'Technical Higher Studies',
         overview: 'M.Tech from IITs/NITs via GATE is the premium academic path for engineers who want deep technical expertise and research opportunities. GATE scholarship also provides stipend during study.',
-        salary: {
-            fresher: '₹8–18 LPA',
-            threeYears: '₹15–30 LPA',
-            fiveYears: '₹25–50 LPA',
-            fresherMin: 8, fresherMax: 18,
-            threeYearsMin: 15, threeYearsMax: 30,
-            fiveYearsMin: 25, fiveYearsMax: 50,
-        },
+        salary: { fresher: '₹8–18 LPA', threeYears: '₹15–30 LPA', fiveYears: '₹25–50 LPA', fresherMin: 8, fresherMax: 18, threeYearsMin: 15, threeYearsMax: 30, fiveYearsMin: 25, fiveYearsMax: 50 },
         demandLevel: 'High',
         skills: ['Advanced Core Engineering', 'Research & Development', 'Technical Writing', 'GATE subjects'],
         riskLevel: 'Low',
@@ -329,34 +156,11 @@ const careerData = [
         stabilityLevel: 'High',
         growthPotential: 'High',
         workLifeBalance: 'High',
-        whoShouldChoose: [
-            'Passionate about deep technical learning',
-            'Want IIT/NIT brand on resume',
-            'Interested in R&D or academia',
-            'Prefer lower financial risk (scholarship available)',
-        ],
+        whoShouldChoose: ['Passionate about deep technical learning', 'Want IIT/NIT brand on resume', 'Interested in R&D or academia', 'Prefer lower financial risk (scholarship available)'],
         roadmap: [
-            {
-                month: 'Month 1–3',
-                skills: ['Core subject revision', 'Engineering Mathematics'],
-                tools: ['Made Easy', 'Gate Academy', 'Standard textbooks'],
-                projects: [],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 4–8',
-                skills: ['Specialization subjects', 'Practice previous GATE papers'],
-                tools: ['GATE previous papers (15 years)', 'Mock test series'],
-                projects: ['Mini research project to strengthen application'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 9–12',
-                skills: ['Full revision', 'Speed and accuracy improvement'],
-                tools: ['Full-length GATE mocks'],
-                projects: [],
-                interviewPrep: ['GATE exam', 'IIT/NIT COAP counseling', 'Interview preparation for IIT admission'],
-            },
+            { month: 'Month 1–3', skills: ['Core subject revision', 'Engineering Mathematics'], tools: ['Made Easy', 'Gate Academy', 'Standard textbooks'], projects: [], interviewPrep: [] },
+            { month: 'Month 4–8', skills: ['Specialization subjects', 'Practice previous GATE papers'], tools: ['GATE previous papers (15 years)', 'Mock test series'], projects: ['Mini research project to strengthen application'], interviewPrep: [] },
+            { month: 'Month 9–12', skills: ['Full revision', 'Speed and accuracy improvement'], tools: ['Full-length GATE mocks'], projects: [], interviewPrep: ['GATE exam', 'IIT/NIT COAP counseling', 'Interview preparation for IIT admission'] },
         ],
         eligibleBranches: ['CSE', 'ECE', 'EEE', 'Mechanical', 'Civil'],
         moderateBranches: [],
@@ -364,21 +168,13 @@ const careerData = [
         tags: ['gate', 'mtech', 'research', 'iit'],
         relatedCareers: ['psu-engineer', 'ms-abroad'],
     },
-
     {
         id: 'ms-abroad',
         name: 'MS Abroad (USA/Europe)',
         category: 'higher-studies',
         subCategory: 'International Higher Studies',
         overview: 'Pursuing MS in USA, Canada, Germany, or other countries offers global exposure, top-tier education, and significantly higher salary potential. GRE/IELTS/TOEFL are key entrance requirements.',
-        salary: {
-            fresher: '₹25–60 LPA (USD equivalent)',
-            threeYears: '₹40–90 LPA',
-            fiveYears: '₹60–150 LPA',
-            fresherMin: 25, fresherMax: 60,
-            threeYearsMin: 40, threeYearsMax: 90,
-            fiveYearsMin: 60, fiveYearsMax: 150,
-        },
+        salary: { fresher: '₹25–60 LPA (USD equivalent)', threeYears: '₹40–90 LPA', fiveYears: '₹60–150 LPA', fresherMin: 25, fresherMax: 60, threeYearsMin: 40, threeYearsMax: 90, fiveYearsMin: 60, fiveYearsMax: 150 },
         demandLevel: 'High',
         skills: ['GRE', 'IELTS/TOEFL', 'Research papers', 'SOP writing', 'Core engineering'],
         riskLevel: 'High',
@@ -389,41 +185,12 @@ const careerData = [
         stabilityLevel: 'Medium',
         growthPotential: 'Very High',
         workLifeBalance: 'Medium',
-        whoShouldChoose: [
-            'Want global career opportunities',
-            'Targeting top US tech companies (FAANG)',
-            'Can financially support or get assistantship',
-            'Strong academic record and CGPA',
-        ],
+        whoShouldChoose: ['Want global career opportunities', 'Targeting top US tech companies (FAANG)', 'Can financially support or get assistantship', 'Strong academic record and CGPA'],
         roadmap: [
-            {
-                month: 'Month 1–3',
-                skills: ['GRE preparation (Quant, Verbal, AWA)', 'IELTS/TOEFL basics'],
-                tools: ['Magoosh', 'ETS official', 'Kaplan'],
-                projects: [],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 4–6',
-                skills: ['Research paper reading', 'Professor email drafts', 'University shortlisting'],
-                tools: ['ResearchGate', 'US News rankings', 'GradCafe'],
-                projects: ['Personal research project for profile'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 7–9',
-                skills: ['SOP writing', 'LOR coordination', 'Resume for MS applications'],
-                tools: ['LinkedIn', 'Grammarly', 'Overleaf (LaTeX)'],
-                projects: [],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 10–12',
-                skills: ['Application submission', 'Visa preparation', 'Financial planning'],
-                tools: ['University portals', 'SEVIS', 'WES evaluation'],
-                projects: [],
-                interviewPrep: ['University interviews', 'Scholarship interviews', 'Visa interview'],
-            },
+            { month: 'Month 1–3', skills: ['GRE preparation (Quant, Verbal, AWA)', 'IELTS/TOEFL basics'], tools: ['Magoosh', 'ETS official', 'Kaplan'], projects: [], interviewPrep: [] },
+            { month: 'Month 4–6', skills: ['Research paper reading', 'Professor email drafts', 'University shortlisting'], tools: ['ResearchGate', 'US News rankings', 'GradCafe'], projects: ['Personal research project for profile'], interviewPrep: [] },
+            { month: 'Month 7–9', skills: ['SOP writing', 'LOR coordination', 'Resume for MS applications'], tools: ['LinkedIn', 'Grammarly', 'Overleaf (LaTeX)'], projects: [], interviewPrep: [] },
+            { month: 'Month 10–12', skills: ['Application submission', 'Visa preparation', 'Financial planning'], tools: ['University portals', 'SEVIS', 'WES evaluation'], projects: [], interviewPrep: ['University interviews', 'Scholarship interviews', 'Visa interview'] },
         ],
         eligibleBranches: ['CSE', 'ECE', 'EEE'],
         moderateBranches: ['Mechanical', 'Civil'],
@@ -431,21 +198,13 @@ const careerData = [
         tags: ['abroad', 'ms', 'usa', 'global', 'research'],
         relatedCareers: ['mtech-gate', 'software-developer'],
     },
-
     {
         id: 'govt-ssc-je',
         name: 'Government Engineer (SSC JE / UPSC)',
         category: 'government',
         subCategory: 'Civil Services & SSC',
         overview: 'SSC JE (Junior Engineer) and UPSC Engineering Services offer permanent government jobs with pension, allowances, and job security. Ideal for civil, mechanical, and electrical engineers.',
-        salary: {
-            fresher: '₹3.5–6 LPA',
-            threeYears: '₹6–9 LPA',
-            fiveYears: '₹9–14 LPA',
-            fresherMin: 3.5, fresherMax: 6,
-            threeYearsMin: 6, threeYearsMax: 9,
-            fiveYearsMin: 9, fiveYearsMax: 14,
-        },
+        salary: { fresher: '₹3.5–6 LPA', threeYears: '₹6–9 LPA', fiveYears: '₹9–14 LPA', fresherMin: 3.5, fresherMax: 6, threeYearsMin: 6, threeYearsMax: 9, fiveYearsMin: 9, fiveYearsMax: 14 },
         demandLevel: 'Medium',
         skills: ['Technical subject knowledge', 'General Awareness', 'Reasoning', 'English'],
         riskLevel: 'Low',
@@ -456,34 +215,11 @@ const careerData = [
         stabilityLevel: 'Very High',
         growthPotential: 'Low',
         workLifeBalance: 'High',
-        whoShouldChoose: [
-            'Value job security above all',
-            'Want government benefits (pension, housing allowance)',
-            'Prefer work-life balance over high salary',
-            'Limited budget for higher studies',
-        ],
+        whoShouldChoose: ['Value job security above all', 'Want government benefits (pension, housing allowance)', 'Prefer work-life balance over high salary', 'Limited budget for higher studies'],
         roadmap: [
-            {
-                month: 'Month 1–4',
-                skills: ['Technical portion: Civil/Mech/Electrical subjects', 'Previous year papers (10 years)'],
-                tools: ['SSC JE study materials', 'RK Jain books', 'Made Easy'],
-                projects: [],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 5–8',
-                skills: ['General Intelligence & Reasoning', 'GK & Current Affairs'],
-                tools: ['Lucent GK', 'The Hindu newspaper', 'News apps'],
-                projects: [],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 9–12',
-                skills: ['Full revision', 'Speed tests', 'Descriptive paper for Paper-2'],
-                tools: ['Testbook mocks', 'SSC Adda247'],
-                projects: [],
-                interviewPrep: ['SSC JE exam strategy', 'Document verification preparation'],
-            },
+            { month: 'Month 1–4', skills: ['Technical portion: Civil/Mech/Electrical subjects', 'Previous year papers (10 years)'], tools: ['SSC JE study materials', 'RK Jain books', 'Made Easy'], projects: [], interviewPrep: [] },
+            { month: 'Month 5–8', skills: ['General Intelligence & Reasoning', 'GK & Current Affairs'], tools: ['Lucent GK', 'The Hindu newspaper', 'News apps'], projects: [], interviewPrep: [] },
+            { month: 'Month 9–12', skills: ['Full revision', 'Speed tests', 'Descriptive paper for Paper-2'], tools: ['Testbook mocks', 'SSC Adda247'], projects: [], interviewPrep: ['SSC JE exam strategy', 'Document verification preparation'] },
         ],
         eligibleBranches: ['Civil', 'Mechanical', 'EEE'],
         moderateBranches: ['ECE', 'CSE'],
@@ -491,21 +227,13 @@ const careerData = [
         tags: ['government', 'ssc', 'je', 'stability', 'pension'],
         relatedCareers: ['psu-engineer', 'mtech-gate'],
     },
-
     {
         id: 'entrepreneurship',
         name: 'Entrepreneurship / Startup',
         category: 'entrepreneurship',
         subCategory: 'Startup & Business',
         overview: 'Build your own startup using engineering skills. India has a thriving startup ecosystem with funding opportunities through incubators, angel networks, and government schemes like Startup India.',
-        salary: {
-            fresher: '₹0–5 LPA (initial)',
-            threeYears: '₹5–50 LPA (variable)',
-            fiveYears: 'Unlimited',
-            fresherMin: 0, fresherMax: 5,
-            threeYearsMin: 5, threeYearsMax: 50,
-            fiveYearsMin: 0, fiveYearsMax: 999,
-        },
+        salary: { fresher: '₹0–5 LPA (initial)', threeYears: '₹5–50 LPA (variable)', fiveYears: 'Unlimited', fresherMin: 0, fresherMax: 5, threeYearsMin: 5, threeYearsMax: 50, fiveYearsMin: 0, fiveYearsMax: 999 },
         demandLevel: 'High',
         skills: ['Product thinking', 'Basic tech skills', 'Marketing', 'Sales', 'Finance basics', 'Customer discovery'],
         riskLevel: 'High',
@@ -516,41 +244,12 @@ const careerData = [
         stabilityLevel: 'Low',
         growthPotential: 'Very High',
         workLifeBalance: 'Low',
-        whoShouldChoose: [
-            'Have a business idea or problem to solve',
-            'High risk tolerance and resilience',
-            'Self-motivated and disciplined',
-            'Want full ownership of your career',
-        ],
+        whoShouldChoose: ['Have a business idea or problem to solve', 'High risk tolerance and resilience', 'Self-motivated and disciplined', 'Want full ownership of your career'],
         roadmap: [
-            {
-                month: 'Month 1–2',
-                skills: ['Idea validation', 'Market research', 'Target audience identification'],
-                tools: ['Google Forms', 'Twitter/X', 'Reddit', 'Typeform'],
-                projects: ['Problem statement document', 'First 100 user interviews'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 3–4',
-                skills: ['MVP development', 'Basic coding or no-code tools'],
-                tools: ['Bubble.io', 'Webflow', 'React', 'Heroku'],
-                projects: ['MVP launch', 'Landing page with email capture'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 5–8',
-                skills: ['Growth marketing', 'User acquisition', 'Product iteration', 'Metrics tracking'],
-                tools: ['Google Analytics', 'Mailchimp', 'Notion', 'Slack'],
-                projects: ['First 500 users', 'Revenue generation attempt'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 9–12',
-                skills: ['Fundraising basics', 'Pitch deck creation', 'Financial modeling'],
-                tools: ['Canva', 'AngelList', 'Startup India portal'],
-                projects: ['Pitch to 10 investors', 'Apply to accelerators (Y-Combinator, TLabs)'],
-                interviewPrep: ['Investor pitch practice', 'Demo Day preparation'],
-            },
+            { month: 'Month 1–2', skills: ['Idea validation', 'Market research', 'Target audience identification'], tools: ['Google Forms', 'Twitter/X', 'Reddit', 'Typeform'], projects: ['Problem statement document', 'First 100 user interviews'], interviewPrep: [] },
+            { month: 'Month 3–4', skills: ['MVP development', 'Basic coding or no-code tools'], tools: ['Bubble.io', 'Webflow', 'React', 'Heroku'], projects: ['MVP launch', 'Landing page with email capture'], interviewPrep: [] },
+            { month: 'Month 5–8', skills: ['Growth marketing', 'User acquisition', 'Product iteration', 'Metrics tracking'], tools: ['Google Analytics', 'Mailchimp', 'Notion', 'Slack'], projects: ['First 500 users', 'Revenue generation attempt'], interviewPrep: [] },
+            { month: 'Month 9–12', skills: ['Fundraising basics', 'Pitch deck creation', 'Financial modeling'], tools: ['Canva', 'AngelList', 'Startup India portal'], projects: ['Pitch to 10 investors', 'Apply to accelerators (Y-Combinator, TLabs)'], interviewPrep: ['Investor pitch practice', 'Demo Day preparation'] },
         ],
         eligibleBranches: ['CSE', 'ECE', 'Mechanical', 'Civil', 'EEE'],
         moderateBranches: [],
@@ -558,21 +257,13 @@ const careerData = [
         tags: ['startup', 'entrepreneurship', 'business', 'founder'],
         relatedCareers: ['mba-cat', 'software-developer'],
     },
-
     {
         id: 'product-manager',
         name: 'Product Manager (Tech)',
         category: 'private',
         subCategory: 'Product & Strategy',
         overview: 'Product Managers bridge technology and business by defining what gets built and why. This is a premium role often requiring 2–3 years of engineering/analytics experience first.',
-        salary: {
-            fresher: '₹12–20 LPA',
-            threeYears: '₹20–35 LPA',
-            fiveYears: '₹35–80 LPA',
-            fresherMin: 12, fresherMax: 20,
-            threeYearsMin: 20, threeYearsMax: 35,
-            fiveYearsMin: 35, fiveYearsMax: 80,
-        },
+        salary: { fresher: '₹12–20 LPA', threeYears: '₹20–35 LPA', fiveYears: '₹35–80 LPA', fresherMin: 12, fresherMax: 20, threeYearsMin: 20, threeYearsMax: 35, fiveYearsMin: 35, fiveYearsMax: 80 },
         demandLevel: 'High',
         skills: ['Product thinking', 'Data analysis', 'User research', 'Agile/Scrum', 'Communication', 'Roadmap planning'],
         riskLevel: 'Medium',
@@ -583,34 +274,11 @@ const careerData = [
         stabilityLevel: 'High',
         growthPotential: 'Very High',
         workLifeBalance: 'Medium',
-        whoShouldChoose: [
-            'Like both technology and business',
-            'Enjoy solving user problems',
-            'Strong communication skills',
-            'Want strategic career growth',
-        ],
+        whoShouldChoose: ['Like both technology and business', 'Enjoy solving user problems', 'Strong communication skills', 'Want strategic career growth'],
         roadmap: [
-            {
-                month: 'Month 1–3',
-                skills: ['Product Management basics', 'User research techniques', 'PRD writing'],
-                tools: ['Notion', 'Figma basics', 'Jira'],
-                projects: ['Build a case study: improve one existing product'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 4–6',
-                skills: ['Metrics & Analytics', 'A/B testing', 'Product strategy frameworks'],
-                tools: ['Google Analytics', 'Mixpanel', 'Amplitude'],
-                projects: ['Product teardown analysis', 'Feature specification document'],
-                interviewPrep: [],
-            },
-            {
-                month: 'Month 7–9',
-                skills: ['Interview preparation', 'PM case frameworks', 'Guesstimate practice'],
-                tools: ['PM exercises', 'ExponentHQ'],
-                projects: [],
-                interviewPrep: ['Product sense interviews', 'Analytical questions', 'Leadership questions'],
-            },
+            { month: 'Month 1–3', skills: ['Product Management basics', 'User research techniques', 'PRD writing'], tools: ['Notion', 'Figma basics', 'Jira'], projects: ['Build a case study: improve one existing product'], interviewPrep: [] },
+            { month: 'Month 4–6', skills: ['Metrics & Analytics', 'A/B testing', 'Product strategy frameworks'], tools: ['Google Analytics', 'Mixpanel', 'Amplitude'], projects: ['Product teardown analysis', 'Feature specification document'], interviewPrep: [] },
+            { month: 'Month 7–9', skills: ['Interview preparation', 'PM case frameworks', 'Guesstimate practice'], tools: ['PM exercises', 'ExponentHQ'], projects: [], interviewPrep: ['Product sense interviews', 'Analytical questions', 'Leadership questions'] },
         ],
         eligibleBranches: ['CSE', 'IT', 'ECE'],
         moderateBranches: ['Mechanical', 'Civil', 'EEE'],
@@ -622,8 +290,7 @@ const careerData = [
 
 const quizQuestions = [
     {
-        step: 1,
-        field: 'branch',
+        step: 1, field: 'branch',
         question: 'Which engineering branch are you from?',
         subtitle: 'Your branch helps us find careers that fit your background',
         icon: '🎓',
@@ -636,8 +303,7 @@ const quizQuestions = [
         ],
     },
     {
-        step: 2,
-        field: 'interest',
+        step: 2, field: 'interest',
         question: 'What is your primary career interest?',
         subtitle: 'Choose the domain that excites you the most',
         icon: '💡',
@@ -650,8 +316,7 @@ const quizQuestions = [
         ],
     },
     {
-        step: 3,
-        field: 'riskTolerance',
+        step: 3, field: 'riskTolerance',
         question: 'How much career risk can you handle?',
         subtitle: 'Risk affects which careers suit your personality',
         icon: '⚖️',
@@ -662,8 +327,7 @@ const quizQuestions = [
         ],
     },
     {
-        step: 4,
-        field: 'salaryExpectation',
+        step: 4, field: 'salaryExpectation',
         question: 'What is your salary expectation (starting)?',
         subtitle: 'This helps match career paths with realistic outcomes',
         icon: '💰',
@@ -674,8 +338,7 @@ const quizQuestions = [
         ],
     },
     {
-        step: 5,
-        field: 'studyPreference',
+        step: 5, field: 'studyPreference',
         question: 'Are you open to further studies after B.Tech?',
         subtitle: 'Some career paths require additional degrees or certifications',
         icon: '📚',
@@ -685,8 +348,7 @@ const quizQuestions = [
         ],
     },
     {
-        step: 6,
-        field: 'workLifeBalance',
+        step: 6, field: 'workLifeBalance',
         question: 'How important is work-life balance to you?',
         subtitle: 'Different careers demand very different time commitments',
         icon: '🧘',
@@ -697,8 +359,7 @@ const quizQuestions = [
         ],
     },
     {
-        step: 7,
-        field: 'financialCondition',
+        step: 7, field: 'financialCondition',
         question: 'What is your financial situation for higher studies?',
         subtitle: 'This affects options like MS abroad or MBA',
         icon: '💵',
@@ -711,24 +372,24 @@ const quizQuestions = [
 
 async function seedDatabase(forceReseed = false) {
     try {
-        const careerCount = await Career.countDocuments();
+        const careerCount = await Career.count();
         if (careerCount === 0 || forceReseed) {
             if (forceReseed && careerCount > 0) {
-                await Career.deleteMany({});
+                await Career.destroy({ where: {} });
                 console.log('🗑️ Cleared existing career data for re-seed');
             }
-            await Career.insertMany(careerData);
+            await Career.bulkCreate(careerData, { ignoreDuplicates: true });
             console.log(`✅ Seeded ${careerData.length} careers`);
         } else {
             console.log(`ℹ️ Database already has ${careerCount} careers — skipping seed`);
         }
 
-        const quizCount = await QuizQuestion.countDocuments();
+        const quizCount = await QuizQuestion.count();
         if (quizCount === 0 || forceReseed) {
             if (forceReseed && quizCount > 0) {
-                await QuizQuestion.deleteMany({});
+                await QuizQuestion.destroy({ where: {} });
             }
-            await QuizQuestion.insertMany(quizQuestions);
+            await QuizQuestion.bulkCreate(quizQuestions);
             console.log(`✅ Seeded ${quizQuestions.length} quiz questions`);
         } else {
             console.log(`ℹ️ Database already has ${quizCount} quiz questions — skipping seed`);

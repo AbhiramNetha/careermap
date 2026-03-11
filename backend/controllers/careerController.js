@@ -1,29 +1,34 @@
+const { Op } = require('sequelize');
 const Career = require('../models/Career');
 
 /**
  * GET /api/careers
- * Query params: category, branch, riskLevel, studyRequired, trending
+ * Query params: category, branch, riskLevel, studyRequired, trending, search
  */
 exports.getAllCareers = async (req, res) => {
     try {
         const { category, branch, riskLevel, studyRequired, trending, search } = req.query;
-        const filter = {};
+        const where = {};
 
-        if (category) filter.category = category;
-        if (riskLevel) filter.riskLevel = riskLevel;
-        if (studyRequired !== undefined) filter.studyRequired = studyRequired === 'true';
-        if (trending === 'true') filter.isTrending = true;
+        if (category) where.category = category;
+        if (riskLevel) where.riskLevel = riskLevel;
+        if (studyRequired !== undefined) where.studyRequired = studyRequired === 'true';
+        if (trending === 'true') where.isTrending = true;
+        if (search) where.name = { [Op.iLike]: `%${search}%` };
+
+        // Branch filtering needs special handling for JSONB arrays
         if (branch) {
-            filter.$or = [
-                { eligibleBranches: branch },
-                { moderateBranches: branch },
+            where[Op.or] = [
+                { eligibleBranches: { [Op.contains]: [branch] } },
+                { moderateBranches: { [Op.contains]: [branch] } },
             ];
         }
-        if (search) {
-            filter.name = { $regex: search, $options: 'i' };
-        }
 
-        const careers = await Career.find(filter).select('-roadmap -quizScoring');
+        const careers = await Career.findAll({
+            where,
+            attributes: { exclude: ['roadmap', 'quizScoring'] },
+        });
+
         res.json({ success: true, count: careers.length, data: careers });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
@@ -35,7 +40,7 @@ exports.getAllCareers = async (req, res) => {
  */
 exports.getCareerById = async (req, res) => {
     try {
-        const career = await Career.findOne({ id: req.params.id });
+        const career = await Career.findByPk(req.params.id);
         if (!career) {
             return res.status(404).json({ success: false, message: 'Career not found' });
         }
@@ -111,16 +116,23 @@ exports.getBranches = async (req, res) => {
 
 /**
  * GET /api/careers/branch/:branchName
- * Returns careers for a specific branch
  */
 exports.getCareersByBranch = async (req, res) => {
     try {
         const { branchName } = req.params;
-        const directFit = await Career.find({ eligibleBranches: branchName }).select('-roadmap -quizScoring');
-        const moderateFit = await Career.find({
-            moderateBranches: branchName,
-            eligibleBranches: { $ne: branchName },
-        }).select('-roadmap -quizScoring');
+
+        const directFit = await Career.findAll({
+            where: { eligibleBranches: { [Op.contains]: [branchName] } },
+            attributes: { exclude: ['roadmap', 'quizScoring'] },
+        });
+
+        const moderateFit = await Career.findAll({
+            where: {
+                moderateBranches: { [Op.contains]: [branchName] },
+                [Op.not]: { eligibleBranches: { [Op.contains]: [branchName] } },
+            },
+            attributes: { exclude: ['roadmap', 'quizScoring'] },
+        });
 
         res.json({
             success: true,
@@ -147,7 +159,7 @@ exports.compareCareers = async (req, res) => {
             return res.status(400).json({ success: false, message: 'Provide 2-3 career IDs to compare' });
         }
 
-        const careers = await Career.find({ id: { $in: careerIds } });
+        const careers = await Career.findAll({ where: { id: { [Op.in]: careerIds } } });
         if (careers.length < 2) {
             return res.status(404).json({ success: false, message: 'Some careers not found' });
         }

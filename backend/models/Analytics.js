@@ -1,22 +1,57 @@
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
 
-const DailyStatsSchema = new mongoose.Schema({
-    date: { type: String, required: true, unique: true }, // YYYY-MM-DD
-    visitors: { type: Number, default: 0 },
-    pageViews: { type: Number, default: 0 },
-    courseClicks: { type: Number, default: 0 },
-    newUsers: { type: Number, default: 0 },
-}, { timestamps: true });
-
-const CourseClickSchema = new mongoose.Schema({
-    courseId: { type: mongoose.Schema.Types.ObjectId, ref: 'Course', required: true },
-    courseTitle: { type: String },
-    clickedAt: { type: Date, default: Date.now },
-    userEmail: { type: String, default: 'anonymous' },
-    referrer: { type: String, default: '' },
+const DailyStats = sequelize.define('DailyStats', {
+    date: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+    },
+    visitors: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+    },
+    pageViews: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+    },
+    courseClicks: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+    },
+    newUsers: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+    },
+}, {
+    tableName: 'daily_stats',
+    timestamps: true,
 });
 
-module.exports = {
-    DailyStats: mongoose.model('DailyStats', DailyStatsSchema),
-    CourseClick: mongoose.model('CourseClick', CourseClickSchema),
-};
+const CourseClick = sequelize.define('CourseClick', {
+    courseId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    courseTitle: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    clickedAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+    },
+    userEmail: {
+        type: DataTypes.STRING,
+        defaultValue: 'anonymous',
+    },
+    referrer: {
+        type: DataTypes.STRING,
+        defaultValue: '',
+    },
+}, {
+    tableName: 'course_clicks',
+    timestamps: true,
+});
+
+module.exports = { DailyStats, CourseClick };
