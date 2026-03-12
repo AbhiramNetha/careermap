@@ -41,13 +41,13 @@ async function startServer() {
         const { seedDatabase } = require('./seedData');
         await seedDatabase();
 
-        app.listen(PORT, () => {
+        app.listen(PORT, '0.0.0.0', () => {
             console.log(`🚀 Server running on port ${PORT}`);
         });
     } catch (err) {
         console.error('❌ PostgreSQL connection failed:', err.message);
         // Start server anyway so frontend isn't blocked
-        app.listen(PORT, () => {
+        app.listen(PORT, '0.0.0.0', () => {
             console.log(`🚀 Server running on port ${PORT} (without DB)`);
         });
     }
