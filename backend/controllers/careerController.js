@@ -3,7 +3,6 @@ const Career = require('../models/Career');
 
 /**
  * GET /api/careers
- * Query params: category, branch, riskLevel, studyRequired, trending, search
  */
 exports.getAllCareers = async (req, res) => {
     try {
@@ -16,7 +15,6 @@ exports.getAllCareers = async (req, res) => {
         if (trending === 'true') where.isTrending = true;
         if (search) where.name = { [Op.iLike]: `%${search}%` };
 
-        // Branch filtering needs special handling for JSONB arrays
         if (branch) {
             where[Op.or] = [
                 { eligibleBranches: { [Op.contains]: [branch] } },
@@ -41,9 +39,7 @@ exports.getAllCareers = async (req, res) => {
 exports.getCareerById = async (req, res) => {
     try {
         const career = await Career.findByPk(req.params.id);
-        if (!career) {
-            return res.status(404).json({ success: false, message: 'Career not found' });
-        }
+        if (!career) return res.status(404).json({ success: false, message: 'Career not found' });
         res.json({ success: true, data: career });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
@@ -56,34 +52,10 @@ exports.getCareerById = async (req, res) => {
 exports.getCategories = async (req, res) => {
     try {
         const categories = [
-            {
-                id: 'private',
-                name: 'Private Sector Jobs',
-                icon: '💼',
-                description: 'Corporate careers in IT, Analytics, Core Engineering & management roles',
-                color: '#6366f1',
-            },
-            {
-                id: 'higher-studies',
-                name: 'Higher Studies',
-                icon: '🎓',
-                description: 'M.Tech via GATE, MBA via CAT, MS Abroad for advanced qualifications',
-                color: '#8b5cf6',
-            },
-            {
-                id: 'government',
-                name: 'Government Jobs',
-                icon: '🏛️',
-                description: 'PSU, SSC JE, UPSC, and other government sector opportunities',
-                color: '#059669',
-            },
-            {
-                id: 'entrepreneurship',
-                name: 'Entrepreneurship',
-                icon: '🚀',
-                description: 'Build your own startup or freelance business using your engineering skills',
-                color: '#f59e0b',
-            },
+            { id: 'private', name: 'Private Sector Jobs', icon: '💼', description: 'Corporate careers in IT, Analytics, Core Engineering & management roles', color: '#6366f1' },
+            { id: 'higher-studies', name: 'Higher Studies', icon: '🎓', description: 'M.Tech via GATE, MBA via CAT, MS Abroad for advanced qualifications', color: '#8b5cf6' },
+            { id: 'government', name: 'Government Jobs', icon: '🏛️', description: 'PSU, SSC JE, UPSC, and other government sector opportunities', color: '#059669' },
+            { id: 'entrepreneurship', name: 'Entrepreneurship', icon: '🚀', description: 'Build your own startup or freelance business using your engineering skills', color: '#f59e0b' },
         ];
         res.json({ success: true, data: categories });
     } catch (err) {
@@ -98,8 +70,7 @@ exports.getBranches = async (req, res) => {
     try {
         const branches = ['CSE', 'ECE', 'Mechanical', 'Civil', 'EEE'];
         const branchDetails = branches.map(b => ({
-            id: b,
-            name: b,
+            id: b, name: b,
             fullName: {
                 CSE: 'Computer Science Engineering',
                 ECE: 'Electronics & Communication Engineering',
@@ -137,11 +108,7 @@ exports.getCareersByBranch = async (req, res) => {
         res.json({
             success: true,
             branch: branchName,
-            data: {
-                directFit,
-                moderateFit,
-                total: directFit.length + moderateFit.length,
-            },
+            data: { directFit, moderateFit, total: directFit.length + moderateFit.length },
         });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
@@ -150,7 +117,6 @@ exports.getCareersByBranch = async (req, res) => {
 
 /**
  * POST /api/careers/compare
- * Body: { careerIds: ["data-analyst", "software-developer"] }
  */
 exports.compareCareers = async (req, res) => {
     try {
@@ -158,12 +124,10 @@ exports.compareCareers = async (req, res) => {
         if (!careerIds || careerIds.length < 2 || careerIds.length > 3) {
             return res.status(400).json({ success: false, message: 'Provide 2-3 career IDs to compare' });
         }
-
         const careers = await Career.findAll({ where: { id: { [Op.in]: careerIds } } });
         if (careers.length < 2) {
             return res.status(404).json({ success: false, message: 'Some careers not found' });
         }
-
         res.json({ success: true, data: careers });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });

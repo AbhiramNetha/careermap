@@ -24,7 +24,7 @@ const Career = sequelize.define('Career', {
         allowNull: false,
     },
     salary: {
-        type: DataTypes.JSONB,    // { fresher, threeYears, fiveYears, fresherMin, fresherMax, ... }
+        type: DataTypes.JSONB,     // { fresher, threeYears, fiveYears, fresherMin, fresherMax, ... }
         defaultValue: {},
     },
     demandLevel: {
@@ -32,7 +32,7 @@ const Career = sequelize.define('Career', {
         allowNull: true,
     },
     skills: {
-        type: DataTypes.JSONB,    // string array
+        type: DataTypes.JSONB,     // string array
         defaultValue: [],
     },
     riskLevel: {
@@ -68,11 +68,11 @@ const Career = sequelize.define('Career', {
         allowNull: true,
     },
     whoShouldChoose: {
-        type: DataTypes.JSONB,    // string array
+        type: DataTypes.JSONB,     // string array
         defaultValue: [],
     },
     roadmap: {
-        type: DataTypes.JSONB,    // array of { month, skills, tools, projects, interviewPrep }
+        type: DataTypes.JSONB,     // array of { month, skills, tools, projects, interviewPrep }
         defaultValue: [],
     },
     eligibleBranches: {
