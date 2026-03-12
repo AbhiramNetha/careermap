@@ -22,6 +22,7 @@ app.use('/api/analytics', analyticsRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
+    console.log('✅ /api/health hit at', new Date().toISOString());
     res.json({ status: 'CareerMap India API is running 🚀', db: 'PostgreSQL', timestamp: new Date() });
 });
 
