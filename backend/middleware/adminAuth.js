@@ -3,9 +3,9 @@
 
 const jwt = require('jsonwebtoken');
 
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@careermap.in';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@way2fresher.in';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Admin@123';
-const JWT_SECRET = process.env.JWT_SECRET || 'careermap_admin_secret_2024';
+const JWT_SECRET = process.env.JWT_SECRET || 'way2fresher_admin_secret_2024';
 
 function adminLogin(req, res) {
     const { email, password } = req.body;

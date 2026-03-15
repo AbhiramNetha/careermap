@@ -139,7 +139,8 @@ export default function SignupPage() {
                 {/* header */}
                 <div className="auth-card-header">
                     <Link to="/" className="auth-logo">
-                        <span>🗺️</span> CareerMap India
+                        <img src="/logo.png" alt="way2fresher logo" className="auth-logo-img" />
+                        way2fresher
                     </Link>
                     <h1 className="auth-title">Create your account</h1>
                     <p className="auth-subtitle">Join 50,000+ students finding their dream career</p>

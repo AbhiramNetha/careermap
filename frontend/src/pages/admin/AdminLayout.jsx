@@ -26,8 +26,8 @@ export default function AdminLayout() {
             <aside className="admin-sidebar">
                 <div className="admin-sidebar-header">
                     <div className="admin-sidebar-logo">
-                        <span>🗺️</span>
-                        <span className="sidebar-logo-text">CareerMap</span>
+                        <img src="/logo.png" alt="way2fresher" className="admin-sidebar-logo-img" />
+                        <span className="sidebar-logo-text">way2fresher</span>
                     </div>
                     <button
                         className="sidebar-toggle-btn"

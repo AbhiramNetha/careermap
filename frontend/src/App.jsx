@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import { AuthProvider } from './context/AuthContext';
 import { AdminAuthProvider } from './context/AdminAuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -112,33 +113,35 @@ function PublicSite() {
 
 function App() {
   return (
-    <AdminAuthProvider>
-      <AuthProvider>
-        <AppProvider>
-          <BrowserRouter>
-            <Routes>
-              {/* ── Admin routes (no Navbar / Footer / particles) ── */}
-              <Route path="/admin" element={<AdminLoginPage />} />
-              <Route
-                path="/admin/*"
-                element={
-                  <AdminRoute>
-                    <AdminLayout />
-                  </AdminRoute>
-                }
-              >
-                <Route path="dashboard" element={<AdminDashboard />} />
-                <Route path="courses" element={<AdminCourses />} />
-                <Route path="analytics" element={<AdminAnalytics />} />
-              </Route>
+    <ThemeProvider>
+      <AdminAuthProvider>
+        <AuthProvider>
+          <AppProvider>
+            <BrowserRouter>
+              <Routes>
+                {/* ── Admin routes (no Navbar / Footer / particles) ── */}
+                <Route path="/admin" element={<AdminLoginPage />} />
+                <Route
+                  path="/admin/*"
+                  element={
+                    <AdminRoute>
+                      <AdminLayout />
+                    </AdminRoute>
+                  }
+                >
+                  <Route path="dashboard" element={<AdminDashboard />} />
+                  <Route path="courses" element={<AdminCourses />} />
+                  <Route path="analytics" element={<AdminAnalytics />} />
+                </Route>
 
-              {/* ── All other routes → public site ── */}
-              <Route path="/*" element={<PublicSite />} />
-            </Routes>
-          </BrowserRouter>
-        </AppProvider>
-      </AuthProvider>
-    </AdminAuthProvider>
+                {/* ── All other routes → public site ── */}
+                <Route path="/*" element={<PublicSite />} />
+              </Routes>
+            </BrowserRouter>
+          </AppProvider>
+        </AuthProvider>
+      </AdminAuthProvider>
+    </ThemeProvider>
   );
 }
 

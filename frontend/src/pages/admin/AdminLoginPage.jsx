@@ -26,9 +26,11 @@ export default function AdminLoginPage() {
             <div className="admin-login-card">
                 {/* Logo */}
                 <div className="admin-login-logo">
-                    <div className="admin-logo-icon">🗺️</div>
+                    <div className="admin-logo-icon">
+                        <img src="/logo.png" alt="way2fresher logo" style={{ width: '48px', height: '48px', objectFit: 'contain' }} />
+                    </div>
                     <div>
-                        <h1 className="admin-login-title">CareerMap India</h1>
+                        <h1 className="admin-login-title">way2fresher</h1>
                         <p className="admin-login-subtitle">Admin Portal</p>
                     </div>
                 </div>
@@ -44,7 +46,7 @@ export default function AdminLoginPage() {
                                 id="admin-email"
                                 type="email"
                                 autoComplete="email"
-                                placeholder="admin@careermap.in"
+                                placeholder="admin@way2fresher.in"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 required
@@ -95,7 +97,7 @@ export default function AdminLoginPage() {
                 </form>
 
                 <p className="admin-login-hint">
-                    Default: <code>admin@careermap.in</code> / <code>Admin@123</code>
+                    Default: <code>admin@way2fresher.in</code> / <code>Admin@123</code>
                 </p>
             </div>
         </div>

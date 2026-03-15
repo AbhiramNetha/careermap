@@ -5,7 +5,10 @@ export default function Footer() {
         <footer className="footer">
             <div className="footer-content">
                 <div className="footer-brand">
-                    <div className="footer-logo">🗺️ CareerMap India</div>
+                    <div className="footer-logo">
+                        <img src="/logo.png" alt="way2fresher logo" className="footer-logo-img" />
+                        way2fresher
+                    </div>
                     <p className="footer-desc">
                         India's most structured career decision platform for engineering students.
                         Make informed decisions with data-backed insights.
@@ -44,7 +47,7 @@ export default function Footer() {
             </div>
 
             <div className="footer-bottom">
-                <p>© 2024 CareerMap India — Built for B.Tech students across India 🇮🇳</p>
+                <p>© 2024 way2fresher — Built for B.Tech students across India 🇮🇳</p>
                 <p style={{ marginTop: '4px', color: 'var(--text-muted)' }}>
                     Data is indicative. Career outcomes are not guaranteed.
                 </p>

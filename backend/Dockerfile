@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────
-#  CareerMap India — Backend
+#  way2fresher — Backend
 #  Node 20 LTS on Alpine (small image)
 # ─────────────────────────────────────────────
 

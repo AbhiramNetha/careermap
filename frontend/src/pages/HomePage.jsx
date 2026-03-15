@@ -168,7 +168,7 @@ const TRENDING = [
 
 const TEAM = [
     { name: 'Aarup', role: 'Full-Stack Developer', emoji: '👨‍💻', color: '#6366f1' },
-    { name: 'CareerMap', role: 'Platform Mission', emoji: '🗺️', color: '#8b5cf6' },
+    { name: 'way2fresher', role: 'Platform Mission', emoji: '🚀', color: '#8b5cf6' },
     { name: 'India Focus', role: 'Tailored for B.Tech', emoji: '🇮🇳', color: '#10b981' },
 ];
 
@@ -315,7 +315,7 @@ export default function HomePage() {
                             Built for <span className="gradient-text">Indian Engineers</span>
                         </h2>
                         <p className="section-subtitle">
-                            CareerMap India was created to solve one of the most stressful problems every B.Tech student faces — <em>"What should I do after graduation?"</em>
+                            way2fresher was created to solve one of the most stressful problems every B.Tech student faces — <em>"What should I do after graduation?"</em>
                         </p>
                     </div>
 
@@ -330,7 +330,7 @@ export default function HomePage() {
                                 Every year, millions of engineering students graduate without a clear direction. Job portals show too many options. Coaching centres push only one path. Parents suggest what worked for their generation.
                             </p>
                             <p className="about-story-text">
-                                We built CareerMap India to cut through all the noise — combining an intelligent quiz engine, real salary data, and month-by-month roadmaps to give every student a personalized, data-backed career plan.
+                                We built way2fresher to cut through all the noise — combining an intelligent quiz engine, real salary data, and month-by-month roadmaps to give every student a personalized, data-backed career plan.
                             </p>
                             <p className="about-story-text">
                                 Whether you're aiming for a software job, a government PSU, an MBA at IIM, or launching your own startup — we map the clearest path from B.Tech to your dream career.

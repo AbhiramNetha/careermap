@@ -1,10 +1,12 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 export default function Navbar() {
     const { selectedCareers } = useApp();
     const { currentUser, logOut } = useAuth();
+    const { isDark, toggleTheme } = useTheme();
     const navigate = useNavigate();
 
     async function handleLogout() {
@@ -19,8 +21,8 @@ export default function Navbar() {
     return (
         <nav className="navbar">
             <Link to="/" className="navbar-logo">
-                <span>🗺️</span>
-                CareerMap India
+                <img src="/logo.png" alt="way2fresher logo" className="navbar-logo-img" />
+                way2fresher
             </Link>
 
             <ul className="navbar-links">
@@ -52,6 +54,22 @@ export default function Navbar() {
                     </button>
                 )}
 
+                {/* ── Glassmorphism Theme Toggle ── */}
+                <button
+                    className={`theme-toggle ${isDark ? 'theme-toggle--dark' : 'theme-toggle--light'}`}
+                    onClick={toggleTheme}
+                    title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                    aria-label="Toggle dark/light theme"
+                >
+                    <span className="theme-toggle-track">
+                        <span className="theme-toggle-thumb">
+                            <span className="theme-toggle-icon">
+                                {isDark ? '🌙' : '☀️'}
+                            </span>
+                        </span>
+                    </span>
+                </button>
+
                 {currentUser ? (
                     /* ── logged-in: avatar + logout ── */
                     <div className="navbar-user">
@@ -76,4 +94,3 @@ export default function Navbar() {
         </nav>
     );
 }
-

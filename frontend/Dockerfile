@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────
-#  CareerMap India — Frontend (Production)
+#  way2fresher — Frontend (Production)
 #  Stage 1: Build the React app with Vite
 #  Stage 2: Serve the static files via nginx
 # ─────────────────────────────────────────────

@@ -1,5 +1,5 @@
 /* ============================================================
-   CAREERMAP INDIA — ADMIN DASHBOARD STYLES
+   WAY2FRESHER — ADMIN DASHBOARD STYLES
    ============================================================ */
 
 /* ─── Design Tokens ─────────────────────────────────────────── */
@@ -352,9 +352,18 @@
     color: var(--admin-text);
 }
 
-.admin-sidebar-logo span:first-child {
-    font-size: 1.4rem;
+.admin-sidebar-logo-img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    border-radius: 6px;
     flex-shrink: 0;
+    filter: drop-shadow(0 2px 6px rgba(99, 102, 241, 0.4));
+    transition: transform 0.3s ease;
+}
+
+.admin-sidebar-logo:hover .admin-sidebar-logo-img {
+    transform: rotate(-5deg) scale(1.08);
 }
 
 .sidebar-logo-text {

@@ -23,7 +23,7 @@ app.use('/api/analytics', analyticsRoutes);
 // Health check
 app.get('/api/health', (req, res) => {
     console.log('✅ /api/health hit at', new Date().toISOString());
-    res.json({ status: 'CareerMap India API is running 🚀', db: 'PostgreSQL', timestamp: new Date() });
+    res.json({ status: 'way2fresher API is running 🚀', db: 'PostgreSQL', timestamp: new Date() });
 });
 
 // PostgreSQL connection + sync tables + start server
