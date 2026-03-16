@@ -2754,7 +2754,7 @@ textarea {
 }
 
 .auth-switch-link:hover {
-  color: white;
+  color: var(--primary);
   text-decoration: underline;
 }
 
