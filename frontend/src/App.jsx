@@ -17,6 +17,7 @@ import BranchDetailPage from './pages/BranchDetailPage';
 import RoadmapPage from './pages/RoadmapPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import CoursesPage from './pages/CoursesPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
@@ -94,6 +95,7 @@ function PublicSite() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/careers" element={<CareerCategoryPage />} />
         <Route path="/courses" element={<CoursesPage />} />
         <Route path="/branches" element={<BranchSelectionPage />} />

@@ -7,12 +7,10 @@ import { initializeApp } from 'firebase/app';
 import {
     getAuth,
     GoogleAuthProvider,
-    GithubAuthProvider,
-    FacebookAuthProvider,
-    TwitterAuthProvider,
     signInWithPopup,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    sendPasswordResetEmail,
     signOut,
     onAuthStateChanged,
     updateProfile,
@@ -42,17 +40,11 @@ const auth = getAuth(app);
 
 // ── Providers ──────────────────────────────────────────────
 const googleProvider = new GoogleAuthProvider();
-const githubProvider = new GithubAuthProvider();
-const facebookProvider = new FacebookAuthProvider();
-const twitterProvider = new TwitterAuthProvider();
 
 googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 // ── Helper sign-in functions ───────────────────────────────
 export const signInWithGoogle = () => signInWithPopup(auth, googleProvider);
-export const signInWithGithub = () => signInWithPopup(auth, githubProvider);
-export const signInWithFacebook = () => signInWithPopup(auth, facebookProvider);
-export const signInWithTwitter = () => signInWithPopup(auth, twitterProvider);
 
 export const signUpWithEmail = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password);
@@ -61,6 +53,8 @@ export const loginWithEmail = (email, password) =>
     signInWithEmailAndPassword(auth, email, password);
 
 export const updateUserProfile = (user, data) => updateProfile(user, data);
+
+export const requestPasswordReset = (email) => sendPasswordResetEmail(auth, email);
 
 export const logOut = () => signOut(auth);
 
