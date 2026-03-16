@@ -15,6 +15,7 @@ import ComparePage from './pages/ComparePage';
 import BranchSelectionPage from './pages/BranchSelectionPage';
 import BranchDetailPage from './pages/BranchDetailPage';
 import RoadmapPage from './pages/RoadmapPage';
+import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
@@ -107,6 +108,7 @@ function PublicSite() {
         <Route path="/compare" element={<ProtectedRoute><ComparePage /></ProtectedRoute>} />
         <Route path="/branches/:branch" element={<ProtectedRoute><BranchDetailPage /></ProtectedRoute>} />
         <Route path="/roadmap/:id" element={<ProtectedRoute><RoadmapPage /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
       </Routes>
       <Footer />
     </div>

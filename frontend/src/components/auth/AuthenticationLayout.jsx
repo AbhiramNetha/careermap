@@ -18,7 +18,7 @@ export default function AuthenticationLayout({
             <div className="auth-card-header">
               <Link to="/" className="auth-logo" aria-label="Go to home">
                 <img src="/logo.png" alt="" className="auth-logo-img" />
-                CareerMap India
+                way2fresher
               </Link>
               <h1 className="auth-title">{title}</h1>
               {subtitle ? <p className="auth-subtitle">{subtitle}</p> : null}

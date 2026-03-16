@@ -1,5 +1,6 @@
 const Career = require('./models/Career');
 const QuizQuestion = require('./models/Quiz');
+const Course = require('./models/Course');
 
 const careerData = [
     {
@@ -370,6 +371,57 @@ const quizQuestions = [
     },
 ];
 
+const courseData = [
+    {
+        title: 'Complete Web Development Bootcamp 2026',
+        description: 'Master web development from scratch with HTML, CSS, JS, Node and React.',
+        price: 499,
+        affiliateLink: 'https://example.com/course1',
+        category: 'Web Development',
+        platform: 'Udemy',
+        rating: 4.8,
+        totalStudents: 154200,
+        isFeatured: true,
+        isActive: true
+    },
+    {
+        title: 'Machine Learning A-Z: AI, Python & R',
+        description: 'Learn to create Machine Learning Algorithms in Python and R from two Data Science experts.',
+        price: 599,
+        affiliateLink: 'https://example.com/course2',
+        category: 'AI/ML',
+        platform: 'Udemy',
+        rating: 4.6,
+        totalStudents: 85000,
+        isFeatured: true,
+        isActive: true
+    },
+    {
+        title: 'AWS Certified Solutions Architect',
+        description: 'Pass the AWS Certified Solutions Architect Associate Certification exam.',
+        price: 699,
+        affiliateLink: 'https://example.com/course3',
+        category: 'Cloud',
+        platform: 'Coursera',
+        rating: 4.7,
+        totalStudents: 56000,
+        isFeatured: false,
+        isActive: true
+    },
+    {
+        title: 'Mastering System Design',
+        description: 'Prepare for technical interviews with advanced system design principles.',
+        price: 399,
+        affiliateLink: 'https://example.com/course4',
+        category: 'SDE',
+        platform: 'Educative',
+        rating: 4.9,
+        totalStudents: 32000,
+        isFeatured: false,
+        isActive: true
+    }
+];
+
 async function seedDatabase(forceReseed = false) {
     try {
         const careerCount = await Career.count();
@@ -394,9 +446,20 @@ async function seedDatabase(forceReseed = false) {
         } else {
             console.log(`ℹ️ Database already has ${quizCount} quiz questions — skipping seed`);
         }
+
+        const courseCount = await Course.count();
+        if (courseCount === 0 || forceReseed) {
+            if (forceReseed && courseCount > 0) {
+                await Course.destroy({ where: {} });
+            }
+            await Course.bulkCreate(courseData);
+            console.log(`✅ Seeded ${courseData.length} courses`);
+        } else {
+            console.log(`ℹ️ Database already has ${courseCount} courses — skipping seed`);
+        }
     } catch (err) {
         console.error('❌ Seeding error:', err.message);
     }
 }
 
-module.exports = { seedDatabase, careerData, quizQuestions };
+module.exports = { seedDatabase, careerData, quizQuestions, courseData };

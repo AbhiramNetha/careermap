@@ -20,7 +20,8 @@ export default function CoursesPage() {
 
     async function handleGoToCourse(course) {
         try {
-            const result = await trackCourseClick(course._id, currentUser?.email || 'anonymous');
+            const courseId = course._id || course.id;
+            const result = await trackCourseClick(courseId, currentUser?.email || 'anonymous');
             window.open(result.affiliateLink || course.affiliateLink, '_blank', 'noopener');
         } catch {
             window.open(course.affiliateLink, '_blank', 'noopener');
@@ -96,7 +97,7 @@ export default function CoursesPage() {
                                 <h2 className="courses-section-title">⭐ Featured Courses</h2>
                                 <div className="courses-grid courses-grid-featured">
                                     {featured.map(c => (
-                                        <CourseCard key={c._id} course={c} onGo={handleGoToCourse} featured />
+                                        <CourseCard key={c._id || c.id} course={c} onGo={handleGoToCourse} featured />
                                     ))}
                                 </div>
                             </section>
@@ -110,7 +111,7 @@ export default function CoursesPage() {
                             <p className="courses-count">{filtered.length} course{filtered.length !== 1 ? 's' : ''} found</p>
                             <div className="courses-grid">
                                 {(filter === 'All' && !search ? regular : filtered).map(c => (
-                                    <CourseCard key={c._id} course={c} onGo={handleGoToCourse} />
+                                    <CourseCard key={c._id || c.id} course={c} onGo={handleGoToCourse} />
                                 ))}
                             </div>
                         </section>
@@ -163,7 +164,7 @@ function CourseCard({ course, onGo, featured = false }) {
                     <button
                         className="course-go-btn"
                         onClick={() => onGo(course)}
-                        id={`course-go-${course._id}`}
+                        id={`course-go-${course._id || course.id}`}
                     >
                         Go to Course →
                     </button>
