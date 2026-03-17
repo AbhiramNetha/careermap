@@ -195,8 +195,6 @@ textarea {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-decoration: none;
-  min-width: 180px;
-  margin-right: 40px;
 }
 
 /* Navbar logo image – optimized for transparent PNG */
@@ -260,19 +258,18 @@ textarea {
 .navbar-links {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 24px;
   list-style: none;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 0 auto;
 }
 
 .navbar-links a {
   color: var(--text-secondary);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   transition: var(--transition);
   position: relative;
+  white-space: nowrap;
 }
 
 .navbar-links a:hover,
@@ -295,11 +292,10 @@ textarea {
   display: flex;
   gap: 12px;
   align-items: center;
-  min-width: 180px;
   justify-content: flex-end;
 }
 
-@media (max-width: 968px) {
+@media (max-width: 1068px) {
   .mobile-menu-btn {
     display: flex;
   }
