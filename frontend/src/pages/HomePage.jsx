@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchAllCareers } from '../services/api';
 import { useApp } from '../context/AppContext';
+import GifScrollSequence from '../components/GifScrollSequence';
+import SpotlightCard from '../components/SpotlightCard';
+import BlurText from '../components/BlurText';
 
 /* ─── Tiny Rising Bubbles Canvas ─── */
 function BubblesCanvas() {
@@ -201,16 +204,21 @@ export default function HomePage() {
 
     return (
         <>
+            <GifScrollSequence />
+
             {/* ══════ HERO ══════ */}
             <section className="hero" id="home">
                 <div className="hero-bg-glow" />
                 <div className="hero-bg-glow-2" />
                 <div className="container hero-content">
                     <div className="hero-badge">✨ India's #1 Career Decision Platform for Engineers</div>
-                    <h1 className="hero-title">
-                        Find Your Perfect Career Path{' '}
-                        <span className="gradient-text">After B.Tech</span>
-                    </h1>
+                    <BlurText
+                        text="Find Your Perfect Career Path After B.Tech"
+                        delay={100}
+                        animateBy="words"
+                        direction="bottom"
+                        className="hero-title"
+                    />
                     <p className="hero-subtitle">
                         Stop guessing. Use our intelligent quiz, detailed roadmaps, and comparison engine
                         to make the smartest career decision for your future.
@@ -255,12 +263,12 @@ export default function HomePage() {
                             { id: 'government', icon: '🏛️', name: 'Government Jobs', desc: 'PSU, SSC JE, UPSC for job security & work-life balance', count: '20+ exams', color: '#059669' },
                             { id: 'entrepreneurship', icon: '🚀', name: 'Entrepreneurship', desc: "Build your startup using engineering skills & India's growing ecosystem", count: 'Unlimited potential', color: '#f59e0b' },
                         ].map(cat => (
-                            <div key={cat.id} className="category-card" onClick={() => navigate(`/careers?category=${cat.id}`)}>
+                            <SpotlightCard key={cat.id} className="category-card" onClick={() => navigate(`/careers?category=${cat.id}`)} spotlightColor={cat.color}>
                                 <div className="category-icon">{cat.icon}</div>
                                 <div className="category-name">{cat.name}</div>
                                 <div className="category-desc">{cat.desc}</div>
                                 <div className="category-count" style={{ color: cat.color }}>→ {cat.count}</div>
-                            </div>
+                            </SpotlightCard>
                         ))}
                     </div>
                 </div>
@@ -280,12 +288,12 @@ export default function HomePage() {
                             { step: '03', icon: '⚖️', title: 'Compare Options', desc: 'Side-by-side comparison of salary, risk, growth & stability' },
                             { step: '04', icon: '🗺️', title: 'Follow the Roadmap', desc: 'Month-by-month preparation plan with skills, tools & projects' },
                         ].map(item => (
-                            <div key={item.step} className="category-card" style={{ textAlign: 'center' }}>
+                            <SpotlightCard key={item.step} className="category-card" style={{ textAlign: 'center' }} spotlightColor="rgba(99, 102, 241, 0.15)">
                                 <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--primary-light)', marginBottom: '1.5rem', letterSpacing: '2px', fontFamily: 'var(--font-heading)' }}>STEP {item.step}</div>
                                 <div style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>{item.icon}</div>
                                 <div className="category-name">{item.title}</div>
                                 <div className="category-desc">{item.desc}</div>
-                            </div>
+                            </SpotlightCard>
                         ))}
                     </div>
                 </div>
@@ -301,7 +309,7 @@ export default function HomePage() {
                     </div>
                     <div className="trending-scroll" style={{ display: 'flex', gap: '2rem', overflowX: 'auto', padding: '1rem 0.5rem 2.5rem', scrollbarWidth: 'none' }}>
                         {TRENDING.map(item => (
-                            <div
+                            <SpotlightCard
                                 key={item.id}
                                 className="category-card"
                                 onClick={() => navigate(`/careers/${item.id}`)}
@@ -310,11 +318,12 @@ export default function HomePage() {
                                     padding: '2rem',
                                     textAlign: 'left'
                                 }}
+                                spotlightColor={item.color}
                             >
                                 <div className="category-icon" style={{ fontSize: '2.5rem' }}>{item.emoji}</div>
                                 <div className="category-name" style={{ fontSize: '1.25rem' }}>{item.name}</div>
                                 <div className="category-count" style={{ color: item.color, fontSize: '1.1rem' }}>{item.salary}</div>
-                            </div>
+                            </SpotlightCard>
                         ))}
                     </div>
                 </div>

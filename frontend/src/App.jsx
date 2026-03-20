@@ -27,6 +27,7 @@ import AdminLayout from './pages/admin/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminCourses from './pages/admin/AdminCourses';
 import AdminAnalytics from './pages/admin/AdminAnalytics';
+import WebsitePreloader from './components/WebsitePreloader';
 import './index.css';
 
 /* ── Global rising-particle background (matches original app.js createParticles) ── */
@@ -117,35 +118,38 @@ function PublicSite() {
 
 function App() {
   return (
-    <ThemeProvider>
-      <AdminAuthProvider>
-        <AuthProvider>
-          <AppProvider>
-            <BrowserRouter>
-              <Routes>
-                {/* ── Admin routes (no Navbar / Footer / particles) ── */}
-                <Route path="/admin" element={<AdminLoginPage />} />
-                <Route
-                  path="/admin/*"
-                  element={
-                    <AdminRoute>
-                      <AdminLayout />
-                    </AdminRoute>
-                  }
-                >
-                  <Route path="dashboard" element={<AdminDashboard />} />
-                  <Route path="courses" element={<AdminCourses />} />
-                  <Route path="analytics" element={<AdminAnalytics />} />
-                </Route>
+    <>
+      <WebsitePreloader />
+      <ThemeProvider>
+        <AdminAuthProvider>
+          <AuthProvider>
+            <AppProvider>
+              <BrowserRouter>
+                <Routes>
+                  {/* ── Admin routes (no Navbar / Footer / particles) ── */}
+                  <Route path="/admin" element={<AdminLoginPage />} />
+                  <Route
+                    path="/admin/*"
+                    element={
+                      <AdminRoute>
+                        <AdminLayout />
+                      </AdminRoute>
+                    }
+                  >
+                    <Route path="dashboard" element={<AdminDashboard />} />
+                    <Route path="courses" element={<AdminCourses />} />
+                    <Route path="analytics" element={<AdminAnalytics />} />
+                  </Route>
 
-                {/* ── All other routes → public site ── */}
-                <Route path="/*" element={<PublicSite />} />
-              </Routes>
-            </BrowserRouter>
-          </AppProvider>
-        </AuthProvider>
-      </AdminAuthProvider>
-    </ThemeProvider>
+                  {/* ── All other routes → public site ── */}
+                  <Route path="/*" element={<PublicSite />} />
+                </Routes>
+              </BrowserRouter>
+            </AppProvider>
+          </AuthProvider>
+        </AdminAuthProvider>
+      </ThemeProvider>
+    </>
   );
 }
 
