@@ -385,23 +385,27 @@ textarea {
 
   .navbar-content {
     position: fixed;
-    top: 64px;
+    top: 80px;
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--bg-glass);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgb(5, 11, 24);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     flex-direction: column;
     justify-content: flex-start;
-    padding: 2rem;
+    padding: 2.5rem 2rem;
     gap: 2rem;
     transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     border-top: 1px solid var(--border);
     z-index: 1000;
+    overflow-y: auto;
   }
 
+  [data-theme='light'] .navbar-content {
+    background: rgb(248, 250, 252);
+  }
 
   .navbar-content.open {
     transform: translateX(0);
@@ -410,23 +414,95 @@ textarea {
   .navbar-links {
     flex-direction: column;
     width: 100%;
-    gap: 1.5rem;
-    align-items: center;
+    gap: 0.25rem;
+    align-items: stretch;
     position: static;
     transform: none;
+    display: flex !important; /* Override any conflicting display:none */
+  }
+
+  .navbar-links li {
+    width: 100%;
+  }
+
+  .navbar-links a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 0.95rem;
+    border-radius: var(--radius-md);
+  }
+
+  .navbar-links a:hover,
+  .navbar-links a.active {
+    background: rgba(16, 185, 129, 0.1);
+  }
+
+  /* Show the "More" dropdown items inline in mobile menu */
+  .nav-more-dropdown {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-more-icon {
+    display: none;
+  }
+
+  .more-dropdown-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    padding: 0;
+    min-width: 0;
+    width: 100%;
+    gap: 0.25rem;
+  }
+
+  .more-dropdown-menu a {
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 0.95rem;
+    border-radius: var(--radius-md);
   }
 
   .navbar-actions {
     flex-direction: column;
     width: 100%;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    margin-top: 0.5rem;
+  }
+
+  .navbar-auth-links {
+    flex-direction: column !important;
+    width: 100%;
+    gap: 0.75rem !important;
+  }
+
+  .navbar-auth-links > a,
+  .navbar-auth-links > .btn-signup-nav {
+    width: 100% !important;
+    text-align: center !important;
+    display: block !important;
+    padding: 14px 20px !important;
+    font-size: 0.95rem !important;
+    border-radius: var(--radius-md) !important;
   }
 }
 
 /* ===== GLASSMORPHISM THEME TOGGLE ===== */
 .floating-theme-toggle {
   position: fixed;
-  top: 2rem;
-  right: 1.5rem;
+  bottom: 2.5rem;
+  right: 2rem;
   z-index: 1050;
 }
 
@@ -1990,9 +2066,6 @@ textarea {
 }
 
 @media (max-width: 768px) {
-  .navbar-links {
-    display: none;
-  }
 
   .hero-stats {
     gap: 1.5rem;
@@ -2188,6 +2261,7 @@ textarea {
   padding: 5rem 1.5rem 2rem;
   position: relative;
   overflow: hidden;
+  overflow-x: hidden;
   background: var(--gradient-hero);
 }
 
@@ -2195,37 +2269,29 @@ textarea {
 .auth-grid {
   position: relative;
   z-index: 2;
-  max-width: 1240px;
+  max-width: min(1240px, 100%);
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
   min-height: calc(100vh - 7rem);
+  overflow: hidden;
 }
 
 .auth-left {
   display: flex;
   justify-content: center;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .auth-right {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-@media (max-width: 980px) {
-  .auth-grid {
-    grid-template-columns: 1fr;
-    min-height: unset;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-
-  .auth-right {
-    order: -1;
-  }
+  min-width: 0;
+  overflow: hidden;
 }
 
 /* ambient glow orbs */
@@ -2260,13 +2326,15 @@ textarea {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 460px;
+  max-width: min(460px, calc(100vw - 2rem));
   background: rgba(26, 26, 46, 0.75);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: var(--radius-xl);
   padding: 2.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
   box-shadow:
     0 0 0 1px rgba(99, 102, 241, 0.12),
     0 20px 60px rgba(0, 0, 0, 0.55),
@@ -2275,7 +2343,7 @@ textarea {
 }
 
 .auth-card--wide {
-  max-width: 520px;
+  max-width: min(520px, calc(100vw - 2rem));
 }
 
 /* logo inside card */
@@ -2326,6 +2394,188 @@ textarea {
   color: var(--text-secondary);
 }
 
+@media (max-width: 980px) {
+  .auth-grid {
+    grid-template-columns: 1fr;
+    min-height: unset;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    gap: 2rem;
+  }
+
+  /* Animation goes below auth card on tablet */
+  .auth-right {
+    order: 1;
+  }
+
+  /* Auth card takes priority — full width */
+  .auth-left {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .auth-card,
+  .auth-card--wide {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 680px) {
+  .auth-shell {
+    padding: 4rem 0.75rem 2rem;
+    overflow-x: hidden;
+  }
+
+  .auth-grid {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .auth-left {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .auth-card,
+  .auth-card--wide {
+    max-width: 100%;
+    width: 100%;
+    padding: 1.75rem 1.25rem;
+    border-radius: var(--radius-lg);
+    box-sizing: border-box;
+  }
+
+  .auth-title {
+    font-size: 1.4rem;
+  }
+
+  .auth-subtitle {
+    font-size: 0.82rem;
+  }
+
+  /* Stack provider buttons vertically */
+  .auth-provider-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-social-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Make Sign In / Create Account button fit */
+  .auth-submit {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Scale animation smaller */
+  .auth-animation {
+    width: 100%;
+    max-height: 280px;
+    overflow: hidden;
+  }
+
+  .auth-lu__scene {
+    transform: scale(0.45);
+    transform-origin: center top;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-shell {
+    padding: 3.5rem 0.5rem 1.5rem;
+  }
+
+  .auth-card,
+  .auth-card--wide {
+    max-width: 100%;
+    width: 100%;
+    padding: 1.5rem 1rem;
+    border-radius: var(--radius-md);
+  }
+
+  .auth-title {
+    font-size: 1.25rem;
+  }
+
+  .auth-card-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .auth-logo {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .auth-logo-img {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Stack name fields */
+  .auth-two-col {
+    grid-template-columns: 1fr;
+  }
+
+  /* Ensure inputs don't overflow */
+  .auth-input-wrap input {
+    font-size: 0.88rem;
+    padding: 0.65rem 0.85rem;
+  }
+
+  .auth-provider-btn {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.84rem;
+  }
+
+  .auth-divider {
+    margin-bottom: 1rem;
+  }
+
+  .auth-form {
+    gap: 0.9rem;
+  }
+
+  /* Hide animation entirely on small phones — prioritize the form */
+  .auth-right {
+    display: none;
+  }
+
+  .auth-grid {
+    gap: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .auth-shell {
+    padding: 3rem 0.25rem 1rem;
+  }
+
+  .auth-card,
+  .auth-card--wide {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .auth-title {
+    font-size: 1.15rem;
+  }
+
+  .auth-provider-btn {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.8rem;
+    gap: 6px;
+  }
+
+  .auth-provider-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* (base auth-card styles moved above responsive overrides for correct cascade) */
+
 /* error banner */
 .auth-error {
   background: rgba(239, 68, 68, 0.12);
@@ -2352,7 +2602,7 @@ textarea {
 /* 2-column social button grid */
 .auth-social-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 0.65rem;
   margin-bottom: 1.5rem;
 }
@@ -2360,9 +2610,57 @@ textarea {
 /* preferred provider buttons (Google + Phone) */
 .auth-provider-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 0.75rem;
   margin-bottom: 1.5rem;
+}
+
+/* --- animation panel responsive --- */
+.auth-animation {
+  width: min(640px, 100%);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+}
+
+/* Level Up animation (scoped) */
+.auth-lu__scene {
+  position: relative;
+  width: 740px;
+  height: 560px;
+  transform: scale(min(1.08, calc(640 / 740)));
+  transform-origin: center;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  overflow: hidden;
+  box-shadow: none;
+  will-change: transform;
+}
+
+@media (max-width: 980px) {
+  .auth-lu__scene {
+    transform: scale(min(1, calc(520 / 740)));
+  }
+
+  .auth-animation {
+    width: min(520px, 100%);
+    aspect-ratio: auto;
+    max-height: 400px;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 520px) {
+  .auth-animation {
+    width: 100%;
+    max-height: 260px;
+  }
+
+  .auth-lu__scene {
+    transform: scale(min(1, calc(340 / 740)));
+    transform-origin: center top;
+  }
 }
 
 .auth-provider-btn {
@@ -2589,44 +2887,7 @@ textarea {
   margin-top: 0.25rem;
 }
 
-/* animation panel */
-.auth-animation {
-  width: min(640px, 100%);
-  aspect-ratio: 1 / 1;
-  display: grid;
-  place-items: center;
-}
 
-/* Level Up animation (scoped) */
-.auth-lu__scene {
-  position: relative;
-  width: 740px;
-  height: 560px;
-  transform: scale(min(1.08, calc(640 / 740)));
-  transform-origin: center;
-  border-radius: 0;
-  background: transparent;
-  border: none;
-  overflow: hidden;
-  box-shadow: none;
-  will-change: transform;
-}
-
-@media (max-width: 980px) {
-  .auth-lu__scene {
-    transform: scale(min(1, calc(520 / 740)));
-  }
-}
-
-@media (max-width: 520px) {
-  .auth-animation {
-    width: min(520px, 100%);
-  }
-
-  .auth-lu__scene {
-    transform: scale(min(1, calc(460 / 740)));
-  }
-}
 
 .auth-lu__stars,
 .auth-lu__particles {
@@ -3037,6 +3298,29 @@ textarea {
   color: var(--text-primary);
   border-color: var(--border-hover);
   background: rgba(99, 102, 241, 0.08);
+}
+
+.btn-signup-nav {
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 10px 22px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 999px;
+  transition: var(--transition);
+  border: none;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-signup-nav:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
 }
 
 /* avatar + logout cluster */
@@ -3945,4 +4229,265 @@ button[type="submit"]:hover {
 .btn-sm:hover::before,
 button[type="submit"]:hover::before {
   opacity: 1;
+}
+
+/* ===== RESPONSIVE LAYOUT HELPERS ===== */
+
+/* Career Browse: sidebar + content grid */
+.career-browse-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .career-browse-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .career-browse-layout .filter-panel {
+    position: static !important;
+  }
+}
+
+/* Career Detail: 2-column sections grid */
+.career-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .career-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===================================
+   Global Responsive Overrides
+   Production-Ready • All Breakpoints
+   =================================== */
+
+/* ── Large Screens (1441px+) ── */
+@media (min-width: 1441px) {
+  .container { max-width: 1400px; }
+  .hero-content { max-width: 1100px; }
+}
+
+/* ── Desktop → Small Laptop (1025px – 1440px) ── */
+@media (max-width: 1440px) {
+  .container { max-width: 1200px; }
+}
+
+/* ── Small Laptop (769px – 1024px) ── */
+@media (max-width: 1024px) {
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .about-grid {
+    gap: 2rem;
+  }
+  .about-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .cta-glass-card {
+    padding: 4rem 2rem;
+  }
+  .career-hero {
+    padding: 2rem;
+  }
+}
+
+/* ── Tablet (481px – 768px) ── */
+@media (max-width: 768px) {
+  /* Layout Paddings */
+  .section { padding: 4rem 0; }
+  .page-wrapper { padding-top: 80px; }
+
+  /* Hero Section */
+  .hero { padding-top: 20px; min-height: auto; }
+  .hero-title { font-size: clamp(2rem, 8vw, 3rem); }
+  .hero-subtitle { font-size: 1rem; padding: 0 1rem; margin-bottom: 2.5rem; }
+  .hero-cta { flex-direction: column; width: 100%; max-width: 320px; margin: 0 auto; gap: 1rem; margin-bottom: 3rem; }
+  .hero-cta button, .hero-cta a { width: 100%; }
+
+  /* Stats & Grids — single column */
+  .hero-stats { grid-template-columns: 1fr; gap: 1rem; }
+  .categories-grid, .careers-grid, .features-grid, .steps-grid, .footer-grid,
+  .values-grid, .courses-grid, .courses-grid-featured,
+  .cd-grid, .bd-sections, .branches-grid, .why-grid,
+  .branch-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem;
+  }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .about-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .about-story { padding: 2rem; }
+
+  /* Footer */
+  .footer-content { grid-template-columns: 1fr; gap: 1.5rem; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 0.75rem; }
+  .footer-links { justify-content: center; flex-wrap: wrap; }
+  .footer { padding: 2rem 1rem 1.5rem; }
+
+  /* CTA */
+  .cta-glass-card { padding: 3rem 1.5rem; }
+
+  /* Quiz */
+  .quiz-page { padding: 4rem 1rem; }
+  .quiz-question { font-size: clamp(1.2rem, 5vw, 1.7rem); }
+  .quiz-icon { font-size: 2.5rem; }
+  .quiz-options, .quiz-options.horizontal { flex-direction: column; }
+  .quiz-opt { width: 100%; }
+  .quiz-nav { flex-direction: column; gap: 1rem; }
+  .quiz-nav button { width: 100%; }
+
+  /* Quiz Results */
+  .results-page { padding: 4rem 1rem; }
+
+  /* Career Detail */
+  .career-detail-page { padding: 2rem 0; }
+  .career-hero { padding: 1.5rem; }
+  .career-hero > div { flex-direction: column !important; }
+  .career-hero > div > div:nth-child(2) { align-self: stretch; margin-top: 1.5rem; min-width: 0 !important; }
+
+  /* Compare */
+  .compare-page { padding: 3rem 0; }
+  .compare-table { min-width: 500px; font-size: 0.82rem; }
+  .compare-table th, .compare-table td { padding: 0.75rem 1rem; }
+
+  /* Courses */
+  .courses-hero { padding: 4rem 1rem 3rem; }
+  .courses-main { padding: 1.5rem 1rem 4rem; }
+
+  /* Auth */
+  .auth-shell { padding: 4rem 0.75rem 2rem; overflow-x: hidden; }
+  .auth-card { padding: 1.75rem 1.25rem; max-width: min(460px, calc(100vw - 1.5rem)); }
+  .auth-card--wide { max-width: min(520px, calc(100vw - 1.5rem)); }
+  .auth-provider-grid { grid-template-columns: 1fr; }
+  .auth-social-grid { grid-template-columns: 1fr; }
+
+  /* Modals / Overlays */
+  .modal-content, .auth-split { flex-direction: column; width: 100%; max-width: 95%; }
+  .auth-split > div { width: 100%; }
+
+  /* Navbar */
+  .navbar { padding: 0 1rem; gap: 1.5rem; height: 60px; }
+
+  /* Floating compare bar */
+  .floating-compare-bar { left: 1rem; right: 1rem; transform: none; padding: 0.75rem 1rem; }
+
+  /* Prevent horizontal scroll */
+  body { overflow-x: hidden; }
+  .container { padding: 0 1rem; }
+  .hero-bg-glow, .hero-bg-glow-2, .cta-glow { display: none; }
+
+  /* Page header */
+  .page-header { padding: 3rem 0 2rem; margin-bottom: 2rem; }
+
+  /* Roadmap */
+  .roadmap-progress-card { padding: 1.25rem 1rem; }
+
+  /* Breadcrumb */
+  .breadcrumb { font-size: 0.75rem; flex-wrap: wrap; }
+}
+
+/* ── Mobile (320px – 480px) ── */
+@media (max-width: 480px) {
+  .hero-title { font-size: clamp(1.6rem, 8vw, 2.2rem); }
+  .hero-subtitle { font-size: 0.95rem; }
+  .stat-value { font-size: 1.8rem; }
+  .hero-stat-item { padding: 1.5rem 1rem; }
+  .hero-badge { font-size: 0.75rem; padding: 0.5rem 1rem; margin-bottom: 1.5rem; }
+
+  /* Cards */
+  .category-card { padding: 1.5rem 1.25rem; }
+  .career-card { padding: 1.25rem; }
+  .detail-section { padding: 1.25rem; }
+  .value-card { padding: 1.5rem; }
+  .about-stat-card { padding: 1.5rem 1rem; }
+
+  /* About */
+  .about-stats-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .about-stat-value { font-size: 2rem; }
+  .about-stat-icon { font-size: 1.8rem; }
+  .about-story { padding: 1.5rem; }
+
+  /* Section header */
+  .section-header { margin-bottom: 2rem; }
+  .section-title { font-size: clamp(1.5rem, 6vw, 2rem); }
+
+  /* Buttons */
+  .btn-primary, .btn-secondary, .btn-quiz-cta, .rc-btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Quiz */
+  .quiz-container { max-width: 100%; }
+  .quiz-question { font-size: 1.2rem; }
+  .quiz-option { padding: 0.85rem 1rem; font-size: 0.88rem; }
+
+  /* Footer */
+  .footer-col-title { font-size: 0.85rem; }
+
+  /* Compare table */
+  .compare-table { min-width: 420px; }
+  .compare-table th, .compare-table td { padding: 0.6rem 0.75rem; font-size: 0.78rem; }
+
+  /* Course Card */
+  .course-card-image { height: 130px; }
+  .course-card-thumbnail { height: 100px; font-size: 2.5rem; }
+
+  /* Navbar header wrapper */
+  .global-header-wrapper { top: 0.75rem !important; padding: 0 0.75rem !important; }
+  .navbar { height: 56px; border-radius: 16px; }
+  .navbar-logo-img { width: 40px !important; height: 40px !important; min-width: 40px !important; }
+
+  /* Theme toggle */
+  .floating-theme-toggle {
+    bottom: 16px;
+    right: 16px;
+    transform: scale(0.85);
+  }
+
+  /* Auth */
+  .auth-card { padding: 1.5rem 1rem; border-radius: var(--radius-lg); max-width: min(460px, calc(100vw - 1rem)); }
+  .auth-card--wide { max-width: min(520px, calc(100vw - 1rem)); }
+  .auth-title { font-size: 1.3rem; }
+  .auth-two-col { grid-template-columns: 1fr; }
+
+  /* CTA */
+  .cta-glass-card { padding: 2.5rem 1.25rem; }
+
+  /* Profile dropdown */
+  .profile-dropdown { width: 200px; }
+  .navbar-user-name { display: none; }
+
+  /* Floating compare bar */
+  .floating-compare-bar { bottom: 1rem; gap: 0.5rem; font-size: 0.82rem; }
+}
+
+/* ── Tiny screens (< 360px) ── */
+@media (max-width: 360px) {
+  .hero-title { font-size: 1.5rem; }
+  .hero-badge { font-size: 0.7rem; }
+  .section-title { font-size: 1.3rem; }
+  .about-stats-grid { grid-template-columns: 1fr; }
+  .category-card { padding: 1.25rem 1rem; }
+  .quiz-question { font-size: 1.1rem; }
+  .auth-provider-grid { grid-template-columns: 1fr; }
+  .navbar { padding: 0 0.75rem; }
+  .global-header-wrapper { padding: 0 0.5rem !important; }
 }

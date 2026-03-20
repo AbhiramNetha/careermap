@@ -28,6 +28,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminCourses from './pages/admin/AdminCourses';
 import AdminAnalytics from './pages/admin/AdminAnalytics';
 import WebsitePreloader from './components/WebsitePreloader';
+import ScrollToTop from './components/ScrollToTop';
 import './index.css';
 
 /* ── Global rising-particle background (matches original app.js createParticles) ── */
@@ -125,6 +126,7 @@ function App() {
           <AuthProvider>
             <AppProvider>
               <BrowserRouter>
+                <ScrollToTop />
                 <Routes>
                   {/* ── Admin routes (no Navbar / Footer / particles) ── */}
                   <Route path="/admin" element={<AdminLoginPage />} />

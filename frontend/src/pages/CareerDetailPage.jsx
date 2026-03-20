@@ -60,7 +60,7 @@ export default function CareerDetailPage() {
                 {/* Hero Section */}
                 <div className="career-hero" style={{ marginBottom: '2rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1.5rem' }}>
-                        <div style={{ flex: 1, minWidth: '300px' }}>
+                        <div style={{ flex: 1, minWidth: 0 }}>
                             <div style={{ display: 'flex', gap: '10px', marginBottom: '1rem', flexWrap: 'wrap' }}>
                                 <span className="chip chip-purple">{categoryLabel}</span>
                                 {career.isTrending && <span className="chip chip-yellow">🔥 Trending</span>}
@@ -114,7 +114,7 @@ export default function CareerDetailPage() {
                     </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                <div className="career-detail-grid">
                     {/* Salary Chart */}
                     <div className="detail-section">
                         <div className="detail-section-title">💰 Salary Progression (India)</div>

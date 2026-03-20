@@ -93,7 +93,7 @@ export default function CareerCategoryPage() {
             </div>
 
             <div className="container">
-                <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: '2rem', alignItems: 'start' }}>
+                <div className="career-browse-layout">
                     {/* Filter Panel */}
                     <div className="filter-panel" style={{ position: 'sticky', top: '90px' }}>
                         <div className="filter-title">🔍 Filter Careers</div>

@@ -1535,4 +1535,29 @@
     .admin-topbar-user-info {
         display: none;
     }
+
+    /* Grids */
+    .admin-stats-grid,
+    .admin-dashboard-grid,
+    .admin-form-row {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .admin-login-card {
+        padding: 24px;
+        margin: 1rem;
+    }
+
+    /* Modals */
+    .admin-modal {
+        width: 100% !important;
+        max-width: 95% !important;
+        padding: 20px !important;
+        margin: auto !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-topbar { padding: 0 16px; }
+    .admin-page-title { font-size: 1.3rem; }
 }
