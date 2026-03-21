@@ -29,6 +29,7 @@ import AdminAnalytics from './pages/admin/AdminAnalytics';
 import WebsitePreloader from './components/WebsitePreloader';
 import ScrollToTop from './components/ScrollToTop';
 import BeamsBackground from './components/Beams/BeamsBackground';
+import AdminBackgrounds from './components/AdminBackgrounds';
 import './index.css';
 
 /* ── Public site wrapper (with Navbar + Footer + Beams background) ── */
@@ -81,6 +82,7 @@ function App() {
             <AppProvider>
               <BrowserRouter>
                 <ScrollToTop />
+                <AdminBackgrounds />
                 <Routes>
                   {/* ── Admin routes (no Navbar / Footer / Beams) ── */}
                   <Route path="/admin" element={<AdminLoginPage />} />

@@ -18,10 +18,6 @@ export default function AdminLoginPage() {
 
     return (
         <div className="admin-login-page">
-            {/* Animated background */}
-            <div className="admin-bg-grid" />
-            <div className="admin-bg-glow admin-bg-glow-1" />
-            <div className="admin-bg-glow admin-bg-glow-2" />
 
             <div className="admin-login-card">
                 {/* Logo */}
@@ -46,7 +42,7 @@ export default function AdminLoginPage() {
                                 id="admin-email"
                                 type="email"
                                 autoComplete="email"
-                                placeholder="admin@way2fresher.in"
+                                placeholder="admin@careermap.in"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 required
@@ -97,7 +93,7 @@ export default function AdminLoginPage() {
                 </form>
 
                 <p className="admin-login-hint">
-                    Default: <code>admin@way2fresher.in</code> / <code>Admin@123</code>
+                    Default: <code>admin@careermap.in</code> / <code>Admin@123</code>
                 </p>
             </div>
         </div>
