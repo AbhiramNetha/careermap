@@ -11,7 +11,7 @@ export default function AdminDashboard() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Update breadcrumb
+        
         const bc = document.getElementById('admin-breadcrumb');
         if (bc) bc.textContent = 'Dashboard';
 
@@ -87,7 +87,7 @@ export default function AdminDashboard() {
                 </Link>
             </div>
 
-            {/* Stat cards */}
+            {}
             <div className="admin-stats-grid">
                 {statCards.map((card, i) => (
                     <div key={i} className={`admin-stat-card admin-stat-${card.color}`}>
@@ -103,9 +103,9 @@ export default function AdminDashboard() {
                 ))}
             </div>
 
-            {/* Charts + Top Courses */}
+            {}
             <div className="admin-dashboard-grid">
-                {/* Traffic Chart */}
+                {}
                 <div className="admin-card admin-chart-card">
                     <div className="admin-card-header">
                         <h3>📈 Daily Traffic (Last 30 Days)</h3>
@@ -113,7 +113,7 @@ export default function AdminDashboard() {
                     <AdminTrafficChart dailyData={analytics?.dailyData || []} />
                 </div>
 
-                {/* Top clicked courses */}
+                {}
                 <div className="admin-card">
                     <div className="admin-card-header">
                         <h3>🏆 Top Clicked Courses</h3>
@@ -138,7 +138,7 @@ export default function AdminDashboard() {
                 </div>
             </div>
 
-            {/* Recent courses */}
+            {}
             <div className="admin-card admin-recent-courses">
                 <div className="admin-card-header">
                     <h3>📚 Recent Courses</h3>

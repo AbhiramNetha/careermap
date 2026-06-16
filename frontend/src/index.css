@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
@@ -9,13 +8,6 @@
 /* ===================================
    way2fresher — Global Styles
    =================================== */
-=======
-/* ===================================
-   way2fresher — Global Styles
-   =================================== */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
->>>>>>> d15a440e4fbcef775a7b41f7fbabedc7987f8653
 
 :root {
   /* Premium Dark Theme (Deep Navy/Slate) */
@@ -4477,7 +4469,6 @@ button[type="submit"]:hover::before {
   .auth-provider-grid { grid-template-columns: 1fr; }
   .navbar { padding: 0 0.75rem; }
   .global-header-wrapper { padding: 0 0.5rem !important; }
-<<<<<<< HEAD
 }
 
 /* ==========================================================================
@@ -4603,6 +4594,4 @@ button[type="submit"]:hover::before {
 }
 [data-theme='light'] .w2f-btn-secondary:hover {
   background: rgba(15, 23, 42, 0.06);
-=======
->>>>>>> d15a440e4fbcef775a7b41f7fbabedc7987f8653
 }

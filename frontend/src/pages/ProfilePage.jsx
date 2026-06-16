@@ -1,9 +1,7 @@
 import { useAuth } from '../context/AuthContext';
-import { useTheme } from '../context/ThemeContext';
 
 export default function ProfilePage() {
     const { currentUser } = useAuth();
-    const { isDark } = useTheme();
 
     return (
         <div className="container" style={{ paddingTop: '120px', paddingBottom: '80px', minHeight: '80vh' }}>

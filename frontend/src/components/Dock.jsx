@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
+import { motion as Motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import { Children, cloneElement, useEffect, useMemo, useRef, useState } from 'react';
 
 import './Dock.css';
@@ -19,7 +19,7 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
   const size = useSpring(targetSize, spring);
 
   return (
-    <motion.div
+    <Motion.div
       ref={ref}
       style={{
         width: size,
@@ -36,7 +36,7 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
       aria-haspopup="true"
     >
       {Children.map(children, child => cloneElement(child, { isHovered }))}
-    </motion.div>
+    </Motion.div>
   );
 }
 
@@ -54,7 +54,7 @@ function DockLabel({ children, className = '', ...rest }) {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.div
+        <Motion.div
           initial={{ opacity: 0, y: 0 }}
           animate={{ opacity: 1, y: -10 }}
           exit={{ opacity: 0, y: 0 }}
@@ -64,7 +64,7 @@ function DockLabel({ children, className = '', ...rest }) {
           style={{ x: '-50%' }}
         >
           {children}
-        </motion.div>
+        </Motion.div>
       )}
     </AnimatePresence>
   );
@@ -95,8 +95,8 @@ export default function Dock({
   const height = useSpring(heightRow, spring);
 
   return (
-    <motion.div style={{ height, scrollbarWidth: 'none' }} className="dock-outer">
-      <motion.div
+    <Motion.div style={{ height, scrollbarWidth: 'none' }} className="dock-outer">
+      <Motion.div
         onMouseMove={({ pageX }) => {
           isHovered.set(1);
           mouseX.set(pageX);
@@ -125,7 +125,7 @@ export default function Dock({
             <DockLabel>{item.label}</DockLabel>
           </DockItem>
         ))}
-      </motion.div>
-    </motion.div>
+      </Motion.div>
+    </Motion.div>
   );
 }

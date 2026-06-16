@@ -7,7 +7,7 @@ import { loginWithEmail, signInWithGoogle } from '../firebase';
 export default function LoginPage() {
     const navigate = useNavigate();
     const location = useLocation();
-    // Redirect back to the page they tried to visit, or home
+    
     const from = location.state?.from?.pathname || '/';
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -62,7 +62,7 @@ export default function LoginPage() {
     );
 }
 
-/* Maps Firebase error codes to user-friendly messages */
+
 function friendlyError(code) {
     const map = {
         'auth/user-not-found': 'No account found with this email.',

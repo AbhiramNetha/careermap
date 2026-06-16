@@ -5,7 +5,7 @@ import { useApp } from '../context/AppContext';
 
 export default function QuizPage() {
     const navigate = useNavigate();
-    const { updateQuizAnswer, quizAnswers, setQuizResults, setQuizAnswers } = useApp();
+    const { updateQuizAnswer, setQuizResults } = useApp();
 
     const [questions, setQuestions] = useState([]);
     const [currentStep, setCurrentStep] = useState(0);
@@ -21,12 +21,12 @@ export default function QuizPage() {
                 if (data && data.length > 0) {
                     setQuestions(data);
                 } else {
-                    // Backend returned empty — use fallback
+                    
                     setQuestions(FALLBACK_QUESTIONS);
                 }
             })
             .catch(() => {
-                // Backend unavailable — use fallback
+                
                 setQuestions(FALLBACK_QUESTIONS);
             })
             .finally(() => setLoading(false));
@@ -63,8 +63,8 @@ export default function QuizPage() {
             const res = await submitQuizAnswers(localAnswers);
             setQuizResults(res.data);
             navigate('/quiz/results');
-        } catch (err) {
-            // If backend is unavailable, run local scoring engine
+        } catch {
+            
             const local = runLocalScoring(localAnswers);
             setQuizResults(local);
             navigate('/quiz/results');
@@ -111,7 +111,7 @@ export default function QuizPage() {
     return (
         <div className="quiz-page">
             <div className="quiz-container">
-                {/* Progress */}
+                {}
                 <div className="quiz-step-label">
                     Question {currentStep + 1} of {questions.length}
                 </div>
@@ -119,14 +119,14 @@ export default function QuizPage() {
                     <div className="quiz-progress-fill" style={{ width: `${progress}%` }} />
                 </div>
 
-                {/* Question */}
+                {}
                 <div className="quiz-icon">{currentQuestion.icon}</div>
                 <h2 className="quiz-question">{currentQuestion.question}</h2>
                 {currentQuestion.subtitle && (
                     <p className="quiz-subtitle">{currentQuestion.subtitle}</p>
                 )}
 
-                {/* Options */}
+                {}
                 <div className="quiz-options">
                     {currentQuestion.options?.map(opt => (
                         <button
@@ -156,7 +156,7 @@ export default function QuizPage() {
                     </div>
                 )}
 
-                {/* Navigation */}
+                {}
                 <div className="quiz-nav">
                     <button
                         className="btn-secondary"
@@ -179,7 +179,7 @@ export default function QuizPage() {
     );
 }
 
-// ===== LOCAL OFFLINE SCORING ENGINE =====
+
 const LOCAL_SCORING = {
     'data-analyst': [
         { field: 'branch', value: 'CSE', score: 15 }, { field: 'branch', value: 'ECE', score: 12 }, { field: 'branch', value: 'EEE', score: 10 }, { field: 'branch', value: 'Mechanical', score: 8 }, { field: 'branch', value: 'Civil', score: 6 },

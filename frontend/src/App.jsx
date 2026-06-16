@@ -32,11 +32,11 @@ import BeamsBackground from './components/Beams/BeamsBackground';
 import AdminBackgrounds from './components/AdminBackgrounds';
 import './index.css';
 
-/* ── Public site wrapper (with Navbar + Footer + Beams background) ── */
+
 function PublicSite() {
   return (
     <div className="page-wrapper">
-      {/* Beams animated background — fixed layer at z-index:-1, mounted once */}
+      {}
       <BeamsBackground
         lightColor="#07c06a"
         beamWidth={2}
@@ -49,7 +49,7 @@ function PublicSite() {
       />
       <Navbar />
       <Routes>
-        {/* ── Public routes ── */}
+        {}
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
@@ -58,7 +58,7 @@ function PublicSite() {
         <Route path="/courses" element={<CoursesPage />} />
         <Route path="/branches" element={<BranchSelectionPage />} />
 
-        {/* ── Protected routes (login required) ── */}
+        {}
         <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
         <Route path="/quiz/results" element={<ProtectedRoute><QuizResultPage /></ProtectedRoute>} />
         <Route path="/careers/:id" element={<ProtectedRoute><CareerDetailPage /></ProtectedRoute>} />
@@ -84,7 +84,7 @@ function App() {
                 <ScrollToTop />
                 <AdminBackgrounds />
                 <Routes>
-                  {/* ── Admin routes (no Navbar / Footer / Beams) ── */}
+                  {}
                   <Route path="/admin" element={<AdminLoginPage />} />
                   <Route
                     path="/admin/*"
@@ -99,7 +99,7 @@ function App() {
                     <Route path="analytics" element={<AdminAnalytics />} />
                   </Route>
 
-                  {/* ── All other routes → public site ── */}
+                  {}
                   <Route path="/*" element={<PublicSite />} />
                 </Routes>
               </BrowserRouter>

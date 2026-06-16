@@ -17,15 +17,15 @@ function AnimationPanel() {
     const canvas = canvasRef.current;
     if (!root || !starsEl || !particlesEl || !sparkleWrap || !xpFill || !canvas) return;
 
-    // Clear (hot-reload guard)
+    
     starsEl.innerHTML = '';
     particlesEl.innerHTML = '';
     sparkleWrap.innerHTML = '';
 
-    // Respect reduced motion
+    
     const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
 
-    // ====== STARS ======
+    
     if (!reduceMotion) {
       for (let i = 0; i < 65; i++) {
         const s = document.createElement('div');
@@ -36,7 +36,7 @@ function AnimationPanel() {
       }
     }
 
-    // ====== PARTICLES ======
+    
     const pcols = ['#4f8ef7', '#a855f7', '#f472b6', '#fbbf24', '#7dd3fc'];
     if (!reduceMotion) {
       for (let i = 0; i < 20; i++) {
@@ -49,7 +49,7 @@ function AnimationPanel() {
       }
     }
 
-    // ====== SPARKLES ======
+    
     const scols = ['#fbbf24', '#f472b6', '#4f8ef7', '#a855f7', '#7dd3fc', '#fbbf24', '#f472b6', '#4f8ef7', '#a855f7', '#7dd3fc'];
     if (!reduceMotion) {
       for (let i = 0; i < 10; i++) {
@@ -60,7 +60,7 @@ function AnimationPanel() {
       }
     }
 
-    // ====== CANVAS ANIMATION ======
+    
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -203,7 +203,7 @@ function AnimationPanel() {
       ctx.translate(hx, hy);
       const lean = pose.lean;
 
-      // Shadow
+      
       ctx.save();
       ctx.globalAlpha = 0.22;
       ctx.beginPath();
@@ -212,7 +212,7 @@ function AnimationPanel() {
       ctx.fill();
       ctx.restore();
 
-      // BACK LEG
+      
       {
         const thA = lean + pose.tr;
         const tj = limb(1, -3, LL.thigh, thA, 9, '#162d4a');
@@ -228,7 +228,7 @@ function AnimationPanel() {
         ctx.restore();
       }
 
-      // BACKPACK
+      
       ctx.save();
       ctx.rotate(lean);
       ctx.beginPath();
@@ -248,7 +248,7 @@ function AnimationPanel() {
       circ(-13, -LL.torso * 0.44, 1.8, '#60a5fa');
       ctx.restore();
 
-      // BACK ARM
+      
       {
         ctx.save();
         ctx.rotate(lean);
@@ -258,7 +258,7 @@ function AnimationPanel() {
         ctx.restore();
       }
 
-      // TORSO
+      
       ctx.save();
       ctx.rotate(lean);
       ctx.beginPath();
@@ -279,7 +279,7 @@ function AnimationPanel() {
       ctx.stroke();
       ctx.restore();
 
-      // HEAD & NECK
+      
       ctx.save();
       ctx.rotate(lean + (pose.nod * 0.5));
       ctx.beginPath();
@@ -301,7 +301,7 @@ function AnimationPanel() {
       ctx.fillStyle = '#e8c060';
       ctx.fill();
 
-      // Grad cap
+      
       const capY = -LL.torso - LL.neck - LL.head * 1.58;
       ctx.save();
       ctx.translate(3, capY);
@@ -330,7 +330,7 @@ function AnimationPanel() {
       circ(eX + 5.5, eY + 4.5, 1.4, '#c8a050');
       ctx.restore();
 
-      // FRONT LEG
+      
       {
         const thA = lean + pose.tl;
         const tj = limb(1, -3, LL.thigh, thA, 10, '#274d7a');
@@ -350,7 +350,7 @@ function AnimationPanel() {
         ctx.restore();
       }
 
-      // FRONT ARM
+      
       {
         ctx.save();
         ctx.rotate(lean);

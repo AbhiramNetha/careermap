@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import '../../admin.css';
 import { useAdminAuth } from '../../context/AdminAuthContext';
@@ -7,7 +7,6 @@ export default function AdminLayout() {
     const { adminUser, logout } = useAdminAuth();
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(true);
-    const [notifOpen, setNotifOpen] = useState(false);
 
     function handleLogout() {
         logout();
@@ -22,7 +21,7 @@ export default function AdminLayout() {
 
     return (
         <div className={`admin-layout ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
-            {/* Sidebar */}
+            {}
             <aside className="admin-sidebar">
                 <div className="admin-sidebar-header">
                     <div className="admin-sidebar-logo">
@@ -69,9 +68,9 @@ export default function AdminLayout() {
                 </div>
             </aside>
 
-            {/* Main content */}
+            {}
             <div className="admin-main">
-                {/* Top bar */}
+                {}
                 <header className="admin-topbar">
                     <div className="admin-topbar-left">
                         <button
@@ -98,7 +97,7 @@ export default function AdminLayout() {
                     </div>
                 </header>
 
-                {/* Page content */}
+                {}
                 <main className="admin-content">
                     <Outlet />
                 </main>

@@ -6,15 +6,15 @@ const WebsitePreloader = () => {
   const [shouldUnmount, setShouldUnmount] = useState(false);
 
   useEffect(() => {
-    // This simulates the website loading time. 
-    // It realistically counts up to 100% with slight randomized pauses.
+    
+    
     const loadingInterval = setInterval(() => {
       setProgress((prevProgress) => {
         if (prevProgress >= 100) {
           clearInterval(loadingInterval);
           return 100;
         }
-        // Increase progress by a random amount between 1 and 15
+        
         const increment = Math.floor(Math.random() * 15) + 1;
         return Math.min(prevProgress + increment, 100);
       });
@@ -24,20 +24,20 @@ const WebsitePreloader = () => {
   }, []);
 
   useEffect(() => {
-    // Once it hits 100%, hold for half a second, then trigger the fade/slide out
+    
     if (progress === 100) {
       setTimeout(() => {
         setIsLoaded(true);
       }, 500);
       
-      // Unmount the component from the DOM completely after the slide-out animation finishes (800ms)
+      
       setTimeout(() => {
         setShouldUnmount(true);
       }, 1400);
     }
   }, [progress]);
 
-  // Once fully loaded and animated out, remove from DOM so it doesn't block interactions
+  
   if (shouldUnmount) return null;
 
   return (
@@ -45,7 +45,7 @@ const WebsitePreloader = () => {
       style={{
         position: 'fixed',
         inset: 0,
-        backgroundColor: 'rgba(3, 0, 20, 0.65)', // Glassmorphism backdrop
+        backgroundColor: 'rgba(3, 0, 20, 0.65)', 
         backdropFilter: 'blur(30px)',
         WebkitBackdropFilter: 'blur(30px)',
         zIndex: 99999,
@@ -53,7 +53,7 @@ const WebsitePreloader = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        // Smooth slide-up effect when loading is done
+        
         transform: isLoaded ? 'translateY(-100vh)' : 'translateY(0)',
         transition: 'transform 0.8s cubic-bezier(0.76, 0, 0.24, 1)',
         color: '#ffffff',
@@ -61,7 +61,7 @@ const WebsitePreloader = () => {
       }}
     >
       <div style={{ textAlign: 'center', overflow: 'hidden' }}>
-        {/* Brand Name & Logo */}
+        {}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
           <img 
             src="/logo.png" 
@@ -83,7 +83,7 @@ const WebsitePreloader = () => {
           </h1>
         </div>
         
-        {/* Loading Counter */}
+        {}
         <div style={{
            fontSize: '1.25rem',
            marginTop: '20px',
@@ -95,7 +95,7 @@ const WebsitePreloader = () => {
           {progress}%
         </div>
         
-        {/* Loading Bar underlying the counter */}
+        {}
         <div style={{
           width: '200px',
           height: '2px',

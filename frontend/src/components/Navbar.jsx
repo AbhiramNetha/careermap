@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useApp } from "../context/AppContext";
@@ -25,7 +24,7 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/solid";
 
-// ── Profile menu items ───────────────────────────────────────────────────────
+
 const profileMenuItems = [
   { label: "My Profile",   icon: UserCircleIcon, action: "profile" },
   { label: "Edit Profile", icon: Cog6ToothIcon,   action: "profile" },
@@ -50,7 +49,7 @@ export function Way2FresherNavbar() {
 
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
 
-  // Close dropdown on click outside
+  
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -61,7 +60,7 @@ export function Way2FresherNavbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Custom Toast handler
+  
   const triggerToast = (msg) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3000);
@@ -111,7 +110,7 @@ export function Way2FresherNavbar() {
     }
   };
 
-  // Primary navigation (Row 1 on Desktop, integrated into MobileNav)
+  
   const primaryNavItems = [
     { label: "Careers", icon: BriefcaseIcon, href: "/careers", type: "route" },
     { label: "Courses", icon: BuildingOfficeIcon, href: "/courses", type: "route" },
@@ -123,7 +122,7 @@ export function Way2FresherNavbar() {
     { label: "Walk-ins", icon: WalletIcon, href: "#", type: "action", msg: "Walk-ins listing coming soon!" },
   ];
 
-  // Secondary tools strip navigation (Row 2 on Desktop, integrated into MobileNav)
+  
   const toolNavItems = [
     { label: "Resume builder", icon: DocumentTextIcon, href: "#", highlight: true, msg: "Resume builder tools are launching soon!" },
     { label: "ATS checker", icon: ChartBarIcon, href: "#", highlight: false, msg: "ATS analyzer tool is in beta testing." },
@@ -135,7 +134,7 @@ export function Way2FresherNavbar() {
 
   return (
     <>
-      {/* ── Custom Toast Notification ── */}
+      {}
       {toastMessage && (
         <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[9999] bg-slate-900/90 text-white border border-emerald-500/30 px-6 py-3 rounded-full shadow-lg shadow-emerald-500/10 backdrop-blur-md flex items-center gap-2 animate-pulse pointer-events-auto">
           <span className="text-emerald-400">💡</span>
@@ -145,10 +144,10 @@ export function Way2FresherNavbar() {
 
       <div className="fixed top-3 sm:top-6 left-0 right-0 z-50 pointer-events-none flex flex-col items-center gap-2 sm:gap-3 px-2 sm:px-4">
         
-        {/* ── ROW 1: Floating Brand & Primary Navigation Pill (Theme-Aware & Expanded Length) ── */}
+        {}
         <nav className="w2f-navbar mx-auto w-[98%] max-w-[1280px] pointer-events-auto rounded-full px-6 py-2 sm:py-2.5 flex items-center justify-between transition-all backdrop-blur-xl relative z-30">
           
-          {/* Logo branding */}
+          {}
           <Link
             to="/"
             onClick={() => handleNavClick("/")}
@@ -164,7 +163,7 @@ export function Way2FresherNavbar() {
             </span>
           </Link>
 
-          {/* Primary Nav Links — Desktop only */}
+          {}
           <div className="hidden lg:block">
             <ul className="flex items-center gap-1 list-none m-0 p-0">
               {primaryNavItems.slice(0, 5).map(({ label, href, countBadge }) => (
@@ -187,7 +186,7 @@ export function Way2FresherNavbar() {
             </ul>
           </div>
 
-          {/* Global Search Input — Responsive width (Desktop only) */}
+          {}
           <div className="mx-4 hidden lg:max-w-[200px] xl:max-w-[350px] flex-1 lg:flex">
             <div className="w2f-search-container flex w-full items-center gap-2 rounded-full px-4 py-1.5">
               <MagnifyingGlassIcon className="h-4 w-4 text-slate-400" />
@@ -202,7 +201,7 @@ export function Way2FresherNavbar() {
             </div>
           </div>
 
-          {/* Right cluster: actions & Auth */}
+          {}
           <div className="hidden items-center gap-2 lg:flex">
             <button 
               onClick={() => triggerToast("Salary guide coming soon!")}
@@ -218,7 +217,7 @@ export function Way2FresherNavbar() {
             </button>
 
             {currentUser ? (
-              /* Profile menu dropdown (Pure React implementation - React 19 compatible) */
+              
               <div className="relative z-50" ref={dropdownRef}>
                 <button 
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -277,7 +276,7 @@ export function Way2FresherNavbar() {
             )}
           </div>
 
-          {/* Hamburger menu for mobile viewport */}
+          {}
           <button
             onClick={toggleIsNavOpen}
             className="ml-auto h-8 w-8 flex items-center justify-center rounded-lg hover:bg-white/5 lg:hidden text-white outline-none"
@@ -288,7 +287,7 @@ export function Way2FresherNavbar() {
 
         </nav>
 
-        {/* ── ROW 2: Desktop-Only Floating Tools Strip Pill (Theme-Aware & Expanded Length) ── */}
+        {}
         <div className="w2f-tools-strip hidden w-[96%] max-w-[1280px] pointer-events-auto rounded-full px-6 py-1.5 shadow-xl backdrop-blur-md lg:block relative z-20">
           <div className="flex items-center justify-between">
             <ul className="flex items-center gap-1 list-none m-0 p-0 w-full justify-around">
@@ -320,12 +319,12 @@ export function Way2FresherNavbar() {
 
       </div>
 
-      {/* ── Responsive Mobile Navigation Drawer (Theme-Aware) ── */}
+      {}
       {isNavOpen && (
         <div className="fixed inset-x-0 top-[72px] sm:top-[90px] z-40 lg:hidden pointer-events-auto">
           <div className="w2f-mobile-drawer mx-auto w-[95%] rounded-3xl p-6 shadow-2xl backdrop-blur-2xl flex flex-col gap-4 overflow-y-auto max-h-[80vh]">
             
-            {/* Mobile search bar */}
+            {}
             <div className="w2f-search-container flex w-full items-center gap-2 rounded-full px-4 py-2">
               <MagnifyingGlassIcon className="h-4 w-4 text-slate-400" />
               <input
@@ -413,7 +412,7 @@ export function Way2FresherNavbar() {
 
             <hr className="border-white/5 my-0.5" />
 
-            {/* Mobile Auth actions */}
+            {}
             <div className="flex flex-col gap-2 mt-2">
               {currentUser ? (
                 <>
@@ -455,7 +454,7 @@ export function Way2FresherNavbar() {
         </div>
       )}
 
-      {/* ── Floating Light/Dark Mode Switcher ── */}
+      {}
       <div className="floating-theme-toggle">
         <button
           className={`theme-toggle ${isDark ? "theme-toggle--dark" : "theme-toggle--light"}`}
@@ -477,178 +476,3 @@ export function Way2FresherNavbar() {
 }
 
 export default Way2FresherNavbar;
-=======
-import { useState, useRef, useEffect } from 'react';
-import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
-import { useAuth } from '../context/AuthContext';
-import { useTheme } from '../context/ThemeContext';
-
-export default function Navbar() {
-    const { selectedCareers } = useApp();
-    const { currentUser, logOut } = useAuth();
-    const { isDark, toggleTheme } = useTheme();
-    const navigate = useNavigate();
-    const location = useLocation();
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const dropdownRef = useRef(null);
-
-    const handleNavClick = (targetPath) => {
-        setIsMobileMenuOpen(false);
-        if (location.pathname === targetPath) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    };
-
-    // Close dropdown when clicking outside
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setIsDropdownOpen(false);
-            }
-        }
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
-
-    // Close mobile menu on route change
-    useEffect(() => {
-        setIsMobileMenuOpen(false);
-    }, [navigate]);
-
-    async function handleLogout() {
-        try {
-            setIsDropdownOpen(false);
-            await logOut();
-            navigate('/');
-        } catch (err) {
-            console.error('Logout error:', err);
-        }
-    }
-
-    return (
-        <>
-            <div className="global-header-wrapper" style={{ position: 'fixed', top: '1.5rem', left: 0, right: 0, zIndex: 1000, pointerEvents: 'none', display: 'flex', justifyContent: 'center', padding: '0 2rem' }}>
-
-                {/* === MAIN FLOATING NAVBAR PILL === */}
-                <nav className="navbar" style={{ pointerEvents: 'auto' }}>
-                    <Link to="/" className="navbar-logo" onClick={() => handleNavClick('/')} aria-label="way2fresher Home" style={{ display: 'flex', alignItems: 'center' }}>
-                        <img src="/logo.png" alt="way2fresher logo" className="navbar-logo-img" style={{ height: '60px', width: 'auto', minWidth: '60px', objectFit: 'contain', zIndex: 10 }} />
-                    </Link>
-
-                    <button
-                        className={`mobile-menu-btn ${isMobileMenuOpen ? 'active' : ''}`}
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="hamburger-line"></span>
-                        <span className="hamburger-line"></span>
-                        <span className="hamburger-line"></span>
-                    </button>
-
-                    <div className={`navbar-content ${isMobileMenuOpen ? 'open' : ''}`}>
-                        <ul className="navbar-links">
-                            <li><NavLink to="/" onClick={() => handleNavClick('/')}>Home</NavLink></li>
-                            <li><NavLink to="/careers" onClick={() => handleNavClick('/careers')}>Explore Careers</NavLink></li>
-                            <li><NavLink to="/courses" onClick={() => handleNavClick('/courses')}>Courses</NavLink></li>
-                            <li><NavLink to="/branches" onClick={() => handleNavClick('/branches')}>Branch Guide</NavLink></li>
-                            <li><NavLink to="/quiz" onClick={() => handleNavClick('/quiz')}>Career Quiz</NavLink></li>
-                            <li className="nav-more-dropdown">
-                                <span className="nav-more-icon" aria-label="More Options">=</span>
-                                <ul className="more-dropdown-menu">
-                                    <li>
-                                        <NavLink to="/compare" onClick={() => handleNavClick('/compare')}>
-                                            Compare {selectedCareers.length > 0 && `(${selectedCareers.length})`}
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="#about"
-                                            onClick={e => {
-                                                e.preventDefault();
-                                                setIsMobileMenuOpen(false);
-                                                const el = document.getElementById('about');
-                                                if (el) el.scrollIntoView({ behavior: 'smooth' });
-                                                else { window.location.href = '/#about'; }
-                                            }}
-                                        >
-                                            About
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <div className="navbar-actions">
-                            {currentUser ? (
-                                /* ── logged-in: avatar dropdown ── */
-                                <div className="navbar-user-container" ref={dropdownRef}>
-                                    <div
-                                        className={`navbar-user ${isDropdownOpen ? 'active' : ''}`}
-                                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                                    >
-                                        <div className="navbar-avatar">
-                                            {currentUser.photoURL
-                                                ? <img src={currentUser.photoURL} alt="avatar" referrerPolicy="no-referrer" />
-                                                : <span>{(currentUser.displayName || currentUser.email || '?')[0].toUpperCase()}</span>
-                                            }
-                                        </div>
-                                        <span className="navbar-user-name">
-                                            {currentUser.displayName || currentUser.email?.split('@')[0]}
-                                        </span>
-                                        <i className={`dropdown-icon ${isDropdownOpen ? 'open' : ''}`}>▾</i>
-                                    </div>
-
-                                    {isDropdownOpen && (
-                                        <div className="profile-dropdown">
-                                            <div className="dropdown-header">
-                                                <p className="dropdown-user-name">{currentUser.displayName || 'User'}</p>
-                                                <p className="dropdown-user-email">{currentUser.email}</p>
-                                            </div>
-                                            <div className="dropdown-divider"></div>
-                                            <Link to="/profile" className="dropdown-item" onClick={() => setIsDropdownOpen(false)}>
-                                                <span className="dropdown-item-icon">👤</span>
-                                                Profile Settings
-                                            </Link>
-                                            <div className="dropdown-divider"></div>
-                                            <button className="dropdown-item logout-item" onClick={handleLogout}>
-                                                <span className="dropdown-item-icon">🚀</span>
-                                                Sign Out
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
-                            ) : (
-                                /* ── logged-out: sign-in / sign-up ── */
-                                <div className="navbar-auth-links">
-                                    <NavLink to="/login" className="btn-login-nav" onClick={() => setIsMobileMenuOpen(false)}>Sign In</NavLink>
-                                    <NavLink to="/signup" className="btn-signup-nav" onClick={() => setIsMobileMenuOpen(false)}>Sign Up</NavLink>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </nav>
-            </div>
-
-            {/* ── Glassmorphism Theme Toggle (Floating at Bottom Right) ── */}
-            <div className="floating-theme-toggle">
-                <button
-                    className={`theme-toggle ${isDark ? 'theme-toggle--dark' : 'theme-toggle--light'}`}
-                    onClick={toggleTheme}
-                    title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                    aria-label="Toggle dark/light theme"
-                >
-                    <span className="theme-toggle-track">
-                        <span className="theme-toggle-thumb">
-                            <span className="theme-toggle-icon">
-                                {isDark ? '🌙' : '☀️'}
-                            </span>
-                        </span>
-                    </span>
-                </button>
-            </div>
-        </>
-    );
-}
->>>>>>> d15a440e4fbcef775a7b41f7fbabedc7987f8653

@@ -51,7 +51,7 @@ export default function ComparePage() {
     return (
         <div className="compare-page">
             <div className="container">
-                {/* Header */}
+                {}
                 <div className="page-header" style={{ padding: '0 0 3rem', background: 'none', borderBottom: 'none' }}>
                     <div className="section-tag">Comparison Tool</div>
                     <h1 className="section-title" style={{ marginTop: '1rem' }}>
@@ -62,7 +62,7 @@ export default function ComparePage() {
                     </p>
                 </div>
 
-                {/* Selected Careers Summary */}
+                {}
                 <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
                     {selectedCareers.map(c => (
                         <div key={c.id} style={{
@@ -100,7 +100,7 @@ export default function ComparePage() {
                     )}
                 </div>
 
-                {/* Add careers dropdown */}
+                {}
                 {selectedCareers.length < 3 && allCareers.length > 0 && (
                     <div style={{ marginBottom: '2rem' }}>
                         <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
@@ -123,7 +123,7 @@ export default function ComparePage() {
                     </div>
                 )}
 
-                {/* Comparison Table */}
+                {}
                 {selectedCareers.length < 2 ? (
                     <div style={{
                         textAlign: 'center',
@@ -179,7 +179,7 @@ export default function ComparePage() {
                                     return (
                                         <tr key={field.key}>
                                             <td style={{ color: 'var(--text-muted)', fontWeight: 600, fontSize: '0.82rem' }}>{field.label}</td>
-                                            {comparingData.map((c, i) => {
+                                            {comparingData.map(c => {
                                                 const val = field.getter(c);
                                                 const best = isBest(val, vals, field.higher);
                                                 return (

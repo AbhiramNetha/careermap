@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useCallback } from 'react';
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
-    const [selectedCareers, setSelectedCareers] = useState([]); // for comparison (max 3)
+    const [selectedCareers, setSelectedCareers] = useState([]); 
     const [quizAnswers, setQuizAnswers] = useState({});
     const [quizResults, setQuizResults] = useState(null);
     const [selectedBranch, setSelectedBranch] = useState(null);
@@ -16,8 +16,8 @@ export function AppProvider({ children }) {
 
     const addToCompare = useCallback((career) => {
         setSelectedCareers(prev => {
-            if (prev.find(c => c.id === career.id)) return prev; // already added
-            if (prev.length >= 3) return prev; // max 3
+            if (prev.find(c => c.id === career.id)) return prev; 
+            if (prev.length >= 3) return prev; 
             return [...prev, career];
         });
     }, []);

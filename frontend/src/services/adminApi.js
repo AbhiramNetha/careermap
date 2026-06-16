@@ -1,7 +1,7 @@
-// Admin API service - talks to /api/admin/* endpoints
+
 const BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
-// ------- Auth -------
+
 export async function adminLogin(email, password) {
     const res = await fetch(`${BASE}/admin/login`, {
         method: 'POST',
@@ -13,7 +13,7 @@ export async function adminLogin(email, password) {
     return data;
 }
 
-// ------- Courses -------
+
 export async function fetchPublicCourses(params = {}) {
     const qs = new URLSearchParams(params).toString();
     const res = await fetch(`${BASE}/courses?${qs}`);
@@ -65,7 +65,7 @@ export async function trackCourseClick(id, userEmail = 'anonymous') {
     return data;
 }
 
-// ------- Analytics -------
+
 export async function fetchAnalyticsSummary(token) {
     const res = await fetch(`${BASE}/analytics/summary`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -79,6 +79,6 @@ export async function trackVisit() {
     try {
         await fetch(`${BASE}/analytics/track`, { method: 'POST' });
     } catch {
-        // Silent fail – analytics should never break the UX
+        void 0;
     }
 }

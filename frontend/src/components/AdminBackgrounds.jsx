@@ -11,7 +11,7 @@ export const AdminStaticBackground = () => (
       height: '100%',
       zIndex: -1,
       pointerEvents: 'none',
-      background: 'var(--admin-bg)' // Base background to ground the glow effects
+      background: 'var(--admin-bg)' 
     }}
   >
     <div className="admin-bg-grid" />

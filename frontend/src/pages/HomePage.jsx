@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchAllCareers } from '../services/api';
-import { useApp } from '../context/AppContext';
 import GifScrollSequence from '../components/GifScrollSequence';
 import SpotlightCard from '../components/SpotlightCard';
 import BlurText from '../components/BlurText';
 
-/* ─── Tiny Rising Bubbles Canvas ─── */
+
 function BubblesCanvas() {
     const canvasRef = useRef(null);
 
@@ -18,11 +16,11 @@ function BubblesCanvas() {
         let width, height, bubbles, animId;
 
         const COLORS = [
-            [99, 102, 241],   // indigo
-            [139, 92, 246],   // violet
-            [6, 182, 212],   // cyan
-            [16, 185, 129],   // emerald
-            [248, 113, 113],   // rose
+            [99, 102, 241],   
+            [139, 92, 246],   
+            [6, 182, 212],   
+            [16, 185, 129],   
+            [248, 113, 113],   
         ];
 
         function rnd(min, max) { return Math.random() * (max - min) + min; }
@@ -34,9 +32,9 @@ function BubblesCanvas() {
                 x: rnd(0, width),
                 y: startAtBottom ? rnd(height * 0.6, height + radius) : rnd(-radius, height + radius),
                 r: radius,
-                speed: rnd(0.4, 1.4),           // upward speed
-                wobble: rnd(0, Math.PI * 2),    // horizontal wobble phase
-                wobbleAmp: rnd(0.2, 0.8),       // how much it sways
+                speed: rnd(0.4, 1.4),           
+                wobble: rnd(0, Math.PI * 2),    
+                wobbleAmp: rnd(0.2, 0.8),       
                 wobbleSpeed: rnd(0.012, 0.03),
                 alpha: rnd(0.25, 0.65),
                 r_: r, g_: g, b_: b,
@@ -50,7 +48,7 @@ function BubblesCanvas() {
 
         function init() {
             resize();
-            // ~1 bubble per 4 000 px² gives a dense-but-not-crowded feel
+            
             const count = Math.max(60, Math.floor((width * height) / 4000));
             bubbles = Array.from({ length: count }, () => makeBubble(false));
         }
@@ -59,24 +57,24 @@ function BubblesCanvas() {
             ctx.clearRect(0, 0, width, height);
 
             bubbles.forEach(b => {
-                // horizontal wobble
+                
                 b.wobble += b.wobbleSpeed;
                 b.x += Math.sin(b.wobble) * b.wobbleAmp;
 
-                // rise
+                
                 b.y -= b.speed;
 
-                // recycle when off-screen top
+                
                 if (b.y + b.r < 0) {
                     Object.assign(b, makeBubble(true));
                     b.y = height + b.r;
                 }
 
-                // clamp horizontal so they don't wander too far
+                
                 if (b.x < -b.r) b.x = width + b.r;
                 if (b.x > width + b.r) b.x = -b.r;
 
-                // draw a clean tiny circle with a hairline rim
+                
                 ctx.save();
                 ctx.globalAlpha = b.alpha;
 
@@ -85,14 +83,14 @@ function BubblesCanvas() {
                 ctx.fillStyle = `rgba(${b.r_},${b.g_},${b.b_},0.35)`;
                 ctx.fill();
 
-                // rim (slightly brighter)
+                
                 ctx.beginPath();
                 ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
                 ctx.strokeStyle = `rgba(${b.r_},${b.g_},${b.b_},0.8)`;
                 ctx.lineWidth = 0.8;
                 ctx.stroke();
 
-                // tiny specular dot (top-left)
+                
                 ctx.beginPath();
                 ctx.arc(b.x - b.r * 0.28, b.y - b.r * 0.28, b.r * 0.22, 0, Math.PI * 2);
                 ctx.fillStyle = 'rgba(255,255,255,0.55)';
@@ -131,7 +129,7 @@ function BubblesCanvas() {
     );
 }
 
-/* ─── Inline CareerCard ─── */
+
 function CareerCard({ career, onCompare, onView }) {
     const riskClass = `risk-${career.riskLevel?.toLowerCase()}`;
     return (
@@ -191,22 +189,12 @@ const VALUES = [
 
 export default function HomePage() {
     const navigate = useNavigate();
-    const { addToCompare } = useApp();
-    const [trendingCareers, setTrendingCareers] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        fetchAllCareers({ trending: true })
-            .then(res => setTrendingCareers(res.data.data))
-            .catch(() => { })
-            .finally(() => setLoading(false));
-    }, []);
 
     return (
         <>
             <GifScrollSequence />
 
-            {/* ══════ HERO ══════ */}
+            {}
             <section className="hero" id="home">
                 <div className="hero-bg-glow" />
                 <div className="hero-bg-glow-2" />

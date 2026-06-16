@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
         <div className="admin-login-page">
 
             <div className="admin-login-card">
-                {/* Logo */}
+                {}
                 <div className="admin-login-logo">
                     <div className="admin-logo-icon">
                         <img src="/logo.png" alt="way2fresher logo" style={{ width: '48px', height: '48px', objectFit: 'contain' }} />

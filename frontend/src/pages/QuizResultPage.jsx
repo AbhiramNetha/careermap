@@ -33,7 +33,7 @@ export default function QuizResultPage() {
     return (
         <div className="results-page">
             <div className="container">
-                {/* Header */}
+                {}
                 <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
                     <div className="section-tag">Quiz Results</div>
                     <h1 className="section-title" style={{ marginTop: '1rem' }}>
@@ -46,7 +46,7 @@ export default function QuizResultPage() {
                     </p>
                 </div>
 
-                {/* Career Result Cards */}
+                {}
                 <div style={{ display: 'grid', gap: '1.5rem', maxWidth: '900px', margin: '0 auto' }}>
                     {recommendations.map((rec, i) => {
                         const rank = rec.rank;
@@ -59,7 +59,7 @@ export default function QuizResultPage() {
                                 <span className={`result-rank ${badge}`}>{medal} {label}</span>
 
                                 <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                                    {/* Match % */}
+                                    {}
                                     <div style={{ minWidth: '120px' }}>
                                         <div className="match-percentage">{rec.matchPercentage}%</div>
                                         <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '4px' }}>Match Score</div>
@@ -68,7 +68,7 @@ export default function QuizResultPage() {
                                         </div>
                                     </div>
 
-                                    {/* Career Info */}
+                                    {}
                                     <div style={{ flex: 1 }}>
                                         <h3 style={{ fontFamily: 'Poppins', fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.25rem' }}>
                                             {career.name}
@@ -126,7 +126,7 @@ export default function QuizResultPage() {
                     })}
                 </div>
 
-                {/* Actions */}
+                {}
                 <div style={{ textAlign: 'center', marginTop: '3rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                     <button className="btn-secondary" onClick={() => navigate('/quiz')}>
                         🔁 Retake Quiz

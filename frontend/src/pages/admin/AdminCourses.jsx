@@ -114,7 +114,7 @@ export default function AdminCourses() {
 
     return (
         <div className="admin-page">
-            {/* Toast notification */}
+            {}
             {toast && <div className="admin-toast">{toast}</div>}
 
             <div className="admin-page-header">
@@ -127,7 +127,7 @@ export default function AdminCourses() {
                 </button>
             </div>
 
-            {/* Filters */}
+            {}
             <div className="admin-filters">
                 <div className="admin-search-box">
                     <span>🔍</span>
@@ -201,7 +201,7 @@ export default function AdminCourses() {
                 </div>
             )}
 
-            {/* Add/Edit Modal */}
+            {}
             {modalOpen && (
                 <div className="admin-modal-overlay" onClick={e => { if (e.target === e.currentTarget) setModalOpen(false); }}>
                     <div className="admin-modal">
@@ -330,7 +330,7 @@ export default function AdminCourses() {
                 </div>
             )}
 
-            {/* Delete Confirmation */}
+            {}
             {deleteId && (
                 <div className="admin-modal-overlay">
                     <div className="admin-modal admin-modal-sm">

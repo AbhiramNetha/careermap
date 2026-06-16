@@ -57,7 +57,7 @@ export default function CareerDetailPage() {
                     <span style={{ color: 'var(--text-primary)' }}>{career.name}</span>
                 </div>
 
-                {/* Hero Section */}
+                {}
                 <div className="career-hero" style={{ marginBottom: '2rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1.5rem' }}>
                         <div style={{ flex: 1, minWidth: 0 }}>
@@ -73,7 +73,7 @@ export default function CareerDetailPage() {
                             </p>
                         </div>
 
-                        {/* Quick Stats */}
+                        {}
                         <div style={{
                             background: 'rgba(255,255,255,0.04)',
                             border: '1px solid var(--border)',
@@ -97,7 +97,7 @@ export default function CareerDetailPage() {
                         </div>
                     </div>
 
-                    {/* Action Buttons */}
+                    {}
                     <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
                         <button
                             className="btn-primary"
@@ -115,7 +115,7 @@ export default function CareerDetailPage() {
                 </div>
 
                 <div className="career-detail-grid">
-                    {/* Salary Chart */}
+                    {}
                     <div className="detail-section">
                         <div className="detail-section-title">💰 Salary Progression (India)</div>
                         <div style={{ height: '220px' }}>
@@ -147,7 +147,7 @@ export default function CareerDetailPage() {
                         </div>
                     </div>
 
-                    {/* Skills */}
+                    {}
                     <div className="detail-section">
                         <div className="detail-section-title">🛠️ Required Skills</div>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -157,7 +157,7 @@ export default function CareerDetailPage() {
                         </div>
                     </div>
 
-                    {/* Who Should Choose */}
+                    {}
                     <div className="detail-section">
                         <div className="detail-section-title">👤 Who Should Choose This?</div>
                         <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -170,7 +170,7 @@ export default function CareerDetailPage() {
                         </ul>
                     </div>
 
-                    {/* Risk & Other Metrics */}
+                    {}
                     <div className="detail-section">
                         <div className="detail-section-title">📊 Career Metrics</div>
                         {[
@@ -189,7 +189,7 @@ export default function CareerDetailPage() {
                     </div>
                 </div>
 
-                {/* Eligible Branches */}
+                {}
                 <div className="detail-section" style={{ marginTop: '1.5rem' }}>
                     <div className="detail-section-title">🎓 Branch Compatibility</div>
                     <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
@@ -214,7 +214,7 @@ export default function CareerDetailPage() {
                     </div>
                 </div>
 
-                {/* Roadmap Preview */}
+                {}
                 {career.roadmap && career.roadmap.length > 0 && (
                     <div className="detail-section" style={{ marginTop: '1.5rem' }}>
                         <div className="detail-section-title" style={{ justifyContent: 'space-between' }}>

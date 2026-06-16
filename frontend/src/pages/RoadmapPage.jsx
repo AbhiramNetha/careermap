@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { fetchCareerById } from '../services/api';
 import { useApp } from '../context/AppContext';
 
-// Build a flat list of all checkable items from the roadmap
+
 function buildItemKeys(roadmap) {
     const keys = [];
     roadmap?.forEach((step, si) => {
@@ -32,16 +32,16 @@ export default function RoadmapPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [expandedSteps, setExpandedSteps] = useState({});
-    const [checked, setChecked] = useState({});     // { "si__cat__ii": true }
+    const [checked, setChecked] = useState({});     
 
-    // Load career data
+    
     useEffect(() => {
         setLoading(true);
         fetchCareerById(id)
             .then(res => {
                 const data = res.data.data;
                 setCareer(data);
-                // Expand all steps by default
+                
                 const init = {};
                 data.roadmap?.forEach((_, i) => { init[i] = true; });
                 setExpandedSteps(init);
@@ -50,30 +50,34 @@ export default function RoadmapPage() {
             .finally(() => setLoading(false));
     }, [id]);
 
-    // Load persisted checked state for this career
+    
     useEffect(() => {
         if (!id) return;
         try {
             const saved = localStorage.getItem(`roadmap-progress-${id}`);
             if (saved) setChecked(JSON.parse(saved));
-        } catch (_) { }
+        } catch {
+            void 0;
+        }
     }, [id]);
 
-    // Persist whenever checked changes
+    
     useEffect(() => {
         if (!id || !career) return;
         try {
             localStorage.setItem(`roadmap-progress-${id}`, JSON.stringify(checked));
-        } catch (_) { }
+        } catch {
+            void 0;
+        }
     }, [checked, id, career]);
 
-    // Computed stats
+    
     const allKeys = useMemo(() => buildItemKeys(career?.roadmap), [career]);
     const doneCount = useMemo(() => allKeys.filter(k => checked[k]).length, [allKeys, checked]);
     const totalCount = allKeys.length;
     const progress = totalCount > 0 ? Math.round((doneCount / totalCount) * 100) : 0;
 
-    // Per-step progress
+    
     const stepProgress = useMemo(() => {
         const map = {};
         career?.roadmap?.forEach((step, si) => {
@@ -115,7 +119,7 @@ export default function RoadmapPage() {
         <div style={{ padding: '3rem 0 6rem' }}>
             <div className="container">
 
-                {/* ── Header ── */}
+                {}
                 <div className="career-hero" style={{ marginBottom: '2rem' }}>
                     <div className="breadcrumb" style={{ marginBottom: '1rem' }}>
                         <Link to="/">Home</Link> <span>/</span>
@@ -148,7 +152,7 @@ export default function RoadmapPage() {
                     </div>
                 </div>
 
-                {/* ── Overall Progress Bar ── */}
+                {}
                 <div className="roadmap-progress-card">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
                         <div>

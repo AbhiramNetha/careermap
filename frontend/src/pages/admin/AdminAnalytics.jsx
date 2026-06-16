@@ -52,7 +52,7 @@ export default function AdminAnalytics() {
         },
     ];
 
-    // Build last N days from dailyData
+    
     const visitorData = dailyData.slice(-range);
 
     return (
@@ -73,7 +73,7 @@ export default function AdminAnalytics() {
                 </select>
             </div>
 
-            {/* Metric cards */}
+            {}
             <div className="admin-stats-grid">
                 {metricCards.map((card, i) => (
                     <div key={i} className={`admin-stat-card admin-stat-${card.color}`}>
@@ -86,7 +86,7 @@ export default function AdminAnalytics() {
                 ))}
             </div>
 
-            {/* Traffic chart */}
+            {}
             <div className="admin-card admin-chart-card-full">
                 <div className="admin-card-header">
                     <h3>📈 Visitor Traffic — Last {range} Days</h3>
@@ -94,7 +94,7 @@ export default function AdminAnalytics() {
                 <AdminTrafficChart dailyData={visitorData} />
             </div>
 
-            {/* Top Courses table */}
+            {}
             <div className="admin-card">
                 <div className="admin-card-header">
                     <h3>🏆 Top Performing Courses</h3>
@@ -147,7 +147,7 @@ export default function AdminAnalytics() {
                 </div>
             </div>
 
-            {/* Daily breakdown */}
+            {}
             <div className="admin-card">
                 <div className="admin-card-header">
                     <h3>📅 Daily Breakdown</h3>

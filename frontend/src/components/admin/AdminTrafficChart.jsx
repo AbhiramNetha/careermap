@@ -1,4 +1,4 @@
-// Pure-SVG bar chart – no external chart library needed
+
 export default function AdminTrafficChart({ dailyData = [] }) {
     if (!dailyData || dailyData.length === 0) {
         return (
@@ -21,7 +21,7 @@ export default function AdminTrafficChart({ dailyData = [] }) {
     const barGroupW = chartW / n;
     const barW = Math.max(Math.min(barGroupW * 0.35, 16), 4);
 
-    // Y gridlines
+    
     const gridLines = 5;
     const yStep = overallMax / gridLines;
 
@@ -36,7 +36,7 @@ export default function AdminTrafficChart({ dailyData = [] }) {
                 preserveAspectRatio="xMidYMid meet"
                 className="admin-svg-chart"
             >
-                {/* Grid lines */}
+                {}
                 {Array.from({ length: gridLines + 1 }).map((_, i) => {
                     const y = PADDING.top + chartH - (i / gridLines) * chartH;
                     const val = Math.round(i * yStep);
@@ -59,16 +59,16 @@ export default function AdminTrafficChart({ dailyData = [] }) {
                     );
                 })}
 
-                {/* Bars */}
+                {}
                 {dailyData.map((d, i) => {
                     const cx = PADDING.left + i * barGroupW + barGroupW / 2;
                     const vH = ((d.visitors || 0) / overallMax) * chartH;
                     const cH = ((d.courseClicks || 0) / overallMax) * chartH;
-                    const dateLabel = d.date ? d.date.slice(5) : ''; // MM-DD
+                    const dateLabel = d.date ? d.date.slice(5) : ''; 
 
                     return (
                         <g key={i}>
-                            {/* Visitor bar */}
+                            {}
                             <rect
                                 x={cx - barW - 2}
                                 y={PADDING.top + chartH - vH}
@@ -80,7 +80,7 @@ export default function AdminTrafficChart({ dailyData = [] }) {
                                 <title>{d.date}: {d.visitors} visitors</title>
                             </rect>
 
-                            {/* Click bar */}
+                            {}
                             <rect
                                 x={cx + 2}
                                 y={PADDING.top + chartH - cH}
@@ -92,7 +92,7 @@ export default function AdminTrafficChart({ dailyData = [] }) {
                                 <title>{d.date}: {d.courseClicks} clicks</title>
                             </rect>
 
-                            {/* X label – show only every N labels to avoid crowding */}
+                            {}
                             {(n <= 14 || i % Math.ceil(n / 14) === 0) && (
                                 <text
                                     x={cx}
@@ -108,7 +108,7 @@ export default function AdminTrafficChart({ dailyData = [] }) {
                     );
                 })}
 
-                {/* Gradient defs */}
+                {}
                 <defs>
                     <linearGradient id="gradV" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="rgba(99,102,241,0.9)" />

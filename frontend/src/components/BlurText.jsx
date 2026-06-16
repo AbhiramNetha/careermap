@@ -1,12 +1,12 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 
 export default function BlurText({
     text = '',
     delay = 200,
     className = '',
-    animateBy = 'words', // 'words' or 'letters'
-    direction = 'top', // 'top' or 'bottom'
+    animateBy = 'words', 
+    direction = 'top', 
 }) {
     const defaultVariants = {
         hidden: { filter: 'blur(10px)', opacity: 0, y: direction === 'top' ? -20 : 20 },
@@ -18,7 +18,7 @@ export default function BlurText({
     return (
         <p className={className}>
             {elements.map((element, index) => (
-                <motion.span
+                <Motion.span
                     key={index}
                     initial="hidden"
                     whileInView="visible"
@@ -26,14 +26,14 @@ export default function BlurText({
                     transition={{
                         delay: index * (delay / 1000),
                         duration: 0.8,
-                        ease: [0.25, 1, 0.5, 1], // ease out expo
+                        ease: [0.25, 1, 0.5, 1], 
                     }}
                     variants={defaultVariants}
                     style={{ display: 'inline-block', whiteSpace: 'pre' }}
                 >
                     {element === ' ' ? '\u00A0' : element}
                     {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}
-                </motion.span>
+                </Motion.span>
             ))}
         </p>
     );

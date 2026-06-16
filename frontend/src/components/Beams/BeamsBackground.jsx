@@ -1,26 +1,7 @@
-import { memo, useState, useCallback } from 'react';
+import { memo } from 'react';
 import Beams from './Beams';
 
-/**
- * BeamsBackground — Fixed, full-viewport background wrapper.
- *
- * • position: fixed  → stays behind everything, never scrolls
- * • z-index: -1      → always behind page content
- * • pointer-events: none → completely non-intrusive
- * • GPU-accelerated via will-change + transform
- * • Memoised so it mounts once and never re-renders
- *
- * Props (all optional):
- *   enabled      – toggle the background on/off (default: true)
- *   lightColor   – beam light colour        (default: '#07c06a')
- *   beamWidth    – width of each beam       (default: 2)
- *   beamHeight   – height of each beam      (default: 15)
- *   beamNumber   – number of beams          (default: 12)
- *   speed        – animation speed          (default: 2)
- *   noiseIntensity – noise grain intensity  (default: 1.75)
- *   scale        – noise scale              (default: 0.2)
- *   rotation     – rotation in degrees      (default: 0)
- */
+
 const BeamsBackground = memo(function BeamsBackground({
   enabled = true,
   lightColor = '#07c06a',
@@ -46,7 +27,7 @@ const BeamsBackground = memo(function BeamsBackground({
         zIndex: -1,
         pointerEvents: 'none',
         willChange: 'transform',
-        transform: 'translateZ(0)', // force own compositing layer
+        transform: 'translateZ(0)', 
       }}
     >
       <Beams

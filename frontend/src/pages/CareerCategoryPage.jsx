@@ -43,7 +43,7 @@ const RISK_LEVELS = ['', 'Low', 'Medium', 'High'];
 
 export default function CareerCategoryPage() {
     const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const { addToCompare } = useApp();
 
     const [careers, setCareers] = useState([]);
@@ -73,11 +73,9 @@ export default function CareerCategoryPage() {
         setFilters(prev => ({ ...prev, [key]: val }));
     }
 
-    const categoryTitle = CATEGORIES.find(c => c.id === filters.category)?.label || 'All Careers';
-
     return (
         <div style={{ padding: '0 0 5rem' }}>
-            {/* Page Header */}
+            {}
             <div className="page-header">
                 <div className="container">
                     <div className="breadcrumb">
@@ -94,11 +92,11 @@ export default function CareerCategoryPage() {
 
             <div className="container">
                 <div className="career-browse-layout">
-                    {/* Filter Panel */}
+                    {}
                     <div className="filter-panel" style={{ position: 'sticky', top: '90px' }}>
                         <div className="filter-title">🔍 Filter Careers</div>
 
-                        {/* Search */}
+                        {}
                         <div className="filter-group">
                             <input
                                 type="text"
@@ -185,7 +183,7 @@ export default function CareerCategoryPage() {
                         )}
                     </div>
 
-                    {/* Career Grid */}
+                    {}
                     <div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                             <div style={{ fontWeight: 700, fontSize: '1rem' }}>

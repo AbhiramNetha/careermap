@@ -51,7 +51,7 @@ export default function SpotlightCard({
                     borderRadius: 'inherit'
                 }}
             />
-            {/* children needs relative context to sit above the spotlight */}
+            {}
             <div style={{ position: 'relative', zIndex: 1 }}>
                 {children}
             </div>

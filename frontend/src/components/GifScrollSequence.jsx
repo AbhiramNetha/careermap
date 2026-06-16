@@ -7,10 +7,10 @@ export default function GifScrollSequence() {
     const [images, setImages] = useState([]);
     const [progress, setProgress] = useState(0);
 
-    const frameCount = 51; // Extracted 51 frames
+    const frameCount = 51; 
     const currentFrame = (index) => `/levelup_frames/frame_${index.toString().padStart(4, '0')}.webp`;
 
-    // 1. Preload all images
+    
     useEffect(() => {
         const loadedImages = [];
         let loadedCount = 0;
@@ -21,7 +21,7 @@ export default function GifScrollSequence() {
             img.onload = () => {
                 loadedCount++;
                 if (loadedCount === frameCount) {
-                    // All images are loaded natively to memory
+                    
                     setImages(loadedImages);
                 }
             };
@@ -29,14 +29,14 @@ export default function GifScrollSequence() {
         }
     }, []);
 
-    // 2. Track scrolling and draw on Canvas perfectly
+    
     useEffect(() => {
         if (!containerRef.current || !canvasRef.current || images.length === 0) return;
 
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
 
-        // Maintain full screen aspect ratio for the canvas rendering
+        
         const updateCanvasSize = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -48,7 +48,7 @@ export default function GifScrollSequence() {
         const renderFrame = (index) => {
             if (!images[index] || !images[index].complete) return;
             
-            // Draw image covering the canvas (object-fit: cover equivalent in JS)
+            
             const img = images[index];
             const canvasRatio = canvas.width / canvas.height;
             const imgRatio = img.width / img.height;
@@ -59,11 +59,11 @@ export default function GifScrollSequence() {
             let offsetY = 0;
 
             if (canvasRatio > imgRatio) {
-                // Canvas is wider than image: crop top/bottom
+                
                 drawHeight = drawWidth / imgRatio;
                 offsetY = (canvas.height - drawHeight) / 2;
             } else {
-                // Canvas is taller than image: crop left/right
+                
                 drawWidth = drawHeight * imgRatio;
                 offsetX = (canvas.width - drawWidth) / 2;
             }
@@ -74,14 +74,14 @@ export default function GifScrollSequence() {
 
         const handleScroll = () => {
             const rect = containerRef.current.getBoundingClientRect();
-            // Total distance the user scrolls *inside* the container component
+            
             const totalScroll = rect.height - window.innerHeight;
-            let currentScroll = -Math.min(0, rect.top); // rect.top goes negative when scrolling past it
+            let currentScroll = -Math.min(0, rect.top); 
             let rawProgress = rect.top < 0 ? currentScroll / totalScroll : 0;
             
             let p = Math.max(0, Math.min(1, rawProgress));
 
-            // Map progress to absolute frame index
+            
             const frameIndex = Math.min(
                 frameCount - 1,
                 Math.floor(p * frameCount)
@@ -89,7 +89,7 @@ export default function GifScrollSequence() {
             
             setProgress(p);
 
-            // Use requestAnimationFrame for performant painting frame by frame!
+            
             requestAnimationFrame(() => renderFrame(frameIndex));
             currentFrameIndex = frameIndex;
         };
@@ -97,7 +97,7 @@ export default function GifScrollSequence() {
         window.addEventListener('resize', updateCanvasSize);
         window.addEventListener('scroll', handleScroll, { passive: true });
 
-        // Initialize first render properly sized
+        
         updateCanvasSize();
         handleScroll();
 
@@ -112,10 +112,10 @@ export default function GifScrollSequence() {
     return (
         <div className="sequence-container" ref={containerRef}>
             <div className="sequence-sticky">
-                {/* Background image player */}
+                {}
                 <canvas ref={canvasRef} className="sequence-canvas" />
                 
-                {/* Extra dynamic overlay gradient so text still resolves if images are bright */}
+                {}
                 <div className="sequence-overlay"></div>
 
                 <div className="parallax-text-overlay">

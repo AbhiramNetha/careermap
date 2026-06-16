@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { fetchCareersByBranch } from '../services/api';
-import { useApp } from '../context/AppContext';
 
 const BRANCH_INFO = {
     CSE: { icon: '💻', fullName: 'Computer Science Engineering', desc: 'CSE graduates have the widest range of career options — from top tech companies to research labs.' },
@@ -14,7 +13,7 @@ const BRANCH_INFO = {
 
 const PIE_COLORS = ['#6366f1', '#8b5cf6', '#10b981', '#f59e0b'];
 
-function CareerMiniCard({ career, onView, onCompare }) {
+function CareerMiniCard({ career, onView }) {
     return (
         <div
             style={{
@@ -45,7 +44,6 @@ function CareerMiniCard({ career, onView, onCompare }) {
 export default function BranchDetailPage() {
     const { branch } = useParams();
     const navigate = useNavigate();
-    const { addToCompare } = useApp();
 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -60,14 +58,6 @@ export default function BranchDetailPage() {
 
     const info = BRANCH_INFO[branch] || {};
 
-    const categorize = (careers) => {
-        const core = careers.filter(c => ['government', 'private'].includes(c.category) && !c.tags?.includes('coding'));
-        const it = careers.filter(c => c.tags?.some(t => ['coding', 'tech', 'web', 'data', 'analytics'].includes(t)));
-        const govt = careers.filter(c => c.category === 'government');
-        const higherStudies = careers.filter(c => c.category === 'higher-studies');
-        return { core, it, govt, higherStudies };
-    };
-
     const pieData = data ? [
         { name: 'IT / Tech', value: data.directFit?.filter(c => c.tags?.includes('coding') || c.tags?.includes('analytics')).length || 2 },
         { name: 'Govt / PSU', value: data.directFit?.filter(c => c.category === 'government').length || 2 },
@@ -79,12 +69,10 @@ export default function BranchDetailPage() {
         return <div className="loader-container"><div className="loader" /><div className="loader-text">Loading branch guide...</div></div>;
     }
 
-    const allCareers = data ? [...(data.directFit || []), ...(data.moderateFit || [])] : [];
-
     return (
         <div style={{ padding: '3rem 0 6rem' }}>
             <div className="container">
-                {/* Header */}
+                {}
                 <div className="career-hero" style={{ marginBottom: '2rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '2rem' }}>
                         <div>
@@ -104,7 +92,7 @@ export default function BranchDetailPage() {
                             </div>
                         </div>
 
-                        {/* Pie Chart */}
+                        {}
                         {pieData.length > 0 && (
                             <div style={{ width: '260px', height: '200px', flexShrink: 0 }}>
                                 <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.5px', textAlign: 'center' }}>
@@ -112,7 +100,7 @@ export default function BranchDetailPage() {
                                 </div>
                                 <ResponsiveContainer width="100%" height="100%">
                                     <PieChart>
-                                        <Pie data={pieData} cx="50%" cy="50%" outerRadius={75} dataKey="value" label={({ name, value }) => `${name}`} labelLine={false}>
+                                        <Pie data={pieData} cx="50%" cy="50%" outerRadius={75} dataKey="value" label={({ name }) => `${name}`} labelLine={false}>
                                             {pieData.map((_, i) => <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />)}
                                         </Pie>
                                         <Tooltip contentStyle={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px' }} />
@@ -123,7 +111,7 @@ export default function BranchDetailPage() {
                     </div>
                 </div>
 
-                {/* Direct Fit Careers */}
+                {}
                 {data?.directFit?.length > 0 && (
                     <div className="detail-section" style={{ marginBottom: '1.5rem' }}>
                         <div className="detail-section-title">
@@ -136,14 +124,13 @@ export default function BranchDetailPage() {
                                     key={career.id}
                                     career={career}
                                     onView={() => navigate(`/careers/${career.id}`)}
-                                    onCompare={addToCompare}
                                 />
                             ))}
                         </div>
                     </div>
                 )}
 
-                {/* Moderate Fit Careers */}
+                {}
                 {data?.moderateFit?.length > 0 && (
                     <div className="detail-section" style={{ marginBottom: '1.5rem' }}>
                         <div className="detail-section-title">
@@ -156,14 +143,13 @@ export default function BranchDetailPage() {
                                     key={career.id}
                                     career={career}
                                     onView={() => navigate(`/careers/${career.id}`)}
-                                    onCompare={addToCompare}
                                 />
                             ))}
                         </div>
                     </div>
                 )}
 
-                {/* Branch-specific guidance */}
+                {}
                 <div className="detail-section">
                     <div className="detail-section-title">🎯 Key Tips for {branch} Students</div>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>

@@ -40,7 +40,7 @@ export default function CoursesPage() {
 
     return (
         <div className="courses-page">
-            {/* Hero */}
+            {}
             <section className="courses-hero">
                 <div className="courses-hero-inner">
                     <span className="courses-hero-badge">📚 Course Discovery</span>
@@ -51,7 +51,7 @@ export default function CoursesPage() {
                         Hand-picked courses from top platforms to supercharge your career journey
                     </p>
 
-                    {/* Search */}
+                    {}
                     <div className="courses-search-bar">
                         <span>🔍</span>
                         <input
@@ -65,7 +65,7 @@ export default function CoursesPage() {
             </section>
 
             <div className="courses-main">
-                {/* Category filters */}
+                {}
                 <div className="courses-category-bar">
                     {CATEGORIES.map(cat => (
                         <button
@@ -91,7 +91,7 @@ export default function CoursesPage() {
                     </div>
                 ) : (
                     <>
-                        {/* Featured */}
+                        {}
                         {featured.length > 0 && filter === 'All' && !search && (
                             <section className="courses-section">
                                 <h2 className="courses-section-title">⭐ Featured Courses</h2>
@@ -103,7 +103,7 @@ export default function CoursesPage() {
                             </section>
                         )}
 
-                        {/* All / filtered */}
+                        {}
                         <section className="courses-section">
                             {filter === 'All' && !search && featured.length > 0 && (
                                 <h2 className="courses-section-title">All Courses</h2>
