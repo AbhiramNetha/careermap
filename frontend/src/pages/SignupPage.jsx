@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import AuthenticationLayout from '../components/auth/AuthenticationLayout';
 import SignupForm from '../components/auth/SignupForm';
 import { signInWithGoogle, signUpWithEmail, updateUserProfile } from '../firebase';
 
 export default function SignupPage() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -15,7 +17,8 @@ export default function SignupPage() {
         try {
             const { user } = await signUpWithEmail(email, password);
             await updateUserProfile(user, { displayName: `${firstName} ${lastName}`.trim() });
-            navigate('/');
+            sessionStorage.setItem('justLoggedInForQuiz', 'true');
+            navigate(from, { replace: true });
         } catch (err) {
             setError(friendlyError(err.code));
         } finally {
@@ -28,7 +31,8 @@ export default function SignupPage() {
         setLoading(true);
         try {
             await signInWithGoogle();
-            navigate('/');
+            sessionStorage.setItem('justLoggedInForQuiz', 'true');
+            navigate(from, { replace: true });
         } catch (err) {
             if (err.code !== 'auth/popup-closed-by-user') {
                 setError(friendlyError(err.code));
@@ -45,7 +49,7 @@ export default function SignupPage() {
             bottom={(
                 <p className="auth-switch">
                     Already have an account?{' '}
-                    <Link to="/login" className="auth-switch-link">Sign in</Link>
+                    <Link to="/login" state={{ from: { pathname: from } }} className="auth-switch-link">Sign in</Link>
                 </p>
             )}
         >

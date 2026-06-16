@@ -453,24 +453,6 @@ export function Way2FresherNavbar() {
           </div>
         </div>
       )}
-
-      {}
-      <div className="floating-theme-toggle">
-        <button
-          className={`theme-toggle ${isDark ? "theme-toggle--dark" : "theme-toggle--light"}`}
-          onClick={toggleTheme}
-          title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-          aria-label="Toggle dark/light theme"
-        >
-          <span className="theme-toggle-track">
-            <span className="theme-toggle-thumb">
-              <span className="theme-toggle-icon">
-                {isDark ? "🌙" : "☀️"}
-              </span>
-            </span>
-          </span>
-        </button>
-      </div>
     </>
   );
 }

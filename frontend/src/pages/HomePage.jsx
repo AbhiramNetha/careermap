@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import GifScrollSequence from '../components/GifScrollSequence';
 import SpotlightCard from '../components/SpotlightCard';
 import BlurText from '../components/BlurText';
@@ -189,6 +190,28 @@ const VALUES = [
 
 export default function HomePage() {
     const navigate = useNavigate();
+    const { currentUser } = useAuth();
+    const [showQuizModal, setShowQuizModal] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowQuizModal(true);
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const handleCloseModal = () => {
+        setShowQuizModal(false);
+    };
+
+    const handleStartQuiz = () => {
+        setShowQuizModal(false);
+        if (currentUser) {
+            navigate('/quiz');
+        } else {
+            navigate('/login', { state: { from: { pathname: '/quiz' } } });
+        }
+    };
 
     return (
         <>
@@ -404,6 +427,29 @@ export default function HomePage() {
                     </div>
                 </div>
             </section>
+
+            {showQuizModal && (
+                <div className="quiz-popup-message-container">
+                    <div className="quiz-popup-message-header">
+                        <div className="quiz-popup-message-info">
+                            <span className="quiz-popup-message-icon">🎯</span>
+                            <h4 className="quiz-popup-message-title">Career Decision Quiz</h4>
+                        </div>
+                        <button className="quiz-popup-message-close" onClick={handleCloseModal} aria-label="Close message">✕</button>
+                    </div>
+                    <p className="quiz-popup-message-text">
+                        Not sure what direction to take after B.Tech? Take our 3-minute Career Quiz to find your best path!
+                    </p>
+                    <div className="quiz-popup-message-actions">
+                        <button className="quiz-popup-message-btn-start" onClick={handleStartQuiz}>
+                            Start Quiz
+                        </button>
+                        <button className="quiz-popup-message-btn-later" onClick={handleCloseModal}>
+                            Maybe Later
+                        </button>
+                    </div>
+                </div>
+            )}
         </>
     );
 }

@@ -13,6 +13,17 @@ export default function QuizPage() {
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState('');
+    const [showLoginToast, setShowLoginToast] = useState(false);
+
+    useEffect(() => {
+        const flag = sessionStorage.getItem('justLoggedInForQuiz');
+        if (flag === 'true') {
+            setShowLoginToast(true);
+            sessionStorage.removeItem('justLoggedInForQuiz');
+            const timer = setTimeout(() => setShowLoginToast(false), 4000);
+            return () => clearTimeout(timer);
+        }
+    }, []);
 
     useEffect(() => {
         fetchQuizQuestions()
@@ -110,6 +121,12 @@ export default function QuizPage() {
 
     return (
         <div className="quiz-page">
+            {showLoginToast && (
+                <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[9999] bg-slate-900/90 text-white border border-emerald-500/30 px-6 py-3 rounded-full shadow-lg shadow-emerald-500/10 backdrop-blur-md flex items-center gap-2 animate-pulse pointer-events-auto">
+                    <span className="text-emerald-400">🎉</span>
+                    <span className="text-xs font-bold tracking-wide">Logged in successfully! Ready to start your Career Quiz.</span>
+                </div>
+            )}
             <div className="quiz-container">
                 {}
                 <div className="quiz-step-label">

@@ -17,6 +17,7 @@ export default function LoginPage() {
         setLoading(true);
         try {
             await loginWithEmail(email, password);
+            sessionStorage.setItem('justLoggedInForQuiz', 'true');
             navigate(from, { replace: true });
         } catch (err) {
             setError(friendlyError(err.code));
@@ -30,6 +31,7 @@ export default function LoginPage() {
         setLoading(true);
         try {
             await signInWithGoogle();
+            sessionStorage.setItem('justLoggedInForQuiz', 'true');
             navigate(from, { replace: true });
         } catch (err) {
             if (err.code !== 'auth/popup-closed-by-user') {
@@ -47,7 +49,7 @@ export default function LoginPage() {
             bottom={(
                 <p className="auth-switch">
                     Don&apos;t have an account?{' '}
-                    <Link to="/signup" className="auth-switch-link">Create one</Link>
+                    <Link to="/signup" state={{ from: { pathname: from } }} className="auth-switch-link">Create one</Link>
                 </p>
             )}
         >

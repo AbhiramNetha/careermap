@@ -3,18 +3,13 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
-    const [isDark, setIsDark] = useState(() => {
-        
-        const saved = localStorage.getItem('w2f-theme');
-        return saved ? saved === 'dark' : true; 
-    });
+    const [isDark] = useState(true);
 
     useEffect(() => {
-        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-        localStorage.setItem('w2f-theme', isDark ? 'dark' : 'light');
-    }, [isDark]);
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }, []);
 
-    const toggleTheme = () => setIsDark(prev => !prev);
+    const toggleTheme = () => {};
 
     return (
         <ThemeContext.Provider value={{ isDark, toggleTheme }}>
