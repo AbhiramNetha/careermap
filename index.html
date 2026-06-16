@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerMap India – Your Smart Career Navigator After B.Tech</title>
+  <meta name="description" content="CareerMap India helps B.Tech engineering students discover, compare, and plan their ideal career paths with personalized quizzes, detailed roadmaps, and intelligent career matching." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo" onclick="showPage('home')">
+        <span class="logo-icon">🗺️</span>
+        <span class="logo-text">CareerMap <span class="logo-india">India</span></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#" class="nav-link" onclick="showPage('home')">Home</a>
+        <a href="#" class="nav-link" onclick="showPage('careers')">Explore Careers</a>
+        <a href="#" class="nav-link" onclick="showPage('branches')">Branch Guide</a>
+        <a href="#" class="nav-link" onclick="showPage('quiz')">Career Quiz</a>
+        <a href="#" class="nav-link" onclick="showPage('compare')">Compare</a>
+        <a href="#" class="nav-link" onclick="showPage('about')">About</a>
+      </div>
+      <button class="nav-cta" id="navCta" onclick="showPage('quiz')">Take Free Quiz →</button>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ====== HOME PAGE ====== -->
+  <div id="page-home" class="page active">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-particles" id="particles"></div>
+      <div class="hero-content">
+        <div class="hero-badge animate-fade-up">🎓 India's #1 Career Decision Platform for Engineers</div>
+        <h1 class="hero-title animate-fade-up delay-1">
+          Unlock Your<br/>
+          <span class="gradient-text">Perfect Career</span><br/>
+          After B.Tech
+        </h1>
+        <p class="hero-subtitle animate-fade-up delay-2">
+          Stop following trends blindly. Get personalized career recommendations based on your branch, interests, risk tolerance, and goals — with structured roadmaps to get there.
+        </p>
+        <div class="hero-stats animate-fade-up delay-3">
+          <div class="stat"><span class="stat-num">20+</span><span class="stat-label">Career Paths</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num">5</span><span class="stat-label">Engineering Branches</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num">7</span><span class="stat-label">Quiz Parameters</span></div>
+        </div>
+        <div class="hero-actions animate-fade-up delay-4">
+          <button class="btn-primary" onclick="showPage('quiz')" id="hero-quiz-btn">
+            <span>🧠</span> Take Career Quiz
+          </button>
+          <button class="btn-secondary" onclick="showPage('careers')" id="hero-explore-btn">
+            Explore Careers →
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual animate-fade-up delay-3">
+        <div class="hero-card floating">
+          <div class="hc-icon">📊</div>
+          <div class="hc-text">
+            <div class="hc-title">Data Analyst</div>
+            <div class="hc-match">92% Match</div>
+          </div>
+        </div>
+        <div class="hero-card floating delay-1">
+          <div class="hc-icon">💼</div>
+          <div class="hc-text">
+            <div class="hc-title">Software Developer</div>
+            <div class="hc-match">87% Match</div>
+          </div>
+        </div>
+        <div class="hero-card floating delay-2">
+          <div class="hc-icon">🏛️</div>
+          <div class="hc-text">
+            <div class="hc-title">PSU Engineer</div>
+            <div class="hc-match">81% Match</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works section">
+      <div class="container">
+        <div class="section-label">HOW IT WORKS</div>
+        <h2 class="section-title">Three steps to career clarity</h2>
+        <p class="section-subtitle">Our structured approach helps you move from confusion to a clear, actionable career plan</p>
+        <div class="steps-grid">
+          <div class="step-card" data-step="01">
+            <div class="step-icon">🙋</div>
+            <h3>Answer Smart Questions</h3>
+            <p>Take our 7-parameter quiz covering your branch, interests, risk tolerance, salary goals, and financial situation.</p>
+          </div>
+          <div class="step-connector">→</div>
+          <div class="step-card" data-step="02">
+            <div class="step-icon">🧮</div>
+            <h3>Get Personalized Matches</h3>
+            <p>Our scoring engine analyzes your inputs against 20+ career profiles and returns your top 3 matches with percentages.</p>
+          </div>
+          <div class="step-connector">→</div>
+          <div class="step-card" data-step="03">
+            <div class="step-icon">🗺️</div>
+            <h3>Follow Your Roadmap</h3>
+            <p>Get month-by-month preparation plans, skills to learn, projects to build, and interview prep strategies.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAREER CATEGORIES -->
+    <section class="categories-section section" id="home-categories">
+      <div class="container">
+        <div class="section-label">EXPLORE BY CATEGORY</div>
+        <h2 class="section-title">What's your direction?</h2>
+        <div class="categories-grid">
+          <div class="category-card" style="--c: #6366f1" onclick="filterCareers('private')" id="cat-private">
+            <div class="cat-icon">💻</div>
+            <h3>Private Sector</h3>
+            <p>IT companies, startups, MNCs — high salary, skill-driven growth</p>
+            <div class="cat-count">8 careers</div>
+          </div>
+          <div class="category-card" style="--c: #10b981" onclick="filterCareers('govt')" id="cat-govt">
+            <div class="cat-icon">🏛️</div>
+            <h3>Government Jobs</h3>
+            <p>PSUs, civil services, defense — stability, pension, work-life balance</p>
+            <div class="cat-count">6 careers</div>
+          </div>
+          <div class="category-card" style="--c: #f59e0b" onclick="filterCareers('higher')" id="cat-higher">
+            <div class="cat-icon">🎓</div>
+            <h3>Higher Studies</h3>
+            <p>M.Tech, MBA, MS Abroad — invest in knowledge for bigger returns</p>
+            <div class="cat-count">5 careers</div>
+          </div>
+          <div class="category-card" style="--c: #ef4444" onclick="filterCareers('entrepreneurship')" id="cat-entrepreneur">
+            <div class="cat-icon">🚀</div>
+            <h3>Entrepreneurship</h3>
+            <p>Startups, freelancing, consulting — high risk, unlimited upside</p>
+            <div class="cat-count">3 careers</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRENDING CAREERS -->
+    <section class="trending-section section">
+      <div class="container">
+        <div class="section-label">TRENDING NOW</div>
+        <h2 class="section-title">Most explored career paths</h2>
+        <div class="trending-scroll" id="trending-scroll">
+          <div class="trending-card" onclick="openCareerDetail('data-analyst')">
+            <div class="tc-icon">📊</div>
+            <div class="tc-name">Data Analyst</div>
+            <div class="tc-salary">₹4–15 LPA</div>
+            <div class="tc-badge hot">🔥 Hot</div>
+          </div>
+          <div class="trending-card" onclick="openCareerDetail('software-dev')">
+            <div class="tc-icon">💻</div>
+            <div class="tc-name">Software Developer</div>
+            <div class="tc-salary">₹5–25 LPA</div>
+            <div class="tc-badge hot">🔥 Hot</div>
+          </div>
+          <div class="trending-card" onclick="openCareerDetail('psu-engineer')">
+            <div class="tc-icon">🏭</div>
+            <div class="tc-name">PSU Engineer</div>
+            <div class="tc-salary">₹6–12 LPA</div>
+            <div class="tc-badge">⭐ Stable</div>
+          </div>
+          <div class="trending-card" onclick="openCareerDetail('mba-cat')">
+            <div class="tc-icon">📈</div>
+            <div class="tc-name">MBA via CAT</div>
+            <div class="tc-salary">₹10–30 LPA</div>
+            <div class="tc-badge">📚 Study</div>
+          </div>
+          <div class="trending-card" onclick="openCareerDetail('cloud-engineer')">
+            <div class="tc-icon">☁️</div>
+            <div class="tc-name">Cloud Engineer</div>
+            <div class="tc-salary">₹6–20 LPA</div>
+            <div class="tc-badge hot">🔥 Hot</div>
+          </div>
+          <div class="trending-card" onclick="openCareerDetail('ms-abroad')">
+            <div class="tc-icon">✈️</div>
+            <div class="tc-name">MS Abroad</div>
+            <div class="tc-salary">₹20–50 LPA</div>
+            <div class="tc-badge">🌍 Global</div>
+          </div>
+          <div class="trending-card" onclick="openCareerDetail('ssc-je')">
+            <div class="tc-icon">📋</div>
+            <div class="tc-name">SSC JE</div>
+            <div class="tc-salary">₹4–8 LPA</div>
+            <div class="tc-badge">🏛️ Govt</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY US -->
+    <section class="why-section section">
+      <div class="container">
+        <div class="section-label">WHY CAREERMAP INDIA</div>
+        <h2 class="section-title">Not a blog. A decision engine.</h2>
+        <div class="why-grid">
+          <div class="why-item">
+            <div class="why-icon">🧠</div>
+            <h4>Rule-Based Intelligence</h4>
+            <p>Our weighted scoring algorithm matches your profile against 20+ career data points — not generic advice.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">📊</div>
+            <h4>India-Focused Data</h4>
+            <p>Salary figures, exam details (GATE, CAT, UPSC), and competition levels calibrated for the Indian market.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">⚖️</div>
+            <h4>Side-by-Side Comparison</h4>
+            <p>Compare up to 3 careers on salary, risk, study time, growth potential, and ROI — all in one table.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">🗺️</div>
+            <h4>Actionable Roadmaps</h4>
+            <p>Month-by-month preparation plans with specific skills, tools, projects, and milestones to guide you.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">🌿</div>
+            <h4>Branch-Specific Guidance</h4>
+            <p>Different pathways for CSE, ECE, Mechanical, Civil, and EEE — because not all advice fits all branches.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">🎯</div>
+            <h4>Risk-Aware Decisions</h4>
+            <p>Every career shows risk level, financial requirement, and preparation time — so you can plan realistically.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner">
+      <div class="container">
+        <h2>Ready to find your career path?</h2>
+        <p>Take our 7-question quiz and get your personalized career matches in under 5 minutes.</p>
+        <button class="btn-primary large" onclick="showPage('quiz')" id="cta-banner-btn">Start Career Quiz — It's Free</button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="nav-logo"><span class="logo-icon">🗺️</span><span class="logo-text">CareerMap <span class="logo-india">India</span></span></div>
+            <p>Your smart career navigator after B.Tech. Built for Indian engineering students.</p>
+          </div>
+          <div class="footer-links">
+            <h4>Platform</h4>
+            <a href="#" onclick="showPage('quiz')">Career Quiz</a>
+            <a href="#" onclick="showPage('careers')">Explore Careers</a>
+            <a href="#" onclick="showPage('branches')">Branch Guide</a>
+            <a href="#" onclick="showPage('compare')">Compare Careers</a>
+          </div>
+          <div class="footer-links">
+            <h4>Categories</h4>
+            <a href="#" onclick="filterCareers('private')">Private Sector</a>
+            <a href="#" onclick="filterCareers('govt')">Government Jobs</a>
+            <a href="#" onclick="filterCareers('higher')">Higher Studies</a>
+            <a href="#" onclick="filterCareers('entrepreneurship')">Entrepreneurship</a>
+          </div>
+          <div class="footer-links">
+            <h4>Company</h4>
+            <a href="#" onclick="showPage('about')">About</a>
+            <a href="#">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 CareerMap India. Built as a portfolio project for B.Tech students. Data is indicative only.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ====== QUIZ PAGE ====== -->
+  <div id="page-quiz" class="page">
+    <div class="quiz-wrapper">
+      <div class="quiz-header">
+        <button class="back-btn" onclick="showPage('home')">← Back</button>
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+        </div>
+        <span class="quiz-step-label" id="quiz-step-label">Step 1 of 7</span>
+      </div>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Steps rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== QUIZ RESULT PAGE ====== -->
+  <div id="page-quiz-result" class="page">
+    <div class="result-wrapper">
+      <button class="back-btn" onclick="showPage('quiz')">← Retake Quiz</button>
+      <div class="result-header">
+        <div class="result-icon">🎯</div>
+        <h1>Your Career Matches</h1>
+        <p>Based on your profile, here are your top recommendations</p>
+      </div>
+      <div class="result-cards" id="result-cards"></div>
+      <div class="result-actions">
+        <button class="btn-secondary" onclick="showPage('compare')" id="compare-results-btn">⚖️ Compare These Careers</button>
+        <button class="btn-outline" onclick="showPage('quiz')">🔄 Retake Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== CAREERS PAGE ====== -->
+  <div id="page-careers" class="page">
+    <div class="page-header">
+      <button class="back-btn" onclick="showPage('home')">← Home</button>
+      <h1>Explore Careers</h1>
+      <p>Discover career paths suited for engineering graduates</p>
+    </div>
+    <div class="careers-layout container">
+      <aside class="filter-panel">
+        <h3>🔍 Filter</h3>
+        <div class="filter-group">
+          <label>Category</label>
+          <div class="filter-options" id="cat-filter">
+            <button class="filter-btn active" onclick="filterCareers('all', this)">All</button>
+            <button class="filter-btn" onclick="filterCareers('private', this)">Private Sector</button>
+            <button class="filter-btn" onclick="filterCareers('govt', this)">Government</button>
+            <button class="filter-btn" onclick="filterCareers('higher', this)">Higher Studies</button>
+            <button class="filter-btn" onclick="filterCareers('entrepreneurship', this)">Entrepreneurship</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>Risk Level</label>
+          <div class="filter-options" id="risk-filter">
+            <button class="filter-btn active" onclick="filterByRisk('all', this)">All</button>
+            <button class="filter-btn" onclick="filterByRisk('Low', this)">Low</button>
+            <button class="filter-btn" onclick="filterByRisk('Medium', this)">Medium</button>
+            <button class="filter-btn" onclick="filterByRisk('High', this)">High</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>Branch Fit</label>
+          <select id="branch-filter" onchange="filterByBranch(this.value)">
+            <option value="all">All Branches</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Civil">Civil</option>
+            <option value="EEE">EEE</option>
+          </select>
+        </div>
+      </aside>
+      <div class="careers-grid" id="careers-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== CAREER DETAIL PAGE ====== -->
+  <div id="page-career-detail" class="page">
+    <div class="career-detail-wrapper container" id="career-detail-content">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+
+  <!-- ====== BRANCHES PAGE ====== -->
+  <div id="page-branches" class="page">
+    <div class="page-header">
+      <button class="back-btn" onclick="showPage('home')">← Home</button>
+      <h1>Branch Guide</h1>
+      <p>Select your engineering branch for tailored career guidance</p>
+    </div>
+    <div class="container">
+      <div class="branches-grid" id="branches-grid">
+        <div class="branch-card" onclick="openBranchDetail('CSE')" id="branch-cse">
+          <div class="branch-icon">💻</div>
+          <h3>Computer Science (CSE)</h3>
+          <p>Most versatile branch with highest placement rates and salary potential</p>
+          <div class="branch-tag">12 career paths</div>
+        </div>
+        <div class="branch-card" onclick="openBranchDetail('ECE')" id="branch-ece">
+          <div class="branch-icon">📡</div>
+          <h3>Electronics (ECE)</h3>
+          <p>Hardware + software — embedded systems, VLSI, telecom, and IT</p>
+          <div class="branch-tag">10 career paths</div>
+        </div>
+        <div class="branch-card" onclick="openBranchDetail('Mechanical')" id="branch-mech">
+          <div class="branch-icon">⚙️</div>
+          <h3>Mechanical Engineering</h3>
+          <p>Core manufacturing, PSUs, automobile, and growing IT crossover options</p>
+          <div class="branch-tag">9 career paths</div>
+        </div>
+        <div class="branch-card" onclick="openBranchDetail('Civil')" id="branch-civil">
+          <div class="branch-icon">🏗️</div>
+          <h3>Civil Engineering</h3>
+          <p>Infrastructure boom in India — construction, urban planning, government</p>
+          <div class="branch-tag">8 career paths</div>
+        </div>
+        <div class="branch-card" onclick="openBranchDetail('EEE')" id="branch-eee">
+          <div class="branch-icon">⚡</div>
+          <h3>Electrical Engineering (EEE)</h3>
+          <p>Power sector, renewable energy, smart grids, and PSU opportunities</p>
+          <div class="branch-tag">8 career paths</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== BRANCH DETAIL PAGE ====== -->
+  <div id="page-branch-detail" class="page">
+    <div class="container" id="branch-detail-content">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+
+  <!-- ====== COMPARE PAGE ====== -->
+  <div id="page-compare" class="page">
+    <div class="page-header">
+      <button class="back-btn" onclick="showPage('home')">← Home</button>
+      <h1>Compare Careers</h1>
+      <p>Compare up to 3 careers side-by-side to make an informed decision</p>
+    </div>
+    <div class="container">
+      <div class="compare-selector" id="compare-selector">
+        <h3>Select careers to compare:</h3>
+        <div class="compare-career-list" id="compare-career-list">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+      <div class="compare-table-wrapper" id="compare-table-wrapper">
+        <div class="compare-table" id="compare-table">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== ABOUT PAGE ====== -->
+  <div id="page-about" class="page">
+    <div class="about-wrapper container">
+      <button class="back-btn" onclick="showPage('home')">← Home</button>
+      <div class="about-hero">
+        <h1>About CareerMap India</h1>
+        <p class="about-tagline">"Your Smart Career Navigator After B.Tech"</p>
+      </div>
+      <div class="about-content">
+        <div class="about-section">
+          <h2>The Problem We Solve</h2>
+          <p>Every year, thousands of B.Tech graduates face the same question: <em>"What should I do after B.Tech?"</em> Most follow whatever their peers are doing — some blindly switch to IT, others attempt GATE without a plan, and many end up in careers that don't suit them.</p>
+          <p>Existing career websites provide static information — just lists of jobs and salaries. They don't help you <strong>decide</strong>.</p>
+        </div>
+        <div class="about-section">
+          <h2>What We Do Differently</h2>
+          <div class="about-features">
+            <div class="af-item">✅ <strong>Personalization:</strong> We analyze 7 parameters unique to you</div>
+            <div class="af-item">✅ <strong>Comparison:</strong> Side-by-side analysis, not vague descriptions</div>
+            <div class="af-item">✅ <strong>India-focused:</strong> Real salary data, real exams (GATE, CAT, UPSC)</div>
+            <div class="af-item">✅ <strong>Actionable roadmaps:</strong> Month-by-month preparation plans</div>
+            <div class="af-item">✅ <strong>Branch-aware:</strong> CSE, ECE, Mech, Civil, EEE — different paths</div>
+          </div>
+        </div>
+        <div class="about-section">
+          <h2>Our Scoring System</h2>
+          <p>Our quiz engine uses a weighted scoring algorithm. Each career has a scoring profile. When you answer our quiz, we calculate your compatibility score for each career and surface your top 3 matches with percentage.</p>
+        </div>
+        <div class="about-section">
+          <h2>Disclaimer</h2>
+          <p>Salary data and career outcomes are indicative based on Indian market trends and are not guaranteed. Data should be used as guidance only. We recommend verifying figures from government and industry sources.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

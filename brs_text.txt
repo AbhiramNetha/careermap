@@ -1,0 +1,458 @@
+📘 BUSINESS REQUIREMENT 
+SPECIFICATION (BRS) 
+Project: CareerMap India 
+Type: Portfolio Product (Decision Support 
+Web Application) 
+ 
+1️⃣ Executive Summary 
+CareerMap India is a web-based decision-support platform designed to help Indian B.Tech 
+students choose structured career paths through: 
+●​ Personalized career recommendations​
+ 
+●​ Branch-specific guidance​
+ 
+●​ Career comparison tools​
+ 
+●​ Step-by-step preparation roadmaps​
+ 
+The platform uses a rule-based scoring engine to provide intelligent recommendations. 
+ 
+2️⃣ Business Objective 
+Build a scalable, structured career intelligence system that: 
+●​ Reduces career confusion​
+ 
+●​ Enables informed decision-making​
+ 
+●​ Provides execution-ready preparation roadmaps​
+ 
+●​ Demonstrates system design & algorithmic thinking (Portfolio Purpose)​
+ 
+ 
+3️⃣ Scope of the System 
+Included (MVP Scope) 
+●​ Home Page​
+ 
+●​ Career Categories​
+ 
+●​ Branch-Specific Pages​
+ 
+●​ Career Detail Pages​
+ 
+●​ Personalized Quiz Engine​
+ 
+●​ Comparison Module​
+ 
+●​ Roadmap Module​
+ 
+Excluded (Future Scope) 
+●​ Login/Signup​
+ 
+●​ Payment integration​
+ 
+●​ AI chatbot​
+ 
+●​ Resume builder​
+ 
+●​ Internship integration​
+ 
+ 
+4️⃣ User Roles 
+Primary User 
+Engineering Student 
+No authentication required in MVP. 
+ 
+5️⃣ Functional Requirements 
+ 
+FR-1: Home Page 
+System shall: 
+●​ Display hero section​
+ 
+●​ Provide CTA buttons:​
+ 
+○​ Take Career Quiz​
+ 
+○​ Explore Careers​
+ 
+●​ Display Career Categories​
+ 
+●​ Display Trending Careers​
+ 
+ 
+FR-2: Career Categories Page 
+System shall: 
+●​ Display 4 main categories:​
+ 
+○​ Private Sector​
+ 
+○​ Higher Studies​
+ 
+○​ Government Jobs​
+ 
+○​ Entrepreneurship​
+ 
+●​ Allow filtering by:​
+ 
+○​ Branch​
+ 
+○​ Salary range​
+ 
+○​ Study requirement​
+ 
+○​ Risk level​
+ 
+ 
+FR-3: Branch-Specific Page 
+System shall: 
+●​ Display selected branch overview​
+ 
+●​ Show career distribution chart​
+ 
+●​ Display:​
+ 
+○​ Core careers​
+ 
+○​ IT switch careers​
+ 
+○​ Govt careers​
+ 
+○​ Higher studies​
+ 
+●​ Recommend top career paths for that branch​
+ 
+ 
+FR-4: Career Detail Page 
+System shall display: 
+●​ Career overview​
+ 
+●​ Salary progression (Fresher / 3Y / 5Y)​
+ 
+●​ Required skills​
+ 
+●​ Risk level​
+ 
+●​ Study requirement​
+ 
+●​ Competition level​
+ 
+●​ Preparation time​
+ 
+●​ Step-by-step roadmap​
+ 
+●​ Compare button​
+ 
+ 
+FR-5: Career Quiz Module 
+System shall: 
+Collect inputs: 
+●​ Branch​
+ 
+●​ Interest​
+ 
+●​ Risk tolerance​
+ 
+●​ Salary expectation​
+ 
+●​ Study preference​
+ 
+●​ Work-life balance importance​
+ 
+●​ Financial condition​
+ 
+System shall: 
+●​ Apply weighted scoring logic​
+ 
+●​ Calculate career match percentage​
+ 
+●​ Display top 3 recommended careers​
+ 
+●​ Show explanation​
+ 
+ 
+FR-6: Career Comparison Module 
+System shall: 
+●​ Allow selection of 2–3 careers​
+ 
+●​ Display comparison table​
+ 
+●​ Compare:​
+ 
+○​ Salary​
+ 
+○​ Study duration​
+ 
+○​ Cost​
+ 
+○​ Risk​
+ 
+○​ Competition​
+ 
+○​ Growth potential​
+ 
+○​ Stability​
+ 
+ 
+FR-7: Roadmap Module 
+System shall: 
+●​ Display timeline view​
+ 
+●​ Show monthly breakdown​
+ 
+●​ List required tools​
+ 
+●​ Suggest project milestones​
+ 
+●​ Include interview preparation stage​
+ 
+ 
+6️⃣ Non-Functional Requirements 
+●​ Responsive (Mobile + Desktop)​
+ 
+●​ Page load < 3 seconds​
+ 
+●​ Clean UI​
+ 
+●​ Modular code structure​
+ 
+●​ Scalable database model​
+ 
+ 
+7️⃣ End-to-End Screen Flow 
+(Designer-Ready) 
+Now this is very detailed. 
+This can directly be given to a UI/UX designer. 
+ 
+🌐 GLOBAL NAVIGATION STRUCTURE 
+Navbar: 
+Logo | Home | Explore Careers | Branch Guide | Quiz | Compare | About 
+ 
+🏠 SCREEN FLOW 1: Entry Journey 
+Screen 1: Home Page 
+Sections (Top to Bottom): 
+1.​ Navbar​
+ 
+2.​ Hero Section​
+ 
+○​ Headline​
+ 
+○​ Subtext​
+ 
+○​ CTA Buttons:​
+ 
+■​ Take Career Quiz​
+ 
+■​ Explore Careers​
+ 
+3.​ Career Categories Grid (4 Cards)​
+ 
+4.​ Trending Careers Horizontal Scroll​
+ 
+5.​ Footer​
+ 
+User Actions: 
+●​ Click Quiz​
+ 
+●​ Click Category​
+ 
+●​ Click Branch Guide​
+ 
+ 
+🧠 SCREEN FLOW 2: Career Quiz Journey 
+ 
+Screen 2: Quiz – Step 1 
+Question: Select Your Branch​
+ Options: CSE, ECE, Mechanical, Civil, EEE 
+Next → 
+ 
+Screen 3: Quiz – Step 2 
+Question: Primary Interest​
+ Options: 
+●​ Coding​
+ 
+●​ Management​
+ 
+●​ Government​
+ 
+●​ Research​
+ 
+●​ Entrepreneurship​
+ 
+Next → 
+ 
+Screen 4: Quiz – Step 3 
+Risk Tolerance:​
+ Low / Medium / High 
+Next → 
+ 
+Screen 5: Quiz – Step 4 
+Salary Expectation:​
+ <5 LPA / 5–8 LPA / >8 LPA 
+Next → 
+ 
+Screen 6: Quiz – Step 5 
+Study Preference:​
+ Yes / No 
+Next → 
+ 
+Screen 7: Quiz – Step 6 
+Work-Life Balance Importance:​
+ Low / Medium / High 
+Next → 
+ 
+Screen 8: Quiz – Step 7 
+Financial Condition:​
+ Can afford higher studies / Limited budget 
+Submit → 
+ 
+Screen 9: Processing Screen 
+Loading animation​
+ "Analyzing your responses..." 
+ 
+Screen 10: Quiz Result Screen 
+Displays: 
+Top 3 Careers 
+Each card shows: 
+●​ Career Name​
+ 
+●​ Match %​
+ 
+●​ Why recommended​
+ 
+●​ Buttons:​
+ 
+○​ View Details​
+ 
+○​ Compare​
+ 
+ 
+📘 SCREEN FLOW 3: Career Exploration 
+Journey 
+ 
+Screen 11: Career Category Page 
+Filters on left​
+ Career cards grid on right 
+User selects career → 
+ 
+Screen 12: Career Detail Page 
+Sections: 
+1.​ Title + Category Tag​
+ 
+2.​ Overview​
+ 
+3.​ Salary Graph​
+ 
+4.​ Skills Required​
+ 
+5.​ Risk Level​
+ 
+6.​ Study Requirement​
+ 
+7.​ Roadmap Timeline​
+ 
+8.​ Compare Button​
+ 
+ 
+⚖ SCREEN FLOW 4: Comparison Journey 
+ 
+Screen 13: Compare Selection Page 
+User selects 2–3 careers 
+Click Compare → 
+ 
+Screen 14: Comparison Result Page 
+Table Layout: 
+Rows: 
+●​ Salary​
+ 
+●​ Study Time​
+ 
+●​ Cost​
+ 
+●​ Competition​
+ 
+●​ Risk​
+ 
+●​ Stability​
+ 
+●​ Growth​
+ 
+Highlight best option visually. 
+ 
+🧭 SCREEN FLOW 5: Branch Journey 
+ 
+Screen 15: Branch Selection Page 
+Cards:​
+ CSE | ECE | Mechanical | Civil | EEE 
+User selects branch → 
+ 
+Screen 16: Branch Detail Page 
+Sections: 
+1.​ Branch Overview​
+ 
+2.​ Career Distribution Chart​
+ 
+3.​ Core Careers​
+ 
+4.​ IT Switch Careers​
+ 
+5.​ Govt Careers​
+ 
+6.​ Higher Studies​
+ 
+7.​ Recommended Roadmaps​
+ 
+ 
+📅 SCREEN FLOW 6: Roadmap Journey 
+ 
+Screen 17: Roadmap Page 
+Timeline View: 
+Month 1–2​
+ Month 3–4​
+ Month 5–6​
+ … 
+Each expandable: 
+●​ Skills​
+ 
+●​ Tools​
+ 
+●​ Projects​
+ 
+●​ Interview Prep​
+ 
+ 
+🔁 Complete User Journey Summary 
+Home​
+ → Quiz​
+ → Result​
+ → Career Details​
+ → Compare​
+ → Roadmap​
+ → Decision 
+OR 
+Home​
+ → Explore​
+ → Career Details​
+ → Compare​
+ → Roadmap 
+OR 
+Home​
+ → Branch​
+ → Branch Details​
+ → Career​
+ → Roadmap 
+ 
+🧩 System Layer Model 
+Information Layer​
+ Decision Layer (Quiz Engine)​
+ Comparison Layer​
+ Execution Layer (Roadmap) 
+ 
+✅ Final Result 
+Now this documentation is: 
+●​ Clear for Designer​
+ 
+●​ Clear for Developer​
+ 
+●​ Clear for Evaluator​
+ 
+●​ Strong for Portfolio​
+ 
+ 

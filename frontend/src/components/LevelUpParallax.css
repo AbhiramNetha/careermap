@@ -1,0 +1,154 @@
+/* ── LevelUpParallax.css ── */
+
+.img-parallax-container {
+    position: relative;
+    height: 400vh; /* Extremely tall for a long, smooth transition scroll */
+    background-color: #000;
+}
+
+.img-parallax-sticky {
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.parallax-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    will-change: transform, opacity, filter;
+    transition: filter 0.1s ease-out; /* Slight blur transitions smoothly */
+}
+
+/* ── Mapped Images ── 
+   NOTE TO USER: Save the two images from the chat to "frontend/public"
+   as "image1.jpg" and "image2.jpg". 
+   If they have different names, update these URLs!
+*/
+.img-1 {
+    background-image: url('/image1.jpg');
+    /* Fallback radial glow if the image is missing */
+    background-color: #1e1b4b;
+    z-index: 10;
+}
+
+.img-2 {
+    background-image: url('/image2.jpg');
+    /* Fallback color */
+    background-color: #030014;
+    z-index: 20;
+}
+
+/* Overlay gradient for better text contrast */
+.img-parallax-sticky::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+    z-index: 30;
+}
+
+/* ── OVERLAY TEXTS ── */
+.parallax-text-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 40;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.parallax-text-step {
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    width: 100%;
+    padding: 2rem;
+    will-change: transform, opacity;
+}
+
+.parallax-text-step h3 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #e2e8f0, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    font-weight: 800;
+}
+
+.parallax-text-step p {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: #cbd5e1;
+    max-width: 600px;
+    margin: 0 auto;
+    text-shadow: 0 2px 5px rgba(0,0,0,1);
+}
+
+.p-mid {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.p-final {
+    bottom: 20vh;
+}
+
+/* Neon text effect specifically for "LEVEL UP" section */
+.neon-text {
+    color: #4ade80 !important;
+    -webkit-text-fill-color: #4ade80 !important;
+    text-shadow: 0 0 10px #22c55e, 0 0 20px #22c55e, 0 0 40px #16a34a, 0 0 80px #15803d !important;
+    letter-spacing: 5px;
+    background: none !important;
+}
+
+/* Scroll Feedback progress bar */
+.scroll-indicator {
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.scroll-indicator p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.scroll-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.scroll-fill {
+    height: 100%;
+    background: #4ade80;
+    box-shadow: 0 0 10px #22c55e;
+}
