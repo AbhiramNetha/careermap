@@ -133,7 +133,7 @@ export function Way2FresherNavbar() {
 
   
   const toolNavItems = [
-    { label: "Resume builder", icon: DocumentTextIcon, href: "#", highlight: true, msg: "Resume builder tools are launching soon!" },
+    { label: "Resume builder", icon: DocumentTextIcon, href: "/resume-builder", highlight: true },
     { label: "ATS checker", icon: ChartBarIcon, href: "/ats", highlight: false },
     { label: "Skill tests", icon: ClipboardDocumentCheckIcon, href: "#", highlight: false, msg: "Skill assessments coming soon." },
     { label: "Mock interview", icon: MicrophoneIcon, href: "#", highlight: false, msg: "AI mock interviews launching in next phase." },

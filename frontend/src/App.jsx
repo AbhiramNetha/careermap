@@ -20,6 +20,7 @@ import SignupPage from './pages/SignupPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import CoursesPage from './pages/CoursesPage';
 import AtsCheckerPage from './pages/AtsCheckerPage';
+import ResumeBuilder from './pages/ResumeBuilder';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
 import AdminLoginPage from './pages/admin/AdminLoginPage';
@@ -68,6 +69,7 @@ function PublicSite() {
         <Route path="/branches/:branch" element={<ProtectedRoute><BranchDetailPage /></ProtectedRoute>} />
         <Route path="/roadmap/:id" element={<ProtectedRoute><RoadmapPage /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+        <Route path="/resume-builder" element={<ProtectedRoute><ResumeBuilder /></ProtectedRoute>} />
       </Routes>
       <Footer />
     </div>

@@ -8,6 +8,8 @@ const quizRoutes = require('./routes/quizRoutes');
 const courseRoutes = require('./routes/courseRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
 const atsRoutes = require('./routes/atsRoutes');
+const resumeRoutes = require('./routes/resumeRoutes');
+const resumeBuilderRoutes = require('./routes/resumeBuilderRoutes');
 
 const app = express();
 
@@ -21,6 +23,8 @@ app.use('/api/quiz', quizRoutes);
 app.use('/api', courseRoutes);           // /api/courses, /api/admin/...
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/ats', atsRoutes);
+app.use('/api/resumes', resumeRoutes);
+app.use('/api/resume', resumeBuilderRoutes);  // AI Resume Builder
 
 // Health check
 app.get('/api/health', (req, res) => {
