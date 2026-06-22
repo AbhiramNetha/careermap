@@ -19,6 +19,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import CoursesPage from './pages/CoursesPage';
+import AtsCheckerPage from './pages/AtsCheckerPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
 import AdminLoginPage from './pages/admin/AdminLoginPage';
@@ -57,6 +58,7 @@ function PublicSite() {
         <Route path="/careers" element={<CareerCategoryPage />} />
         <Route path="/courses" element={<CoursesPage />} />
         <Route path="/branches" element={<BranchSelectionPage />} />
+        <Route path="/ats" element={<AtsCheckerPage />} />
 
         {}
         <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />

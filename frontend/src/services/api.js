@@ -17,4 +17,11 @@ export const compareCareers = (careerIds) => API.post('/careers/compare', { care
 export const fetchQuizQuestions = () => API.get('/quiz/questions');
 export const submitQuizAnswers = (answers) => API.post('/quiz/submit', answers);
 
+// ATS Checker API
+export const analyzeResume = (formData) => API.post('/ats/analyze', formData, {
+    headers: {
+        'Content-Type': 'multipart/form-data'
+    }
+});
+
 export default API;

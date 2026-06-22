@@ -7,6 +7,7 @@ const careerRoutes = require('./routes/careerRoutes');
 const quizRoutes = require('./routes/quizRoutes');
 const courseRoutes = require('./routes/courseRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
+const atsRoutes = require('./routes/atsRoutes');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/api/careers', careerRoutes);
 app.use('/api/quiz', quizRoutes);
 app.use('/api', courseRoutes);           // /api/courses, /api/admin/...
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/ats', atsRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

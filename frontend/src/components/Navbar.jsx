@@ -110,6 +110,15 @@ export function Way2FresherNavbar() {
     }
   };
 
+  const handleToolClick = (item) => {
+    setIsNavOpen(false);
+    if (item.href && item.href !== "#") {
+      navigate(item.href);
+    } else {
+      triggerToast(item.msg);
+    }
+  };
+
   
   const primaryNavItems = [
     { label: "Careers", icon: BriefcaseIcon, href: "/careers", type: "route" },
@@ -125,7 +134,7 @@ export function Way2FresherNavbar() {
   
   const toolNavItems = [
     { label: "Resume builder", icon: DocumentTextIcon, href: "#", highlight: true, msg: "Resume builder tools are launching soon!" },
-    { label: "ATS checker", icon: ChartBarIcon, href: "#", highlight: false, msg: "ATS analyzer tool is in beta testing." },
+    { label: "ATS checker", icon: ChartBarIcon, href: "/ats", highlight: false },
     { label: "Skill tests", icon: ClipboardDocumentCheckIcon, href: "#", highlight: false, msg: "Skill assessments coming soon." },
     { label: "Mock interview", icon: MicrophoneIcon, href: "#", highlight: false, msg: "AI mock interviews launching in next phase." },
     { label: "Learning hub", icon: AcademicCapIcon, href: "#", highlight: false, msg: "Courses are available in the 'Courses' page!" },
@@ -142,10 +151,10 @@ export function Way2FresherNavbar() {
         </div>
       )}
 
-      <div className="fixed top-3 sm:top-6 left-0 right-0 z-50 pointer-events-none flex flex-col items-center gap-2 sm:gap-3 px-2 sm:px-4">
+      <div className="fixed top-2 sm:top-3 left-0 right-0 z-50 pointer-events-none flex flex-col items-center gap-0 px-2 sm:px-4">
         
         {}
-        <nav className="w2f-navbar mx-auto w-[98%] max-w-[1280px] pointer-events-auto rounded-full px-6 py-2 sm:py-2.5 flex items-center justify-between transition-all backdrop-blur-xl relative z-30">
+        <nav className="w2f-navbar mx-auto w-[98%] max-w-[1280px] pointer-events-auto rounded-t-full rounded-b-none px-6 py-2 sm:py-2.5 flex items-center justify-between transition-all backdrop-blur-xl relative z-30" style={{borderBottom: 'none'}}>
           
           {}
           <Link
@@ -288,26 +297,26 @@ export function Way2FresherNavbar() {
         </nav>
 
         {}
-        <div className="w2f-tools-strip hidden w-[96%] max-w-[1280px] pointer-events-auto rounded-full px-6 py-1.5 shadow-xl backdrop-blur-md lg:block relative z-20">
+        <div className="w2f-tools-strip hidden w-[98%] max-w-[1280px] pointer-events-auto rounded-b-full rounded-t-none px-6 py-1.5 shadow-xl backdrop-blur-md lg:block relative z-20" style={{borderTop: 'none'}}>
           <div className="flex items-center justify-between">
             <ul className="flex items-center gap-1 list-none m-0 p-0 w-full justify-around">
-              {toolNavItems.map(({ label, icon, highlight, badge, msg }) => (
-                <li key={label}>
+              {toolNavItems.map((item) => (
+                <li key={item.label}>
                   <button
-                    onClick={() => triggerToast(msg)}
+                    onClick={() => handleToolClick(item)}
                     className={`flex items-center gap-1.5 rounded-full lg:px-2 xl:px-3 py-1 lg:text-[11px] xl:text-xs font-medium transition-all ${
-                      highlight
+                      item.highlight
                         ? "w2f-tool-highlight shadow-sm"
                         : "w2f-tool-btn hover:text-white"
                     }`}
                   >
-                    {React.createElement(icon, {
-                      className: `h-[14px] w-[14px] ${highlight ? "text-white" : "text-slate-500"}`
+                    {React.createElement(item.icon, {
+                      className: `h-[14px] w-[14px] ${item.highlight ? "text-white" : "text-slate-500"}`
                     })}
-                    <span>{label}</span>
-                    {badge && (
+                    <span>{item.label}</span>
+                    {item.badge && (
                       <span className="ml-1 rounded-full bg-amber-500/10 border border-amber-500/20 px-1.5 py-0.2 text-[9px] font-bold uppercase tracking-wider text-amber-400">
-                        {badge}
+                        {item.badge}
                       </span>
                     )}
                   </button>
@@ -392,16 +401,16 @@ export function Way2FresherNavbar() {
                 Career Tools
               </p>
               <ul className="flex flex-col gap-1 list-none m-0 p-0">
-                {toolNavItems.map(({ label, msg, badge }) => (
-                  <li key={label}>
+                {toolNavItems.map((item) => (
+                  <li key={item.label}>
                     <button
-                      onClick={() => triggerToast(msg)}
+                      onClick={() => handleToolClick(item)}
                       className="w2f-tool-btn flex w-full items-center justify-between rounded-xl px-4 py-2 text-sm font-semibold transition-all text-left"
                     >
-                      <span>{label}</span>
-                      {badge && (
+                      <span>{item.label}</span>
+                      {item.badge && (
                         <span className="rounded-full bg-amber-500/10 border border-amber-500/20 px-1.5 py-0.2 text-[9px] font-bold uppercase tracking-wider text-amber-400">
-                          {badge}
+                          {item.badge}
                         </span>
                       )}
                     </button>
