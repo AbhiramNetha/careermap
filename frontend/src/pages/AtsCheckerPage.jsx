@@ -283,7 +283,9 @@ export default function AtsCheckerPage() {
                 <button
                   type="button"
                   onClick={removeFile}
-                  className="text-slate-500 hover:text-red-400 p-1.5 rounded-lg hover:bg-white/5 transition-all text-xs uppercase font-bold"
+                  className="text-slate-500 hover:text-red-400 p-1.5 rounded-lg hover:bg-white/5 transition-all text-xs uppercase font-bold  ${activeTab === 'structure'
+                  ? 'bg-amber-500/25 text-amber-300 border-amber-400 shadow-lg shadow-amber-500/20'
+                  : 'text-amber-400 border-amber-400 bg-transparent hover:bg-amber-500/10'"
                 >
                   Remove
                 </button>
