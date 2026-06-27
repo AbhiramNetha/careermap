@@ -1,0 +1,25 @@
+# ─────────────────────────────────────────────────────────────
+#  render.yaml — Render Blueprint for Way2Fresher / CareerMap
+#  Docs: https://render.com/docs/blueprint-spec
+# ─────────────────────────────────────────────────────────────
+
+services:
+  # ── Backend (Node / Express) ──────────────────────────────
+  - type: web
+    name: careermap-backend
+    runtime: docker
+    # Root directory for Docker build context (where the Dockerfile lives)
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: oregon
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      # Set these in Render dashboard → Environment:
+      - key: DATABASE_URL
+        sync: false
+      - key: GEMINI_KEY
+        sync: false
