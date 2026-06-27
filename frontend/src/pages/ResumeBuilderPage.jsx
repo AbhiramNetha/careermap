@@ -519,7 +519,7 @@ export default function ResumeBuilderPage() {
   };
 
   return (
-    <div className="container min-h-screen pt-24 pb-12 px-4 flex flex-col items-center">
+    <div className="min-h-screen pt-16 lg:pt-[98px] pb-12 px-4 flex flex-col items-center relative">
       {/* Background radial effects */}
       <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-amber-500/5 rounded-full filter blur-[100px] pointer-events-none z-0"></div>
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 rounded-full filter blur-[100px] pointer-events-none z-0"></div>
@@ -527,8 +527,8 @@ export default function ResumeBuilderPage() {
       {/* Header Panel */}
       <div className="w-full max-w-7xl flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 relative z-10">
         <div>
-          <h1 className="text-3xl font-extrabold text-slate-100 flex items-center gap-2">
-            <DocumentTextIcon className="w-8 h-8 text-amber-400" />
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-100 flex items-center gap-2 flex-wrap">
+            <DocumentTextIcon className="w-7 h-7 sm:w-8 sm:h-8 text-amber-400 shrink-0" />
             Interactive <span className="text-amber-400">Resume Builder</span>
           </h1>
           <p className="text-slate-400 text-xs sm:text-sm mt-1">
@@ -612,7 +612,10 @@ export default function ResumeBuilderPage() {
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-slate-200 outline-none focus:border-amber-500"
+                  className="w-full rounded-xl px-3 py-1.5 text-xs text-white outline-none transition-colors"
+                  style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }}
+                  onFocus={e => e.target.style.borderColor = '#22c55e'}
+                  onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'}
                 />
               </div>
               <div className="flex-1">
@@ -620,11 +623,14 @@ export default function ResumeBuilderPage() {
                 <select
                   value={template}
                   onChange={(e) => setTemplate(e.target.value)}
-                  className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-slate-200 outline-none focus:border-amber-500"
+                  className="w-full rounded-xl px-3 py-1.5 text-xs outline-none transition-colors"
+                  style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }}
+                  onFocus={e => e.target.style.borderColor = '#22c55e'}
+                  onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'}
                 >
-                  <option value="minimalist">Minimalist (AATS Std)</option>
-                  <option value="tech">Modern Tech Column</option>
-                  <option value="elegant">Elegant Serif</option>
+                  <option value="minimalist" style={{ background: '#1a1a2e' }}>Minimalist (AATS Std)</option>
+                  <option value="tech" style={{ background: '#1a1a2e' }}>Modern Tech Column</option>
+                  <option value="elegant" style={{ background: '#1a1a2e' }}>Elegant Serif</option>
                 </select>
               </div>
             </div>
@@ -640,20 +646,26 @@ export default function ResumeBuilderPage() {
               <select
                 value={styles.fontFamily}
                 onChange={(e) => setStyles(prev => ({ ...prev, fontFamily: e.target.value }))}
-                className="bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-[10px] text-slate-300"
+                className="rounded-lg px-2 py-1 text-[10px] outline-none transition-colors"
+                style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }}
+                onFocus={e => e.target.style.borderColor = '#22c55e'}
+                onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'}
               >
-                {FONTS.map(f => <option key={f.name} value={f.name}>{f.name}</option>)}
+                {FONTS.map(f => <option key={f.name} value={f.name} style={{ background: '#1a1a2e' }}>{f.name}</option>)}
               </select>
 
               {/* Spacing chooser */}
               <select
                 value={styles.lineHeight}
                 onChange={(e) => setStyles(prev => ({ ...prev, lineHeight: e.target.value }))}
-                className="bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-[10px] text-slate-300"
+                className="rounded-lg px-2 py-1 text-[10px] outline-none transition-colors"
+                style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }}
+                onFocus={e => e.target.style.borderColor = '#22c55e'}
+                onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'}
               >
-                <option value="1.2">Compact spacing</option>
-                <option value="1.4">Normal spacing</option>
-                <option value="1.6">Relaxed spacing</option>
+                <option value="1.2" style={{ background: '#1a1a2e' }}>Compact spacing</option>
+                <option value="1.4" style={{ background: '#1a1a2e' }}>Normal spacing</option>
+                <option value="1.6" style={{ background: '#1a1a2e' }}>Relaxed spacing</option>
               </select>
 
               {/* Accent Colors */}
@@ -689,35 +701,35 @@ export default function ResumeBuilderPage() {
                 <div className="p-4 bg-slate-950/20 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
                     <label className="block text-slate-400 text-[10px] mb-1">Full Name</label>
-                    <input type="text" value={data.contact.name} onChange={e => updateContactField('name', e.target.value)} className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-slate-200 outline-none" />
+                    <input type="text" value={data.contact.name} onChange={e => updateContactField('name', e.target.value)} className="w-full rounded-xl px-3 py-1.5 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                   </div>
                   <div>
                     <label className="block text-slate-400 text-[10px] mb-1">Subtitle / Role</label>
-                    <input type="text" value={data.contact.role} onChange={e => updateContactField('role', e.target.value)} className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-slate-200 outline-none" />
+                    <input type="text" value={data.contact.role} onChange={e => updateContactField('role', e.target.value)} className="w-full rounded-xl px-3 py-1.5 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                   </div>
                   <div>
                     <label className="block text-slate-400 text-[10px] mb-1">Email</label>
-                    <input type="email" value={data.contact.email} onChange={e => updateContactField('email', e.target.value)} className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-slate-200 outline-none" />
+                    <input type="email" value={data.contact.email} onChange={e => updateContactField('email', e.target.value)} className="w-full rounded-xl px-3 py-1.5 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                   </div>
                   <div>
                     <label className="block text-slate-400 text-[10px] mb-1">Phone</label>
-                    <input type="text" value={data.contact.phone} onChange={e => updateContactField('phone', e.target.value)} className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-slate-200 outline-none" />
+                    <input type="text" value={data.contact.phone} onChange={e => updateContactField('phone', e.target.value)} className="w-full rounded-xl px-3 py-1.5 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                   </div>
                   <div>
                     <label className="block text-slate-400 text-[10px] mb-1">Location</label>
-                    <input type="text" value={data.contact.location} onChange={e => updateContactField('location', e.target.value)} className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-slate-200 outline-none" />
+                    <input type="text" value={data.contact.location} onChange={e => updateContactField('location', e.target.value)} className="w-full rounded-xl px-3 py-1.5 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                   </div>
                   <div>
                     <label className="block text-slate-400 text-[10px] mb-1">LinkedIn Username</label>
-                    <input type="text" value={data.contact.linkedin} onChange={e => updateContactField('linkedin', e.target.value)} className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-slate-200 outline-none" />
+                    <input type="text" value={data.contact.linkedin} onChange={e => updateContactField('linkedin', e.target.value)} className="w-full rounded-xl px-3 py-1.5 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                   </div>
                   <div>
                     <label className="block text-slate-400 text-[10px] mb-1">GitHub Username</label>
-                    <input type="text" value={data.contact.github} onChange={e => updateContactField('github', e.target.value)} className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-slate-200 outline-none" />
+                    <input type="text" value={data.contact.github} onChange={e => updateContactField('github', e.target.value)} className="w-full rounded-xl px-3 py-1.5 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                   </div>
                   <div>
                     <label className="block text-slate-400 text-[10px] mb-1">Portfolio Link</label>
-                    <input type="text" value={data.contact.portfolio} onChange={e => updateContactField('portfolio', e.target.value)} className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-slate-200 outline-none" />
+                    <input type="text" value={data.contact.portfolio} onChange={e => updateContactField('portfolio', e.target.value)} className="w-full rounded-xl px-3 py-1.5 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                   </div>
                 </div>
               )}
@@ -739,7 +751,10 @@ export default function ResumeBuilderPage() {
                     value={data.summary}
                     onChange={e => setData(prev => ({ ...prev, summary: e.target.value }))}
                     rows={4}
-                    className="w-full bg-slate-950/60 border border-white/10 rounded-xl p-3 text-xs text-slate-200 outline-none resize-none"
+                    className="w-full rounded-xl p-3 text-xs outline-none resize-none transition-colors placeholder-white/40"
+                    style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }}
+                    onFocus={e => e.target.style.borderColor = '#22c55e'}
+                    onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'}
                     placeholder="Write a standard ATS summary explaining your technical skills and focus areas..."
                   />
                 </div>
@@ -770,23 +785,23 @@ export default function ResumeBuilderPage() {
                       <div className="grid grid-cols-2 gap-2 mt-1">
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">Company</label>
-                          <input type="text" value={exp.company} onChange={e => updateExperienceItem(idx, 'company', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" />
+                          <input type="text" value={exp.company} onChange={e => updateExperienceItem(idx, 'company', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                         </div>
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">Role/Title</label>
-                          <input type="text" value={exp.role} onChange={e => updateExperienceItem(idx, 'role', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" />
+                          <input type="text" value={exp.role} onChange={e => updateExperienceItem(idx, 'role', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                         </div>
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">Location</label>
-                          <input type="text" value={exp.location} onChange={e => updateExperienceItem(idx, 'location', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" />
+                          <input type="text" value={exp.location} onChange={e => updateExperienceItem(idx, 'location', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                         </div>
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">Start Date</label>
-                          <input type="text" value={exp.startDate} onChange={e => updateExperienceItem(idx, 'startDate', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" />
+                          <input type="text" value={exp.startDate} onChange={e => updateExperienceItem(idx, 'startDate', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                         </div>
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">End Date</label>
-                          <input type="text" value={exp.endDate} onChange={e => updateExperienceItem(idx, 'endDate', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" disabled={exp.current} />
+                          <input type="text" value={exp.endDate} onChange={e => updateExperienceItem(idx, 'endDate', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff', opacity: exp.current ? 0.4 : 1 }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} disabled={exp.current} />
                         </div>
                         <div className="flex items-center gap-1.5 mt-4">
                           <input type="checkbox" id={`exp-cur-${idx}`} checked={exp.current} onChange={e => updateExperienceItem(idx, 'current', e.target.checked)} className="rounded" />
@@ -796,7 +811,7 @@ export default function ResumeBuilderPage() {
 
                       <div>
                         <label className="block text-slate-500 text-[9px] mb-0.5">Responsibilities (Use • bullet points)</label>
-                        <textarea value={exp.description} onChange={e => updateExperienceItem(idx, 'description', e.target.value)} rows={3} className="w-full bg-slate-950/40 border border-white/5 rounded-lg p-2 text-xs text-slate-200 outline-none resize-none" placeholder="• Accomplished X by implementing Y, resulting in Z..." />
+                        <textarea value={exp.description} onChange={e => updateExperienceItem(idx, 'description', e.target.value)} rows={3} className="w-full rounded-lg p-2 text-xs outline-none resize-none transition-colors placeholder-white/40" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} placeholder="• Accomplished X by implementing Y, resulting in Z..." />
                       </div>
                     </div>
                   ))}
@@ -835,25 +850,25 @@ export default function ResumeBuilderPage() {
                       <div className="grid grid-cols-2 gap-2 mt-1">
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">Project Name</label>
-                          <input type="text" value={proj.name} onChange={e => updateProjectItem(idx, 'name', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" />
+                          <input type="text" value={proj.name} onChange={e => updateProjectItem(idx, 'name', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                         </div>
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">Your Role</label>
-                          <input type="text" value={proj.role} onChange={e => updateProjectItem(idx, 'role', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" />
+                          <input type="text" value={proj.role} onChange={e => updateProjectItem(idx, 'role', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                         </div>
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">Tech Stack</label>
-                          <input type="text" value={proj.techStack} onChange={e => updateProjectItem(idx, 'techStack', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" placeholder="e.g. React, Node.js" />
+                          <input type="text" value={proj.techStack} onChange={e => updateProjectItem(idx, 'techStack', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors placeholder-white/40" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} placeholder="e.g. React, Node.js" />
                         </div>
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">Project Link</label>
-                          <input type="text" value={proj.link} onChange={e => updateProjectItem(idx, 'link', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" placeholder="e.g. github.com/..." />
+                          <input type="text" value={proj.link} onChange={e => updateProjectItem(idx, 'link', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors placeholder-white/40" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} placeholder="e.g. github.com/..." />
                         </div>
                       </div>
 
                       <div>
                         <label className="block text-slate-500 text-[9px] mb-0.5">Project Description (Use • bullet points)</label>
-                        <textarea value={proj.description} onChange={e => updateProjectItem(idx, 'description', e.target.value)} rows={3} className="w-full bg-slate-950/40 border border-white/5 rounded-lg p-2 text-xs text-slate-200 outline-none resize-none" placeholder="• Designed high-fidelity wireframes...\n• Deployed API service to Cloud..." />
+                        <textarea value={proj.description} onChange={e => updateProjectItem(idx, 'description', e.target.value)} rows={3} className="w-full rounded-lg p-2 text-xs outline-none resize-none transition-colors placeholder-white/40" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} placeholder="• Designed high-fidelity wireframes...\n• Deployed API service to Cloud..." />
                       </div>
                     </div>
                   ))}
@@ -892,29 +907,29 @@ export default function ResumeBuilderPage() {
                       <div className="grid grid-cols-2 gap-2 mt-1">
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">School/University</label>
-                          <input type="text" value={edu.school} onChange={e => updateEducationItem(idx, 'school', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" />
+                          <input type="text" value={edu.school} onChange={e => updateEducationItem(idx, 'school', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                         </div>
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">Degree / Major</label>
-                          <input type="text" value={edu.degree} onChange={e => updateEducationItem(idx, 'degree', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" />
+                          <input type="text" value={edu.degree} onChange={e => updateEducationItem(idx, 'degree', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                         </div>
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">Location</label>
-                          <input type="text" value={edu.location} onChange={e => updateEducationItem(idx, 'location', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" />
+                          <input type="text" value={edu.location} onChange={e => updateEducationItem(idx, 'location', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                         </div>
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">Start Date</label>
-                          <input type="text" value={edu.startDate} onChange={e => updateEducationItem(idx, 'startDate', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" />
+                          <input type="text" value={edu.startDate} onChange={e => updateEducationItem(idx, 'startDate', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                         </div>
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">End Date</label>
-                          <input type="text" value={edu.endDate} onChange={e => updateEducationItem(idx, 'endDate', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1 text-xs text-slate-200" />
+                          <input type="text" value={edu.endDate} onChange={e => updateEducationItem(idx, 'endDate', e.target.value)} className="w-full rounded-lg px-2 py-1 text-xs outline-none transition-colors" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} />
                         </div>
                       </div>
 
                       <div>
                         <label className="block text-slate-500 text-[9px] mb-0.5">GPA & Other details</label>
-                        <input type="text" value={edu.description} onChange={e => updateEducationItem(idx, 'description', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1.5 text-xs text-slate-200" placeholder="GPA: 9.0/10.0. Special accomplishments..." />
+                        <input type="text" value={edu.description} onChange={e => updateEducationItem(idx, 'description', e.target.value)} className="w-full rounded-lg px-2 py-1.5 text-xs outline-none transition-colors placeholder-white/40" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} placeholder="GPA: 9.0/10.0. Special accomplishments..." />
                       </div>
                     </div>
                   ))}
@@ -953,11 +968,11 @@ export default function ResumeBuilderPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">Category Name</label>
-                          <input type="text" value={sk.category} onChange={e => updateSkillItem(idx, 'category', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1.5 text-xs text-slate-200" placeholder="e.g. Programming Languages" />
+                          <input type="text" value={sk.category} onChange={e => updateSkillItem(idx, 'category', e.target.value)} className="w-full rounded-lg px-2 py-1.5 text-xs outline-none transition-colors placeholder-white/40" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} placeholder="e.g. Programming Languages" />
                         </div>
                         <div>
                           <label className="block text-slate-500 text-[9px] mb-0.5">Skill tags (Comma separated)</label>
-                          <input type="text" value={sk.tags} onChange={e => updateSkillItem(idx, 'tags', e.target.value)} className="w-full bg-slate-950/40 border border-white/5 rounded-lg px-2 py-1.5 text-xs text-slate-200" placeholder="e.g. JavaScript, Python, C++" />
+                          <input type="text" value={sk.tags} onChange={e => updateSkillItem(idx, 'tags', e.target.value)} className="w-full rounded-lg px-2 py-1.5 text-xs outline-none transition-colors placeholder-white/40" style={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff' }} onFocus={e => e.target.style.borderColor = '#22c55e'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'} placeholder="e.g. JavaScript, Python, C++" />
                         </div>
                       </div>
                     </div>

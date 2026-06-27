@@ -170,7 +170,7 @@ export default function AtsCheckerPage() {
   const strokeDashoffset = results ? circumference - (results.overallScore / 100) * circumference : circumference;
 
   return (
-    <div className="container min-h-screen pt-24 pb-12 px-4 flex flex-col items-center">
+    <div className="min-h-screen pt-16 lg:pt-[98px] pb-12 px-4 flex flex-col items-center relative">
       {/* Background glow effects matching main page themes */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 rounded-full filter blur-[100px] pointer-events-none z-0"></div>
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full filter blur-[100px] pointer-events-none z-0"></div>

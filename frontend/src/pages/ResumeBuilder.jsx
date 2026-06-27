@@ -111,7 +111,7 @@ export default function ResumeBuilder() {
   };
 
   return (
-    <div className="container min-h-screen pt-24 pb-16 px-4 relative">
+    <div className="min-h-screen pt-16 lg:pt-[98px] pb-16 px-4 relative">
       <Toaster
         position="top-center"
         toastOptions={{
