@@ -154,7 +154,7 @@ export default function ResumeBuilder() {
         {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
           {/* LEFT — Form Panel */}
-          <div className="bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-xl">
+          <div className="resume-builder-form bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-xl">
             {renderStep()}
           </div>
 

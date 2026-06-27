@@ -4744,3 +4744,97 @@ button[type="submit"]:hover::before {
     width: auto;
   }
 }
+
+
+/* ==========================================================================
+   AI Resume Builder Form — Glassmorphism Inputs + Full Yellow Button Text
+   ========================================================================== */
+
+/* ── Dark glass/frosted textboxes, selects, and textareas ── */
+.resume-builder-form input[type="text"],
+.resume-builder-form input[type="email"],
+.resume-builder-form input[type="tel"],
+.resume-builder-form input[type="url"],
+.resume-builder-form textarea,
+.resume-builder-form select {
+  background-color: #1a1a2e !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+/* Glass placeholders */
+.resume-builder-form input::placeholder,
+.resume-builder-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Focus border — brand green #22c55e */
+.resume-builder-form input[type="text"]:focus,
+.resume-builder-form input[type="email"]:focus,
+.resume-builder-form input[type="tel"]:focus,
+.resume-builder-form input[type="url"]:focus,
+.resume-builder-form textarea:focus,
+.resume-builder-form select:focus {
+  border-color: #22c55e !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2) !important;
+}
+
+/* ── YELLOW TEXT on ALL meaningful buttons ── */
+
+/* Submit / Continue / Generate buttons */
+.resume-builder-form button[type="submit"] {
+  color: #fbbf24 !important;
+}
+
+/* Back buttons — flex-1 navigation buttons */
+.resume-builder-form button[type="button"].flex-1,
+.resume-builder-form button.bg-slate-900 {
+  color: #fbbf24 !important;
+  border-color: rgba(251, 191, 36, 0.25) !important;
+}
+.resume-builder-form button[type="button"].flex-1:hover,
+.resume-builder-form button.bg-slate-900:hover {
+  background-color: rgba(251, 191, 36, 0.08) !important;
+}
+
+/* Add Another / Add Experience / Add Project buttons (w-fit outline buttons) */
+.resume-builder-form button[type="button"].w-fit,
+.resume-builder-form button[type="button"].text-emerald-400 {
+  color: #fbbf24 !important;
+  border-color: rgba(251, 191, 36, 0.3) !important;
+}
+.resume-builder-form button[type="button"].w-fit svg,
+.resume-builder-form button[type="button"].text-emerald-400 svg {
+  color: #fbbf24 !important;
+}
+.resume-builder-form button[type="button"].w-fit:hover,
+.resume-builder-form button[type="button"].text-emerald-400:hover {
+  background-color: rgba(251, 191, 36, 0.1) !important;
+}
+
+/* Skill suggestion pill buttons */
+.resume-builder-form button[type="button"].rounded-full {
+  color: #fbbf24 !important;
+  border-color: rgba(251, 191, 36, 0.25) !important;
+}
+.resume-builder-form button[type="button"].rounded-full:hover:not(:disabled) {
+  color: #fde68a !important;
+  border-color: rgba(251, 191, 36, 0.5) !important;
+  background-color: rgba(251, 191, 36, 0.08) !important;
+}
+.resume-builder-form button[type="button"].rounded-full:disabled {
+  opacity: 0.35 !important;
+}
+
+/* ── Tag X-remove buttons inside skill inputs — keep them white/subtle ── */
+.resume-builder-form span button[type="button"] {
+  color: rgba(255, 255, 255, 0.6) !important;
+  border: none !important;
+}
+.resume-builder-form span button[type="button"]:hover {
+  color: #ffffff !important;
+  background-color: transparent !important;
+}
+
