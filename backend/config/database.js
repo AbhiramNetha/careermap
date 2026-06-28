@@ -5,7 +5,7 @@ const DATABASE_URL = process.env.DATABASE_URL || 'postgres://postgres:postgres@l
 const sequelize = new Sequelize(DATABASE_URL, {
     dialect: 'postgres',
     logging: false,
-    dialectOptions: DATABASE_URL.includes('railway') || DATABASE_URL.includes('render') || DATABASE_URL.includes('neon')
+    dialectOptions: DATABASE_URL.includes('railway') || DATABASE_URL.includes('render') || DATABASE_URL.includes('neon') || DATABASE_URL.includes('neon.tech')
         ? { ssl: { require: true, rejectUnauthorized: false } }
         : {},
     pool: { max: 5, min: 0, acquire: 30000, idle: 10000 },
