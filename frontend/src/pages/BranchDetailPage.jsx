@@ -5,13 +5,14 @@ import { fetchCareersByBranch } from '../services/api';
 
 const BRANCH_INFO = {
     CSE: { icon: '💻', fullName: 'Computer Science Engineering', desc: 'CSE graduates have the widest range of career options — from top tech companies to research labs.' },
+    IT: { icon: '💻', fullName: 'Information Technology', desc: 'IT graduates have an extensive range of paths in software, cloud, and digital services.' },
     ECE: { icon: '📡', fullName: 'Electronics & Communication Engineering', desc: 'ECE opens doors to both core electronics and IT roles, plus government PSU jobs.' },
-    Mechanical: { icon: '⚙️', fullName: 'Mechanical Engineering', desc: 'Mechanical engineers are backbone of manufacturing, automotive, and energy sectors.' },
-    Civil: { icon: '🏗️', fullName: 'Civil Engineering', desc: 'Civil engineers build India\'s infrastructure — from highways to smart cities.' },
+    MECH: { icon: '⚙️', fullName: 'Mechanical Engineering', desc: 'Mechanical engineers are backbone of manufacturing, automotive, and energy sectors.' },
+    CIVIL: { icon: '🏗️', fullName: 'Civil Engineering', desc: 'Civil engineers build India\'s infrastructure — from highways to smart cities.' },
     EEE: { icon: '⚡', fullName: 'Electrical & Electronics Engineering', desc: 'EEE graduates power India\'s energy transition and automation revolution.' },
 };
 
-const PIE_COLORS = ['#6366f1', '#8b5cf6', '#10b981', '#f59e0b'];
+const PIE_COLORS = ['#6366f1', '#059669', '#8b5cf6', '#f59e0b'];
 
 function CareerMiniCard({ career, onView }) {
     return (
@@ -32,11 +33,11 @@ function CareerMiniCard({ career, onView }) {
                 e.currentTarget.style.borderColor = '';
                 e.currentTarget.style.transform = '';
             }}
-            onClick={() => onView(career.id)}
+            onClick={() => onView(career.slug)}
         >
-            <div style={{ fontWeight: 700, marginBottom: '0.25rem' }}>{career.name}</div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>{career.subCategory}</div>
-            <div style={{ fontSize: '0.82rem', color: '#10b981', fontWeight: 600 }}>💰 {career.salary?.fresher}</div>
+            <div style={{ fontWeight: 700, marginBottom: '0.25rem' }}>{career.icon} {career.title}</div>
+            <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>{career.category}</div>
+            {career.salaryRange && <div style={{ fontSize: '0.82rem', color: '#10b981', fontWeight: 600 }}>💰 {career.salaryRange}</div>}
         </div>
     );
 }
@@ -59,11 +60,11 @@ export default function BranchDetailPage() {
     const info = BRANCH_INFO[branch] || {};
 
     const pieData = data ? [
-        { name: 'IT / Tech', value: data.directFit?.filter(c => c.tags?.includes('coding') || c.tags?.includes('analytics')).length || 2 },
-        { name: 'Govt / PSU', value: data.directFit?.filter(c => c.category === 'government').length || 2 },
-        { name: 'Higher Studies', value: data.directFit?.filter(c => c.category === 'higher-studies').length || 2 },
-        { name: 'Entrepreneurship', value: 1 },
-    ] : [];
+        { name: 'Private Sector', value: data.directFit?.filter(c => c.category === 'Private Sector').length || 0 },
+        { name: 'Government', value: data.directFit?.filter(c => c.category === 'Government').length || 0 },
+        { name: 'Higher Studies', value: data.directFit?.filter(c => c.category === 'Higher Studies').length || 0 },
+        { name: 'Entrepreneurship', value: data.directFit?.filter(c => c.category === 'Entrepreneurship').length || 0 },
+    ].filter(item => item.value > 0) : [];
 
     if (loading) {
         return <div className="loader-container"><div className="loader" /><div className="loader-text">Loading branch guide...</div></div>;
@@ -123,14 +124,14 @@ export default function BranchDetailPage() {
                                 <CareerMiniCard
                                     key={career.id}
                                     career={career}
-                                    onView={() => navigate(`/careers/${career.id}`)}
+                                    onView={(slug) => navigate(`/careers/${slug}`)}
                                 />
                             ))}
                         </div>
                     </div>
                 )}
 
-                {}
+                {/* Moderate Fit Section */}
                 {data?.moderateFit?.length > 0 && (
                     <div className="detail-section" style={{ marginBottom: '1.5rem' }}>
                         <div className="detail-section-title">
@@ -142,7 +143,7 @@ export default function BranchDetailPage() {
                                 <CareerMiniCard
                                     key={career.id}
                                     career={career}
-                                    onView={() => navigate(`/careers/${career.id}`)}
+                                    onView={(slug) => navigate(`/careers/${slug}`)}
                                 />
                             ))}
                         </div>

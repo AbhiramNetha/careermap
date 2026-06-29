@@ -73,14 +73,14 @@ exports.submitQuiz = async (req, res) => {
  */
 function generateExplanation(careerId, answers, matchPct) {
     const explanations = {
-        'data-analyst': `With your ${answers.interest === 'Coding' ? 'love for coding' : 'analytical mindset'} and ${answers.riskTolerance === 'Low' ? 'preference for stability' : 'calculated risk approach'}, Data Analytics is a ${matchPct > 75 ? 'perfect' : 'good'} fit. ${answers.financialCondition === 'limited' ? 'No expensive degree needed — skills-based entry is affordable.' : ''}`,
+        'data-scientist': `With your ${answers.interest === 'Coding' ? 'love for coding' : 'analytical mindset'} and ${answers.riskTolerance === 'Low' ? 'preference for stability' : 'calculated risk approach'}, Data Analytics is a ${matchPct > 75 ? 'perfect' : 'good'} fit. ${answers.financialCondition === 'limited' ? 'No expensive degree needed — skills-based entry is affordable.' : ''}`,
         'software-developer': `Your ${answers.branch === 'CSE' || answers.branch === 'IT' ? 'strong CS background' : 'technical foundation'} combined with ${answers.interest === 'Coding' ? 'passion for coding' : 'interest in technology'} makes Software Development a ${matchPct > 75 ? 'top choice' : 'solid option'}.`,
-        'mba-cat': `Your interest in ${answers.interest === 'Management' ? 'management and leadership' : 'business and strategy'} with ${answers.financialCondition === 'can-afford' ? 'financial flexibility' : 'ambition to grow'} aligns well with an MBA via CAT.`,
+        'mba-iim-xlri': `Your interest in ${answers.interest === 'Management' ? 'management and leadership' : 'business and strategy'} with ${answers.financialCondition === 'can-afford' ? 'financial flexibility' : 'ambition to grow'} aligns well with a top MBA.`,
         'psu-engineer': `${answers.riskTolerance === 'Low' ? 'Your preference for job security' : 'Your balanced approach'} and ${answers.workLifeBalance === 'High' ? 'high priority for work-life balance' : 'practical career goals'} make PSU jobs a strong match.`,
-        'mtech-gate': `Your ${answers.interest === 'Research' ? 'passion for research' : 'desire for deeper knowledge'} and ${answers.studyPreference === 'Yes' ? 'willingness to study more' : 'technical inclination'} suit M.Tech via GATE perfectly.`,
+        'mtech-iit-nit': `Your ${answers.interest === 'Research' ? 'passion for research' : 'desire for deeper knowledge'} and ${answers.studyPreference === 'Yes' ? 'willingness to study more' : 'technical inclination'} suit M.Tech via GATE perfectly.`,
         'ms-abroad': `Your ambition for ${answers.salaryExpectation === '>8lpa' ? 'high earning potential' : 'global exposure'} and ${answers.financialCondition === 'can-afford' ? 'financial readiness' : 'drive to succeed abroad'} make MS Abroad a compelling path.`,
-        'govt-ssc-je': `Your preference for ${answers.riskTolerance === 'Low' ? 'job security' : 'government service'} and ${answers.workLifeBalance === 'High' ? 'work-life balance' : 'stable career'} make SSC JE an ideal choice.`,
-        'entrepreneurship': `Your high ${answers.riskTolerance === 'High' ? 'risk appetite' : 'ambition'} and ${answers.interest === 'Entrepreneurship' ? 'entrepreneurial drive' : 'innovative thinking'} are exactly what entrepreneurship demands.`,
+        'ssc-je': `Your preference for ${answers.riskTolerance === 'Low' ? 'job security' : 'government service'} and ${answers.workLifeBalance === 'High' ? 'work-life balance' : 'stable career'} make SSC JE an ideal choice.`,
+        'saas-startup': `Your high ${answers.riskTolerance === 'High' ? 'risk appetite' : 'ambition'} and ${answers.interest === 'Entrepreneurship' ? 'entrepreneurial drive' : 'innovative thinking'} are exactly what a SaaS startup demands.`,
     };
 
     return explanations[careerId] || `Based on your profile, ${careerId.replace(/-/g, ' ')} scores ${matchPct}% match with your preferences.`;

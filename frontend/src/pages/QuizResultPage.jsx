@@ -68,13 +68,13 @@ export default function QuizResultPage() {
                                         </div>
                                     </div>
 
-                                    {}
+                                    {/* Recommendation Info */}
                                     <div style={{ flex: 1 }}>
                                         <h3 style={{ fontFamily: 'Poppins', fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.25rem' }}>
-                                            {career.name}
+                                            {career.icon} {career.title}
                                         </h3>
                                         <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
-                                            {career.subCategory}
+                                            {career.category}
                                         </div>
 
                                         <div style={{
@@ -92,17 +92,19 @@ export default function QuizResultPage() {
                                         </div>
 
                                         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-                                            <span className="chip chip-green">💰 {career.salary?.fresher}</span>
-                                            <span className={`chip ${career.riskLevel === 'Low' ? 'chip-green' : career.riskLevel === 'High' ? 'chip-red' : 'chip-yellow'}`}>
-                                                ⚡ {career.riskLevel} Risk
-                                            </span>
-                                            <span className="chip chip-purple">📈 {career.growthPotential} Growth</span>
+                                            {career.salaryRange && <span className="chip chip-green">💰 {career.salaryRange}</span>}
+                                            {career.riskLevel && (
+                                                <span className={`chip ${career.riskLevel === 'Low' ? 'chip-green' : career.riskLevel === 'High' ? 'chip-red' : 'chip-yellow'}`}>
+                                                    ⚡ {career.riskLevel} Risk
+                                                </span>
+                                            )}
+                                            {career.demandLevel && <span className="chip chip-purple">📈 {career.demandLevel} Demand</span>}
                                         </div>
 
                                         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                                             <button
                                                 className="btn-sm btn-filled"
-                                                onClick={() => navigate(`/careers/${career.id}`)}
+                                                onClick={() => navigate(`/careers/${career.slug}`)}
                                             >
                                                 📖 View Full Details
                                             </button>
@@ -114,7 +116,7 @@ export default function QuizResultPage() {
                                             </button>
                                             <button
                                                 className="btn-sm btn-outline"
-                                                onClick={() => navigate(`/roadmap/${career.id}`)}
+                                                onClick={() => navigate(`/roadmap/${career.slug}`)}
                                             >
                                                 🗺️ View Roadmap
                                             </button>

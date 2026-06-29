@@ -119,31 +119,33 @@ export default function RoadmapPage() {
         <div style={{ padding: '3rem 0 6rem' }}>
             <div className="container">
 
-                {}
+                {/* ── Career Hero ── */}
                 <div className="career-hero" style={{ marginBottom: '2rem' }}>
                     <div className="breadcrumb" style={{ marginBottom: '1rem' }}>
                         <Link to="/">Home</Link> <span>/</span>
                         <Link to="/careers">Careers</Link> <span>/</span>
-                        <Link to={`/careers/${career.id}`}>{career.name}</Link> <span>/</span>
+                        <Link to={`/careers/${career.slug}`}>{career.title}</Link> <span>/</span>
                         <span style={{ color: 'var(--text-primary)' }}>Roadmap</span>
                     </div>
 
                     <h1 style={{ fontFamily: 'Poppins', fontSize: 'clamp(1.8rem,3vw,2.5rem)', fontWeight: 800, marginBottom: '0.5rem' }}>
-                        🗺️ {career.name} Roadmap
+                        🗺️ {career.title} Roadmap
                     </h1>
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-                        {career.preparationTime} structured preparation plan with skills, tools &amp; projects
+                        {career.duration || 'Custom'} structured preparation plan with skills, tools &amp; projects
                     </p>
                     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                        <span className="chip chip-purple">⏰ {career.preparationTime}</span>
-                        <span className={`chip ${career.riskLevel === 'Low' ? 'chip-green' : career.riskLevel === 'High' ? 'chip-red' : 'chip-yellow'}`}>
-                            ⚡ {career.riskLevel} Risk
-                        </span>
-                        <span className="chip chip-green">💰 {career.salary?.fresher} (Fresher)</span>
+                        {career.duration && <span className="chip chip-purple">⏰ {career.duration}</span>}
+                        {career.riskLevel && (
+                            <span className={`chip ${career.riskLevel === 'Low' ? 'chip-green' : career.riskLevel === 'High' ? 'chip-red' : 'chip-yellow'}`}>
+                                ⚡ {career.riskLevel} Risk
+                            </span>
+                        )}
+                        {career.salaryRange && <span className="chip chip-green">💰 {career.salaryRange}</span>}
                     </div>
 
                     <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
-                        <button className="btn-primary" onClick={() => navigate(`/careers/${career.id}`)}>
+                        <button className="btn-primary" onClick={() => navigate(`/careers/${career.slug}`)}>
                             ← View Career Details
                         </button>
                         <button className="btn-secondary" onClick={() => { addToCompare(career); navigate('/compare'); }}>
@@ -153,143 +155,167 @@ export default function RoadmapPage() {
                 </div>
 
                 {}
-                <div className="roadmap-progress-card">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-                        <div>
-                            <span style={{ fontFamily: 'Poppins', fontWeight: 700, fontSize: '1rem' }}>
-                                Overall Progress
-                            </span>
-                            <span style={{ marginLeft: '0.75rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                                {doneCount} / {totalCount} topics completed
-                            </span>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                            <span className="roadmap-progress-pct">{progress}%</span>
-                            {doneCount > 0 && (
-                                <button
-                                    className="btn-ghost-sm"
-                                    onClick={resetProgress}
-                                    title="Reset all progress"
-                                >
-                                    🔄 Reset
-                                </button>
+                {career.roadmap && career.roadmap.length > 0 ? (
+                    <>
+                        {/* ── Progress Card ── */}
+                        <div className="roadmap-progress-card">
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                                <div>
+                                    <span style={{ fontFamily: 'Poppins', fontWeight: 700, fontSize: '1rem' }}>
+                                        Overall Progress
+                                    </span>
+                                    <span style={{ marginLeft: '0.75rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                                        {doneCount} / {totalCount} topics completed
+                                    </span>
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                    <span className="roadmap-progress-pct">{progress}%</span>
+                                    {doneCount > 0 && (
+                                        <button
+                                            className="btn-ghost-sm"
+                                            onClick={resetProgress}
+                                            title="Reset all progress"
+                                        >
+                                            🔄 Reset
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="roadmap-progress-track">
+                                <div
+                                    className="roadmap-progress-fill"
+                                    style={{ width: `${progress}%` }}
+                                />
+                            </div>
+                            {progress === 100 && (
+                                <div className="roadmap-complete-banner">
+                                    🎉 Congratulations! You've completed the entire roadmap!
+                                </div>
                             )}
                         </div>
-                    </div>
-                    <div className="roadmap-progress-track">
-                        <div
-                            className="roadmap-progress-fill"
-                            style={{ width: `${progress}%` }}
-                        />
-                    </div>
-                    {progress === 100 && (
-                        <div className="roadmap-complete-banner">
-                            🎉 Congratulations! You've completed the entire roadmap!
-                        </div>
-                    )}
-                </div>
 
-                {/* ── Phase Overview chips ── */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '0.75rem', marginBottom: '2.5rem' }}>
-                    {career.roadmap?.map((step, i) => {
-                        const sp = stepProgress[i] || { done: 0, total: 0 };
-                        const pct = sp.total > 0 ? Math.round((sp.done / sp.total) * 100) : 0;
-                        return (
-                            <div
-                                key={i}
-                                className="phase-chip"
-                                style={{ background: pct === 100 ? 'rgba(16,185,129,0.12)' : 'rgba(99,102,241,0.08)', borderColor: pct === 100 ? 'rgba(16,185,129,0.35)' : 'rgba(99,102,241,0.2)' }}
-                                onClick={() => document.getElementById(`step-${i}`)?.scrollIntoView({ behavior: 'smooth' })}
-                            >
-                                <div style={{ fontWeight: 700, color: pct === 100 ? '#10b981' : 'var(--primary-light)', fontSize: '0.82rem', marginBottom: '4px' }}>
-                                    {pct === 100 ? '✅ ' : ''}{step.month}
-                                </div>
-                                <div style={{ height: '4px', borderRadius: '99px', background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
-                                    <div style={{ height: '100%', width: `${pct}%`, background: pct === 100 ? '#10b981' : 'var(--gradient-primary)', borderRadius: '99px', transition: 'width 0.4s ease' }} />
-                                </div>
-                                <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '4px' }}>{sp.done}/{sp.total} done</div>
-                            </div>
-                        );
-                    })}
-                </div>
-
-                {/* ── Timeline (Checklist) ── */}
-                <div className="timeline">
-                    {career.roadmap?.map((step, si) => {
-                        const sp = stepProgress[si] || { done: 0, total: 0 };
-                        const stepPct = sp.total > 0 ? Math.round((sp.done / sp.total) * 100) : 0;
-                        const isComplete = stepPct === 100 && sp.total > 0;
-
-                        return (
-                            <div id={`step-${si}`} key={si} className="timeline-item" style={{ marginBottom: '2.5rem' }}>
-                                <div className={`timeline-dot ${isComplete ? 'timeline-dot-done' : ''}`} />
-
-                                {/* Step header */}
-                                <div
-                                    className="timeline-month"
-                                    style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-                                    onClick={() => toggleStep(si)}
-                                >
-                                    <span>
-                                        {isComplete ? '✅' : '📅'} {step.month}
-                                        <span style={{ marginLeft: '0.75rem', fontSize: '0.75rem', fontWeight: 600, color: isComplete ? '#10b981' : 'var(--text-muted)' }}>
-                                            {sp.done}/{sp.total}
-                                        </span>
-                                    </span>
-                                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                                        {expandedSteps[si] ? '▼ collapse' : '▶ expand'}
-                                    </span>
-                                </div>
-
-                                {/* Mini step progress bar */}
-                                <div style={{ height: '3px', borderRadius: '99px', background: 'rgba(255,255,255,0.06)', marginBottom: '0.75rem', overflow: 'hidden' }}>
-                                    <div style={{ height: '100%', width: `${stepPct}%`, background: isComplete ? '#10b981' : 'var(--gradient-primary)', borderRadius: '99px', transition: 'width 0.4s ease' }} />
-                                </div>
-
-                                {expandedSteps[si] && (
-                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
-                                        {['skills', 'tools', 'projects', 'interviewPrep'].map(cat => {
-                                            const items = step[cat];
-                                            if (!items?.length) return null;
-                                            const meta = CATEGORY_META[cat];
-                                            return (
-                                                <div
-                                                    key={cat}
-                                                    className="timeline-content checklist-card"
-                                                    style={{ borderColor: meta.border }}
-                                                >
-                                                    <h4 style={{ color: meta.text }}>{meta.label}</h4>
-                                                    <ul className="checklist-ul">
-                                                        {items.map((item, ii) => {
-                                                            const key = `${si}__${cat}__${ii}`;
-                                                            const done = !!checked[key];
-                                                            return (
-                                                                <li
-                                                                    key={key}
-                                                                    className={`checklist-item ${done ? 'checklist-item-done' : ''}`}
-                                                                    onClick={() => toggleItem(key)}
-                                                                    role="checkbox"
-                                                                    aria-checked={done}
-                                                                    tabIndex={0}
-                                                                    onKeyDown={e => (e.key === ' ' || e.key === 'Enter') && toggleItem(key)}
-                                                                >
-                                                                    <span className={`check-box ${done ? 'check-box-done' : ''}`}>
-                                                                        {done && <span>✓</span>}
-                                                                    </span>
-                                                                    <span className="checklist-label">{item}</span>
-                                                                </li>
-                                                            );
-                                                        })}
-                                                    </ul>
-                                                </div>
-                                            );
-                                        })}
+                        {/* ── Phase Overview chips ── */}
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '0.75rem', marginBottom: '2.5rem' }}>
+                            {career.roadmap?.map((step, i) => {
+                                const sp = stepProgress[i] || { done: 0, total: 0 };
+                                const pct = sp.total > 0 ? Math.round((sp.done / sp.total) * 100) : 0;
+                                return (
+                                    <div
+                                        key={i}
+                                        className="phase-chip"
+                                        style={{ background: pct === 100 ? 'rgba(16,185,129,0.12)' : 'rgba(99,102,241,0.08)', borderColor: pct === 100 ? 'rgba(16,185,129,0.35)' : 'rgba(99,102,241,0.2)' }}
+                                        onClick={() => document.getElementById(`step-${i}`)?.scrollIntoView({ behavior: 'smooth' })}
+                                    >
+                                        <div style={{ fontWeight: 700, color: pct === 100 ? '#10b981' : 'var(--primary-light)', fontSize: '0.82rem', marginBottom: '4px' }}>
+                                            {pct === 100 ? '✅ ' : ''}{step.month}
+                                        </div>
+                                        <div style={{ height: '4px', borderRadius: '99px', background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+                                            <div style={{ height: '100%', width: `${pct}%`, background: pct === 100 ? '#10b981' : 'var(--gradient-primary)', borderRadius: '99px', transition: 'width 0.4s ease' }} />
+                                        </div>
+                                        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '4px' }}>{sp.done}/{sp.total} done</div>
                                     </div>
-                                )}
-                            </div>
-                        );
-                    })}
-                </div>
+                                );
+                            })}
+                        </div>
+
+                        {/* ── Timeline (Checklist) ── */}
+                        <div className="timeline">
+                            {career.roadmap?.map((step, si) => {
+                                const sp = stepProgress[si] || { done: 0, total: 0 };
+                                const stepPct = sp.total > 0 ? Math.round((sp.done / sp.total) * 100) : 0;
+                                const isComplete = stepPct === 100 && sp.total > 0;
+
+                                return (
+                                    <div id={`step-${si}`} key={si} className="timeline-item" style={{ marginBottom: '2.5rem' }}>
+                                        <div className={`timeline-dot ${isComplete ? 'timeline-dot-done' : ''}`} />
+
+                                        {/* Step header */}
+                                        <div
+                                            className="timeline-month"
+                                            style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                                            onClick={() => toggleStep(si)}
+                                        >
+                                            <span>
+                                                {isComplete ? '✅' : '📅'} {step.month}
+                                                <span style={{ marginLeft: '0.75rem', fontSize: '0.75rem', fontWeight: 600, color: isComplete ? '#10b981' : 'var(--text-muted)' }}>
+                                                    {sp.done}/{sp.total}
+                                                </span>
+                                            </span>
+                                            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                                                {expandedSteps[si] ? '▼ collapse' : '▶ expand'}
+                                            </span>
+                                        </div>
+
+                                        {/* Mini step progress bar */}
+                                        <div style={{ height: '3px', borderRadius: '99px', background: 'rgba(255,255,255,0.06)', marginBottom: '0.75rem', overflow: 'hidden' }}>
+                                            <div style={{ height: '100%', width: `${stepPct}%`, background: isComplete ? '#10b981' : 'var(--gradient-primary)', borderRadius: '99px', transition: 'width 0.4s ease' }} />
+                                        </div>
+
+                                        {expandedSteps[si] && (
+                                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+                                                {['skills', 'tools', 'projects', 'interviewPrep'].map(cat => {
+                                                    const items = step[cat];
+                                                    if (!items?.length) return null;
+                                                    const meta = CATEGORY_META[cat];
+                                                    return (
+                                                        <div
+                                                            key={cat}
+                                                            className="timeline-content checklist-card"
+                                                            style={{ borderColor: meta.border }}
+                                                        >
+                                                            <h4 style={{ color: meta.text }}>{meta.label}</h4>
+                                                            <ul className="checklist-ul">
+                                                                {items.map((item, ii) => {
+                                                                    const key = `${si}__${cat}__${ii}`;
+                                                                    const done = !!checked[key];
+                                                                    return (
+                                                                        <li
+                                                                            key={key}
+                                                                            className={`checklist-item ${done ? 'checklist-item-done' : ''}`}
+                                                                            onClick={() => toggleItem(key)}
+                                                                            role="checkbox"
+                                                                            aria-checked={done}
+                                                                            tabIndex={0}
+                                                                            onKeyDown={e => (e.key === ' ' || e.key === 'Enter') && toggleItem(key)}
+                                                                        >
+                                                                            <span className={`check-box ${done ? 'check-box-done' : ''}`}>
+                                                                                {done && <span>✓</span>}
+                                                                            </span>
+                                                                            <span className="checklist-label">{item}</span>
+                                                                        </li>
+                                                                    );
+                                                                })}
+                                                            </ul>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </>
+                ) : (
+                    <div style={{
+                        background: 'var(--bg-card)',
+                        border: '1px solid var(--border)',
+                        borderRadius: 'var(--radius-xl)',
+                        padding: '4rem 2rem',
+                        textAlign: 'center',
+                        boxShadow: 'var(--shadow-md)',
+                        marginBottom: '2rem',
+                    }}>
+                        <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>🗺️</div>
+                        <h2 style={{ marginBottom: '0.75rem', fontWeight: 700, fontFamily: 'Poppins' }}>Structured Roadmap Coming Soon!</h2>
+                        <p style={{ color: 'var(--text-secondary)', maxWidth: '520px', margin: '0 auto 1.75rem', lineHeight: 1.6, fontSize: '0.92rem' }}>
+                            Our team is currently designing the custom month-by-month learning roadmaps for our newly added career paths. You can view the recommended skills and tools on the Career Details page.
+                        </p>
+                        <button className="btn-primary" onClick={() => navigate(`/careers/${career.slug}`)}>
+                            View Career Details
+                        </button>
+                    </div>
+                )}
 
                 {/* ── All Skills Summary ── */}
                 <div className="detail-section" style={{ marginTop: '2rem' }}>

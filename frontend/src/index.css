@@ -4098,22 +4098,9 @@ textarea {
 }
 
 /* ===================================
-   React Bits — Animated Border Glow 
-   Applied globally to all `.btn-*` 
+   Standard Premium Interactive Buttons
    =================================== */
 
-@property --border-angle {
-  syntax: "<angle>";
-  inherits: true;
-  initial-value: 0turn;
-}
-
-@keyframes reactBitsBorderRotate {
-  to {
-    --border-angle: 1turn;
-  }
-}
-
 .btn-primary,
 .btn-secondary,
 .btn-filled,
@@ -4121,93 +4108,98 @@ textarea {
 .btn-quiz-cta,
 .btn-sm,
 button[type="submit"] {
-  position: relative;
-  z-index: 1;
-  /* Reset regular borders so the glowing border stands out perfectly */
-  border: none !important;
-  overflow: hidden;
-  color: var(--text-primary);
-  transform-style: preserve-3d;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  border-radius: var(--radius-md);
+  padding: 10px 22px;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid transparent;
+  transition: var(--transition);
+  text-decoration: none;
+  gap: 8px;
+  white-space: nowrap;
 }
 
-/* The Animated Glowing Conic Border Background */
-.btn-primary::before,
-.btn-secondary::before,
-.btn-filled::before,
-.btn-outline::before,
-.btn-quiz-cta::before,
-.btn-sm::before,
-button[type="submit"]::before {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  z-index: -2;
-  background: conic-gradient(from var(--border-angle), #10b981 0%, #3b82f6 20%, #a855f7 40%, rgba(99, 102, 241, 0) 50%, #10b981 100%);
-  animation: reactBitsBorderRotate 2.5s linear infinite;
-  border-radius: inherit;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
-}
-
-/* The Button Surface */
-.btn-primary::after,
-.btn-secondary::after,
-.btn-filled::after,
-.btn-outline::after,
-.btn-quiz-cta::after,
-.btn-sm::after,
-button[type="submit"]::after {
-  content: '';
-  position: absolute;
-  inset: 2px;
-  /* width of the glowing border */
-  z-index: -1;
-  background: #0f172a;
-  /* dark face */
-  border-radius: inherit;
-  transition: background 0.3s, transform 0.3s;
-}
-
-[data-theme='light'] .btn-primary::after,
-[data-theme='light'] .btn-secondary::after,
-[data-theme='light'] .btn-filled::after,
-[data-theme='light'] .btn-outline::after,
-[data-theme='light'] .btn-quiz-cta::after,
-[data-theme='light'] .btn-sm::after,
-[data-theme='light'] button[type="submit"]::after {
-  background: #ffffff;
-}
-
-/* The True Outer Glow Ambient Lighting */
+/* Primary / Filled Button Style */
 .btn-primary,
-.btn-secondary,
 .btn-filled,
-.btn-outline,
 .btn-quiz-cta,
-.btn-sm,
 button[type="submit"] {
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
+  background: var(--gradient-primary);
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2);
 }
 
 .btn-primary:hover,
-.btn-secondary:hover,
 .btn-filled:hover,
-.btn-outline:hover,
 .btn-quiz-cta:hover,
-.btn-sm:hover,
-button[type="submit"]:hover {
-  box-shadow: 0 0 25px rgba(59, 130, 246, 0.4), 0 0 45px rgba(16, 185, 129, 0.3);
+button[type="submit"]:hover:not(:disabled) {
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+  filter: brightness(1.1);
 }
 
-.btn-primary:hover::before,
-.btn-secondary:hover::before,
-.btn-filled:hover::before,
-.btn-outline:hover::before,
-.btn-quiz-cta:hover::before,
-.btn-sm:hover::before,
-button[type="submit"]:hover::before {
-  opacity: 1;
+.btn-primary:active,
+.btn-filled:active,
+.btn-quiz-cta:active,
+button[type="submit"]:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+/* Secondary / Outline Button Style */
+.btn-secondary,
+.btn-outline {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--text-primary) !important;
+}
+
+[data-theme='light'] .btn-secondary,
+[data-theme='light'] .btn-outline {
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.btn-secondary:hover,
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary);
+  color: var(--primary-light) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+}
+
+[data-theme='light'] .btn-secondary:hover,
+[data-theme='light'] .btn-outline:hover {
+  background: rgba(15, 23, 42, 0.08);
+  border-color: var(--primary);
+  color: var(--primary) !important;
+}
+
+.btn-secondary:active,
+.btn-outline:active {
+  transform: translateY(-1px);
+}
+
+/* Specific styling for btn-sm to behave as flex item when needed */
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  flex: 1;
+}
+
+/* Specific styling for btn-quiz-cta (gold accents) */
+.btn-quiz-cta {
+  background: var(--gradient-gold);
+  color: #000000 !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+}
+
+.btn-quiz-cta:hover {
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.4);
 }
 
 /* ===== RESPONSIVE LAYOUT HELPERS ===== */

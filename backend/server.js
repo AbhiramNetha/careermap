@@ -38,8 +38,6 @@ const PORT = process.env.PORT || 5000;
 async function startServer() {
     try {
         await sequelize.authenticate();
-        console.log('✅ PostgreSQL connected');
-
         // Sync all models (creates tables if they don't exist)
         await sequelize.sync({ alter: false });
         console.log('✅ Database tables synced');

@@ -4,28 +4,28 @@ import { fetchAllCareers } from '../services/api';
 import { useApp } from '../context/AppContext';
 
 function CareerCard({ career, onCompare, onView }) {
-    const riskClass = `risk-${career.riskLevel?.toLowerCase()}`;
+    const riskClass = `risk-${career.riskLevel?.toLowerCase() || 'medium'}`;
     return (
         <div className="career-card fade-in">
             <div className="career-card-header">
                 <div>
-                    <div className="career-name">{career.name}</div>
-                    <div className="career-subcategory">{career.subCategory}</div>
+                    <div className="career-name">{career.icon} {career.title}</div>
+                    <div className="career-subcategory">{career.category}</div>
                 </div>
                 {career.isTrending && <span className="trend-badge">🔥 Trending</span>}
             </div>
-            <p className="career-overview">{career.overview}</p>
+            <p className="career-overview">{career.description}</p>
             <div className="career-meta">
-                <span className={`meta-tag ${riskClass}`}>⚡ {career.riskLevel} Risk</span>
-                <span className="meta-tag">📊 {career.demandLevel} Demand</span>
-                {career.studyRequired
-                    ? <span className="meta-tag">📚 Study Required</span>
-                    : <span className="meta-tag">✅ No Extra Degree</span>}
+                {career.riskLevel && <span className={`meta-tag ${riskClass}`}>⚡ {career.riskLevel} Risk</span>}
+                {career.demandLevel && <span className="meta-tag">📊 {career.demandLevel} Demand</span>}
+                {career.examRoute && <span className="meta-tag">📝 {career.examRoute}</span>}
+                {career.duration && <span className="meta-tag">⏳ {career.duration}</span>}
+                {career.capitalNeeded && <span className="meta-tag">💰 Capital: {career.capitalNeeded}</span>}
             </div>
-            <div className="career-salary">💰 Fresher: {career.salary?.fresher}</div>
+            {career.salaryRange && <div className="career-salary">💰 Salary Range: {career.salaryRange}</div>}
             <div className="career-card-footer">
                 <button className="btn-sm btn-outline" onClick={() => onCompare(career)}>⚖️ Compare</button>
-                <button className="btn-sm btn-filled" onClick={() => onView(career.id)}>View Details →</button>
+                <button className="btn-sm btn-filled" onClick={() => onView(career.slug)}>View Details →</button>
             </div>
         </div>
     );
@@ -33,10 +33,10 @@ function CareerCard({ career, onCompare, onView }) {
 
 const CATEGORIES = [
     { id: '', label: 'All Careers' },
-    { id: 'private', label: '💼 Private Sector' },
-    { id: 'government', label: '🏛️ Government' },
-    { id: 'higher-studies', label: '🎓 Higher Studies' },
-    { id: 'entrepreneurship', label: '🚀 Entrepreneurship' },
+    { id: 'Private Sector', label: '💼 Private Sector' },
+    { id: 'Government', label: '🏛️ Government' },
+    { id: 'Higher Studies', label: '🎓 Higher Studies' },
+    { id: 'Entrepreneurship', label: '🚀 Entrepreneurship' },
 ];
 
 const RISK_LEVELS = ['', 'Low', 'Medium', 'High'];
@@ -208,7 +208,7 @@ export default function CareerCategoryPage() {
                                         key={career.id}
                                         career={career}
                                         onCompare={addToCompare}
-                                        onView={(id) => navigate(`/careers/${id}`)}
+                                        onView={(slug) => navigate(`/careers/${slug}`)}
                                     />
                                 ))}
                             </div>

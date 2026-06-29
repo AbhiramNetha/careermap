@@ -4,16 +4,14 @@ import { useApp } from '../context/AppContext';
 import { compareCareers, fetchAllCareers } from '../services/api';
 
 const FIELDS = [
-    { key: 'salary', label: '💰 Starting Salary', getter: c => c.salary?.fresher, higher: true },
-    { key: 'salary5', label: '💰 5-Year Salary', getter: c => c.salary?.fiveYears, higher: true },
-    { key: 'risk', label: '⚡ Risk Level', getter: c => c.riskLevel, lower: true },
-    { key: 'demand', label: '📈 Demand Level', getter: c => c.demandLevel, higher: true },
-    { key: 'growth', label: '🚀 Growth Potential', getter: c => c.growthPotential, higher: true },
-    { key: 'stability', label: '🛡️ Stability', getter: c => c.stabilityLevel, higher: true },
-    { key: 'wlb', label: '🧘 Work-Life Balance', getter: c => c.workLifeBalance, higher: true },
-    { key: 'prep', label: '⏰ Prep Time', getter: c => c.preparationTime, lower: true },
-    { key: 'study', label: '📚 Study Required', getter: c => (c.studyRequired ? 'Yes' : 'No'), lower: true },
-    { key: 'comp', label: '🏆 Competition', getter: c => c.competitionLevel, lower: true },
+    { key: 'category', label: '📂 Category', getter: c => c.category },
+    { key: 'salaryRange', label: '💰 Salary Range', getter: c => c.salaryRange || 'N/A' },
+    { key: 'risk', label: '⚡ Risk Level', getter: c => c.riskLevel || 'N/A' },
+    { key: 'demand', label: '📈 Demand Level', getter: c => c.demandLevel || 'N/A' },
+    { key: 'examRoute', label: '📝 Exam Route', getter: c => c.examRoute || 'Direct/Skills' },
+    { key: 'duration', label: '⏳ Duration', getter: c => c.duration || 'N/A' },
+    { key: 'capitalNeeded', label: '💳 Capital Needed', getter: c => c.capitalNeeded || 'None' },
+    { key: 'skills', label: '🛠️ Skills', getter: c => c.skills?.slice(0, 4).join(', ') || 'N/A' },
 ];
 
 const LEVEL_SCORE = { 'Very High': 4, High: 3, Medium: 2, Low: 1, Yes: 1, No: 2 };
@@ -32,6 +30,7 @@ export default function ComparePage() {
     const [comparingData, setComparingData] = useState([]);
     const [allCareers, setAllCareers] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         fetchAllCareers()
@@ -51,7 +50,7 @@ export default function ComparePage() {
     return (
         <div className="compare-page">
             <div className="container">
-                {}
+                {/* Header */}
                 <div className="page-header" style={{ padding: '0 0 3rem', background: 'none', borderBottom: 'none' }}>
                     <div className="section-tag">Comparison Tool</div>
                     <h1 className="section-title" style={{ marginTop: '1rem' }}>
@@ -62,7 +61,7 @@ export default function ComparePage() {
                     </p>
                 </div>
 
-                {}
+                {/* Selected Careers Chips */}
                 <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
                     {selectedCareers.map(c => (
                         <div key={c.id} style={{
@@ -74,7 +73,7 @@ export default function ComparePage() {
                             borderRadius: 'var(--radius-md)',
                             padding: '10px 16px',
                         }}>
-                            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{c.name}</span>
+                            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{c.icon} {c.title || c.name}</span>
                             <button
                                 onClick={() => removeFromCompare(c.id)}
                                 style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1 }}
@@ -100,22 +99,54 @@ export default function ComparePage() {
                     )}
                 </div>
 
-                {}
+                {/* Quick Add with Search Filter (Responsive Layout) */}
                 {selectedCareers.length < 3 && allCareers.length > 0 && (
-                    <div style={{ marginBottom: '2rem' }}>
-                        <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
-                            Quick add career:
+                    <div style={{ marginBottom: '2.5rem' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+                            <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+                                Quick add career:
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="🔍 Search career path..."
+                                value={searchQuery}
+                                onChange={e => setSearchQuery(e.target.value)}
+                                style={{
+                                    background: 'rgba(255, 255, 255, 0.05)',
+                                    border: '1px solid var(--border)',
+                                    borderRadius: 'var(--radius-sm)',
+                                    padding: '6px 14px',
+                                    fontSize: '0.85rem',
+                                    color: 'var(--text-primary)',
+                                    outline: 'none',
+                                    width: '100%',
+                                    maxWidth: '280px',
+                                    transition: 'border-color 0.2s',
+                                }}
+                            />
                         </div>
-                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                        <div style={{ 
+                            display: 'flex', 
+                            gap: '8px', 
+                            flexWrap: 'wrap',
+                            maxHeight: '160px',
+                            overflowY: 'auto',
+                            padding: '8px',
+                            border: '1px solid var(--border)',
+                            borderRadius: 'var(--radius-md)',
+                            background: 'rgba(0,0,0,0.15)'
+                        }}>
                             {allCareers
                                 .filter(c => !selectedCareers.find(s => s.id === c.id))
+                                .filter(c => c.title.toLowerCase().includes(searchQuery.toLowerCase()))
                                 .map(c => (
                                     <button
                                         key={c.id}
                                         className="btn-sm btn-outline"
                                         onClick={() => addToCompare(c)}
+                                        style={{ flex: '0 0 auto', width: 'auto', padding: '6px 12px', fontSize: '0.78rem' }}
                                     >
-                                        + {c.name}
+                                        + {c.icon} {c.title}
                                     </button>
                                 ))
                             }
@@ -151,19 +182,19 @@ export default function ComparePage() {
                                     <th style={{ width: '200px' }}>Metric</th>
                                     {comparingData.map(c => (
                                         <th key={c.id}>
-                                            <div style={{ fontWeight: 700 }}>{c.name}</div>
-                                            <div style={{ fontWeight: 400, fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '4px' }}>{c.subCategory}</div>
+                                            <div style={{ fontWeight: 700 }}>{c.icon} {c.title}</div>
+                                            <div style={{ fontWeight: 400, fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '4px' }}>{c.category}</div>
                                             <div style={{ display: 'flex', gap: '6px', marginTop: '8px', flexWrap: 'wrap' }}>
                                                 <button
                                                     className="btn-sm btn-filled"
-                                                    onClick={() => navigate(`/careers/${c.id}`)}
+                                                    onClick={() => navigate(`/careers/${c.slug}`)}
                                                     style={{ flex: 1, padding: '4px 8px', fontSize: '0.72rem' }}
                                                 >
                                                     Details
                                                 </button>
                                                 <button
                                                     className="btn-sm btn-outline"
-                                                    onClick={() => navigate(`/roadmap/${c.id}`)}
+                                                    onClick={() => navigate(`/roadmap/${c.slug}`)}
                                                     style={{ flex: 1, padding: '4px 8px', fontSize: '0.72rem' }}
                                                 >
                                                     Roadmap

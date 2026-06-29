@@ -3,105 +3,83 @@ const sequelize = require('../config/database');
 
 const Career = sequelize.define('Career', {
     id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
+    },
+    title: {
+        type: DataTypes.STRING(100),
         allowNull: false,
     },
-    name: {
-        type: DataTypes.STRING,
+    slug: {
+        type: DataTypes.STRING(100),
         allowNull: false,
+        unique: true,
     },
     category: {
-        type: DataTypes.ENUM('private', 'higher-studies', 'government', 'entrepreneurship'),
+        type: DataTypes.STRING(50),
         allowNull: false,
+        validate: {
+            isIn: [['Private Sector', 'Government', 'Higher Studies', 'Entrepreneurship']],
+        },
     },
-    subCategory: {
-        type: DataTypes.STRING,
+    salaryRange: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+        field: 'salary_range',
+    },
+    demandLevel: {
+        type: DataTypes.STRING(20),
+        allowNull: true,
+        field: 'demand_level',
+        validate: {
+            isIn: [['Very High', 'High', 'Medium', 'Low']],
+        },
+    },
+    examRoute: {
+        type: DataTypes.STRING(150),
+        allowNull: true,
+        field: 'exam_route',
+    },
+    duration: {
+        type: DataTypes.STRING(50),
         allowNull: true,
     },
-    overview: {
+    riskLevel: {
+        type: DataTypes.STRING(20),
+        allowNull: true,
+        field: 'risk_level',
+    },
+    capitalNeeded: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+        field: 'capital_needed',
+    },
+    description: {
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    salary: {
-        type: DataTypes.JSONB,     // { fresher, threeYears, fiveYears, fresherMin, fresherMax, ... }
-        defaultValue: {},
-    },
-    demandLevel: {
-        type: DataTypes.STRING,
+    icon: {
+        type: DataTypes.STRING(10),
         allowNull: true,
-    },
-    skills: {
-        type: DataTypes.JSONB,     // string array
-        defaultValue: [],
-    },
-    riskLevel: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    studyRequired: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-    },
-    studyDuration: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    preparationTime: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    competitionLevel: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    stabilityLevel: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    growthPotential: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    workLifeBalance: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    whoShouldChoose: {
-        type: DataTypes.JSONB,     // string array
-        defaultValue: [],
-    },
-    roadmap: {
-        type: DataTypes.JSONB,     // array of { month, skills, tools, projects, interviewPrep }
-        defaultValue: [],
-    },
-    eligibleBranches: {
-        type: DataTypes.JSONB,
-        defaultValue: [],
-    },
-    moderateBranches: {
-        type: DataTypes.JSONB,
-        defaultValue: [],
-    },
-    quizScoring: {
-        type: DataTypes.JSONB,
-        defaultValue: {},
-    },
-    relatedCareers: {
-        type: DataTypes.JSONB,
-        defaultValue: [],
     },
     isTrending: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
+        field: 'is_trending',
     },
-    tags: {
+    skills: {
+        type: DataTypes.JSONB,
+        defaultValue: [],
+    },
+    branches: {
         type: DataTypes.JSONB,
         defaultValue: [],
     },
 }, {
     tableName: 'careers',
     timestamps: true,
+    underscored: true,
 });
 
 module.exports = Career;

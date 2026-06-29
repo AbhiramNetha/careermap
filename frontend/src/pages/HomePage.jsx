@@ -160,12 +160,12 @@ function CareerCard({ career, onCompare, onView }) {
 }
 
 const TRENDING = [
-    { emoji: '📊', name: 'Data Analyst', salary: '₹4–8 LPA', id: 'data-analyst', color: '#6366f1' },
+    { emoji: '📊', name: 'Data Scientist', salary: '₹6–15 LPA', id: 'data-scientist', color: '#6366f1' },
     { emoji: '💻', name: 'Software Dev', salary: '₹5–12 LPA', id: 'software-developer', color: '#8b5cf6' },
-    { emoji: '🎓', name: 'MBA via CAT', salary: '₹10–25 LPA', id: 'mba-cat', color: '#f59e0b' },
-    { emoji: '🌍', name: 'MS Abroad', salary: '₹25–60 LPA', id: 'ms-abroad', color: '#06b6d4' },
-    { emoji: '🚀', name: 'Startup / Entrepreneurship', salary: 'Unlimited', id: 'entrepreneurship', color: '#10b981' },
-    { emoji: '🏛️', name: 'PSU Engineer', salary: '₹6–10 LPA', id: 'psu-engineer', color: '#059669' },
+    { emoji: '🎓', name: 'MBA via CAT', salary: '₹15–50 LPA', id: 'mba-iim-xlri', color: '#f59e0b' },
+    { emoji: '🌍', name: 'MS Abroad', salary: '₹40–100 LPA', id: 'ms-abroad', color: '#06b6d4' },
+    { emoji: '🚀', name: 'SaaS Startup', salary: 'Variable', id: 'saas-startup', color: '#10b981' },
+    { emoji: '🏛️', name: 'PSU Engineer', salary: '₹7–15 LPA', id: 'psu-engineer', color: '#059669' },
 ];
 
 const TEAM = [
