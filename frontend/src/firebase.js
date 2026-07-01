@@ -18,13 +18,13 @@ import {
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBtD813Xk16mbjF0Gd8IZIXgkN3IHZyPYA",
-    authDomain: "careermap-b5e34.firebaseapp.com",
-    projectId: "careermap-b5e34",
-    storageBucket: "careermap-b5e34.firebasestorage.app",
-    messagingSenderId: "1078782802610",
-    appId: "1:1078782802610:web:e4b1d98e186a302578a7ab",
-    measurementId: "G-B81NPSL6VB"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 
