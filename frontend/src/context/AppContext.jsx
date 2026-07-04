@@ -7,6 +7,19 @@ export function AppProvider({ children }) {
     const [quizAnswers, setQuizAnswers] = useState({});
     const [quizResults, setQuizResults] = useState(null);
     const [selectedBranch, setSelectedBranch] = useState(null);
+    const [isPremium, setIsPremium] = useState(() => {
+        const saved = typeof window !== 'undefined' ? localStorage.getItem('w2f-premium') : null;
+        return saved === 'true';
+    });
+
+    const togglePremium = useCallback(() => {
+        setIsPremium(prev => {
+            const next = !prev;
+            localStorage.setItem('w2f-premium', String(next));
+            return next;
+        });
+    }, []);
+
     const [filtersState, setFiltersState] = useState({
         category: '',
         branch: '',
@@ -52,6 +65,8 @@ export function AppProvider({ children }) {
                 setSelectedBranch,
                 filtersState,
                 updateFilters,
+                isPremium,
+                togglePremium,
             }}
         >
             {children}

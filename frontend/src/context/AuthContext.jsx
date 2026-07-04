@@ -15,7 +15,12 @@ export function AuthProvider({ children }) {
         return unsub;
     }, []);
 
-    const value = { currentUser, logOut };
+    const handleLogOut = async () => {
+        localStorage.removeItem('w2f-premium');
+        await logOut();
+    };
+
+    const value = { currentUser, logOut: handleLogOut };
 
     return (
         <AuthContext.Provider value={value}>

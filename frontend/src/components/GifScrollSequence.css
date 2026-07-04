@@ -4,6 +4,7 @@
     position: relative;
     height: 400vh; /* Extremely tall to allow a slow, smooth scroll through the 51 frames */
     background-color: #000;
+    margin-top: calc(-1 * var(--topbar-height, 56px));
 }
 
 .sequence-sticky {

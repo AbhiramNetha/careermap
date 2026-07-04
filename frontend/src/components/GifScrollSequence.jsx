@@ -10,7 +10,7 @@ export default function GifScrollSequence() {
     const frameCount = 51; 
     const currentFrame = (index) => `/levelup_frames/frame_${index.toString().padStart(4, '0')}.webp`;
 
-    
+    // Preload all frames
     useEffect(() => {
         const loadedImages = [];
         let loadedCount = 0;
@@ -21,7 +21,6 @@ export default function GifScrollSequence() {
             img.onload = () => {
                 loadedCount++;
                 if (loadedCount === frameCount) {
-                    
                     setImages(loadedImages);
                 }
             };
@@ -29,25 +28,33 @@ export default function GifScrollSequence() {
         }
     }, []);
 
-    
+    // Animation + scroll logic — listens to the main-content-area scroll container
     useEffect(() => {
         if (!containerRef.current || !canvasRef.current || images.length === 0) return;
 
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
 
-        
+        // Find the scroll container (#main-scroll-container) or fallback to window
+        const scrollContainer = document.getElementById('main-scroll-container') || window;
+        const isElementScroll = scrollContainer !== window;
+
+        const getViewportHeight = () => {
+            return isElementScroll ? scrollContainer.clientHeight : window.innerHeight;
+        };
+
         const updateCanvasSize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            renderFrame(currentFrameIndex); 
+            const stickyEl = containerRef.current?.querySelector('.sequence-sticky') || containerRef.current;
+            const rect = stickyEl.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            renderFrame(currentFrameIndex);
         };
 
         let currentFrameIndex = 0;
 
         const renderFrame = (index) => {
             if (!images[index] || !images[index].complete) return;
-            
             
             const img = images[index];
             const canvasRatio = canvas.width / canvas.height;
@@ -59,11 +66,9 @@ export default function GifScrollSequence() {
             let offsetY = 0;
 
             if (canvasRatio > imgRatio) {
-                
                 drawHeight = drawWidth / imgRatio;
                 offsetY = (canvas.height - drawHeight) / 2;
             } else {
-                
                 drawWidth = drawHeight * imgRatio;
                 offsetX = (canvas.width - drawWidth) / 2;
             }
@@ -73,15 +78,16 @@ export default function GifScrollSequence() {
         };
 
         const handleScroll = () => {
+            if (!containerRef.current) return;
             const rect = containerRef.current.getBoundingClientRect();
+            const viewportH = getViewportHeight();
             
-            const totalScroll = rect.height - window.innerHeight;
+            const totalScroll = rect.height - viewportH;
             let currentScroll = -Math.min(0, rect.top); 
             let rawProgress = rect.top < 0 ? currentScroll / totalScroll : 0;
             
             let p = Math.max(0, Math.min(1, rawProgress));
 
-            
             const frameIndex = Math.min(
                 frameCount - 1,
                 Math.floor(p * frameCount)
@@ -89,21 +95,22 @@ export default function GifScrollSequence() {
             
             setProgress(p);
 
-            
             requestAnimationFrame(() => renderFrame(frameIndex));
             currentFrameIndex = frameIndex;
         };
 
-        window.addEventListener('resize', updateCanvasSize);
-        window.addEventListener('scroll', handleScroll, { passive: true });
-
+        const scrollTarget = isElementScroll ? scrollContainer : window;
         
+        window.addEventListener('resize', updateCanvasSize);
+        scrollTarget.addEventListener('scroll', handleScroll, { passive: true });
+
+        // Initial trigger
         updateCanvasSize();
         handleScroll();
 
         return () => {
             window.removeEventListener('resize', updateCanvasSize);
-            window.removeEventListener('scroll', handleScroll);
+            scrollTarget.removeEventListener('scroll', handleScroll);
         };
     }, [images]);
 
@@ -112,15 +119,15 @@ export default function GifScrollSequence() {
     return (
         <div className="sequence-container" ref={containerRef}>
             <div className="sequence-sticky">
-                {}
+                {/* Canvas */}
                 <canvas ref={canvasRef} className="sequence-canvas" />
                 
-                {}
+                {/* Overlay */}
                 <div className="sequence-overlay"></div>
 
                 <div className="parallax-text-overlay">
                     <div className="parallax-text-step" style={{ 
-                        opacity: progress < 0.3 ? mapVal(0, 3) : Math.max(0, 1 - (progress - 0.3)*5),
+                        opacity: progress < 0.3 ? 1 : Math.max(0, 1 - (progress - 0.3)*5),
                         transform: `translateY(${mapVal(0, -30)}px)`
                     }}>
                         <h3>Lost After B.Tech?</h3>
