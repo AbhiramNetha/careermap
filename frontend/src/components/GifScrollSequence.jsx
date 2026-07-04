@@ -149,6 +149,18 @@ export default function GifScrollSequence() {
                         <p>Take the 7-question quiz and unlock your true potential.</p>
                     </div>
                 </div>
+
+                {/* Mouse-scroll hint icon — fades out once user starts scrolling */}
+                <div
+                    className="scroll-hint"
+                    style={{ opacity: progress > 0.05 ? 0 : 1 }}
+                    aria-hidden="true"
+                >
+                    <div className="scroll-hint-mouse">
+                        <div className="scroll-hint-wheel" />
+                    </div>
+                    <span className="scroll-hint-label">Scroll</span>
+                </div>
             </div>
         </div>
     );
