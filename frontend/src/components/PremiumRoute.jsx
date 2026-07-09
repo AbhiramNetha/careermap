@@ -16,10 +16,8 @@ export default function PremiumRoute({ children }) {
 
   const handleUpgradeClick = () => {
     if (!currentUser) {
-      // Redirect to login page as requested
       navigate('/login');
     } else {
-      // Upgrade to Pro version profile
       togglePremium();
     }
   };
@@ -31,9 +29,12 @@ export default function PremiumRoute({ children }) {
         {children}
       </div>
 
-      {/* Centered Premium Unlock Overlay Card */}
-      <div className="absolute inset-0 flex items-center justify-center z-40 p-4 bg-black/10">
-        <div 
+      {/* Start-Aligned Premium Unlock Overlay Card */}
+      <div 
+        className="absolute inset-0 flex flex-col items-center justify-start z-40 p-4 bg-black/10"
+        style={{ paddingTop: '80px' }}
+      >
+        <div
           className="w-full max-w-md bg-neutral-950/80 border border-amber-500/20 backdrop-blur-md rounded-2xl p-8 text-center shadow-2xl transition-all"
           style={{
             boxShadow: '0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(251, 191, 36, 0.1)',
@@ -47,10 +48,9 @@ export default function PremiumRoute({ children }) {
             {!currentUser ? 'Login Required' : 'Unlock Premium Access'}
           </h2>
           <p className="text-sm text-gray-400 mb-6 leading-relaxed">
-            {!currentUser 
-              ? 'You must login to access this premium page. Click upgrade below to login and unlock Way2Fresher PRO.' 
-              : 'This is a premium feature. Upgrade your account to Way2Fresher PRO to unlock Branch Guide, Compare, Resume Builder, ATS Checker, and more.'
-            }
+            {!currentUser
+              ? 'You must login to access this premium page. Click the button below to login and unlock Way2Fresher PRO.'
+              : 'This is a premium feature. Upgrade your account to Way2Fresher PRO to unlock Branch Guide, Compare, Resume Builder, ATS Checker, and more.'}
           </p>
 
           <button

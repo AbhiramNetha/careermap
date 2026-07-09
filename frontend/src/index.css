@@ -112,6 +112,7 @@ h4,
 .navbar-logo {
   font-family: var(--font-heading);
   letter-spacing: -0.02em;
+  color: var(--text-primary);
 }
 
 .container {
@@ -124,7 +125,13 @@ h4,
 
 html {
   scroll-behavior: smooth;
-  background: #000000;
+  background: var(--bg);
+  transition: background 0.35s ease;
+}
+
+[data-theme='light'] html,
+[data-theme='light'] body {
+  background: var(--bg);
 }
 
 a {
@@ -5682,4 +5689,110 @@ button[type="submit"]:active:not(:disabled) {
   padding: 1px 6px;
   border-radius: 99px;
   letter-spacing: 0.5px;
-}
+}
+
+/* ============================================================
+   LIGHT THEME — Global Overrides
+   Targets hardcoded Tailwind dark utilities so every page
+   reads correctly in light mode without touching dark mode.
+   ============================================================ */
+
+/* ── Card / panel backgrounds ── */
+[data-theme='light'] .bg-slate-900,
+[data-theme='light'] .bg-slate-950,
+[data-theme='light'] .bg-neutral-900,
+[data-theme='light'] .bg-neutral-950 {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+
+[data-theme='light'] .bg-slate-900\/40,
+[data-theme='light'] .bg-slate-900\/60,
+[data-theme='light'] .bg-slate-900\/80,
+[data-theme='light'] .bg-slate-950\/40,
+[data-theme='light'] .bg-slate-950\/60,
+[data-theme='light'] .bg-slate-950\/80,
+[data-theme='light'] .bg-neutral-950\/80 {
+  background-color: rgba(248, 250, 252, 0.92) !important;
+}
+
+/* ── Text colours ── */
+[data-theme='light'] .text-white {
+  color: #0f172a !important;
+}
+
+[data-theme='light'] .text-slate-200 {
+  color: #1e293b !important;
+}
+
+[data-theme='light'] .text-slate-300 {
+  color: #334155 !important;
+}
+
+[data-theme='light'] .text-slate-400 {
+  color: #475569 !important;
+}
+
+[data-theme='light'] .text-slate-500 {
+  color: #64748b !important;
+}
+
+[data-theme='light'] .text-gray-400 {
+  color: #4b5563 !important;
+}
+
+[data-theme='light'] .text-gray-300 {
+  color: #374151 !important;
+}
+
+[data-theme='light'] .text-neutral-200,
+[data-theme='light'] .text-neutral-300 {
+  color: #374151 !important;
+}
+
+/* ── Borders ── */
+[data-theme='light'] .border-white\/5,
+[data-theme='light'] .border-white\/10,
+[data-theme='light'] .border-white\/20 {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+/* ── Background tints used in dark-only panels ── */
+[data-theme='light'] .bg-slate-800 {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+[data-theme='light'] .bg-white\/5,
+[data-theme='light'] .bg-white\/10 {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+}
+
+/* ── Backdrop blur dark panels ── */
+[data-theme='light'] .backdrop-blur-xl,
+[data-theme='light'] .backdrop-blur-md {
+  /* Let the bg-color rules take effect; backdrop stays readable */
+}
+
+/* ── Highlight rings / inner glow ── */
+[data-theme='light'] .bg-slate-950\/80 {
+  background-color: rgba(241, 245, 249, 0.95) !important;
+}
+
+/* ATS score number specifically (was text-white inside dark card) */
+[data-theme='light'] .SpaceGrotesk {
+  color: #0f172a !important;
+}
+
+/* ── PremiumRoute overlay card light fix ── */
+[data-theme='light'] .bg-neutral-950\/80 {
+  background-color: rgba(255, 255, 255, 0.97) !important;
+  border-color: rgba(251, 191, 36, 0.3) !important;
+}
+
+/* Keep amber/green/red/blue accent colours unchanged in light theme */
+[data-theme='light'] .text-emerald-400 { color: #059669 !important; }
+[data-theme='light'] .text-amber-500   { color: #d97706 !important; }
+[data-theme='light'] .text-red-400     { color: #dc2626 !important; }
+
+
+

@@ -77,7 +77,8 @@ const WebsitePreloader = () => {
             fontSize: 'clamp(2.5rem, 5vw, 4rem)', 
             fontWeight: '800', 
             margin: 0, 
-            letterSpacing: '-1px' 
+            letterSpacing: '-1px',
+            color: '#ffffff',  /* always white — preloader bg is always dark */
           }}>
             way2<span style={{ color: '#10b981' }}>fresher</span>
           </h1>
