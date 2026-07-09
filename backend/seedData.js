@@ -1,6 +1,8 @@
 const Career = require('./models/Career');
 const QuizQuestion = require('./models/Quiz');
 const Course = require('./models/Course');
+const College = require('./models/College');
+const ChatRoom = require('./models/ChatRoom');
 
 // ═══════════════════════════════════════════════════════════════
 // 56 CAREERS — adapted from plan/seed.js
@@ -936,6 +938,42 @@ async function seedDatabase(forceReseed = false) {
         } else {
             console.log(`ℹ️ Database already has ${courseCount} courses — skipping seed`);
         }
+
+        // Seed Colleges & default chat rooms
+        const collegeCount = await College.count();
+        if (collegeCount === 0) {
+            const initialColleges = [
+                { name: 'ACE Engineering College', slug: 'aceec', domain: 'aceec.ac.in' },
+                { name: 'IIT Hyderabad', slug: 'iith', domain: 'iith.ac.in' },
+                { name: 'BITS Pilani', slug: 'bits-pilani', domain: 'bits-pilani.ac.in' },
+                { name: 'JNTU Hyderabad', slug: 'jntuh', domain: 'jntuh.ac.in' },
+                { name: 'VNR VJIET', slug: 'vnrvjiet', domain: 'vnrvjiet.ac.in' }
+            ];
+
+            const standardRooms = [
+                { name: '💬 General Chat', type: 'general' },
+                { name: '💼 Placement Updates', type: 'placements' },
+                { name: '🎒 Internship Leads', type: 'internships' },
+                { name: '🎓 Higher Studies', type: 'higher-studies' },
+                { name: '🏛️ Govt Jobs Prep', type: 'government' },
+                { name: '🚀 Startup Discussion', type: 'startup' }
+            ];
+
+            for (const colData of initialColleges) {
+                const college = await College.create(colData);
+                for (const room of standardRooms) {
+                    await ChatRoom.create({
+                        collegeId: college.id,
+                        name: room.name,
+                        type: room.type
+                    });
+                }
+            }
+            console.log(`✅ Seeded ${initialColleges.length} colleges and their chat channels`);
+        } else {
+            console.log(`ℹ️ Database already has ${collegeCount} colleges — skipping seed`);
+        }
+
     } catch (err) {
         console.error('❌ Seeding error:', err.message);
     }

@@ -7,20 +7,15 @@ import {
   Briefcase,
   BookOpen,
   HelpCircle,
-  Network,
-  GitCompare,
-  DollarSign,
-  Newspaper,
-  ChevronDown,
   Building2,
   FileBadge,
   Footprints,
   Menu,
   X,
-  FileText,
-  BarChart3,
-  Mic,
-  Lock,
+  ChevronDown,
+  Crown,
+  Sparkles,
+  Network,
 } from 'lucide-react';
 
 /* ── Navigation data ── */
@@ -29,16 +24,7 @@ const mainLinks = [
   { label: 'Careers', href: '/careers', icon: Briefcase },
   { label: 'Courses', href: '/courses', icon: BookOpen },
   { label: 'Quiz', href: '/quiz', icon: HelpCircle },
-];
-
-const premiumLinks = [
-  { label: 'Branch guide', href: '/branches', icon: Network },
-  { label: 'Compare', href: '/compare', icon: GitCompare },
-  { label: 'Resume builder', href: '/resume-builder', icon: FileText },
-  { label: 'ATS checker', href: '/ats', icon: BarChart3 },
-  { label: 'Salary guide', href: '#', icon: DollarSign, comingSoon: true, msg: 'Salary guide coming soon!' },
-  { label: 'Career blogs', href: '#', icon: Newspaper, comingSoon: true, msg: 'Career blogs section is in development.' },
-  { label: 'Mock interview', href: '#', icon: Mic, comingSoon: true, msg: 'AI mock interviews launching in next phase.' },
+  { label: 'College Alumni', href: '/alumni', icon: Network },
 ];
 
 const opportunityLinks = [
@@ -48,7 +34,7 @@ const opportunityLinks = [
 ];
 
 /* ── Single nav item ── */
-function NavItem({ label, href, icon: Icon, active, indent, comingSoon, msg, collapsed, onToast, onClick, isLocked }) {
+function NavItem({ label, href, icon: Icon, active, indent, comingSoon, msg, collapsed, onToast, onClick }) {
   const baseClasses = `sidebar-nav-item ${indent ? 'sidebar-nav-item--indent' : ''} ${active ? 'sidebar-nav-item--active' : ''} ${collapsed ? 'sidebar-nav-item--collapsed' : ''}`;
 
   if (comingSoon) {
@@ -60,7 +46,6 @@ function NavItem({ label, href, icon: Icon, active, indent, comingSoon, msg, col
       >
         <Icon size={18} className="sidebar-nav-icon" />
         {!collapsed && <span className="sidebar-nav-label">{label}</span>}
-        {!collapsed && <Lock size={12} className="text-amber-500/60 ml-auto" />}
       </button>
     );
   }
@@ -74,8 +59,7 @@ function NavItem({ label, href, icon: Icon, active, indent, comingSoon, msg, col
     >
       <Icon size={18} className="sidebar-nav-icon" />
       {!collapsed && <span className="sidebar-nav-label">{label}</span>}
-      {!collapsed && isLocked && <Lock size={12} className="text-amber-500/60 ml-auto" />}
-      {!collapsed && active && !isLocked && <span className="sidebar-active-dot" />}
+      {!collapsed && active && <span className="sidebar-active-dot" />}
     </NavLink>
   );
 }
@@ -83,7 +67,7 @@ function NavItem({ label, href, icon: Icon, active, indent, comingSoon, msg, col
 /* ── Main Sidebar ── */
 export default function Sidebar() {
   const { currentUser } = useAuth();
-  const { selectedCareers, isPremium, togglePremium } = useApp();
+  const { isPremium } = useApp();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -156,84 +140,79 @@ export default function Sidebar() {
         ))}
       </nav>
 
-      {/* Premium section highlighted container */}
-      <div className={`sidebar-premium-container ${isCollapsed ? 'sidebar-premium-container--collapsed' : ''}`}>
-        {!isCollapsed && (
-          <div className="sidebar-premium-header">
-            <div className="flex items-center gap-1">
-              <span className="sidebar-section-title" style={{ paddingRight: 0 }}>PREMIUM</span>
-              <Lock size={12} className="text-amber-500/80 mb-0.5" />
-            </div>
-            <span className="sidebar-premium-badge">PRO</span>
+      {/* Opportunities section */}
+      <div className="sidebar-section-divider" style={{ margin: '0.5rem 0' }} />
+      {!isCollapsed && (
+        <span className="sidebar-section-title" style={{ paddingLeft: '0.5rem', paddingBottom: '0.25rem', display: 'block', fontSize: '0.65rem', color: 'var(--sidebar-section-text)', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>Opportunities</span>
+      )}
+      <nav className="sidebar-nav-section">
+        <button
+          onClick={() => setOpportunitiesOpen((prev) => !prev)}
+          className={`sidebar-nav-item sidebar-nav-item--toggle ${isCollapsed ? 'sidebar-nav-item--collapsed' : ''}`}
+          title={isCollapsed ? 'Opportunities' : undefined}
+        >
+          <Building2 size={18} className="sidebar-nav-icon" />
+          {!isCollapsed && (
+            <>
+              <span className="sidebar-nav-label">Opportunities</span>
+              <ChevronDown
+                size={14}
+                className={`sidebar-chevron ${opportunitiesOpen ? '' : 'sidebar-chevron--closed'}`}
+              />
+            </>
+          )}
+        </button>
+        {opportunitiesOpen && (
+          <div className="sidebar-sub-items">
+            {opportunityLinks.map((link) => (
+              <NavItem
+                key={link.label}
+                {...link}
+                indent={!isCollapsed}
+                active={isActive(link.href)}
+                collapsed={isCollapsed}
+                onToast={triggerToast}
+                onClick={closeMobile}
+              />
+            ))}
           </div>
         )}
-        {isCollapsed && <div className="sidebar-section-divider" />}
+      </nav>
 
-        <nav className="sidebar-nav-section">
-          {premiumLinks.map((link) => (
-            <NavItem
-              key={link.label}
-              {...link}
-              active={isActive(link.href)}
-              collapsed={isCollapsed}
-              onToast={triggerToast}
-              onClick={closeMobile}
-              isLocked={!currentUser || !isPremium}
-            />
-          ))}
-
-          {/* Opportunities collapsible */}
-          <button
-            onClick={() => setOpportunitiesOpen((prev) => !prev)}
-            className={`sidebar-nav-item sidebar-nav-item--toggle ${isCollapsed ? 'sidebar-nav-item--collapsed' : ''}`}
-            title={isCollapsed ? 'Opportunities' : undefined}
-          >
-            <Building2 size={18} className="sidebar-nav-icon" />
-            {!isCollapsed && (
+      {/* Premium CTA Button */}
+      <div style={{ padding: isCollapsed ? '0.5rem 0.25rem' : '0.75rem 0.25rem' }}>
+        <NavLink
+          to="/premium"
+          onClick={closeMobile}
+          title={isCollapsed ? 'PRO Features' : undefined}
+          style={({ isActive }) => ({
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: isCollapsed ? 'center' : 'flex-start',
+            gap: '0.5rem',
+            width: '100%',
+            padding: isCollapsed ? '0.6rem' : '0.65rem 0.85rem',
+            borderRadius: '10px',
+            background: isActive
+              ? 'linear-gradient(135deg, rgba(251,191,36,0.25) 0%, rgba(245,158,11,0.15) 100%)'
+              : 'linear-gradient(135deg, rgba(251,191,36,0.12) 0%, rgba(245,158,11,0.08) 100%)',
+            border: isActive ? '1px solid rgba(251,191,36,0.5)' : '1px solid rgba(251,191,36,0.25)',
+            textDecoration: 'none',
+            transition: 'all 0.2s ease',
+            cursor: 'pointer',
+          })}
+        >
+          {isCollapsed
+            ? <Crown size={18} color="#fbbf24" />
+            : (
               <>
-                <span className="sidebar-nav-label">Opportunities</span>
-                <ChevronDown
-                  size={14}
-                  className={`sidebar-chevron ${opportunitiesOpen ? '' : 'sidebar-chevron--closed'}`}
-                />
+                <Crown size={16} color="#fbbf24" />
+                <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#fbbf24', flex: 1 }}>PRO Features</span>
+                <Sparkles size={13} color="#f59e0b" />
               </>
-            )}
-          </button>
-
-          {opportunitiesOpen && (
-            <div className="sidebar-sub-items">
-              {opportunityLinks.map((link) => (
-                <NavItem
-                  key={link.label}
-                  {...link}
-                  indent={!isCollapsed}
-                  active={isActive(link.href)}
-                  collapsed={isCollapsed}
-                  onToast={triggerToast}
-                  onClick={closeMobile}
-                />
-              ))}
-            </div>
-          )}
-
-          {/* Sidebar Upgrade Button for free/unauthenticated users */}
-          {(!currentUser || !isPremium) && !isCollapsed && (
-            <div style={{ padding: '0.75rem 0.5rem 0.25rem' }}>
-              <button
-                onClick={() => {
-                  if (!currentUser) {
-                    navigate('/login');
-                  } else {
-                    togglePremium();
-                  }
-                }}
-                className="w-full bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold text-xs py-2 px-3 rounded-lg transition-all hover:scale-[1.02] shadow-md shadow-amber-500/10 border-none cursor-pointer"
-              >
-                Upgrade to PRO
-              </button>
-            </div>
-          )}
-        </nav>
+            )
+          }
+        </NavLink>
       </div>
 
       {/* Spacer */}

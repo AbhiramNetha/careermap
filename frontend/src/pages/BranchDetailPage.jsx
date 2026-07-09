@@ -42,9 +42,10 @@ function CareerMiniCard({ career, onView }) {
     );
 }
 
-export default function BranchDetailPage() {
-    const { branch } = useParams();
+export default function BranchDetailPage({ branchId: branchIdProp, onBack }) {
+    const params = useParams();
     const navigate = useNavigate();
+    const branch = branchIdProp || params.branch;
 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -79,7 +80,10 @@ export default function BranchDetailPage() {
                         <div>
                             <div className="breadcrumb" style={{ marginBottom: '1rem' }}>
                                 <a href="/">Home</a> <span>/</span>
-                                <a href="/branches">Branches</a> <span>/</span>
+                                {onBack
+                                    ? <button onClick={onBack} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)', fontWeight: 600, padding: 0 }}>Branch Guide</button>
+                                    : <a href="/branches">Branches</a>
+                                } <span>/</span>
                                 <span style={{ color: 'var(--text-primary)' }}>{branch}</span>
                             </div>
                             <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>{info.icon}</div>

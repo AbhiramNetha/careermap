@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import { AuthProvider } from './context/AuthContext';
 import { AdminAuthProvider } from './context/AdminAuthContext';
@@ -22,6 +22,8 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import CoursesPage from './pages/CoursesPage';
 import AtsCheckerPage from './pages/AtsCheckerPage';
 import ResumeBuilder from './pages/ResumeBuilder';
+import PremiumPage from './pages/PremiumPage';
+import CollegeAlumniPage from './pages/CollegeAlumniPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import PremiumRoute from './components/PremiumRoute';
 import AdminRoute from './components/AdminRoute';
@@ -38,6 +40,8 @@ import './index.css';
 
 
 function PublicSite() {
+  const location = useLocation();
+  const hideFooter = ['/premium', '/courses', '/careers', '/quiz', '/alumni'].some(p => location.pathname.startsWith(p));
   return (
     <div className="app-layout">
       {/* Fixed Sidebar */}
@@ -65,6 +69,7 @@ function PublicSite() {
           <Routes>
             {/* Public routes */}
             <Route path="/" element={<HomePage />} />
+            <Route path="/premium" element={<PremiumPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
@@ -82,8 +87,9 @@ function PublicSite() {
             <Route path="/roadmap/:id" element={<ProtectedRoute><RoadmapPage /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
             <Route path="/resume-builder" element={<PremiumRoute><ResumeBuilder /></PremiumRoute>} />
+            <Route path="/alumni" element={<ProtectedRoute><CollegeAlumniPage /></ProtectedRoute>} />
           </Routes>
-          <Footer />
+          {!hideFooter && <Footer />}
         </main>
       </div>
     </div>

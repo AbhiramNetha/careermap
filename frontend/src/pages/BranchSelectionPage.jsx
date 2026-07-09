@@ -8,8 +8,12 @@ const BRANCHES = [
     { id: 'EEE', name: 'EEE', fullName: 'Electrical & Electronics', icon: '⚡', color: '#06b6d4', desc: 'Power sector, PSU, Automation careers' },
 ];
 
-export default function BranchSelectionPage() {
+export default function BranchSelectionPage({ onSelect }) {
     const navigate = useNavigate();
+    const handleBranchClick = (id) => {
+        if (onSelect) onSelect(id);
+        else navigate(`/branches/${id}`);
+    };
 
     return (
         <div style={{ padding: '4rem 0 6rem' }}>
@@ -29,7 +33,7 @@ export default function BranchSelectionPage() {
                         <div
                             key={branch.id}
                             className="branch-card"
-                            onClick={() => navigate(`/branches/${branch.id}`)}
+                            onClick={() => handleBranchClick(branch.id)}
                             onMouseEnter={e => {
                                 e.currentTarget.style.borderColor = branch.color + '60';
                                 e.currentTarget.style.boxShadow = `0 8px 30px ${branch.color}25`;

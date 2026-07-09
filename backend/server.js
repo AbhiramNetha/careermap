@@ -10,6 +10,7 @@ const analyticsRoutes = require('./routes/analyticsRoutes');
 const atsRoutes = require('./routes/atsRoutes');
 const resumeRoutes = require('./routes/resumeRoutes');
 const resumeBuilderRoutes = require('./routes/resumeBuilderRoutes');
+const alumniRoutes = require('./routes/alumniRoutes');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/ats', atsRoutes);
 app.use('/api/resumes', resumeRoutes);
 app.use('/api/resume', resumeBuilderRoutes);  // AI Resume Builder
+app.use('/api/alumni', alumniRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
