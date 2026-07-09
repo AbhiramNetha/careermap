@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import API from '../services/api';
 import {
     Network, MessageSquare, HelpCircle, Send, Search, Trophy,
@@ -11,7 +12,13 @@ import {
 export default function CollegeAlumniPage() {
     const navigate = useNavigate();
     const { currentUser } = useAuth();
+    const { isDark } = useTheme();
     const reqUserId = currentUser?.uid;
+
+    const optionStyle = {
+        background: isDark ? '#1e293b' : '#ffffff',
+        color: isDark ? '#f3f4f6' : '#111827'
+    };
 
     // App state
     const [loading, setLoading] = useState(true);
@@ -492,9 +499,9 @@ export default function CollegeAlumniPage() {
                                             }}
                                             style={{ width: '100%', padding: '0.65rem 0.8rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
                                         >
-                                            <option value="" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>-- Choose a College --</option>
+                                            <option value="" style={optionStyle}>-- Choose a College --</option>
                                             {colleges.map(c => (
-                                                <option key={c.id} value={c.id} style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>
+                                                <option key={c.id} value={c.id} style={optionStyle}>
                                                     {c.name} ({c.domain})
                                                 </option>
                                             ))}
@@ -523,8 +530,8 @@ export default function CollegeAlumniPage() {
                                                 onChange={e => setOnboardingForm(prev => ({ ...prev, role: e.target.value }))}
                                                 style={{ padding: '0.65rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
                                             >
-                                                <option value="student" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Student</option>
-                                                <option value="alumnus" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Alumnus/Alumna</option>
+                                                <option value="student" style={optionStyle}>Student</option>
+                                                <option value="alumnus" style={optionStyle}>Alumnus/Alumna</option>
                                             </select>
                                         </div>
                                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
@@ -534,11 +541,11 @@ export default function CollegeAlumniPage() {
                                                 onChange={e => setOnboardingForm(prev => ({ ...prev, branch: e.target.value }))}
                                                 style={{ padding: '0.65rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
                                             >
-                                                <option value="CSE" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>CSE</option>
-                                                <option value="ECE" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>ECE</option>
-                                                <option value="Mechanical" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Mechanical</option>
-                                                <option value="Civil" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Civil</option>
-                                                <option value="EEE" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>EEE</option>
+                                                <option value="CSE" style={optionStyle}>CSE</option>
+                                                <option value="ECE" style={optionStyle}>ECE</option>
+                                                <option value="Mechanical" style={optionStyle}>Mechanical</option>
+                                                <option value="Civil" style={optionStyle}>Civil</option>
+                                                <option value="EEE" style={optionStyle}>EEE</option>
                                             </select>
                                         </div>
                                     </div>
@@ -663,9 +670,9 @@ export default function CollegeAlumniPage() {
                                                 onChange={e => setRegisterForm(prev => ({ ...prev, role: e.target.value }))}
                                                 style={{ padding: '0.65rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
                                             >
-                                                <option value="admin" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>TPO/Admin</option>
-                                                <option value="student" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Student Representative</option>
-                                                <option value="alumnus" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Alumnus Representative</option>
+                                                <option value="admin" style={optionStyle}>TPO/Admin</option>
+                                                <option value="student" style={optionStyle}>Student Representative</option>
+                                                <option value="alumnus" style={optionStyle}>Alumnus Representative</option>
                                             </select>
                                         </div>
                                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
@@ -675,11 +682,11 @@ export default function CollegeAlumniPage() {
                                                 onChange={e => setRegisterForm(prev => ({ ...prev, branch: e.target.value }))}
                                                 style={{ padding: '0.65rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
                                             >
-                                                <option value="CSE" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>CSE</option>
-                                                <option value="ECE" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>ECE</option>
-                                                <option value="Mechanical" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Mechanical</option>
-                                                <option value="Civil" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Civil</option>
-                                                <option value="EEE" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>EEE</option>
+                                                <option value="CSE" style={optionStyle}>CSE</option>
+                                                <option value="ECE" style={optionStyle}>ECE</option>
+                                                <option value="Mechanical" style={optionStyle}>Mechanical</option>
+                                                <option value="Civil" style={optionStyle}>Civil</option>
+                                                <option value="EEE" style={optionStyle}>EEE</option>
                                             </select>
                                         </div>
                                     </div>
@@ -777,21 +784,21 @@ export default function CollegeAlumniPage() {
                                 onChange={e => setDirRole(e.target.value)}
                                 style={{ padding: '0.55rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.82rem' }}
                             >
-                                <option value="">All Roles</option>
-                                <option value="alumnus">Alumni</option>
-                                <option value="student">Students</option>
+                                <option value="" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>All Roles</option>
+                                <option value="alumnus" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Alumni</option>
+                                <option value="student" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Students</option>
                             </select>
                             <select
                                 value={dirBranch}
                                 onChange={e => setDirBranch(e.target.value)}
                                 style={{ padding: '0.55rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.82rem' }}
                             >
-                                <option value="">All Branches</option>
-                                <option value="CSE">CSE</option>
-                                <option value="ECE">ECE</option>
-                                <option value="Mechanical">Mechanical</option>
-                                <option value="Civil">Civil</option>
-                                <option value="EEE">EEE</option>
+                                <option value="" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>All Branches</option>
+                                <option value="CSE" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>CSE</option>
+                                <option value="ECE" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>ECE</option>
+                                <option value="Mechanical" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Mechanical</option>
+                                <option value="Civil" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Civil</option>
+                                <option value="EEE" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>EEE</option>
                             </select>
                         </div>
 

@@ -7,15 +7,15 @@ import {
   Briefcase,
   BookOpen,
   HelpCircle,
-  Building2,
-  FileBadge,
-  Footprints,
   Menu,
   X,
-  ChevronDown,
   Crown,
   Sparkles,
   Network,
+  FileBadge,
+  Building2,
+  Footprints,
+  ChevronDown,
 } from 'lucide-react';
 
 /* ── Navigation data ── */
@@ -140,30 +140,29 @@ export default function Sidebar() {
         ))}
       </nav>
 
-      {/* Opportunities section */}
-      <div className="sidebar-section-divider" style={{ margin: '0.5rem 0' }} />
-      {!isCollapsed && (
-        <span className="sidebar-section-title" style={{ paddingLeft: '0.5rem', paddingBottom: '0.25rem', display: 'block', fontSize: '0.65rem', color: 'var(--sidebar-section-text)', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>Opportunities</span>
-      )}
-      <nav className="sidebar-nav-section">
+      {/* Opportunities Dropdown Section */}
+      <nav className="sidebar-nav-section" style={{ marginTop: '0.25rem' }}>
         <button
+          type="button"
           onClick={() => setOpportunitiesOpen((prev) => !prev)}
           className={`sidebar-nav-item sidebar-nav-item--toggle ${isCollapsed ? 'sidebar-nav-item--collapsed' : ''}`}
           title={isCollapsed ? 'Opportunities' : undefined}
+          style={{ width: '100%', background: 'transparent', border: 'none', textAlign: 'left', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
         >
           <Building2 size={18} className="sidebar-nav-icon" />
           {!isCollapsed && (
             <>
-              <span className="sidebar-nav-label">Opportunities</span>
+              <span className="sidebar-nav-label" style={{ flex: 1 }}>Opportunities</span>
               <ChevronDown
                 size={14}
                 className={`sidebar-chevron ${opportunitiesOpen ? '' : 'sidebar-chevron--closed'}`}
+                style={{ transform: opportunitiesOpen ? 'rotate(0deg)' : 'rotate(-90deg)', transition: 'transform 0.2s ease' }}
               />
             </>
           )}
         </button>
         {opportunitiesOpen && (
-          <div className="sidebar-sub-items">
+          <div className="sidebar-sub-items" style={{ paddingLeft: isCollapsed ? '0' : '1rem' }}>
             {opportunityLinks.map((link) => (
               <NavItem
                 key={link.label}
