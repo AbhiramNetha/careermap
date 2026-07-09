@@ -5794,5 +5794,16 @@ button[type="submit"]:active:not(:disabled) {
 [data-theme='light'] .text-amber-500   { color: #d97706 !important; }
 [data-theme='light'] .text-red-400     { color: #dc2626 !important; }
 
+/* ── Topbar Theme Toggle Responsive Visibility ── */
+.topbar-theme-toggle {
+  display: flex !important;
+}
+
+@media (max-width: 767px) {
+  .topbar-theme-toggle {
+    display: none !important;
+  }
+}
+
 
 

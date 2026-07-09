@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Search, Bell, ChevronDown, User, Settings, LogOut, HelpCircle } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+import { Search, Bell, ChevronDown, User, Settings, LogOut, HelpCircle, Sun, Moon } from 'lucide-react';
 
 const profileMenuItems = [
   { label: 'My Profile', icon: User, action: 'profile' },
@@ -12,6 +13,7 @@ const profileMenuItems = [
 
 export default function TopBar() {
   const { currentUser, logOut } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -95,6 +97,16 @@ export default function TopBar() {
             aria-label="Notifications"
           >
             <Bell size={18} />
+          </button>
+
+          {/* Theme toggle button */}
+          <button
+            className="topbar-icon-btn topbar-theme-toggle"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
           {/* User avatar / auth */}
