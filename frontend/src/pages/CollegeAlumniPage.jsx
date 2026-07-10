@@ -32,11 +32,12 @@ export default function CollegeAlumniPage() {
     const [onboardingForm, setOnboardingForm] = useState({
         collegeId: '', role: 'student', batchYear: new Date().getFullYear(),
         branch: 'CSE', currentCompany: '', currentRole: '',
-        availabilityTags: [], email: ''
+        availabilityTags: [], email: '', name: '', rollNo: ''
     });
     const [registerForm, setRegisterForm] = useState({
         name: '', slug: '', domain: '', logoUrl: '', bannerUrl: '',
-        role: 'admin', batchYear: new Date().getFullYear(), branch: 'CSE'
+        role: 'admin', batchYear: new Date().getFullYear(), branch: 'CSE',
+        creatorName: '', rollNo: ''
     });
     const [formError, setFormError] = useState('');
 
@@ -79,6 +80,20 @@ export default function CollegeAlumniPage() {
     useEffect(() => {
         loadMembership();
     }, []);
+
+    // Prefill name fields when currentUser details load
+    useEffect(() => {
+        if (currentUser) {
+            setOnboardingForm(prev => ({
+                ...prev,
+                name: prev.name || currentUser.displayName || ''
+            }));
+            setRegisterForm(prev => ({
+                ...prev,
+                creatorName: prev.creatorName || currentUser.displayName || ''
+            }));
+        }
+    }, [currentUser]);
 
     const loadMembership = async () => {
         try {
@@ -508,6 +523,19 @@ export default function CollegeAlumniPage() {
                                         </select>
                                     </div>
 
+                                    {/* Full Name */}
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                                        <label style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Full Name</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Your Full Name"
+                                            value={onboardingForm.name || ''}
+                                            onChange={e => setOnboardingForm(prev => ({ ...prev, name: e.target.value }))}
+                                            style={{ width: '100%', padding: '0.65rem 0.8rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
+                                            required
+                                        />
+                                    </div>
+
                                     {/* Verification domain */}
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                                         <label style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-secondary)' }}>College Email Domain Check (Optional)</label>
@@ -560,6 +588,19 @@ export default function CollegeAlumniPage() {
                                                 style={{ width: '100%', padding: '0.65rem 0.8rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
                                             />
                                         </div>
+                                        {onboardingForm.role === 'student' && (
+                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                                                <label style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Roll Number</label>
+                                                <input
+                                                    type="text"
+                                                    placeholder="e.g. 21H61A0501"
+                                                    value={onboardingForm.rollNo || ''}
+                                                    onChange={e => setOnboardingForm(prev => ({ ...prev, rollNo: e.target.value }))}
+                                                    style={{ width: '100%', padding: '0.65rem 0.8rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
+                                                    required
+                                                />
+                                            </div>
+                                        )}
                                     </div>
 
                                     {onboardingForm.role === 'alumnus' && (
@@ -691,6 +732,33 @@ export default function CollegeAlumniPage() {
                                         </div>
                                     </div>
 
+                                    <div style={{ display: 'flex', gap: '1rem' }}>
+                                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                                            <label style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Your Name</label>
+                                            <input
+                                                type="text"
+                                                placeholder="Your Full Name"
+                                                value={registerForm.creatorName || ''}
+                                                onChange={e => setRegisterForm(prev => ({ ...prev, creatorName: e.target.value }))}
+                                                style={{ width: '100%', padding: '0.65rem 0.8rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
+                                                required
+                                            />
+                                        </div>
+                                        {registerForm.role === 'student' && (
+                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                                                <label style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Your Roll Number</label>
+                                                <input
+                                                    type="text"
+                                                    placeholder="e.g. 21H61A0501"
+                                                    value={registerForm.rollNo || ''}
+                                                    onChange={e => setRegisterForm(prev => ({ ...prev, rollNo: e.target.value }))}
+                                                    style={{ width: '100%', padding: '0.65rem 0.8rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
+                                                    required
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+
                                     <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '0.5rem' }}>Register College</button>
                                     <button type="button" onClick={() => setShowRegister(false)} style={{ background: 'none', border: 'none', color: 'var(--primary)', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600 }}>
                                         Search & Join existing college
@@ -808,9 +876,9 @@ export default function CollegeAlumniPage() {
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                                         <div>
                                             <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
-                                                {m.role === 'alumnus' ? '💼' : '🎓'} {m.branch} Member
+                                                {m.role === 'alumnus' ? '💼' : '🎓'} {m.name || `${m.branch} Member`}
                                             </h4>
-                                            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Class of {m.batchYear} • {m.branch}</span>
+                                            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Class of {m.batchYear} • {m.branch}{m.rollNo ? ` • Roll No: ${m.rollNo}` : ''}</span>
                                         </div>
                                         <span style={{ fontSize: '0.65rem', padding: '2px 8px', borderRadius: '12px', fontWeight: 700, background: m.role === 'alumnus' ? 'rgba(16,185,129,0.1)' : 'rgba(59,130,246,0.1)', color: m.role === 'alumnus' ? '#10b981' : '#3b82f6', textTransform: 'uppercase' }}>
                                             {m.role}
@@ -1127,7 +1195,7 @@ export default function CollegeAlumniPage() {
                                         #{idx + 1}
                                     </div>
                                     <div style={{ flex: 1 }}>
-                                        <div style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--text-primary)' }}>Alumni Member</div>
+                                        <div style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--text-primary)' }}>{item.name || 'Alumni Member'}</div>
                                         <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{item.currentRole} at {item.currentCompany} ({item.branch})</span>
                                     </div>
                                     <div style={{ display: 'flex', gap: '1.5rem', textAlign: 'center', flexWrap: 'wrap' }}>

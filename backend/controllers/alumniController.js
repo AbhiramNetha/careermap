@@ -42,7 +42,7 @@ exports.searchColleges = async (req, res) => {
 // Register a college (by TPO/Admin)
 exports.registerCollege = async (req, res) => {
     try {
-        const { name, slug, domain, logoUrl, bannerUrl, role, batchYear, branch } = req.body;
+        const { name, slug, domain, logoUrl, bannerUrl, role, batchYear, branch, creatorName, rollNo } = req.body;
 
         // Check if slug or domain already registered
         const existing = await College.findOne({
@@ -62,7 +62,9 @@ exports.registerCollege = async (req, res) => {
             role: role || 'admin',
             verificationMethod: 'domain',
             batchYear,
-            branch
+            branch,
+            name: creatorName || '',
+            rollNo: role === 'student' ? (rollNo || '') : ''
         });
 
         // Initialize standard chat rooms
@@ -92,7 +94,7 @@ exports.registerCollege = async (req, res) => {
 // Join an existing college
 exports.joinCollege = async (req, res) => {
     try {
-        const { collegeId, role, batchYear, branch, currentCompany, currentRole, availabilityTags, email } = req.body;
+        const { collegeId, role, batchYear, branch, currentCompany, currentRole, availabilityTags, email, name, rollNo } = req.body;
 
         const college = await College.findByPk(collegeId);
         if (!college) {
@@ -124,7 +126,9 @@ exports.joinCollege = async (req, res) => {
             branch,
             currentCompany: currentCompany || '',
             currentRole: currentRole || '',
-            availabilityTags: availabilityTags || []
+            availabilityTags: availabilityTags || [],
+            name: name || '',
+            rollNo: role === 'student' ? (rollNo || '') : ''
         });
 
         return res.status(201).json({ success: true, member, college });
@@ -433,6 +437,7 @@ exports.getLeaderboard = async (req, res) => {
 
             list.push({
                 userId: al.userId,
+                name: al.name,
                 branch: al.branch,
                 currentCompany: al.currentCompany,
                 currentRole: al.currentRole,

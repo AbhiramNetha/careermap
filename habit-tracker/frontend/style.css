@@ -1,0 +1,38 @@
+body {
+  background: linear-gradient(135deg, #f5f7ff 0%, #eef8f3 100%);
+  min-height: 100vh;
+}
+
+.card {
+  border: none;
+  border-radius: 16px;
+}
+
+.habit-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.habit-item.completed {
+  background: #f1fdf5;
+  border-color: #8ce8a8;
+}
+
+.habit-name {
+  font-weight: 600;
+}
+
+.habit-meta {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.toggle-btn {
+  min-width: 110px;
+}

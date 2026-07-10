@@ -51,6 +51,16 @@ const CollegeMember = sequelize.define('CollegeMember', {
     availabilityTags: {
         type: DataTypes.JSONB, // e.g. ['referrals', 'mentorship', 'chat']
         defaultValue: []
+    },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: ''
+    },
+    rollNo: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: ''
     }
 }, {
     tableName: 'college_members',
