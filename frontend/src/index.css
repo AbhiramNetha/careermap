@@ -11,7 +11,7 @@
 
 :root {
   /* Premium Dark Theme (Deep Navy/Slate) */
-  --bg: #050b18;
+  --bg: #020a06;
   --bg-card: rgba(13, 17, 23, 0.7);
   --bg-glass: rgba(15, 23, 42, 0.6);
   --border: rgba(255, 255, 255, 0.08);
@@ -94,7 +94,7 @@
 
 body {
   font-family: var(--font-main);
-  background: transparent;
+  background: var(--bg);
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
@@ -4861,7 +4861,9 @@ button[type="submit"]:active:not(:disabled) {
   display: flex;
   height: 100vh;
   overflow: hidden;
-  background: var(--bg);
+  background: transparent;
+  position: relative;
+  z-index: 1;
 }
 
 .main-content-area {
@@ -4870,6 +4872,7 @@ button[type="submit"]:active:not(:disabled) {
   overflow-x: hidden;
   position: relative;
   scroll-behavior: smooth;
+  background: transparent;
 }
 
 .main-content {

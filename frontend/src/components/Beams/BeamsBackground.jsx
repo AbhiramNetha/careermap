@@ -24,10 +24,8 @@ const BeamsBackground = memo(function BeamsBackground({
         left: 0,
         width: '100%',
         height: '100%',
-        zIndex: -1,
+        zIndex: 0,
         pointerEvents: 'none',
-        willChange: 'transform',
-        transform: 'translateZ(0)', 
       }}
     >
       <Beams

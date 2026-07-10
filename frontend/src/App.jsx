@@ -43,56 +43,59 @@ function PublicSite() {
   const location = useLocation();
   const hideFooter = ['/premium', '/courses', '/careers', '/quiz', '/alumni'].some(p => location.pathname.startsWith(p));
   return (
-    <div className="app-layout">
-      {/* Fixed Sidebar */}
-      <Sidebar />
+    <>
+      {/* Beams background — fixed to viewport, behind everything */}
+      <BeamsBackground
+        lightColor="#00ff88"
+        beamWidth={3}
+        beamHeight={15}
+        beamNumber={20}
+        speed={1.8}
+        noiseIntensity={1.5}
+        scale={0.25}
+        rotation={0}
+      />
 
-      {/* Main content area — this is the scroll container */}
-      <div className="main-content-area" id="main-scroll-container">
-        {/* Beams background — fills the main content area */}
-        <BeamsBackground
-          lightColor="#07c06a"
-          beamWidth={2}
-          beamHeight={15}
-          beamNumber={12}
-          speed={2}
-          noiseIntensity={1.75}
-          scale={0.2}
-          rotation={0}
-        />
+      <div className="app-layout">
+        {/* Fixed Sidebar */}
+        <Sidebar />
 
-        {/* Sticky top bar */}
-        <TopBar />
+        {/* Main content area — this is the scroll container */}
+        <div className="main-content-area" id="main-scroll-container">
 
-        {/* Page content */}
-        <main className="main-content">
-          <Routes>
-            {/* Public routes */}
-            <Route path="/" element={<HomePage />} />
-            <Route path="/premium" element={<PremiumPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-            <Route path="/careers" element={<CareerCategoryPage />} />
-            <Route path="/courses" element={<CoursesPage />} />
-            <Route path="/branches" element={<PremiumRoute><BranchSelectionPage /></PremiumRoute>} />
-            <Route path="/ats" element={<PremiumRoute><AtsCheckerPage /></PremiumRoute>} />
+          {/* Sticky top bar */}
+          <TopBar />
 
-            {/* Protected routes */}
-            <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
-            <Route path="/quiz/results" element={<ProtectedRoute><QuizResultPage /></ProtectedRoute>} />
-            <Route path="/careers/:id" element={<ProtectedRoute><CareerDetailPage /></ProtectedRoute>} />
-            <Route path="/compare" element={<PremiumRoute><ComparePage /></PremiumRoute>} />
-            <Route path="/branches/:branch" element={<PremiumRoute><BranchDetailPage /></PremiumRoute>} />
-            <Route path="/roadmap/:id" element={<ProtectedRoute><RoadmapPage /></ProtectedRoute>} />
-            <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-            <Route path="/resume-builder" element={<PremiumRoute><ResumeBuilder /></PremiumRoute>} />
-            <Route path="/alumni" element={<ProtectedRoute><CollegeAlumniPage /></ProtectedRoute>} />
-          </Routes>
-          {!hideFooter && <Footer />}
-        </main>
+          {/* Page content */}
+          <main className="main-content">
+            <Routes>
+              {/* Public routes */}
+              <Route path="/" element={<HomePage />} />
+              <Route path="/premium" element={<PremiumPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+              <Route path="/careers" element={<CareerCategoryPage />} />
+              <Route path="/courses" element={<CoursesPage />} />
+              <Route path="/branches" element={<PremiumRoute><BranchSelectionPage /></PremiumRoute>} />
+              <Route path="/ats" element={<PremiumRoute><AtsCheckerPage /></PremiumRoute>} />
+
+              {/* Protected routes */}
+              <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
+              <Route path="/quiz/results" element={<ProtectedRoute><QuizResultPage /></ProtectedRoute>} />
+              <Route path="/careers/:id" element={<ProtectedRoute><CareerDetailPage /></ProtectedRoute>} />
+              <Route path="/compare" element={<PremiumRoute><ComparePage /></PremiumRoute>} />
+              <Route path="/branches/:branch" element={<PremiumRoute><BranchDetailPage /></PremiumRoute>} />
+              <Route path="/roadmap/:id" element={<ProtectedRoute><RoadmapPage /></ProtectedRoute>} />
+              <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+              <Route path="/resume-builder" element={<PremiumRoute><ResumeBuilder /></PremiumRoute>} />
+              <Route path="/alumni" element={<ProtectedRoute><CollegeAlumniPage /></ProtectedRoute>} />
+            </Routes>
+            {!hideFooter && <Footer />}
+          </main>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
