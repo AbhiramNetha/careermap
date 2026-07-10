@@ -100,7 +100,7 @@ function SectionLock({ onUpgrade, isLoggedIn }) {
           onMouseEnter={e => e.currentTarget.style.opacity = '0.88'}
           onMouseLeave={e => e.currentTarget.style.opacity = '1'}
         >
-          {isLoggedIn ? '⚡ Upgrade to PRO — Free' : '→ Log In to Upgrade'}
+          {isLoggedIn ? '⚡ Upgrade to PRO' : '→ Log In to Upgrade'}
         </button>
       </div>
     </div>
@@ -362,7 +362,7 @@ export default function PremiumPage() {
             onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
           >
             <Sparkles size={17} />
-            {!currentUser ? 'Log In to Unlock PRO' : 'Upgrade to PRO — Free'}
+            {!currentUser ? 'Log In to Unlock PRO' : 'Upgrade to PRO'}
           </button>
         ) : (
           <div style={{
