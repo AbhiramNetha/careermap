@@ -30,10 +30,27 @@ export default function QuizResultPage() {
         3: { medal: '🥉', gradientText: '', badge: 'rank-3', label: '3rd Best' },
     };
 
+    const degree = answers?.degree || 'Engineering';
+    let summaryText = '';
+    if (degree === 'Engineering') {
+        summaryText = `Engineering • Branch: ${answers?.eng_branch || 'N/A'} • Interest: ${answers?.eng_interest || 'N/A'} • Risk: ${answers?.eng_risk || 'N/A'}`;
+    } else if (degree === 'ComputerApplications') {
+        summaryText = `Computer Applications • Spec: ${answers?.ca_specialization || 'N/A'} • Coding: ${answers?.ca_coding || 'N/A'} • Risk: ${answers?.ca_risk || 'N/A'}`;
+    } else if (degree === 'Management') {
+        summaryText = `Management • Domain: ${answers?.mgt_specialization || 'N/A'} • Strength: ${answers?.mgt_strength || 'N/A'} • Risk: ${answers?.mgt_risk || 'N/A'}`;
+    } else if (degree === 'Commerce') {
+        summaryText = `Commerce • Domain: ${answers?.com_specialization || 'N/A'} • Certs: ${answers?.com_professional || 'N/A'} • Pace: ${answers?.com_risk || 'N/A'}`;
+    } else if (degree === 'Sciences') {
+        summaryText = `Sciences • Field: ${answers?.sci_domain || 'N/A'} • Focus: ${answers?.sci_interest || 'N/A'} • Env: ${answers?.sci_work || 'N/A'}`;
+    } else if (degree === 'Arts') {
+        summaryText = `Arts & Humanities • Field: ${answers?.art_domain || 'N/A'} • Interest: ${answers?.art_interest || 'N/A'} • Risk: ${answers?.art_risk || 'N/A'}`;
+    } else {
+        summaryText = `Profile: ${answers?.branch || 'N/A'} • ${answers?.interest || 'N/A'} Interest • ${answers?.riskTolerance || 'N/A'} Risk`;
+    }
+
     return (
         <div className="results-page">
             <div className="container">
-                {}
                 <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
                     <div className="section-tag">Quiz Results</div>
                     <h1 className="section-title" style={{ marginTop: '1rem' }}>
@@ -41,7 +58,7 @@ export default function QuizResultPage() {
                     </h1>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', marginTop: '0.5rem' }}>
                         Based on your profile: <strong style={{ color: 'var(--text-primary)' }}>
-                            {answers?.branch} • {answers?.interest} Interest • {answers?.riskTolerance} Risk
+                            {summaryText}
                         </strong>
                     </p>
                 </div>

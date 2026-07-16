@@ -34,8 +34,8 @@ import AdminCourses from './pages/admin/AdminCourses';
 import AdminAnalytics from './pages/admin/AdminAnalytics';
 import WebsitePreloader from './components/WebsitePreloader';
 import ScrollToTop from './components/ScrollToTop';
-import BeamsBackground from './components/Beams/BeamsBackground';
 import AdminBackgrounds from './components/AdminBackgrounds';
+import FloatingDotsBackground from './components/Backgrounds/FloatingDotsBackground';
 import './index.css';
 
 
@@ -44,18 +44,7 @@ function PublicSite() {
   const hideFooter = ['/premium', '/courses', '/careers', '/quiz', '/alumni'].some(p => location.pathname.startsWith(p));
   return (
     <>
-      {/* Beams background — fixed to viewport, behind everything */}
-      <BeamsBackground
-        lightColor="#00ff88"
-        beamWidth={3}
-        beamHeight={15}
-        beamNumber={20}
-        speed={1.8}
-        noiseIntensity={1.5}
-        scale={0.25}
-        rotation={0}
-      />
-
+      <FloatingDotsBackground />
       <div className="app-layout">
         {/* Fixed Sidebar */}
         <Sidebar />

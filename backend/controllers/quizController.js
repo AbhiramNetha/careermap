@@ -17,20 +17,18 @@ exports.getQuizQuestions = async (req, res) => {
 
 /**
  * POST /api/quiz/submit
- * Body: { branch, interest, riskTolerance, salaryExpectation, studyPreference, workLifeBalance, financialCondition }
+ * Body: { degree, ...dynamicAnswers }
  */
 exports.submitQuiz = async (req, res) => {
     try {
-        const { branch, interest, riskTolerance, salaryExpectation, studyPreference, workLifeBalance, financialCondition } = req.body;
+        const { degree } = req.body;
 
-        // Validate required fields
-        const required = ['branch', 'interest', 'riskTolerance', 'salaryExpectation', 'studyPreference', 'workLifeBalance', 'financialCondition'];
-        const missing = required.filter(f => !req.body[f]);
-        if (missing.length > 0) {
-            return res.status(400).json({ success: false, message: `Missing fields: ${missing.join(', ')}` });
+        // Validate required field
+        if (!degree) {
+            return res.status(400).json({ success: false, message: 'Missing required field: degree' });
         }
 
-        const answers = { branch, interest, riskTolerance, salaryExpectation, studyPreference, workLifeBalance, financialCondition };
+        const answers = req.body;
 
         // Run scoring engine
         const topResults = calculateQuizResults(answers);
@@ -38,13 +36,13 @@ exports.submitQuiz = async (req, res) => {
         // Fetch career data for top results
         const careerIds = topResults.map(r => r.careerId);
         const careers = await Career.findAll({
-            where: { id: { [Op.in]: careerIds } },
+            where: { slug: { [Op.in]: careerIds } }, // FIX: Query by slug instead of auto-incrementing id
             attributes: { exclude: ['quizScoring'] },
         });
 
         // Build response with match data
         const recommendations = topResults.map(result => {
-            const career = careers.find(c => c.id === result.careerId);
+            const career = careers.find(c => c.slug === result.careerId); // FIX: Compare slug instead of id
             if (!career) return null;
 
             // Generate explanation
@@ -73,15 +71,41 @@ exports.submitQuiz = async (req, res) => {
  */
 function generateExplanation(careerId, answers, matchPct) {
     const explanations = {
-        'data-scientist': `With your ${answers.interest === 'Coding' ? 'love for coding' : 'analytical mindset'} and ${answers.riskTolerance === 'Low' ? 'preference for stability' : 'calculated risk approach'}, Data Analytics is a ${matchPct > 75 ? 'perfect' : 'good'} fit. ${answers.financialCondition === 'limited' ? 'No expensive degree needed — skills-based entry is affordable.' : ''}`,
-        'software-developer': `Your ${answers.branch === 'CSE' || answers.branch === 'IT' ? 'strong CS background' : 'technical foundation'} combined with ${answers.interest === 'Coding' ? 'passion for coding' : 'interest in technology'} makes Software Development a ${matchPct > 75 ? 'top choice' : 'solid option'}.`,
-        'mba-iim-xlri': `Your interest in ${answers.interest === 'Management' ? 'management and leadership' : 'business and strategy'} with ${answers.financialCondition === 'can-afford' ? 'financial flexibility' : 'ambition to grow'} aligns well with a top MBA.`,
-        'psu-engineer': `${answers.riskTolerance === 'Low' ? 'Your preference for job security' : 'Your balanced approach'} and ${answers.workLifeBalance === 'High' ? 'high priority for work-life balance' : 'practical career goals'} make PSU jobs a strong match.`,
-        'mtech-iit-nit': `Your ${answers.interest === 'Research' ? 'passion for research' : 'desire for deeper knowledge'} and ${answers.studyPreference === 'Yes' ? 'willingness to study more' : 'technical inclination'} suit M.Tech via GATE perfectly.`,
-        'ms-abroad': `Your ambition for ${answers.salaryExpectation === '>8lpa' ? 'high earning potential' : 'global exposure'} and ${answers.financialCondition === 'can-afford' ? 'financial readiness' : 'drive to succeed abroad'} make MS Abroad a compelling path.`,
-        'ssc-je': `Your preference for ${answers.riskTolerance === 'Low' ? 'job security' : 'government service'} and ${answers.workLifeBalance === 'High' ? 'work-life balance' : 'stable career'} make SSC JE an ideal choice.`,
-        'saas-startup': `Your high ${answers.riskTolerance === 'High' ? 'risk appetite' : 'ambition'} and ${answers.interest === 'Entrepreneurship' ? 'entrepreneurial drive' : 'innovative thinking'} are exactly what a SaaS startup demands.`,
+        'data-scientist': `With your analytical mindset and preferences, Data Science is a ${matchPct > 75 ? 'perfect' : 'good'} fit.`,
+        'software-developer': `Your strong technical foundation and interest in software make Software Development a ${matchPct > 75 ? 'top choice' : 'solid option'}.`,
+        'full-stack-developer': `Your passion for web development and software engineering matches Full Stack Development perfectly.`,
+        'freelancer-remote-developer': `Your love for coding and high risk tolerance make remote freelancing a great fit.`,
+        'ms-computer-science': `Your academic drive and interest in computer science align well with an MS in CS.`,
+        'gaming-ar-vr-startup': `Your interest in creative tech and high risk appetite make game development a compelling choice.`,
+        'mba-iim-xlri': `Your strong alignment with business strategy and leadership makes a top MBA your best path.`,
+        'product-manager': `Your problem-solving skills and strategic mindset fit Product Management perfectly.`,
+        'technical-consultant': `Your communication skills and interest in consulting make this technical consulting role ideal.`,
+        'rbi-grade-b': `Your preference for stability and business/finance interests suit RBI Grade B Officer perfectly.`,
+        'pgdm': `Your interest in business and corporate management aligns with a Post Graduate Diploma.`,
+        'edtech-startup': `Your entrepreneurial mindset and passion for education make EdTech startups a great choice.`,
+        'banking-po': `Your preference for stability and interest in banking make Banking PO an excellent career choice.`,
+        'professional-certifications': `Pursuing professional finance certifications (like CFA) fits your career aspirations.`,
+        'fintech-startup': `Your interest in financial markets and high risk appetite match FinTech startups perfectly.`,
+        'ssc-cgl-officer': `Your preference for public service and stable career growth aligns with SSC CGL.`,
+        'business-analyst': `Your data analysis and corporate finance interests fit Business Analyst perfectly.`,
+        'isro-scientist': `Your science background and interest in space research make ISRO Scientist a dream match.`,
+        'drdo-scientist': `Your technical skills and desire to work in national defence research fit DRDO perfectly.`,
+        'phd-india': `Your passion for academic research and teaching matches a PhD program in India.`,
+        'phd-abroad': `Your desire for global research exposure matches a PhD abroad.`,
+        'government-lecturer': `Your passion for classroom teaching and academia aligns with a Government Lecturer role.`,
+        'ms-data-science-ai': `Your interests in analytics and AI make an MS in Data Science/AI a strong match.`,
+        'ias-ips-ifs-officer': `Your dream of civil services and public leadership aligns with IAS/IPS/IFS.`,
+        'ui-ux-designer': `Your creative design skills and psychology interests fit UI/UX Design perfectly.`,
+        'content-creator': `Your writing, design, and creative skills make content creation/YouTubing a very strong match.`,
+        'social-impact-tech': `Your desire to solve social problems using technology aligns with a Tech NGO venture.`,
+        'llb-law': `Your analytical background and interest in regulation/legal systems make patent or tech law a unique fit.`,
+        'freelance-agency': `Your creative skills and entrepreneurial drive fit running a freelance agency perfectly.`,
+        'psu-engineer': `Your technical engineering skills and search for job security align with a PSU career.`,
+        'mtech-iit-nit': `Your desire for deeper technical research aligns with M.Tech via GATE.`,
+        'ms-abroad': `Your global career aspirations make MS Abroad a very compelling path.`,
+        'ssc-je': `Your engineering specialization and search for stable government work match SSC JE.`,
+        'saas-startup': `Your technical coding skills and high risk appetite match SaaS startups perfectly.`,
     };
 
-    return explanations[careerId] || `Based on your profile, ${careerId.replace(/-/g, ' ')} scores ${matchPct}% match with your preferences.`;
+    return explanations[careerId] || `Based on your profile, ${careerId.replace(/-/g, ' ')} scores a ${matchPct}% match with your preferences.`;
 }

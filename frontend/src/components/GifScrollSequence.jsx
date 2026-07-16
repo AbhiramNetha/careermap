@@ -130,15 +130,15 @@ export default function GifScrollSequence() {
                         opacity: progress < 0.3 ? 1 : Math.max(0, 1 - (progress - 0.3)*5),
                         transform: `translateY(${mapVal(0, -30)}px)`
                     }}>
-                        <h3>Lost After B.Tech?</h3>
-                        <p>Stop guessing. Make data-driven career choices that guarantee success.</p>
+                        <h3>Confused About Your Future?</h3>
+                        <p>Stop guessing. Make data-driven career choices that match your degree, strengths, and goals.</p>
                     </div>
                     
                     <div className="parallax-text-step p-mid" style={{ 
                         opacity: progress > 0.4 && progress < 0.8 ? Math.sin((progress - 0.4)*2.5 * Math.PI) : 0 
                     }}>
                         <h3 className="neon-text">LEVEL UP</h3>
-                        <p>Discover personalized roadmaps tailored to your engineering branch.</p>
+                        <p>Discover personalized roadmaps tailored to your degree, interests, and career ambitions.</p>
                     </div>
 
                     <div className="parallax-text-step p-final" style={{ 
@@ -146,7 +146,7 @@ export default function GifScrollSequence() {
                         transform: `translateY(${mapVal(20, 0)}px)` 
                     }}>
                         <h3 className="neon-text">Your Journey Begins</h3>
-                        <p>Take the 7-question quiz and unlock your true potential.</p>
+                        <p>Take the quiz and unlock career paths built specifically for your field of study.</p>
                     </div>
                 </div>
 
