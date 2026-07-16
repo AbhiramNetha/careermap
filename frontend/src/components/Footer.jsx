@@ -10,7 +10,7 @@ export default function Footer() {
                         way2fresher
                     </div>
                     <p className="footer-desc">
-                        India's most structured career decision platform for engineering students.
+                        India's most structured career decision platform for students across all degree backgrounds.
                         Make informed decisions with data-backed insights.
                     </p>
                 </div>
@@ -47,7 +47,7 @@ export default function Footer() {
             </div>
 
             <div className="footer-bottom">
-                <p>© 2024 way2fresher — Built for B.Tech students across India 🇮🇳</p>
+                <p>© 2025 way2fresher — Built for students across all degrees in India 🇮🇳</p>
                 <p style={{ marginTop: '4px', color: 'var(--text-muted)' }}>
                     Data is indicative. Career outcomes are not guaranteed.
                 </p>

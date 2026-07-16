@@ -1141,6 +1141,302 @@ const quizQuestions = [
             { id: 'no', label: '❌ No — Aiming for corporate, creative, or academic career routes', value: 'No' },
         ],
     },
+    // --- Engineering extra questions (7-10) ---
+    {
+        step: 7, field: 'eng_coding',
+        question: 'How confident are you with programming?',
+        subtitle: 'Be honest — this affects technical vs non-technical career recommendations',
+        icon: '💻',
+        options: [
+            { id: 'high', label: '🔥 High — I build projects independently', value: 'High' },
+            { id: 'mod', label: '👍 Moderate — I can code but prefer a mix of technical & managerial work', value: 'Moderate' },
+            { id: 'low', label: '🔧 Low — I prefer hardware, design, or management roles', value: 'Low' },
+        ],
+    },
+    {
+        step: 8, field: 'eng_exam',
+        question: 'Are you preparing (or planning to prepare) for any competitive exam?',
+        subtitle: 'Knowing your exam plans helps narrow down the right path',
+        icon: '📝',
+        options: [
+            { id: 'gate', label: '📐 GATE — For M.Tech or PSU jobs', value: 'GATE' },
+            { id: 'gre', label: '🌍 GRE / GMAT — For MS or MBA abroad', value: 'GRE' },
+            { id: 'cat', label: '📊 CAT / XAT — For MBA in India', value: 'CAT' },
+            { id: 'sscje', label: '🏛️ SSC JE / CDS — For government technical jobs', value: 'SSCJE' },
+            { id: 'none', label: '❌ No plans — Looking for direct job placement', value: 'NoExam' },
+        ],
+    },
+    {
+        step: 9, field: 'eng_experience',
+        question: 'What is your practical experience level?',
+        subtitle: 'Your internships and projects influence recruiter readiness',
+        icon: '🏆',
+        options: [
+            { id: 'strong', label: '💪 Strong — Multiple internships and active personal projects', value: 'Strong' },
+            { id: 'moderate', label: '👌 Moderate — One internship or a few projects', value: 'Moderate' },
+            { id: 'limited', label: '📚 Limited — Mostly academic coursework', value: 'Limited' },
+        ],
+    },
+    {
+        step: 10, field: 'eng_location',
+        question: 'What is your preferred work location?',
+        subtitle: 'Location preferences affect which companies and roles suit you best',
+        icon: '📍',
+        options: [
+            { id: 'metro', label: '🏙️ Major metros (Bangalore, Hyderabad, Pune, Delhi)', value: 'Metro' },
+            { id: 'tier2', label: '🏠 Tier 2 cities or home state', value: 'Tier2' },
+            { id: 'abroad', label: '✈️ Open to relocating abroad', value: 'Abroad' },
+            { id: 'remote', label: '🏡 Remote / Work from home', value: 'Remote' },
+        ],
+    },
+
+    // --- Computer Applications extra questions (7-10) ---
+    {
+        step: 7, field: 'ca_tools',
+        question: 'Which technology domain are you most comfortable with?',
+        subtitle: 'Your strongest tech area defines your career entry point',
+        icon: '🛠️',
+        options: [
+            { id: 'frontend', label: '🌐 Frontend (React, Vue, HTML/CSS)', value: 'Frontend' },
+            { id: 'backend', label: '🔧 Backend (Node.js, Python, Java, Databases)', value: 'Backend' },
+            { id: 'aiml', label: '🤖 AI/ML (TensorFlow, scikit-learn, LLMs)', value: 'AIML' },
+            { id: 'mobile', label: '📱 Mobile (Android, Flutter, React Native)', value: 'Mobile' },
+            { id: 'cloud', label: '☁️ Cloud & DevOps (AWS, Docker, Linux)', value: 'Cloud' },
+        ],
+    },
+    {
+        step: 8, field: 'ca_project',
+        question: 'Do you have personal projects or a public portfolio?',
+        subtitle: 'Portfolio strength directly impacts your job and freelance opportunities',
+        icon: '📂',
+        options: [
+            { id: 'active', label: '✅ Yes — Active GitHub / portfolio site with real projects', value: 'Active' },
+            { id: 'inprogress', label: '🔄 In Progress — Currently building projects', value: 'InProgress' },
+            { id: 'none', label: '❌ No — But planning to start soon', value: 'None' },
+        ],
+    },
+    {
+        step: 9, field: 'ca_work_env',
+        question: 'What work environment suits you best?',
+        subtitle: 'Matching your environment preference avoids early burnout',
+        icon: '🏢',
+        options: [
+            { id: 'corp', label: '🏢 Structured corporate office with fixed hours', value: 'Corporate' },
+            { id: 'startup', label: '🚀 Agile startup with flexible roles & hours', value: 'Startup' },
+            { id: 'remote', label: '🏡 Remote-first freelancing', value: 'Remote' },
+            { id: 'acad', label: '🎓 Academic or research environment', value: 'Academic' },
+        ],
+    },
+    {
+        step: 10, field: 'ca_goal',
+        question: 'What is your primary 5-year career goal?',
+        subtitle: 'Your long-term vision shapes which path to start on today',
+        icon: '🎯',
+        options: [
+            { id: 'swe', label: '💻 Senior Software Engineer at a top MNC/product company', value: 'SeniorSWE' },
+            { id: 'data', label: '📊 Data Scientist or AI/ML Expert', value: 'DataExpert' },
+            { id: 'founder', label: '🚀 Startup Founder or Freelance Agency owner', value: 'Founder' },
+            { id: 'research', label: '🔬 Research Scientist — MS/PhD track', value: 'Research' },
+        ],
+    },
+
+    // --- Management & Business extra questions (7-10) ---
+    {
+        step: 7, field: 'mgt_experience',
+        question: 'What is your current experience level?',
+        subtitle: 'Work and internship experience determines which management paths are accessible now',
+        icon: '💼',
+        options: [
+            { id: 'exp', label: '🏆 Experienced — 1+ years of work/internship experience', value: 'Experienced' },
+            { id: 'some', label: '👌 Some — 1-2 internships completed', value: 'SomeExp' },
+            { id: 'fresher', label: '🎓 Fresher — No experience yet', value: 'Fresher' },
+        ],
+    },
+    {
+        step: 8, field: 'mgt_industry',
+        question: 'Which industry domain interests you most?',
+        subtitle: 'Your target industry shapes your MBA specialization and career trajectory',
+        icon: '🏭',
+        options: [
+            { id: 'fin', label: '💵 Financial Services, Banking & Insurance', value: 'Finance' },
+            { id: 'tech', label: '💻 Technology, E-commerce & Digital', value: 'Tech' },
+            { id: 'fmcg', label: '🛒 FMCG, Retail & Consumer Goods', value: 'FMCG' },
+            { id: 'health', label: '🏥 Healthcare & Pharmaceuticals', value: 'Healthcare' },
+            { id: 'mfg', label: '⚙️ Manufacturing, Logistics & Operations', value: 'Manufacturing' },
+        ],
+    },
+    {
+        step: 9, field: 'mgt_leadership',
+        question: 'How would you describe your leadership style?',
+        subtitle: 'Your management style determines which roles and cultures suit you',
+        icon: '👑',
+        options: [
+            { id: 'collab', label: '🤝 Collaborative — I build consensus and bring people together', value: 'Collaborative' },
+            { id: 'dir', label: '🎯 Directive — I lead from the front with clear decisions', value: 'Directive' },
+            { id: 'anal', label: '📊 Analytical — I base decisions on data and logic', value: 'Analytical' },
+            { id: 'insp', label: '💡 Inspirational — I lead with vision and motivation', value: 'Inspirational' },
+        ],
+    },
+    {
+        step: 10, field: 'mgt_goal',
+        question: 'What is your 5-year career goal?',
+        subtitle: 'Knowing your end goal helps us suggest the fastest path to get there',
+        icon: '🎯',
+        options: [
+            { id: 'vp', label: '🏢 VP / Director at a large corporate MNC', value: 'VP' },
+            { id: 'ceo', label: '🚀 Startup CEO or Co-Founder', value: 'CEO' },
+            { id: 'policy', label: '🏛️ Policy Advisor or Government Officer (RBI, IAS)', value: 'PolicyAdvisor' },
+            { id: 'finadv', label: '💰 Investment Banker or Senior Finance Analyst', value: 'FinanceAnalyst' },
+        ],
+    },
+
+    // --- Commerce & Finance extra questions (7-10) ---
+    {
+        step: 7, field: 'com_skill',
+        question: 'Which skill area are you strongest in?',
+        subtitle: 'Your core competency determines your niche in finance',
+        icon: '🧮',
+        options: [
+            { id: 'account', label: '📋 Numerical Analysis & Accounting', value: 'Accounting' },
+            { id: 'val', label: '📈 Financial Modeling & Valuation', value: 'Valuation' },
+            { id: 'comm', label: '💬 Communication & Client Relations', value: 'Communication' },
+            { id: 'legal', label: '⚖️ Legal & Compliance Knowledge', value: 'Legal' },
+        ],
+    },
+    {
+        step: 8, field: 'com_tech',
+        question: 'How comfortable are you with financial technology tools?',
+        subtitle: 'Tech comfort influences whether analytics or advisory roles suit you',
+        icon: '💻',
+        options: [
+            { id: 'high', label: '💪 High — Excel, Tally, SAP, Bloomberg, SQL', value: 'HighTech' },
+            { id: 'mod', label: '👍 Moderate — Excel & basic accounting tools', value: 'ModerateTech' },
+            { id: 'low', label: '📝 Low — Prefer non-technical client-facing or compliance roles', value: 'LowTech' },
+        ],
+    },
+    {
+        step: 9, field: 'com_priority',
+        question: 'What is your top career priority?',
+        subtitle: 'Your priority helps match you to the right finance career segment',
+        icon: '🏆',
+        options: [
+            { id: 'sec', label: '🛡️ Job security and stable income', value: 'Security' },
+            { id: 'grow', label: '📈 High earning potential and rapid growth', value: 'Growth' },
+            { id: 'prest', label: '🎖️ Prestigious designations and institutional status', value: 'Prestige' },
+            { id: 'bal', label: '🧘 Work-life balance and schedule flexibility', value: 'Balance' },
+        ],
+    },
+    {
+        step: 10, field: 'com_goal',
+        question: 'What is your 5-year career goal?',
+        subtitle: 'Your target role shapes the certifications and path you should follow today',
+        icon: '🎯',
+        options: [
+            { id: 'cacfa', label: '📜 Chartered Accountant (CA) or CFA charterholder', value: 'CAorCFA' },
+            { id: 'bank', label: '🏦 Branch Manager or Senior Banking Officer', value: 'BankManager' },
+            { id: 'cfo', label: '💼 CFO or Finance Director at a company', value: 'CFO' },
+            { id: 'entpre', label: '🚀 FinTech Entrepreneur or Investment Startup Founder', value: 'Entrepreneur' },
+        ],
+    },
+
+    // --- Sciences extra questions (7-10) ---
+    {
+        step: 7, field: 'sci_skill',
+        question: 'What is your strongest academic skill?',
+        subtitle: 'Your core academic strength guides your career niche in science',
+        icon: '🧬',
+        options: [
+            { id: 'math', label: '📐 Mathematical Modeling & Statistics', value: 'Math' },
+            { id: 'lab', label: '🧪 Laboratory Techniques & Experimentation', value: 'Lab' },
+            { id: 'prog', label: '💻 Programming & Data Analysis', value: 'Programming' },
+            { id: 'write', label: '✍️ Scientific Writing & Research Review', value: 'Writing' },
+        ],
+    },
+    {
+        step: 8, field: 'sci_collab',
+        question: 'Do you prefer working independently or in a team?',
+        subtitle: 'Research environments vary from solitary deep work to large structured labs',
+        icon: '🤝',
+        options: [
+            { id: 'indep', label: '🧘 Independently — Deep focused solo research', value: 'Independent' },
+            { id: 'small', label: '👥 Small team — Collaborative research group', value: 'SmallTeam' },
+            { id: 'large', label: '🏛️ Large organization — Structured government or industry lab', value: 'LargeOrg' },
+        ],
+    },
+    {
+        step: 9, field: 'sci_publication',
+        question: 'Are you interested in academic publishing and research papers?',
+        subtitle: 'Research publication interest determines academic vs. industry career paths',
+        icon: '📚',
+        options: [
+            { id: 'very', label: '✅ Very interested — Publishing is a key career goal', value: 'VeryInterested' },
+            { id: 'some', label: '🤔 Somewhat — Open to it but not my main focus', value: 'Somewhat' },
+            { id: 'not', label: '❌ Not interested — Prefer applied or industry work', value: 'NotInterested' },
+        ],
+    },
+    {
+        step: 10, field: 'sci_goal',
+        question: 'What is your long-term professional goal?',
+        subtitle: 'Your 5-year goal determines the research or application path to pursue',
+        icon: '🎯',
+        options: [
+            { id: 'prof', label: '🏫 Professor or Government College Lecturer', value: 'Professor' },
+            { id: 'govt', label: '🚀 Scientist at ISRO / DRDO / CSIR national lab', value: 'GovtScientist' },
+            { id: 'ind', label: '🏭 Researcher at a Pharma or Tech company', value: 'IndustryResearch' },
+            { id: 'data', label: '📊 Data Analyst or ML Engineer in industry', value: 'DataAnalyst' },
+        ],
+    },
+
+    // --- Arts & Humanities extra questions (7-10) ---
+    {
+        step: 7, field: 'art_skill',
+        question: 'What is your strongest creative or academic skill?',
+        subtitle: 'Your core skill is the foundation of your arts career path',
+        icon: '✨',
+        options: [
+            { id: 'write', label: '✍️ Writing, Editing & Content Creation', value: 'Writing' },
+            { id: 'design', label: '🎨 Visual Design & Digital Art', value: 'Design' },
+            { id: 'research', label: '🔬 Research, Analysis & Critical Thinking', value: 'Research' },
+            { id: 'speak', label: '🎤 Public Speaking & Debate', value: 'Speaking' },
+            { id: 'counsel', label: '💚 Counseling, Empathy & Social Work', value: 'Counseling' },
+        ],
+    },
+    {
+        step: 8, field: 'art_digital',
+        question: 'How comfortable are you with digital tools?',
+        subtitle: 'Digital fluency is increasingly important in arts and creative careers',
+        icon: '💻',
+        options: [
+            { id: 'high', label: '🖥️ High — I use Figma, Canva, Adobe, or video editing tools', value: 'HighDigital' },
+            { id: 'mod', label: '📱 Moderate — Basic office, social media & presentation tools', value: 'ModerateDigital' },
+            { id: 'low', label: '📝 Low — Prefer offline, traditional, or academic work', value: 'LowDigital' },
+        ],
+    },
+    {
+        step: 9, field: 'art_network',
+        question: 'What type of professional community do you want to build?',
+        subtitle: 'Your network type shapes the opportunities that come your way',
+        icon: '🌐',
+        options: [
+            { id: 'govt', label: '🏛️ Government officials, IAS officers & policy makers', value: 'GovtNetwork' },
+            { id: 'creative', label: '🎨 Creative industry — artists, designers, content creators', value: 'CreativeNetwork' },
+            { id: 'corp', label: '💼 Corporate marketing, media & advertising professionals', value: 'CorporateNetwork' },
+            { id: 'ngo', label: '🌱 NGO workers, activists & social entrepreneurs', value: 'NGONetwork' },
+        ],
+    },
+    {
+        step: 10, field: 'art_goal',
+        question: 'What is your 5-year career goal?',
+        subtitle: 'Knowing your end goal helps us map the best starting path for you today',
+        icon: '🎯',
+        options: [
+            { id: 'civil', label: '🏛️ IAS / IPS Officer or Diplomat', value: 'CivilServant' },
+            { id: 'creator', label: '🎥 Content Creator, YouTuber, or Published Author', value: 'Creator' },
+            { id: 'therapist', label: '💚 Counselor, Therapist or Social Impact Entrepreneur', value: 'Therapist' },
+            { id: 'design', label: '🎨 UI/UX Lead or Creative Director at a tech company', value: 'DesignLead' },
+            { id: 'acad', label: '📚 Academician, Researcher or Lecturer', value: 'Academician' },
+        ],
+    },
 ];
 
 const courseData = [

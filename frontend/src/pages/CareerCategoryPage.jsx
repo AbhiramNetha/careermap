@@ -85,7 +85,7 @@ export default function CareerCategoryPage() {
                         Explore <span className="gradient-text">Career Paths</span>
                     </h1>
                     <p style={{ color: 'var(--text-secondary)' }}>
-                        Browse {careers.length} career paths tailored for Indian B.Tech graduates
+                        Browse {careers.length} career paths tailored for Indian graduates across all degree backgrounds
                     </p>
                 </div>
             </div>

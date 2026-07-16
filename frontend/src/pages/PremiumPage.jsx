@@ -18,7 +18,7 @@ const SECTIONS = [
   {
     id: 'branches', label: 'Branch Guide', icon: Network,
     color: '#6366f1', glow: 'rgba(99,102,241,0.12)',
-    desc: 'Explore career paths, salary ranges, top recruiters & growth forecasts by engineering branch.',
+    desc: 'Explore career paths, salary ranges, top recruiters & growth forecasts by degree sector and specialization.',
     highlights: ['Branch-wise career breakdown', 'Top company recruiters', 'Salary benchmarks', 'Growth trajectory charts'],
     comingSoon: false,
   },

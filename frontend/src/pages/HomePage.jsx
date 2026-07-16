@@ -171,20 +171,20 @@ const TRENDING = [
 const TEAM = [
     { name: 'Aarup', role: 'Full-Stack Developer', emoji: '👨‍💻', color: '#6366f1' },
     { name: 'way2fresher', role: 'Platform Mission', emoji: '🚀', color: '#8b5cf6' },
-    { name: 'India Focus', role: 'Tailored for B.Tech', emoji: '🇮🇳', color: '#10b981' },
+    { name: 'India Focus', role: 'All Degrees Welcome', emoji: '🇮🇳', color: '#10b981' },
 ];
 
 const ABOUT_STATS = [
-    { value: '8+', label: 'Career Paths', icon: '🗺️' },
-    { value: '5', label: 'Engineering Branches', icon: '🎓' },
-    { value: '7', label: 'Quiz Parameters', icon: '✨' },
+    { value: '56+', label: 'Career Paths', icon: '🗺️' },
+    { value: '6', label: 'Degree Sectors', icon: '🎓' },
+    { value: '6+', label: 'Quiz Parameters', icon: '✨' },
     { value: '100%', label: 'India Focused', icon: '🇮🇳' },
 ];
 
 const VALUES = [
-    { icon: '🎯', title: 'Personalization', desc: 'Career recommendations tailored to your branch, skills, risk appetite, and life goals.' },
+    { icon: '🎯', title: 'Personalization', desc: 'Career recommendations tailored to your degree, skills, risk appetite, and personal goals.' },
     { icon: '📊', title: 'Data-Driven', desc: 'Every suggestion is backed by real salary data, market trends, and growth projections.' },
-    { icon: '🇮🇳', title: 'India-First', desc: 'Built specifically for the Indian engineering ecosystem — PSU, CAT, GATE, startups & beyond.' },
+    { icon: '🇮🇳', title: 'India-First', desc: 'Built for the entire Indian student ecosystem — Engineering, Commerce, Arts, Sciences, Management & more.' },
     { icon: '🔓', title: 'Completely Free', desc: 'No subscriptions, no paywalls. Every feature — quiz, roadmaps, comparisons — is free forever.' },
 ];
 
@@ -222,9 +222,9 @@ export default function HomePage() {
                 <div className="hero-bg-glow" />
                 <div className="hero-bg-glow-2" />
                 <div className="container hero-content">
-                    <div className="hero-badge">✨ India's #1 Career Decision Platform for Engineers</div>
+                    <div className="hero-badge">✨ India's #1 Career Decision Platform for Students</div>
                     <BlurText
-                        text="Find Your Perfect Career Path After B.Tech"
+                        text="Find Your Perfect Career Path After Graduation"
                         delay={100}
                         animateBy="words"
                         direction="bottom"
@@ -240,16 +240,16 @@ export default function HomePage() {
                     </div>
                     <div className="hero-stats">
                         <div className="hero-stat-item">
-                            <div className="stat-value">8+</div>
+                            <div className="stat-value">56+</div>
                             <div className="stat-label">Career Paths</div>
                         </div>
                         <div className="hero-stat-item">
-                            <div className="stat-value">5</div>
-                            <div className="stat-label">Branches</div>
+                            <div className="stat-value">6</div>
+                            <div className="stat-label">Degree Sectors</div>
                         </div>
                         <div className="hero-stat-item">
-                            <div className="stat-value">7</div>
-                            <div className="stat-label">Parameters</div>
+                            <div className="stat-value">6+</div>
+                            <div className="stat-label">Quiz Parameters</div>
                         </div>
                         <div className="hero-stat-item">
                             <div className="stat-value">100%</div>
@@ -265,14 +265,14 @@ export default function HomePage() {
                     <div className="section-header">
                         <div className="section-tag">Career Categories</div>
                         <h2 className="section-title">Four Paths. <span className="gradient-text">Infinite Possibilities.</span></h2>
-                        <p className="section-subtitle">Every engineering career fits into one of these categories. Choose your direction.</p>
+                        <p className="section-subtitle">Every career fits into one of these categories — across all degrees and fields. Choose your direction.</p>
                     </div>
                     <div className="categories-grid">
                         {[
-                            { id: 'private', icon: '💼', name: 'Private Sector Jobs', desc: 'IT, Analytics, Core Engineering & Product roles at top companies', count: '50+ careers', color: '#6366f1' },
-                            { id: 'higher-studies', icon: '🎓', name: 'Higher Studies', desc: 'M.Tech via GATE, MBA via CAT & MS Abroad for advanced qualifications', count: '10+ paths', color: '#8b5cf6' },
-                            { id: 'government', icon: '🏛️', name: 'Government Jobs', desc: 'PSU, SSC JE, UPSC for job security & work-life balance', count: '20+ exams', color: '#059669' },
-                            { id: 'entrepreneurship', icon: '🚀', name: 'Entrepreneurship', desc: "Build your startup using engineering skills & India's growing ecosystem", count: 'Unlimited potential', color: '#f59e0b' },
+                            { id: 'private', icon: '💼', name: 'Private Sector Jobs', desc: 'IT, Analytics, Finance, Design & Product roles across top companies', count: '50+ careers', color: '#6366f1' },
+                            { id: 'higher-studies', icon: '🎓', name: 'Higher Studies', desc: 'MBA, M.Tech, MS Abroad, PhD, LLB & professional certifications', count: '15+ paths', color: '#8b5cf6' },
+                            { id: 'government', icon: '🏛️', name: 'Government Jobs', desc: 'PSU, SSC, UPSC, Banking PO, RBI, ISRO for all degree backgrounds', count: '20+ exams', color: '#059669' },
+                            { id: 'entrepreneurship', icon: '🚀', name: 'Entrepreneurship', desc: "Launch startups, freelance agencies, or creative ventures using your skills", count: 'Unlimited potential', color: '#f59e0b' },
                         ].map(cat => (
                             <SpotlightCard key={cat.id} className="category-card" onClick={() => navigate(`/careers?category=${cat.id}`)} spotlightColor={cat.color}>
                                 <div className="category-icon">{cat.icon}</div>
@@ -350,7 +350,7 @@ export default function HomePage() {
                             Empowering <span className="gradient-text">The Next Generation</span>
                         </h2>
                         <p className="section-subtitle">
-                            We are more than a career site. We are a structured decision-making engine built specifically for the unique needs of Indian Engineering graduates.
+                            We are more than a career site. We are a structured decision-making engine built for every Indian student — across Engineering, Commerce, Arts, Sciences, Management, and Computer Applications.
                         </p>
                     </div>
 
@@ -360,7 +360,7 @@ export default function HomePage() {
                             <div className="about-story-tag">Our Platform</div>
                             <h3 className="about-story-title">How It Helps You</h3>
                             <div className="about-story-text">
-                                <p><strong>🎯 Personalized Career Quiz:</strong> Stop following the crowd. Our intelligent quiz analyzes your branch (CSE, ECE, Mech, etc.), risk appetite, and personal interests to suggest the top 3 paths where you are most likely to succeed.</p>
+                                <p><strong>🎯 Personalized Career Quiz:</strong> Stop following the crowd. Our intelligent quiz analyzes your degree sector, specialization, risk appetite, and personal interests to suggest the top 3 career paths where you are most likely to succeed.</p>
                                 <p><strong>🔍 Detailed Career Database:</strong> Dive into 50+ mapped careers. Each page covers salary ranges (fresher to senior), future demand, stability, and typical work-life balance — all tailored to the Indian market.</p>
                                 <p><strong>⚖️ Strategic Comparison:</strong> Should you do an MBA or join an IT firm? Use our comparison tool to weigh the long-term ROI, effort required, and risk of different paths side-by-side.</p>
                                 <p><strong>🗺️ Master Roadmaps:</strong> Once you decide, we don't leave you hanging. Follow month-by-month skill-building plans, discover the best certifications, and find exactly what projects you need to build to get hired.</p>
@@ -416,10 +416,10 @@ export default function HomePage() {
                         <div className="cta-glow" />
                         <div className="section-tag" style={{ marginBottom: '2rem' }}>Ready to Decide?</div>
                         <h2 className="hero-title" style={{ marginBottom: '1.5rem', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
-                            Your Career Clarity Starts with <span className="gradient-text">7 Questions</span>
+                            Your Career Clarity Starts with <span className="gradient-text">a Few Questions</span>
                         </h2>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '3.5rem', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto 3.5rem' }}>
-                            Takes only 3 minutes. Join thousands of engineering students making data-backed career decisions.
+                            Takes only 3 minutes. Join thousands of students across all disciplines making data-backed career decisions.
                         </p>
                         <button className="btn-primary" onClick={() => navigate('/quiz')} style={{ fontSize: '1.2rem', padding: '18px 48px' }}>
                             🎯 Start Your Career Quiz Now
@@ -438,7 +438,7 @@ export default function HomePage() {
                         <button className="quiz-popup-message-close" onClick={handleCloseModal} aria-label="Close message">✕</button>
                     </div>
                     <p className="quiz-popup-message-text">
-                        Not sure what direction to take after B.Tech? Take our 3-minute Career Quiz to find your best path!
+                        Not sure what direction to take after graduation? Take our 3-minute Career Quiz to find your best path — tailored to your degree!
                     </p>
                     <div className="quiz-popup-message-actions">
                         <button className="quiz-popup-message-btn-start" onClick={handleStartQuiz}>
