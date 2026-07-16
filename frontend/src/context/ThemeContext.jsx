@@ -4,9 +4,9 @@ const ThemeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
     const [isDark, setIsDark] = useState(() => {
-        // Always default to dark — only switch to light if the user has explicitly chosen it
+        // Always default to light — only switch to dark if the user has explicitly chosen it
         const saved = typeof window !== 'undefined' ? localStorage.getItem('w2f-theme') : null;
-        return saved === 'light' ? false : true;
+        return saved === 'dark' ? true : false;
     });
 
     useEffect(() => {
