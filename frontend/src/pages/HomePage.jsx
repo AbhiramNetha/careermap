@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import GifScrollSequence from '../components/GifScrollSequence';
 import SpotlightCard from '../components/SpotlightCard';
 import BlurText from '../components/BlurText';
+import ScrollReveal from '../components/ScrollReveal';
 
 
 function BubblesCanvas() {
@@ -230,56 +231,66 @@ export default function HomePage() {
                         direction="bottom"
                         className="hero-title"
                     />
-                    <p className="hero-subtitle">
-                        Stop guessing. Use our intelligent quiz, detailed roadmaps, and comparison engine
-                        to make the smartest career decision for your future.
-                    </p>
-                    <div className="hero-cta">
-                        <button className="btn-primary" onClick={() => navigate('/quiz')}>Take Career Quiz — 7 Questions</button>
-                        <button className="btn-secondary" onClick={() => navigate('/careers')}>Explore All Careers</button>
-                    </div>
-                    <div className="hero-stats">
-                        <div className="hero-stat-item">
-                            <div className="stat-value">56+</div>
-                            <div className="stat-label">Career Paths</div>
+                    <ScrollReveal delay={0.2}>
+                        <p className="hero-subtitle">
+                            Stop guessing. Use our intelligent quiz, detailed roadmaps, and comparison engine
+                            to make the smartest career decision for your future.
+                        </p>
+                    </ScrollReveal>
+                    <ScrollReveal delay={0.35}>
+                        <div className="hero-cta">
+                            <button className="btn-primary" onClick={() => navigate('/quiz')}>Take Career Quiz — 7 Questions</button>
+                            <button className="btn-secondary" onClick={() => navigate('/careers')}>Explore All Careers</button>
                         </div>
-                        <div className="hero-stat-item">
-                            <div className="stat-value">6</div>
-                            <div className="stat-label">Degree Sectors</div>
+                    </ScrollReveal>
+                    <ScrollReveal delay={0.5}>
+                        <div className="hero-stats">
+                            <div className="hero-stat-item">
+                                <div className="stat-value">56+</div>
+                                <div className="stat-label">Career Paths</div>
+                            </div>
+                            <div className="hero-stat-item">
+                                <div className="stat-value">6</div>
+                                <div className="stat-label">Degree Sectors</div>
+                            </div>
+                            <div className="hero-stat-item">
+                                <div className="stat-value">6+</div>
+                                <div className="stat-label">Quiz Parameters</div>
+                            </div>
+                            <div className="hero-stat-item">
+                                <div className="stat-value">100%</div>
+                                <div className="stat-label">India Focused</div>
+                            </div>
                         </div>
-                        <div className="hero-stat-item">
-                            <div className="stat-value">6+</div>
-                            <div className="stat-label">Quiz Parameters</div>
-                        </div>
-                        <div className="hero-stat-item">
-                            <div className="stat-value">100%</div>
-                            <div className="stat-label">India Focused</div>
-                        </div>
-                    </div>
+                    </ScrollReveal>
                 </div>
             </section>
 
             {/* ══════ CATEGORIES ══════ */}
             <section className="section">
                 <div className="container">
-                    <div className="section-header">
-                        <div className="section-tag">Career Categories</div>
-                        <h2 className="section-title">Four Paths. <span className="gradient-text">Infinite Possibilities.</span></h2>
-                        <p className="section-subtitle">Every career fits into one of these categories — across all degrees and fields. Choose your direction.</p>
-                    </div>
+                    <ScrollReveal>
+                        <div className="section-header">
+                            <div className="section-tag">Career Categories</div>
+                            <h2 className="section-title">Four Paths. <span className="gradient-text">Infinite Possibilities.</span></h2>
+                            <p className="section-subtitle">Every career fits into one of these categories — across all degrees and fields. Choose your direction.</p>
+                        </div>
+                    </ScrollReveal>
                     <div className="categories-grid">
                         {[
                             { id: 'private', icon: '💼', name: 'Private Sector Jobs', desc: 'IT, Analytics, Finance, Design & Product roles across top companies', count: '50+ careers', color: '#6366f1' },
                             { id: 'higher-studies', icon: '🎓', name: 'Higher Studies', desc: 'MBA, M.Tech, MS Abroad, PhD, LLB & professional certifications', count: '15+ paths', color: '#8b5cf6' },
                             { id: 'government', icon: '🏛️', name: 'Government Jobs', desc: 'PSU, SSC, UPSC, Banking PO, RBI, ISRO for all degree backgrounds', count: '20+ exams', color: '#059669' },
                             { id: 'entrepreneurship', icon: '🚀', name: 'Entrepreneurship', desc: "Launch startups, freelance agencies, or creative ventures using your skills", count: 'Unlimited potential', color: '#f59e0b' },
-                        ].map(cat => (
-                            <SpotlightCard key={cat.id} className="category-card" onClick={() => navigate(`/careers?category=${cat.id}`)} spotlightColor={cat.color}>
-                                <div className="category-icon">{cat.icon}</div>
-                                <div className="category-name">{cat.name}</div>
-                                <div className="category-desc">{cat.desc}</div>
-                                <div className="category-count" style={{ color: cat.color }}>→ {cat.count}</div>
-                            </SpotlightCard>
+                        ].map((cat, idx) => (
+                            <ScrollReveal key={cat.id} delay={idx * 0.1} yOffset={25}>
+                                <SpotlightCard className="category-card" onClick={() => navigate(`/careers?category=${cat.id}`)} spotlightColor={cat.color}>
+                                    <div className="category-icon">{cat.icon}</div>
+                                    <div className="category-name">{cat.name}</div>
+                                    <div className="category-desc">{cat.desc}</div>
+                                    <div className="category-count" style={{ color: cat.color }}>→ {cat.count}</div>
+                                </SpotlightCard>
+                            </ScrollReveal>
                         ))}
                     </div>
                 </div>
@@ -288,23 +299,27 @@ export default function HomePage() {
             {/* ══════ HOW IT WORKS ══════ */}
             <section className="section" style={{ background: 'var(--bg-glass)' }}>
                 <div className="container">
-                    <div className="section-header">
-                        <div className="section-tag">How It Works</div>
-                        <h2 className="section-title">Career Clarity in <span className="gradient-text">4 Simple Steps</span></h2>
-                    </div>
+                    <ScrollReveal>
+                        <div className="section-header">
+                            <div className="section-tag">How It Works</div>
+                            <h2 className="section-title">Career Clarity in <span className="gradient-text">4 Simple Steps</span></h2>
+                        </div>
+                    </ScrollReveal>
                     <div className="categories-grid">
                         {[
                             { step: '01', icon: '✨', title: 'Take the Quiz', desc: '7 personalized questions about your branch, interests & preferences' },
                             { step: '02', icon: '🎯', title: 'Get Recommendations', desc: 'Our scoring engine finds your top 3 career matches with match %' },
                             { step: '03', icon: '⚖️', title: 'Compare Options', desc: 'Side-by-side comparison of salary, risk, growth & stability' },
                             { step: '04', icon: '🗺️', title: 'Follow the Roadmap', desc: 'Month-by-month preparation plan with skills, tools & projects' },
-                        ].map(item => (
-                            <SpotlightCard key={item.step} className="category-card" style={{ textAlign: 'center' }} spotlightColor="rgba(99, 102, 241, 0.15)">
-                                <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--primary-light)', marginBottom: '1.5rem', letterSpacing: '2px', fontFamily: 'var(--font-heading)' }}>STEP {item.step}</div>
-                                <div style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>{item.icon}</div>
-                                <div className="category-name">{item.title}</div>
-                                <div className="category-desc">{item.desc}</div>
-                            </SpotlightCard>
+                        ].map((item, idx) => (
+                            <ScrollReveal key={item.step} delay={idx * 0.1} yOffset={25}>
+                                <SpotlightCard className="category-card" style={{ textAlign: 'center' }} spotlightColor="rgba(99, 102, 241, 0.15)">
+                                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--primary-light)', marginBottom: '1.5rem', letterSpacing: '2px', fontFamily: 'var(--font-heading)' }}>STEP {item.step}</div>
+                                    <div style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>{item.icon}</div>
+                                    <div className="category-name">{item.title}</div>
+                                    <div className="category-desc">{item.desc}</div>
+                                </SpotlightCard>
+                            </ScrollReveal>
                         ))}
                     </div>
                 </div>
@@ -313,30 +328,34 @@ export default function HomePage() {
             {/* ══════ TRENDING CAREERS ══════ */}
             <section className="section" style={{ background: 'var(--gradient-hero)' }}>
                 <div className="container">
-                    <div className="section-header">
-                        <div className="section-tag">Trending Now</div>
-                        <h2 className="section-title">Most Popular <span className="gradient-text">Career Choices</span></h2>
-                        <p className="section-subtitle">What students across India are choosing in 2024</p>
-                    </div>
-                    <div className="trending-scroll" style={{ display: 'flex', gap: '2rem', overflowX: 'auto', padding: '1rem 0.5rem 2.5rem', scrollbarWidth: 'none' }}>
-                        {TRENDING.map(item => (
-                            <SpotlightCard
-                                key={item.id}
-                                className="category-card"
-                                onClick={() => navigate(`/careers/${item.id}`)}
-                                style={{ 
-                                    minWidth: '280px', 
-                                    padding: '2rem',
-                                    textAlign: 'left'
-                                }}
-                                spotlightColor={item.color}
-                            >
-                                <div className="category-icon" style={{ fontSize: '2.5rem' }}>{item.emoji}</div>
-                                <div className="category-name" style={{ fontSize: '1.25rem' }}>{item.name}</div>
-                                <div className="category-count" style={{ color: item.color, fontSize: '1.1rem' }}>{item.salary}</div>
-                            </SpotlightCard>
-                        ))}
-                    </div>
+                    <ScrollReveal>
+                        <div className="section-header">
+                            <div className="section-tag">Trending Now</div>
+                            <h2 className="section-title">Most Popular <span className="gradient-text">Career Choices</span></h2>
+                            <p className="section-subtitle">What students across India are choosing in 2024</p>
+                        </div>
+                    </ScrollReveal>
+                    <ScrollReveal delay={0.2} yOffset={20}>
+                        <div className="trending-scroll" style={{ display: 'flex', gap: '2rem', overflowX: 'auto', padding: '1rem 0.5rem 2.5rem', scrollbarWidth: 'none' }}>
+                            {TRENDING.map(item => (
+                                <SpotlightCard
+                                    key={item.id}
+                                    className="category-card"
+                                    onClick={() => navigate(`/careers/${item.id}`)}
+                                    style={{ 
+                                        minWidth: '280px', 
+                                        padding: '2rem',
+                                        textAlign: 'left'
+                                    }}
+                                    spotlightColor={item.color}
+                                >
+                                    <div className="category-icon" style={{ fontSize: '2.5rem' }}>{item.emoji}</div>
+                                    <div className="category-name" style={{ fontSize: '1.25rem' }}>{item.name}</div>
+                                    <div className="category-count" style={{ color: item.color, fontSize: '1.1rem' }}>{item.salary}</div>
+                                </SpotlightCard>
+                            ))}
+                        </div>
+                    </ScrollReveal>
                 </div>
             </section>
 
@@ -344,65 +363,77 @@ export default function HomePage() {
             <section className="section about-section" id="about">
                 <div className="container">
                     {/* Header */}
-                    <div className="section-header">
-                        <div className="section-tag">About way2fresher</div>
-                        <h2 className="section-title">
-                            Empowering <span className="gradient-text">The Next Generation</span>
-                        </h2>
-                        <p className="section-subtitle">
-                            We are more than a career site. We are a structured decision-making engine built for every Indian student — across Engineering, Commerce, Arts, Sciences, Management, and Computer Applications.
-                        </p>
-                    </div>
+                    <ScrollReveal>
+                        <div className="section-header">
+                            <div className="section-tag">About way2fresher</div>
+                            <h2 className="section-title">
+                                Empowering <span className="gradient-text">The Next Generation</span>
+                            </h2>
+                            <p className="section-subtitle">
+                                We are more than a career site. We are a structured decision-making engine built for every Indian student — across Engineering, Commerce, Arts, Sciences, Management, and Computer Applications.
+                            </p>
+                        </div>
+                    </ScrollReveal>
 
                     {/* Mission + Visual */}
                     <div className="about-grid">
-                        <div className="about-story">
-                            <div className="about-story-tag">Our Platform</div>
-                            <h3 className="about-story-title">How It Helps You</h3>
-                            <div className="about-story-text">
-                                <p><strong>🎯 Personalized Career Quiz:</strong> Stop following the crowd. Our intelligent quiz analyzes your degree sector, specialization, risk appetite, and personal interests to suggest the top 3 career paths where you are most likely to succeed.</p>
-                                <p><strong>🔍 Detailed Career Database:</strong> Dive into 50+ mapped careers. Each page covers salary ranges (fresher to senior), future demand, stability, and typical work-life balance — all tailored to the Indian market.</p>
-                                <p><strong>⚖️ Strategic Comparison:</strong> Should you do an MBA or join an IT firm? Use our comparison tool to weigh the long-term ROI, effort required, and risk of different paths side-by-side.</p>
-                                <p><strong>🗺️ Master Roadmaps:</strong> Once you decide, we don't leave you hanging. Follow month-by-month skill-building plans, discover the best certifications, and find exactly what projects you need to build to get hired.</p>
+                        <ScrollReveal delay={0.1}>
+                            <div className="about-story">
+                                <div className="about-story-tag">Our Platform</div>
+                                <h3 className="about-story-title">How It Helps You</h3>
+                                <div className="about-story-text">
+                                    <p><strong>🎯 Personalized Career Quiz:</strong> Stop following the crowd. Our intelligent quiz analyzes your degree sector, specialization, risk appetite, and personal interests to suggest the top 3 career paths where you are most likely to succeed.</p>
+                                    <p><strong>🔍 Detailed Career Database:</strong> Dive into 50+ mapped careers. Each page covers salary ranges (fresher to senior), future demand, stability, and typical work-life balance — all tailored to the Indian market.</p>
+                                    <p><strong>⚖️ Strategic Comparison:</strong> Should you do an MBA or join an IT firm? Use our comparison tool to weigh the long-term ROI, effort required, and risk of different paths side-by-side.</p>
+                                    <p><strong>🗺️ Master Roadmaps:</strong> Once you decide, we don't leave you hanging. Follow month-by-month skill-building plans, discover the best certifications, and find exactly what projects you need to build to get hired.</p>
+                                </div>
                             </div>
-                        </div>
+                        </ScrollReveal>
 
-                        <div className="about-story">
-                            <div className="about-story-tag">Freshers First</div>
-                            <h3 className="about-story-title">Why Use way2fresher?</h3>
-                            <div className="about-story-text">
-                                <p>For freshers, the transition from college to the workplace is often a "black box." way2fresher turns that box transparent. We provide the <strong>structure</strong> that is missing in university curriculum and the <strong>transparency</strong> that is missing in job portals.</p>
-                                <p>By using data-backed insights on PSU exams (GATE/IES), higher studies (CAT/GRE/MS), and private sector trends, we save you months of trial-and-error. Our mission is to ensure no fresher starts their career with regret.</p>
+                        <ScrollReveal delay={0.2}>
+                            <div className="about-story">
+                                <div className="about-story-tag">Freshers First</div>
+                                <h3 className="about-story-title">Why Use way2fresher?</h3>
+                                <div className="about-story-text">
+                                    <p>For freshers, the transition from college to the workplace is often a "black box." way2fresher turns that box transparent. We provide the <strong>structure</strong> that is missing in university curriculum and the <strong>transparency</strong> that is missing in job portals.</p>
+                                    <p>By using data-backed insights on PSU exams (GATE/IES), higher studies (CAT/GRE/MS), and private sector trends, we save you months of trial-and-error. Our mission is to ensure no fresher starts their career with regret.</p>
+                                </div>
                             </div>
-                        </div>
+                        </ScrollReveal>
                     </div>
 
-                        {/* Stats grid */}
-                        <div className="about-stats-grid">
-                            {ABOUT_STATS.map(s => (
-                                <div key={s.label} className="about-stat-card">
+                    {/* Stats grid */}
+                    <div className="about-stats-grid">
+                        {ABOUT_STATS.map((s, idx) => (
+                            <ScrollReveal key={s.label} delay={idx * 0.08} yOffset={20}>
+                                <div className="about-stat-card">
                                     <div className="about-stat-icon">{s.icon}</div>
                                     <div className="about-stat-value">{s.value}</div>
                                     <div className="about-stat-label">{s.label}</div>
                                 </div>
-                            ))}
-                        </div>
+                            </ScrollReveal>
+                        ))}
+                    </div>
 
                     {/* Values */}
                     <div style={{ marginTop: '8rem' }}>
-                        <div className="section-header" style={{ marginBottom: '4rem' }}>
-                            <div className="section-tag">Our Values</div>
-                            <h3 className="section-title">
-                                Why Students <span className="gradient-text">Trust Us</span>
-                            </h3>
-                        </div>
+                        <ScrollReveal>
+                            <div className="section-header" style={{ marginBottom: '4rem' }}>
+                                <div className="section-tag">Our Values</div>
+                                <h3 className="section-title">
+                                    Why Students <span className="gradient-text">Trust Us</span>
+                                </h3>
+                            </div>
+                        </ScrollReveal>
                         <div className="values-grid">
-                            {VALUES.map(v => (
-                                <div key={v.title} className="value-card">
-                                    <div className="value-icon">{v.icon}</div>
-                                    <div className="value-title">{v.title}</div>
-                                    <div className="value-desc">{v.desc}</div>
-                                </div>
+                            {VALUES.map((v, idx) => (
+                                <ScrollReveal key={v.title} delay={idx * 0.08} yOffset={20}>
+                                    <div className="value-card">
+                                        <div className="value-icon">{v.icon}</div>
+                                        <div className="value-title">{v.title}</div>
+                                        <div className="value-desc">{v.desc}</div>
+                                    </div>
+                                </ScrollReveal>
                             ))}
                         </div>
                     </div>
@@ -412,19 +443,21 @@ export default function HomePage() {
             {/* ══════ CTA ══════ */}
             <section className="section" style={{ paddingBottom: '10rem' }}>
                 <div className="container">
-                    <div className="cta-glass-card">
-                        <div className="cta-glow" />
-                        <div className="section-tag" style={{ marginBottom: '2rem' }}>Ready to Decide?</div>
-                        <h2 className="hero-title" style={{ marginBottom: '1.5rem', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
-                            Your Career Clarity Starts with <span className="gradient-text">a Few Questions</span>
-                        </h2>
-                        <p style={{ color: 'var(--text-secondary)', marginBottom: '3.5rem', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto 3.5rem' }}>
-                            Takes only 3 minutes. Join thousands of students across all disciplines making data-backed career decisions.
-                        </p>
-                        <button className="btn-primary" onClick={() => navigate('/quiz')} style={{ fontSize: '1.2rem', padding: '18px 48px' }}>
-                            🎯 Start Your Career Quiz Now
-                        </button>
-                    </div>
+                    <ScrollReveal>
+                        <div className="cta-glass-card">
+                            <div className="cta-glow" />
+                            <div className="section-tag" style={{ marginBottom: '2rem' }}>Ready to Decide?</div>
+                            <h2 className="hero-title" style={{ marginBottom: '1.5rem', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
+                                Your Career Clarity Starts with <span className="gradient-text">a Few Questions</span>
+                            </h2>
+                            <p style={{ color: 'var(--text-secondary)', marginBottom: '3.5rem', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto 3.5rem' }}>
+                                Takes only 3 minutes. Join thousands of students across all disciplines making data-backed career decisions.
+                            </p>
+                            <button className="btn-primary" onClick={() => navigate('/quiz')} style={{ fontSize: '1.2rem', padding: '18px 48px' }}>
+                                🎯 Start Your Career Quiz Now
+                            </button>
+                        </div>
+                    </ScrollReveal>
                 </div>
             </section>
 
