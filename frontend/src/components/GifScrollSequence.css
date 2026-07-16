@@ -111,23 +111,31 @@
     user-select: none;
 }
 
-.scroll-hint-mouse {
-    width: 26px;
-    height: 40px;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    border-radius: 13px;
+.scroll-hint-chevrons {
     display: flex;
-    justify-content: center;
-    padding-top: 6px;
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 2px;
 }
 
-.scroll-hint-wheel {
-    width: 4px;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 2px;
-    animation: scroll-wheel 1.6s ease-in-out infinite;
+.scroll-hint-chevron {
+    display: block;
+    margin-top: -6px; /* negative margin to overlap them snugly */
+    animation: bounce-chevron 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
+}
+
+.scroll-hint-chevron.chevron-1 {
+    animation-delay: 0s;
+}
+
+.scroll-hint-chevron.chevron-2 {
+    animation-delay: 0.15s;
+}
+
+.scroll-hint-chevron.chevron-3 {
+    animation-delay: 0.3s;
 }
 
 .scroll-hint-label {
@@ -138,9 +146,14 @@
     color: rgba(255, 255, 255, 0.55);
 }
 
-@keyframes scroll-wheel {
-    0%   { opacity: 1;   transform: translateY(0); }
-    50%  { opacity: 0.3; transform: translateY(8px); }
-    100% { opacity: 1;   transform: translateY(0); }
+@keyframes bounce-chevron {
+    0%, 100% {
+        opacity: 0.3;
+        transform: translateY(0) scale(0.9);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(6px) scale(1);
+    }
 }
 

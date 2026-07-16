@@ -150,14 +150,22 @@ export default function GifScrollSequence() {
                     </div>
                 </div>
 
-                {/* Mouse-scroll hint icon — fades out once user starts scrolling */}
+                {/* Bouncing chevron hint icon — fades out once user starts scrolling */}
                 <div
                     className="scroll-hint"
                     style={{ opacity: progress > 0.05 ? 0 : 1 }}
                     aria-hidden="true"
                 >
-                    <div className="scroll-hint-mouse">
-                        <div className="scroll-hint-wheel" />
+                    <div className="scroll-hint-chevrons">
+                        <svg width="24" height="12" viewBox="0 0 24 12" fill="none" stroke="rgba(255, 255, 255, 0.85)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="scroll-hint-chevron chevron-1">
+                            <path d="M6 3l6 6 6-6" />
+                        </svg>
+                        <svg width="24" height="12" viewBox="0 0 24 12" fill="none" stroke="rgba(255, 255, 255, 0.85)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="scroll-hint-chevron chevron-2">
+                            <path d="M6 3l6 6 6-6" />
+                        </svg>
+                        <svg width="24" height="12" viewBox="0 0 24 12" fill="none" stroke="rgba(255, 255, 255, 0.85)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="scroll-hint-chevron chevron-3">
+                            <path d="M6 3l6 6 6-6" />
+                        </svg>
                     </div>
                     <span className="scroll-hint-label">Scroll</span>
                 </div>
