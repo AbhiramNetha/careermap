@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { fetchQuizQuestions, submitQuizAnswers } from '../services/api';
 import { useApp } from '../context/AppContext';
@@ -147,14 +148,70 @@ export default function QuizPage() {
                     <span className="text-xs font-bold tracking-wide">Logged in successfully! Ready to start your Career Quiz.</span>
                 </div>
             )}
-            <div className="quiz-container">
-                <div className="quiz-step-label">
-                    Question {currentStep + 1} of {displayTotal}
-                </div>
-                <div className="quiz-progress-bar">
-                    <div className="quiz-progress-fill" style={{ width: `${progress}%` }} />
+            <div className="container" style={{ maxWidth: '680px', margin: '0 auto' }}>
+                {/* ── Step dots ── */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0', marginBottom: '1.25rem', justifyContent: 'center' }}>
+                    {Array.from({ length: displayTotal }).map((_, i) => {
+                        const isDone = i < currentStep;
+                        const isCurrent = i === currentStep;
+                        return (
+                            <div key={i} style={{ display: 'flex', alignItems: 'center' }}>
+                                <motion.div
+                                    animate={{
+                                        scale: isCurrent ? 1.25 : 1,
+                                        background: isDone
+                                            ? 'linear-gradient(135deg,#10b981,#3b82f6)'
+                                            : isCurrent
+                                            ? 'linear-gradient(135deg,#10b981,#3b82f6)'
+                                            : 'rgba(255,255,255,0.1)',
+                                        boxShadow: isCurrent ? '0 0 10px rgba(16,185,129,0.6)' : 'none',
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                    style={{
+                                        width: isCurrent ? '10px' : '8px',
+                                        height: isCurrent ? '10px' : '8px',
+                                        borderRadius: '50%',
+                                        border: isDone || isCurrent ? 'none' : '1px solid rgba(255,255,255,0.25)',
+                                    }}
+                                />
+                                {i < displayTotal - 1 && (
+                                    <div style={{
+                                        width: '24px',
+                                        height: '2px',
+                                        background: isDone
+                                            ? 'linear-gradient(90deg,#10b981,#3b82f6)'
+                                            : 'rgba(255,255,255,0.1)',
+                                        transition: 'background 0.4s ease',
+                                    }} />
+                                )}
+                            </div>
+                        );
+                    })}
                 </div>
 
+                {/* ── Step label ── */}
+                <div className="quiz-step-label" style={{ textAlign: 'center', marginBottom: '0.75rem' }}>
+                    Question <strong>{currentStep + 1}</strong> of {displayTotal}
+                </div>
+
+                {/* ── Animated gradient progress bar ── */}
+                <div className="quiz-progress-bar-enhanced">
+                    <motion.div
+                        className="quiz-progress-fill-enhanced"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${progress}%` }}
+                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    />
+                </div>
+
+                <AnimatePresence mode="wait">
+                <motion.div
+                    key={currentStep}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.28, ease: 'easeOut' }}
+                >
                 <div className="quiz-icon">{currentQuestion.icon}</div>
                 <h2 className="quiz-question">{currentQuestion.question}</h2>
                 {currentQuestion.subtitle && (
@@ -175,6 +232,8 @@ export default function QuizPage() {
                         </button>
                     ))}
                 </div>
+                </motion.div>
+                </AnimatePresence>
 
                 {error && (
                     <div style={{

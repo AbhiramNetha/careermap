@@ -9,46 +9,39 @@ export default function ProfilePage() {
     const { isPremium, togglePremium } = useApp();
 
     return (
-        <div className="container" style={{ paddingTop: '40px', paddingBottom: '80px', minHeight: '80vh' }}>
+        <div className="container mx-auto px-4 py-8 md:py-10 min-h-[80vh]">
             <div className="section-header">
                 <span className="section-tag">Account</span>
                 <h1 className="section-title">Profile Settings</h1>
                 <p className="section-subtitle">Manage your account preferences and personal information.</p>
             </div>
 
-            <div style={{
-                maxWidth: '800px',
-                margin: '0 auto',
-                background: 'var(--bg-glass)',
-                backdropFilter: 'blur(20px)',
-                borderRadius: 'var(--radius-xl)',
-                border: '1px solid var(--border)',
-                padding: '3rem',
-                boxShadow: 'var(--shadow-premium)'
-            }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '3rem' }}>
-                    <div style={{
-                        width: '100px',
-                        height: '100px',
-                        borderRadius: '50%',
-                        background: 'var(--gradient-primary)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '2.5rem',
-                        fontWeight: '800',
-                        color: 'white',
-                        overflow: 'hidden',
-                        border: '4px solid var(--border)'
-                    }}>
+            <div 
+                className="w-full max-w-[800px] mx-auto p-6 md:p-12"
+                style={{
+                    background: 'var(--bg-glass)',
+                    backdropFilter: 'blur(20px)',
+                    borderRadius: 'var(--radius-xl)',
+                    border: '1px solid var(--border)',
+                    boxShadow: 'var(--shadow-premium)'
+                }}
+            >
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-8 mb-8 md:mb-12 text-center sm:text-left">
+                    <div 
+                        className="w-24 h-24 rounded-full flex items-center justify-center text-4xl font-extrabold text-white overflow-hidden flex-shrink-0"
+                        style={{
+                            background: 'var(--gradient-primary)',
+                            border: '4px solid var(--border)'
+                        }}
+                    >
                         {currentUser?.photoURL 
-                            ? <img src={currentUser.photoURL} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            ? <img src={currentUser.photoURL} alt="profile" className="w-full h-full object-cover" />
                             : <span>{(currentUser?.displayName || currentUser?.email || '?')[0].toUpperCase()}</span>
                         }
                     </div>
                     <div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.25rem' }}>
-                            <h2 style={{ fontSize: '1.8rem', fontWeight: '700', margin: 0 }}>
+                        <div className="flex flex-col sm:flex-row items-center gap-2 mb-1">
+                            <h2 style={{ fontSize: '1.8rem', fontWeight: '700', margin: 0, color: 'var(--text-primary)' }}>
                                 {currentUser?.displayName || 'Student'}
                             </h2>
                             {isPremium && (
@@ -73,21 +66,19 @@ export default function ProfilePage() {
                     </div>
                 </div>
 
-                <div style={{ display: 'grid', gap: '2rem' }}>
+                <div className="grid gap-6">
                     {/* Account Type Section */}
                     <div className="profile-field">
                         <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>
                             Account Type
                         </label>
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            padding: '1rem',
-                            background: isPremium ? 'rgba(251, 191, 36, 0.03)' : 'rgba(255,255,255,0.03)',
-                            border: isPremium ? '1px solid rgba(251, 191, 36, 0.2)' : '1px solid var(--border)',
-                            borderRadius: 'var(--radius-md)',
-                        }}>
+                        <div 
+                            className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-xl"
+                            style={{
+                                background: isPremium ? 'rgba(251, 191, 36, 0.03)' : 'rgba(255,255,255,0.03)',
+                                border: isPremium ? '1px solid rgba(251, 191, 36, 0.2)' : '1px solid var(--border)',
+                            }}
+                        >
                             <div>
                                 <span style={{
                                     color: isPremium ? '#fbbf24' : 'var(--text-primary)',
@@ -96,21 +87,21 @@ export default function ProfilePage() {
                                 }}>
                                     {isPremium ? 'Way2Fresher PRO' : 'Free Account'}
                                 </span>
-                                <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', margin: '4px 0 0' }}>
+                                <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', margin: '4px 0 0', lineHeight: 1.4 }}>
                                     {isPremium ? 'You have full access to all premium navigation pages and tools.' : 'Upgrade to PRO to access Compare, Branch Guide, ATS, and Mock Interviews.'}
                                 </p>
                             </div>
                             {isPremium ? (
                                 <button
                                     onClick={togglePremium}
-                                    className="bg-red-500/10 hover:bg-red-500/20 text-red-400 font-bold text-xs py-2.5 px-4 rounded-lg transition-all hover:scale-[1.02] border border-red-500/20 cursor-pointer"
+                                    className="bg-red-500/10 hover:bg-red-500/20 text-red-400 font-bold text-xs py-2.5 px-4 rounded-lg transition-all border border-red-500/20 cursor-pointer w-full md:w-auto text-center flex-shrink-0"
                                 >
                                     Withdraw PRO
                                 </button>
                             ) : (
                                 <button
                                     onClick={togglePremium}
-                                    className="bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold text-xs py-2.5 px-4 rounded-lg transition-all hover:scale-[1.02] shadow-md shadow-amber-500/10 border-none cursor-pointer"
+                                    className="bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold text-xs py-2.5 px-4 rounded-lg transition-all shadow-md shadow-amber-500/10 border-none cursor-pointer w-full md:w-auto text-center flex-shrink-0"
                                 >
                                     Upgrade to PRO
                                 </button>
@@ -122,7 +113,7 @@ export default function ProfilePage() {
                         <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>
                             Full Name
                         </label>
-                        <div style={{ padding: '1rem', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', color: 'var(--text-primary)' }}>
+                        <div className="p-4 rounded-xl text-left" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', color: 'var(--text-primary)' }}>
                             {currentUser?.displayName || 'Not provided'}
                         </div>
                     </div>
@@ -131,30 +122,28 @@ export default function ProfilePage() {
                         <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>
                             Email Address
                         </label>
-                        <div style={{ padding: '1rem', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', color: 'var(--text-primary)' }}>
+                        <div className="p-4 rounded-xl text-left" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', color: 'var(--text-primary)' }}>
                             {currentUser?.email}
                         </div>
                     </div>
 
-                    {/* ── Appearance Section ── */}
+                    {/* Appearance Section */}
                     <div className="profile-field">
                         <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>
                             Appearance
                         </label>
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            padding: '1rem 1.25rem',
-                            background: 'rgba(255,255,255,0.03)',
-                            border: '1px solid var(--border)',
-                            borderRadius: 'var(--radius-md)',
-                        }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <div 
+                            className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl"
+                            style={{
+                                background: 'rgba(255,255,255,0.03)',
+                                border: '1px solid var(--border)',
+                            }}
+                        >
+                            <div className="flex items-center gap-3">
                                 {isDark ? (
-                                    <Moon size={20} style={{ color: 'var(--primary-light)' }} />
+                                    <Moon size={20} style={{ color: 'var(--primary-light)', flexShrink: 0 }} />
                                 ) : (
-                                    <Sun size={20} style={{ color: '#f59e0b' }} />
+                                    <Sun size={20} style={{ color: '#f59e0b', flexShrink: 0 }} />
                                 )}
                                 <div>
                                     <div style={{ color: 'var(--text-primary)', fontWeight: '600', fontSize: '0.95rem' }}>
@@ -167,7 +156,7 @@ export default function ProfilePage() {
                             </div>
                             <button
                                 onClick={toggleTheme}
-                                className="appearance-toggle"
+                                className="appearance-toggle flex-shrink-0 self-start sm:self-auto"
                                 aria-label="Toggle theme"
                                 role="switch"
                                 aria-checked={!isDark}
@@ -181,11 +170,11 @@ export default function ProfilePage() {
                         </div>
                     </div>
 
-                    <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem' }}>
-                        <button className="btn-filled" style={{ padding: '12px 24px', borderRadius: 'var(--radius-md)', width: 'auto' }}>
+                    <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                        <button className="btn-filled w-full sm:w-auto px-6 py-3 rounded-xl text-sm font-bold">
                             Update Profile
                         </button>
-                        <button className="btn-outline" style={{ padding: '12px 24px', borderRadius: 'var(--radius-md)', width: 'auto' }}>
+                        <button className="btn-outline w-full sm:w-auto px-6 py-3 rounded-xl text-sm font-bold">
                             Change Password
                         </button>
                     </div>

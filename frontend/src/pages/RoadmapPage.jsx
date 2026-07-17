@@ -1,7 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { fetchCareerById } from '../services/api';
 import { useApp } from '../context/AppContext';
+import { RoadmapSkeleton } from '../components/SkeletonLoader';
 
 
 function buildItemKeys(roadmap) {
@@ -103,7 +105,7 @@ export default function RoadmapPage() {
     };
 
     if (loading) {
-        return <div className="loader-container"><div className="loader" /></div>;
+        return <RoadmapSkeleton />;
     }
     if (error || !career) {
         return (
@@ -226,8 +228,41 @@ export default function RoadmapPage() {
                                 const isComplete = stepPct === 100 && sp.total > 0;
 
                                 return (
-                                    <div id={`step-${si}`} key={si} className="timeline-item" style={{ marginBottom: '2.5rem' }}>
-                                        <div className={`timeline-dot ${isComplete ? 'timeline-dot-done' : ''}`} />
+                                    <motion.div
+                                        id={`step-${si}`}
+                                        key={si}
+                                        className="timeline-item"
+                                        style={{ marginBottom: '2.5rem', position: 'relative' }}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true, margin: '-40px' }}
+                                        transition={{ duration: 0.5, delay: si * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                                    >
+                                        {/* Enhanced dot with pulse ring for completed */}
+                                        <div style={{ position: 'relative', display: 'inline-block' }}>
+                                            <div className={`timeline-dot ${isComplete ? 'timeline-dot-done' : ''}`}
+                                                style={{
+                                                    background: isComplete
+                                                        ? 'linear-gradient(135deg,#10b981,#059669)'
+                                                        : 'linear-gradient(135deg,#3b82f6,#6366f1)',
+                                                    boxShadow: isComplete
+                                                        ? '0 0 16px rgba(16,185,129,0.5)'
+                                                        : '0 0 12px rgba(99,102,241,0.4)',
+                                                }}
+                                            />
+                                            {isComplete && (
+                                                <motion.div
+                                                    style={{
+                                                        position: 'absolute',
+                                                        inset: '-6px',
+                                                        borderRadius: '50%',
+                                                        border: '2px solid rgba(16,185,129,0.4)',
+                                                    }}
+                                                    animate={{ scale: [1, 1.4, 1], opacity: [0.8, 0, 0.8] }}
+                                                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                                                />
+                                            )}
+                                        </div>
 
                                         {/* Step header */}
                                         <div
@@ -248,11 +283,21 @@ export default function RoadmapPage() {
 
                                         {/* Mini step progress bar */}
                                         <div style={{ height: '3px', borderRadius: '99px', background: 'rgba(255,255,255,0.06)', marginBottom: '0.75rem', overflow: 'hidden' }}>
-                                            <div style={{ height: '100%', width: `${stepPct}%`, background: isComplete ? '#10b981' : 'var(--gradient-primary)', borderRadius: '99px', transition: 'width 0.4s ease' }} />
+                                            <motion.div
+                                                style={{ height: '100%', background: isComplete ? '#10b981' : 'var(--gradient-primary)', borderRadius: '99px' }}
+                                                initial={{ width: 0 }}
+                                                animate={{ width: `${stepPct}%` }}
+                                                transition={{ duration: 0.6, ease: 'easeOut', delay: si * 0.05 }}
+                                            />
                                         </div>
 
                                         {expandedSteps[si] && (
-                                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+                                            <motion.div
+                                                style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}
+                                                initial={{ opacity: 0, height: 0 }}
+                                                animate={{ opacity: 1, height: 'auto' }}
+                                                transition={{ duration: 0.35, ease: 'easeOut' }}
+                                            >
                                                 {['skills', 'tools', 'projects', 'interviewPrep'].map(cat => {
                                                     const items = step[cat];
                                                     if (!items?.length) return null;
@@ -289,9 +334,9 @@ export default function RoadmapPage() {
                                                         </div>
                                                     );
                                                 })}
-                                            </div>
+                                            </motion.div>
                                         )}
-                                    </div>
+                                    </motion.div>
                                 );
                             })}
                         </div>

@@ -1,11 +1,32 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import GifScrollSequence from '../components/GifScrollSequence';
 import SpotlightCard from '../components/SpotlightCard';
 import BlurText from '../components/BlurText';
 import ScrollReveal from '../components/ScrollReveal';
+import Tooltip from '../components/Tooltip';
+import useCountUp from '../hooks/useCountUp';
 
+/** Animated counter stat — counts up when it enters the viewport */
+function CountUpStat({ end, suffix, label }) {
+  const { display, ref } = useCountUp(end, 1600, suffix);
+  return (
+    <div className="hero-stat-item" ref={ref}>
+      <motion.div
+        className="stat-value"
+        initial={{ scale: 0.8, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, ease: 'backOut' }}
+      >
+        {display}
+      </motion.div>
+      <div className="stat-label">{label}</div>
+    </div>
+  );
+}
 
 function BubblesCanvas() {
     const canvasRef = useRef(null);
@@ -243,24 +264,17 @@ export default function HomePage() {
                             <button className="btn-secondary" onClick={() => navigate('/careers')}>Explore All Careers</button>
                         </div>
                     </ScrollReveal>
+            {/* Aurora glow orbs */}
+            <div className="aurora-orb aurora-orb-1" />
+            <div className="aurora-orb aurora-orb-2" />
+            <div className="aurora-orb aurora-orb-3" />
+
                     <ScrollReveal delay={0.5}>
                         <div className="hero-stats">
-                            <div className="hero-stat-item">
-                                <div className="stat-value">56+</div>
-                                <div className="stat-label">Career Paths</div>
-                            </div>
-                            <div className="hero-stat-item">
-                                <div className="stat-value">6</div>
-                                <div className="stat-label">Degree Sectors</div>
-                            </div>
-                            <div className="hero-stat-item">
-                                <div className="stat-value">6+</div>
-                                <div className="stat-label">Quiz Parameters</div>
-                            </div>
-                            <div className="hero-stat-item">
-                                <div className="stat-value">100%</div>
-                                <div className="stat-label">India Focused</div>
-                            </div>
+                            <CountUpStat end={56} suffix="+" label="Career Paths" />
+                            <CountUpStat end={6} suffix="" label="Degree Sectors" />
+                            <CountUpStat end={6} suffix="+" label="Quiz Parameters" />
+                            <CountUpStat end={100} suffix="%" label="India Focused" />
                         </div>
                     </ScrollReveal>
                 </div>
@@ -429,7 +443,9 @@ export default function HomePage() {
                             {VALUES.map((v, idx) => (
                                 <ScrollReveal key={v.title} delay={idx * 0.08} yOffset={20}>
                                     <div className="value-card">
-                                        <div className="value-icon">{v.icon}</div>
+                                        <Tooltip text={v.desc} position="top">
+                                            <div className="value-icon" style={{ cursor: 'help' }}>{v.icon}</div>
+                                        </Tooltip>
                                         <div className="value-title">{v.title}</div>
                                         <div className="value-desc">{v.desc}</div>
                                     </div>

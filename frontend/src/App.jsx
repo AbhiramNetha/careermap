@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import { AppProvider } from './context/AppContext';
 import { AuthProvider } from './context/AuthContext';
 import { AdminAuthProvider } from './context/AdminAuthContext';
@@ -39,6 +40,12 @@ import FloatingDotsBackground from './components/Backgrounds/FloatingDotsBackgro
 import './index.css';
 
 
+const pageVariants = {
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } },
+  exit:    { opacity: 0, y: -8,  transition: { duration: 0.2,  ease: 'easeIn' } },
+};
+
 function PublicSite() {
   const location = useLocation();
   const hideFooter = ['/premium', '/courses', '/careers', '/quiz', '/alumni'].some(p => location.pathname.startsWith(p));
@@ -55,32 +62,43 @@ function PublicSite() {
           {/* Sticky top bar */}
           <TopBar />
 
-          {/* Page content */}
+          {/* Page content with animated transitions */}
           <main className="main-content">
-            <Routes>
-              {/* Public routes */}
-              <Route path="/" element={<HomePage />} />
-              <Route path="/premium" element={<PremiumPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-              <Route path="/careers" element={<CareerCategoryPage />} />
-              <Route path="/courses" element={<CoursesPage />} />
-              <Route path="/branches" element={<PremiumRoute><BranchSelectionPage /></PremiumRoute>} />
-              <Route path="/ats" element={<PremiumRoute><AtsCheckerPage /></PremiumRoute>} />
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={location.pathname}
+                variants={pageVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                style={{ minHeight: '100%' }}
+              >
+                <Routes location={location}>
+                  {/* Public routes */}
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/premium" element={<PremiumPage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/signup" element={<SignupPage />} />
+                  <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                  <Route path="/careers" element={<CareerCategoryPage />} />
+                  <Route path="/courses" element={<CoursesPage />} />
+                  <Route path="/branches" element={<PremiumRoute><BranchSelectionPage /></PremiumRoute>} />
+                  <Route path="/ats" element={<PremiumRoute><AtsCheckerPage /></PremiumRoute>} />
 
-              {/* Protected routes */}
-              <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
-              <Route path="/quiz/results" element={<ProtectedRoute><QuizResultPage /></ProtectedRoute>} />
-              <Route path="/careers/:id" element={<ProtectedRoute><CareerDetailPage /></ProtectedRoute>} />
-              <Route path="/compare" element={<PremiumRoute><ComparePage /></PremiumRoute>} />
-              <Route path="/branches/:branch" element={<PremiumRoute><BranchDetailPage /></PremiumRoute>} />
-              <Route path="/roadmap/:id" element={<ProtectedRoute><RoadmapPage /></ProtectedRoute>} />
-              <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-              <Route path="/resume-builder" element={<PremiumRoute><ResumeBuilder /></PremiumRoute>} />
-              <Route path="/alumni" element={<ProtectedRoute><CollegeAlumniPage /></ProtectedRoute>} />
-            </Routes>
-            {!hideFooter && <Footer />}
+                  {/* Protected routes */}
+                  <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
+                  <Route path="/quiz/results" element={<ProtectedRoute><QuizResultPage /></ProtectedRoute>} />
+                  <Route path="/careers/:id" element={<ProtectedRoute><CareerDetailPage /></ProtectedRoute>} />
+                  <Route path="/compare" element={<PremiumRoute><ComparePage /></PremiumRoute>} />
+                  <Route path="/branches/:branch" element={<PremiumRoute><BranchDetailPage /></PremiumRoute>} />
+                  <Route path="/roadmap/:id" element={<ProtectedRoute><RoadmapPage /></ProtectedRoute>} />
+                  <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+                  <Route path="/resume-builder" element={<PremiumRoute><ResumeBuilder /></PremiumRoute>} />
+                  <Route path="/alumni" element={<ProtectedRoute><CollegeAlumniPage /></ProtectedRoute>} />
+                </Routes>
+                {!hideFooter && <Footer />}
+              </motion.div>
+            </AnimatePresence>
           </main>
         </div>
       </div>

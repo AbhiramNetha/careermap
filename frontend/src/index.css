@@ -4797,52 +4797,7 @@ button[type="submit"]:active:not(:disabled) {
   box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2) !important;
 }
 
-/* ── YELLOW TEXT on ALL meaningful buttons ── */
 
-/* Submit / Continue / Generate buttons */
-.resume-builder-form button[type="submit"] {
-  color: #fbbf24 !important;
-}
-
-/* Back buttons — flex-1 navigation buttons */
-.resume-builder-form button[type="button"].flex-1,
-.resume-builder-form button.bg-slate-900 {
-  color: #fbbf24 !important;
-  border-color: rgba(251, 191, 36, 0.25) !important;
-}
-.resume-builder-form button[type="button"].flex-1:hover,
-.resume-builder-form button.bg-slate-900:hover {
-  background-color: rgba(251, 191, 36, 0.08) !important;
-}
-
-/* Add Another / Add Experience / Add Project buttons (w-fit outline buttons) */
-.resume-builder-form button[type="button"].w-fit,
-.resume-builder-form button[type="button"].text-emerald-400 {
-  color: #fbbf24 !important;
-  border-color: rgba(251, 191, 36, 0.3) !important;
-}
-.resume-builder-form button[type="button"].w-fit svg,
-.resume-builder-form button[type="button"].text-emerald-400 svg {
-  color: #fbbf24 !important;
-}
-.resume-builder-form button[type="button"].w-fit:hover,
-.resume-builder-form button[type="button"].text-emerald-400:hover {
-  background-color: rgba(251, 191, 36, 0.1) !important;
-}
-
-/* Skill suggestion pill buttons */
-.resume-builder-form button[type="button"].rounded-full {
-  color: #fbbf24 !important;
-  border-color: rgba(251, 191, 36, 0.25) !important;
-}
-.resume-builder-form button[type="button"].rounded-full:hover:not(:disabled) {
-  color: #fde68a !important;
-  border-color: rgba(251, 191, 36, 0.5) !important;
-  background-color: rgba(251, 191, 36, 0.08) !important;
-}
-.resume-builder-form button[type="button"].rounded-full:disabled {
-  opacity: 0.35 !important;
-}
 
 /* ── Tag X-remove buttons inside skill inputs — keep them white/subtle ── */
 .resume-builder-form span button[type="button"] {
@@ -5808,5 +5763,245 @@ button[type="submit"]:active:not(:disabled) {
   }
 }
 
+
+/* ============================================================
+   UI ENHANCEMENTS — Skeleton, Aurora, Quiz Bar, Tooltip
+   ============================================================ */
+
+/* ── Skeleton shimmer ── */
+@keyframes skeleton-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton-line,
+.skeleton-card,
+.skeleton-dot {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.09) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 800px 100%;
+  animation: skeleton-shimmer 1.6s infinite linear;
+}
+
+[data-theme='light'] .skeleton-line,
+[data-theme='light'] .skeleton-card,
+[data-theme='light'] .skeleton-dot {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.05) 25%,
+    rgba(15, 23, 42, 0.12) 50%,
+    rgba(15, 23, 42, 0.05) 75%
+  );
+  background-size: 800px 100%;
+  animation: skeleton-shimmer 1.6s infinite linear;
+}
+
+.skeleton-card {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+}
+
+.skeleton-line {
+  display: block;
+  border-radius: 6px;
+}
+
+.skeleton-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+/* ── Aurora orbs (hero section background) ── */
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(40px, -30px) scale(1.08); }
+  66%       { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-50px, 30px) scale(1.1); }
+  70%       { transform: translate(30px, -20px) scale(0.9); }
+}
+
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(25px, 40px) scale(1.05); }
+}
+
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.aurora-orb-1 {
+  width: 520px;
+  height: 520px;
+  top: -100px;
+  left: -80px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, transparent 70%);
+  animation: aurora-drift-1 12s ease-in-out infinite;
+}
+
+.aurora-orb-2 {
+  width: 440px;
+  height: 440px;
+  top: 60px;
+  right: -60px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  animation: aurora-drift-2 15s ease-in-out infinite;
+}
+
+.aurora-orb-3 {
+  width: 300px;
+  height: 300px;
+  bottom: 0px;
+  left: 45%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+  animation: aurora-drift-3 18s ease-in-out infinite;
+}
+
+/* ── Enhanced quiz progress bar ── */
+@keyframes quiz-bar-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.quiz-progress-bar-enhanced {
+  height: 6px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: visible;
+  margin-bottom: 2rem;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='light'] .quiz-progress-bar-enhanced {
+  background: rgba(15, 23, 42, 0.08);
+}
+
+.quiz-progress-fill-enhanced {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(
+    90deg,
+    #10b981 0%,
+    #3b82f6 50%,
+    #10b981 100%
+  );
+  background-size: 200% auto;
+  animation: quiz-bar-shimmer 2s linear infinite;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
+  position: relative;
+}
+
+/* ── Tooltip fade-in animation ── */
+@keyframes tooltip-fade-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(4px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ── Timeline dot enhancements ── */
+.timeline-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: box-shadow 0.3s ease;
+}
+
+.timeline-dot-done {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.5) !important;
+}
+
+
+/* ============================================================
+   Sidebar Premium CTA Button — Exact matches from user reference image
+   ============================================================ */
+.sidebar-premium-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  border-radius: 10px;
+  text-decoration: none !important;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  
+  /* Gold gradient from reference image */
+  background: linear-gradient(90deg, #ffde59 0%, #f59f00 100%) !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(245, 159, 0, 0.25) !important;
+  
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark slate label text for contrast */
+.sidebar-premium-btn .sidebar-nav-label {
+  color: #0f1d33 !important;
+  font-weight: 700 !important;
+}
+
+/* Warm golden-orange color for icons */
+.sidebar-premium-btn svg {
+  color: #e28a00 !important;
+}
+
+.sidebar-premium-btn--collapsed {
+  justify-content: center;
+  padding: 0.6rem;
+}
+
+.sidebar-premium-btn--expanded {
+  justify-content: flex-start;
+  padding: 0.65rem 0.85rem;
+}
+
+/* Active style (when on the premium route) */
+.sidebar-premium-btn.active {
+  box-shadow: 0 6px 20px rgba(245, 159, 0, 0.35) !important;
+}
+
+/* Hover style */
+.sidebar-premium-btn:hover {
+  box-shadow: 0 6px 22px rgba(245, 159, 0, 0.4) !important;
+  transform: translateY(-1px);
+}
+
+/* Gold shimmer sweeping light sweep effect */
+.sidebar-premium-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -80%;
+  width: 30%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: all 0.7s ease-in-out;
+  pointer-events: none;
+}
+
+.sidebar-premium-btn:hover::after {
+  left: 160%;
+}
 
 

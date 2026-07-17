@@ -184,30 +184,17 @@ export default function Sidebar() {
           to="/premium"
           onClick={closeMobile}
           title={isCollapsed ? 'PRO Features' : undefined}
-          style={({ isActive }) => ({
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: isCollapsed ? 'center' : 'flex-start',
-            gap: '0.5rem',
-            width: '100%',
-            padding: isCollapsed ? '0.6rem' : '0.65rem 0.85rem',
-            borderRadius: '10px',
-            background: isActive
-              ? 'linear-gradient(135deg, rgba(251,191,36,0.25) 0%, rgba(245,158,11,0.15) 100%)'
-              : 'linear-gradient(135deg, rgba(251,191,36,0.12) 0%, rgba(245,158,11,0.08) 100%)',
-            border: isActive ? '1px solid rgba(251,191,36,0.5)' : '1px solid rgba(251,191,36,0.25)',
-            textDecoration: 'none',
-            transition: 'all 0.2s ease',
-            cursor: 'pointer',
-          })}
+          className={({ isActive }) => 
+            `sidebar-premium-btn ${isCollapsed ? 'sidebar-premium-btn--collapsed' : 'sidebar-premium-btn--expanded'} ${isActive ? 'active' : ''}`
+          }
         >
           {isCollapsed
-            ? <Crown size={18} color="#fbbf24" />
+            ? <Crown size={18} color="#fbbf24" style={{ flexShrink: 0 }} />
             : (
               <>
-                <Crown size={16} color="#fbbf24" />
-                <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#fbbf24', flex: 1 }}>PRO Features</span>
-                <Sparkles size={13} color="#f59e0b" />
+                <Crown size={16} color="#fbbf24" style={{ flexShrink: 0 }} />
+                <span className="sidebar-nav-label" style={{ fontSize: '0.82rem', fontWeight: 700, color: '#fbbf24', flex: 1, textTransform: 'none' }}>PRO Features</span>
+                <Sparkles size={13} color="#f59e0b" style={{ flexShrink: 0 }} />
               </>
             )
           }

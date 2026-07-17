@@ -380,7 +380,7 @@ export default function PremiumPage() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(320px, 100%), 1fr))', gap: '1.25rem' }}>
         {SECTIONS.map((s) => {
           const Icon = s.icon;
-          const isCardInteractive = isUnlocked && !s.comingSoon;
+          const isCardInteractive = !s.comingSoon;
           return (
             <div
               key={s.id}
@@ -388,10 +388,13 @@ export default function PremiumPage() {
               style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
                 borderRadius: '16px', padding: '1.6rem',
-                cursor: isCardInteractive ? 'pointer' : s.comingSoon ? 'default' : 'not-allowed',
+                cursor: isCardInteractive ? 'pointer' : 'default',
                 position: 'relative', overflow: 'hidden',
                 transition: 'transform 0.22s, box-shadow 0.22s, border-color 0.22s',
-                opacity: isCardInteractive ? 1 : 0.82,
+                opacity: isCardInteractive ? 1 : 0.75,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
               }}
               onMouseEnter={e => {
                 if (isCardInteractive) {
@@ -408,45 +411,130 @@ export default function PremiumPage() {
                 }
               }}
             >
-              {/* Glow blob */}
-              <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '110px', height: '110px', background: s.glow, borderRadius: '50%', filter: 'blur(28px)', pointerEvents: 'none' }} />
+              <div>
+                {/* Glow blob */}
+                <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '110px', height: '110px', background: s.glow, borderRadius: '50%', filter: 'blur(28px)', pointerEvents: 'none' }} />
 
-              {/* Header */}
-              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: s.glow, border: `1px solid ${s.color}33`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Icon size={22} color={s.color} />
+                {/* Header */}
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                  <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: s.glow, border: `1px solid ${s.color}33`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Icon size={22} color={s.color} />
+                  </div>
+                  <div>
+                    {s.comingSoon ? (
+                      <span style={{ fontSize: '0.65rem', fontWeight: 700, color: '#94a3b8', background: 'rgba(148,163,184,0.12)', border: '1px solid rgba(148,163,184,0.2)', padding: '2px 8px', borderRadius: '99px', textTransform: 'uppercase' }}>Soon</span>
+                    ) : !isUnlocked ? (
+                      <span style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Lock size={13} color="#fbbf24" />
+                      </span>
+                    ) : (
+                      <span style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <ChevronRight size={14} color="#10b981" />
+                      </span>
+                    )}
+                  </div>
                 </div>
-                <div>
-                  {s.comingSoon ? (
-                    <span style={{ fontSize: '0.65rem', fontWeight: 700, color: '#94a3b8', background: 'rgba(148,163,184,0.12)', border: '1px solid rgba(148,163,184,0.2)', padding: '2px 8px', borderRadius: '99px', textTransform: 'uppercase' }}>Soon</span>
-                  ) : !isUnlocked ? (
-                    <span style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Lock size={13} color="#fbbf24" />
-                    </span>
-                  ) : (
-                    <span style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <ChevronRight size={14} color="#10b981" />
-                    </span>
-                  )}
-                </div>
+
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.45rem' }}>{s.label}</h3>
+                <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: 1.65, marginBottom: '1.1rem' }}>{s.desc}</p>
+
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.35rem', marginBottom: '1.5rem' }}>
+                  {s.highlights.map(h => (
+                    <li key={h} style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                      <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: s.color, flexShrink: 0 }} />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.45rem' }}>{s.label}</h3>
-              <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: 1.65, marginBottom: '1.1rem' }}>{s.desc}</p>
-
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                {s.highlights.map(h => (
-                  <li key={h} style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                    <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: s.color, flexShrink: 0 }} />
-                    {h}
-                  </li>
-                ))}
-              </ul>
-
-              <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
-                <span style={{ fontSize: '0.8rem', fontWeight: 700, color: s.comingSoon ? 'var(--text-muted)' : s.color }}>
-                  {s.comingSoon ? 'Coming Soon' : isUnlocked ? 'Open →' : 'Unlock with PRO →'}
-                </span>
+              <div style={{ paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+                {s.comingSoon ? (
+                  <button
+                    disabled
+                    style={{
+                      width: '100%',
+                      padding: '0.65rem 1rem',
+                      borderRadius: '10px',
+                      border: '1px solid rgba(255, 255, 255, 0.05)',
+                      background: 'rgba(255, 255, 255, 0.02)',
+                      color: 'var(--text-muted)',
+                      fontSize: '0.8rem',
+                      fontWeight: 600,
+                      cursor: 'not-allowed',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.4rem',
+                    }}
+                  >
+                    Coming Soon
+                  </button>
+                ) : isUnlocked ? (
+                  <button
+                    style={{
+                      width: '100%',
+                      padding: '0.65rem 1rem',
+                      borderRadius: '10px',
+                      border: `1px solid ${s.color}35`,
+                      background: `${s.color}15`,
+                      color: s.color,
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.4rem',
+                      transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.background = `${s.color}25`;
+                      e.currentTarget.style.borderColor = s.color;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.background = `${s.color}15`;
+                      e.currentTarget.style.borderColor = `${s.color}35`;
+                    }}
+                  >
+                    <span>Open Feature</span>
+                    <ChevronRight size={14} />
+                  </button>
+                ) : (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleUpgrade();
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '0.65rem 1rem',
+                      borderRadius: '10px',
+                      border: '1px solid rgba(251, 191, 36, 0.25)',
+                      background: 'rgba(251, 191, 36, 0.08)',
+                      color: '#fbbf24',
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.4rem',
+                      transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.background = 'rgba(251, 191, 36, 0.15)';
+                      e.currentTarget.style.borderColor = '#fbbf24';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.background = 'rgba(251, 191, 36, 0.08)';
+                      e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.25)';
+                    }}
+                  >
+                    <span>Unlock with PRO</span>
+                    <Sparkles size={13} />
+                  </button>
+                )}
               </div>
             </div>
           );
