@@ -50,7 +50,7 @@
   /* Sidebar */
   --sidebar-width: 220px;
   --sidebar-collapsed-width: 56px;
-  --sidebar-bg: rgba(8, 10, 18, 0.95);
+  --sidebar-bg: rgba(8, 10, 18, 0.6);
   --sidebar-border: rgba(255, 255, 255, 0.06);
   --sidebar-hover: rgba(255, 255, 255, 0.06);
   --sidebar-active-bg: #2563eb;
@@ -76,7 +76,7 @@
   --shadow-premium: 0 8px 32px 0 rgba(15, 23, 42, 0.08);
 
   /* Sidebar light */
-  --sidebar-bg: rgba(255, 255, 255, 0.96);
+  --sidebar-bg: rgba(255, 255, 255, 0.65);
   --sidebar-border: rgba(15, 23, 42, 0.08);
   --sidebar-hover: rgba(15, 23, 42, 0.05);
   --sidebar-active-bg: #2563eb;
@@ -3160,6 +3160,43 @@ textarea {
   }
 }
 
+/* --- Light theme contrast fixes for level up animation --- */
+[data-theme='light'] .auth-lu__h1 {
+  background: linear-gradient(90deg, #1d4ed8, #7e22ce, #db2777);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme='light'] .auth-lu__p {
+  color: #475569 !important;
+  text-shadow: none !important;
+}
+
+[data-theme='light'] .auth-lu__xpLabel {
+  color: #1e293b !important;
+}
+
+[data-theme='light'] .auth-lu__xpTrack {
+  background: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-theme='light'] .auth-lu__badge {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), 0 0 4px rgba(0, 0, 0, 0.05) !important;
+  text-shadow: none !important;
+  font-weight: 700 !important;
+}
+
+[data-theme='light'] .auth-lu__chip {
+  background: #0f172a !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   .auth-lu__star,
@@ -4845,11 +4882,13 @@ button[type="submit"]:active:not(:disabled) {
   display: flex;
   flex-direction: column;
   background: var(--sidebar-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-right: 1px solid var(--sidebar-border);
   padding: 1rem 0.75rem;
   overflow-y: auto;
   overflow-x: hidden;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, border-right 0.35s ease;
   z-index: 100;
   scrollbar-width: thin;
   scrollbar-color: var(--sidebar-border) transparent;
@@ -6002,6 +6041,24 @@ button[type="submit"]:active:not(:disabled) {
 
 .sidebar-premium-btn:hover::after {
   left: 160%;
+}
+
+/* ── Scroll-reveal Sidebar Visibility Overrides ── */
+.w2f-sidebar--hidden {
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  padding: 0 !important;
+  border-right: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 768px) {
+  .topbar--no-sidebar {
+    padding-left: 1.5rem !important;
+  }
 }
 
 

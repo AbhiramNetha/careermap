@@ -50,7 +50,7 @@ function NavItem({ label, href, icon: Icon, active, indent, comingSoon, msg, col
 }
 
 /* ── Main Sidebar ── */
-export default function Sidebar() {
+export default function Sidebar({ visible = true }) {
   const { currentUser } = useAuth();
   const { isPremium } = useApp();
   const location = useLocation();
@@ -138,6 +138,13 @@ export default function Sidebar() {
           {!isCollapsed && (
             <>
               <span className="sidebar-nav-label" style={{ flex: 1 }}>Opportunities</span>
+              <span style={{
+                fontSize: '0.65rem',
+                color: 'var(--text-muted)',
+                transition: 'transform 0.2s ease',
+                transform: opportunitiesOpen ? 'rotate(0deg)' : 'rotate(-90deg)',
+                display: 'inline-block'
+              }}>▼</span>
             </>
           )}
         </button>
@@ -228,22 +235,24 @@ export default function Sidebar() {
       )}
 
       {/* Mobile hamburger button */}
-      <button
-        className="sidebar-mobile-toggle"
-        onClick={() => setMobileOpen(!mobileOpen)}
-        aria-label="Toggle sidebar"
-        style={{ fontSize: '0.8rem', fontWeight: 'bold' }}
-      >
-        {mobileOpen ? 'Close' : 'Menu'}
-      </button>
+      {visible && (
+        <button
+          className="sidebar-mobile-toggle"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle sidebar"
+          style={{ fontSize: '0.8rem', fontWeight: 'bold' }}
+        >
+          {mobileOpen ? 'Close' : 'Menu'}
+        </button>
+      )}
 
       {/* Mobile overlay */}
-      {mobileOpen && (
+      {visible && mobileOpen && (
         <div className="sidebar-mobile-overlay" onClick={closeMobile} />
       )}
 
       {/* Sidebar */}
-      <aside className={`w2f-sidebar ${isCollapsed ? 'w2f-sidebar--collapsed' : ''} ${mobileOpen ? 'w2f-sidebar--open' : ''}`}>
+      <aside className={`w2f-sidebar ${isCollapsed ? 'w2f-sidebar--collapsed' : ''} ${mobileOpen ? 'w2f-sidebar--open' : ''} ${!visible ? 'w2f-sidebar--hidden' : ''}`}>
         {sidebarContent}
       </aside>
     </>

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { AppProvider } from './context/AppContext';
@@ -47,17 +48,53 @@ const pageVariants = {
 function PublicSite() {
   const location = useLocation();
   const hideFooter = ['/premium', '/courses', '/careers', '/quiz', '/alumni'].some(p => location.pathname.startsWith(p));
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      setShowSidebar(true);
+      return;
+    }
+
+    const scrollContainer = document.getElementById('main-scroll-container');
+    if (!scrollContainer) {
+      setShowSidebar(false);
+      return;
+    }
+
+    const handleScroll = () => {
+      const viewportH = window.innerHeight;
+      // Show sidebar after 2.8 viewports
+      const threshold = viewportH * 2.8;
+      if (scrollContainer.scrollTop >= threshold) {
+        setShowSidebar(true);
+      } else {
+        setShowSidebar(false);
+      }
+    };
+
+    handleScroll();
+
+    scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      scrollContainer.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [location.pathname]);
+
   return (
     <>
       <div className="app-layout">
         {/* Fixed Sidebar */}
-        <Sidebar />
+        <Sidebar visible={showSidebar} />
 
         {/* Main content area — this is the scroll container */}
         <div className="main-content-area" id="main-scroll-container">
 
           {/* Sticky top bar */}
-          <TopBar />
+          <TopBar sidebarHidden={!showSidebar} />
 
           {/* Page content with animated transitions */}
           <main className="main-content">

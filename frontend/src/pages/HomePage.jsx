@@ -118,14 +118,12 @@ export default function HomePage() {
                 <div className="hero-bg-glow" />
                 <div className="hero-bg-glow-2" />
                 <div className="container hero-content">
-                    <div className="hero-badge">India's #1 Career Decision Platform for Students</div>
-                    <BlurText
-                        text="Find Your Perfect Career Path After Graduation"
-                        delay={100}
-                        animateBy="words"
-                        direction="bottom"
-                        className="hero-title"
-                    />
+                    <ScrollReveal delay={0.05}>
+                        <div className="hero-badge">India's #1 Career Decision Platform for Students</div>
+                    </ScrollReveal>
+                    <ScrollReveal delay={0.15}>
+                        <h1 className="hero-title">Find Your Perfect Career Path After Graduation</h1>
+                    </ScrollReveal>
                     <ScrollReveal delay={0.2}>
                         <p className="hero-subtitle">
                             Stop guessing. Use our intelligent quiz, detailed roadmaps, and comparison engine

@@ -130,7 +130,17 @@ export default function GifScrollSequence() {
                         opacity: progress < 0.3 ? 1 : Math.max(0, 1 - (progress - 0.3)*5),
                         transform: `translateY(${mapVal(0, -30)}px)`
                     }}>
-                        <h3>Confused About Your Future?</h3>
+                        <h3>
+                            {"Confused About Your Future?".split("").map((char, index) => (
+                                <span
+                                    key={index}
+                                    className="wave-letter"
+                                    style={{ animationDelay: `${index * 0.05}s` }}
+                                >
+                                    {char === " " ? "\u00A0" : char}
+                                </span>
+                            ))}
+                        </h3>
                         <p>Stop guessing. Make data-driven career choices that match your degree, strengths, and goals.</p>
                     </div>
                     

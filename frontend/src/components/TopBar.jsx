@@ -10,7 +10,7 @@ const profileMenuItems = [
   { label: 'Sign Out', action: 'logout' },
 ];
 
-export default function TopBar() {
+export default function TopBar({ sidebarHidden = false }) {
   const { currentUser, logOut } = useAuth();
   const navigate = useNavigate();
 
@@ -72,7 +72,16 @@ export default function TopBar() {
         </div>
       )}
 
-      <header className="topbar">
+      <header className={`topbar ${sidebarHidden ? 'topbar--no-sidebar' : ''}`}>
+        {sidebarHidden && (
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', marginRight: '1rem', flexShrink: 0 }}>
+            <img src="/logo.png" alt="logo" style={{ height: '32px', objectFit: 'contain' }} />
+            <span style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+              Way2<span style={{ color: 'var(--primary)' }}>Fresher</span>
+            </span>
+          </Link>
+        )}
+
         {/* Search */}
         <div className="topbar-search">
           <input
