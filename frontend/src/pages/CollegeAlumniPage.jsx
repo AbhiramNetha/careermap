@@ -799,12 +799,12 @@ export default function CollegeAlumniPage() {
                 {/* Main Tabs */}
                 <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                     {[
-                        { id: 'directory', label: 'Directory', icon: Network },
-                        { id: 'chat', label: 'Chat Channels', icon: MessageSquare },
-                        { id: 'qa', label: 'Ask Alumni', icon: HelpCircle },
-                        { id: 'referrals', label: 'Referral Board', icon: Building2 },
-                        { id: 'leaderboard', label: 'Leaderboard', icon: Trophy },
-                        { id: 'ai', label: 'AI Assistant', icon: Sparkles }
+                        { id: 'directory', label: 'Directory' },
+                        { id: 'chat', label: 'Chat Channels' },
+                        { id: 'qa', label: 'Ask Alumni' },
+                        { id: 'referrals', label: 'Referral Board' },
+                        { id: 'leaderboard', label: 'Leaderboard' },
+                        { id: 'ai', label: 'AI Assistant' }
                     ].map(t => {
                         const active = activeTab === t.id;
                         return (
