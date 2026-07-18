@@ -131,15 +131,28 @@ export default function GifScrollSequence() {
                         transform: `translateY(${mapVal(0, -30)}px)`
                     }}>
                         <h3>
-                            {"Confused About Your Future?".split("").map((char, index) => (
-                                <span
-                                    key={index}
-                                    className="wave-letter"
-                                    style={{ animationDelay: `${index * 0.05}s` }}
-                                >
-                                    {char === " " ? "\u00A0" : char}
-                                </span>
-                            ))}
+                            {"Confused About Your Future?".split(" ").map((word, wordIdx, arr) => {
+                                const charOffset = arr.slice(0, wordIdx).join(" ").length + (wordIdx > 0 ? 1 : 0);
+                                return (
+                                    <React.Fragment key={wordIdx}>
+                                        <span className="wave-word" style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+                                            {word.split("").map((char, charIdx) => {
+                                                const globalIdx = charOffset + charIdx;
+                                                return (
+                                                    <span
+                                                        key={charIdx}
+                                                        className="wave-letter"
+                                                        style={{ animationDelay: `${globalIdx * 0.05}s` }}
+                                                    >
+                                                        {char}
+                                                    </span>
+                                                );
+                                            })}
+                                        </span>
+                                        {wordIdx < arr.length - 1 && ' '}
+                                    </React.Fragment>
+                                );
+                            })}
                         </h3>
                         <p>Stop guessing. Make data-driven career choices that match your degree, strengths, and goals.</p>
                     </div>
