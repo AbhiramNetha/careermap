@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Search, Bell, ChevronDown, User, Settings, LogOut, HelpCircle } from 'lucide-react';
+
 
 const profileMenuItems = [
-  { label: 'My Profile', icon: User, action: 'profile' },
-  { label: 'Settings', icon: Settings, action: 'profile' },
-  { label: 'Help', icon: HelpCircle, action: 'coming_soon' },
-  { label: 'Sign Out', icon: LogOut, action: 'logout' },
+  { label: 'My Profile', action: 'profile' },
+  { label: 'Settings', action: 'profile' },
+  { label: 'Help', action: 'coming_soon' },
+  { label: 'Sign Out', action: 'logout' },
 ];
 
 export default function TopBar() {
@@ -75,7 +75,6 @@ export default function TopBar() {
       <header className="topbar">
         {/* Search */}
         <div className="topbar-search">
-          <Search size={16} className="topbar-search-icon" />
           <input
             type="search"
             placeholder="Search careers..."
@@ -89,13 +88,7 @@ export default function TopBar() {
         {/* Right actions */}
         <div className="topbar-actions">
           {/* Notification bell */}
-          <button
-            className="topbar-icon-btn"
-            onClick={() => triggerToast('Notifications coming soon!')}
-            aria-label="Notifications"
-          >
-            <Bell size={18} />
-          </button>
+
 
           {/* User avatar / auth */}
           {currentUser ? (
@@ -115,10 +108,6 @@ export default function TopBar() {
                     {(currentUser.displayName || currentUser.email || '?')[0].toUpperCase()}
                   </div>
                 )}
-                <ChevronDown
-                  size={14}
-                  className={`topbar-chevron ${isMenuOpen ? 'topbar-chevron--open' : ''}`}
-                />
               </button>
 
               {isMenuOpen && (
@@ -135,7 +124,6 @@ export default function TopBar() {
                         onClick={() => handleMenuClick(action)}
                         className={`topbar-dropdown-item ${isLogout ? 'topbar-dropdown-item--danger' : ''}`}
                       >
-                        <Icon size={15} />
                         <span>{label}</span>
                       </button>
                     );

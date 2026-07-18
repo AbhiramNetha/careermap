@@ -1,7 +1,7 @@
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { useApp } from '../context/AppContext';
-import { Sun, Moon, Award } from 'lucide-react';
+
 
 export default function ProfilePage() {
     const { currentUser } = useAuth();
@@ -58,7 +58,7 @@ export default function ProfilePage() {
                                     alignItems: 'center',
                                     gap: '4px'
                                 }}>
-                                    <Award size={12} /> PRO
+                                    PRO
                                 </span>
                             )}
                         </div>
@@ -140,11 +140,6 @@ export default function ProfilePage() {
                             }}
                         >
                             <div className="flex items-center gap-3">
-                                {isDark ? (
-                                    <Moon size={20} style={{ color: 'var(--primary-light)', flexShrink: 0 }} />
-                                ) : (
-                                    <Sun size={20} style={{ color: '#f59e0b', flexShrink: 0 }} />
-                                )}
                                 <div>
                                     <div style={{ color: 'var(--text-primary)', fontWeight: '600', fontSize: '0.95rem' }}>
                                         {isDark ? 'Dark Mode' : 'Light Mode'}
@@ -163,7 +158,6 @@ export default function ProfilePage() {
                             >
                                 <span className={`appearance-toggle-track ${isDark ? '' : 'appearance-toggle-track--light'}`}>
                                     <span className="appearance-toggle-thumb">
-                                        {isDark ? <Moon size={12} /> : <Sun size={12} />}
                                     </span>
                                 </span>
                             </button>

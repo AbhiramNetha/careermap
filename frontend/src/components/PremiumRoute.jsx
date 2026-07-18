@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { useAuth } from '../context/AuthContext';
-import { Lock } from 'lucide-react';
 
 export default function PremiumRoute({ children }) {
   const { isPremium, togglePremium } = useApp();
@@ -40,9 +39,7 @@ export default function PremiumRoute({ children }) {
             boxShadow: '0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(251, 191, 36, 0.1)',
           }}
         >
-          <div className="mx-auto w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mb-6 animate-pulse">
-            <Lock size={28} className="text-amber-500" />
-          </div>
+
 
           <h2 className="text-2xl font-bold text-white mb-2">
             {!currentUser ? 'Login Required' : 'Unlock Premium Access'}

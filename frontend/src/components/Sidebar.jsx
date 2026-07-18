@@ -2,35 +2,20 @@ import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useApp } from '../context/AppContext';
-import {
-  Home,
-  Briefcase,
-  BookOpen,
-  HelpCircle,
-  Menu,
-  X,
-  Crown,
-  Sparkles,
-  Network,
-  FileBadge,
-  Building2,
-  Footprints,
-  ChevronDown,
-} from 'lucide-react';
 
 /* ── Navigation data ── */
 const mainLinks = [
-  { label: 'Home', href: '/', icon: Home },
-  { label: 'Careers', href: '/careers', icon: Briefcase },
-  { label: 'Courses', href: '/courses', icon: BookOpen },
-  { label: 'Quiz', href: '/quiz', icon: HelpCircle },
-  { label: 'College Alumni', href: '/alumni', icon: Network },
+  { label: 'Home', href: '/' },
+  { label: 'Careers', href: '/careers' },
+  { label: 'Courses', href: '/courses' },
+  { label: 'Quiz', href: '/quiz' },
+  { label: 'College Alumni', href: '/alumni' },
 ];
 
 const opportunityLinks = [
-  { label: 'Internships', href: '#', icon: FileBadge, comingSoon: true, msg: 'Internships coming soon!' },
-  { label: 'Jobs', href: '#', icon: Building2, comingSoon: true, msg: 'Jobs board is coming soon! Partnering with companies.' },
-  { label: 'Walk-ins', href: '#', icon: Footprints, comingSoon: true, msg: 'Walk-ins listing coming soon!' },
+  { label: 'Internships', href: '#', comingSoon: true, msg: 'Internships coming soon!' },
+  { label: 'Jobs', href: '#', comingSoon: true, msg: 'Jobs board is coming soon! Partnering with companies.' },
+  { label: 'Walk-ins', href: '#', comingSoon: true, msg: 'Walk-ins listing coming soon!' },
 ];
 
 /* ── Single nav item ── */
@@ -44,7 +29,7 @@ function NavItem({ label, href, icon: Icon, active, indent, comingSoon, msg, col
         className={`${baseClasses} sidebar-nav-item--locked`}
         title={collapsed ? label : undefined}
       >
-        <Icon size={18} className="sidebar-nav-icon" />
+        {collapsed ? <span style={{ fontWeight: 800 }}>{label[0]}</span> : null}
         {!collapsed && <span className="sidebar-nav-label">{label}</span>}
       </button>
     );
@@ -57,7 +42,7 @@ function NavItem({ label, href, icon: Icon, active, indent, comingSoon, msg, col
       className={baseClasses}
       title={collapsed ? label : undefined}
     >
-      <Icon size={18} className="sidebar-nav-icon" />
+      {collapsed ? <span style={{ fontWeight: 800 }}>{label[0]}</span> : null}
       {!collapsed && <span className="sidebar-nav-label">{label}</span>}
       {!collapsed && active && <span className="sidebar-active-dot" />}
     </NavLink>
@@ -149,15 +134,10 @@ export default function Sidebar() {
           title={isCollapsed ? 'Opportunities' : undefined}
           style={{ width: '100%', background: 'transparent', border: 'none', textAlign: 'left', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
         >
-          <Building2 size={18} className="sidebar-nav-icon" />
+          {isCollapsed ? <span style={{ fontWeight: 800 }}>O</span> : null}
           {!isCollapsed && (
             <>
               <span className="sidebar-nav-label" style={{ flex: 1 }}>Opportunities</span>
-              <ChevronDown
-                size={14}
-                className={`sidebar-chevron ${opportunitiesOpen ? '' : 'sidebar-chevron--closed'}`}
-                style={{ transform: opportunitiesOpen ? 'rotate(0deg)' : 'rotate(-90deg)', transition: 'transform 0.2s ease' }}
-              />
             </>
           )}
         </button>
@@ -189,12 +169,10 @@ export default function Sidebar() {
           }
         >
           {isCollapsed
-            ? <Crown size={18} color="#fbbf24" style={{ flexShrink: 0 }} />
+            ? <span style={{ fontWeight: 800, color: '#fbbf24' }}>P</span>
             : (
               <>
-                <Crown size={16} color="#fbbf24" style={{ flexShrink: 0 }} />
                 <span className="sidebar-nav-label" style={{ fontSize: '0.82rem', fontWeight: 700, color: '#fbbf24', flex: 1, textTransform: 'none' }}>PRO Features</span>
-                <Sparkles size={13} color="#f59e0b" style={{ flexShrink: 0 }} />
               </>
             )
           }
@@ -230,7 +208,7 @@ export default function Sidebar() {
               </>
             ) : (
               <Link to="/login" className="sidebar-btn sidebar-btn--icon" onClick={closeMobile} title="Log In">
-                <Briefcase size={18} />
+                <span style={{ fontWeight: 800 }}>L</span>
               </Link>
             )}
           </div>
@@ -254,8 +232,9 @@ export default function Sidebar() {
         className="sidebar-mobile-toggle"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label="Toggle sidebar"
+        style={{ fontSize: '0.8rem', fontWeight: 'bold' }}
       >
-        {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        {mobileOpen ? 'Close' : 'Menu'}
       </button>
 
       {/* Mobile overlay */}

@@ -505,7 +505,7 @@ export default function AtsCheckerPage() {
               {results.aiSuggestions ? (
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-1 text-[10px] text-amber-400 uppercase font-bold tracking-widest bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-md self-start mb-1 animate-pulse">
-                    ✨ AI Optimized Recommendations
+                    AI Optimized Recommendations
                   </div>
                   <div className="flex flex-col gap-3 overflow-y-auto max-h-[280px] pr-2">
                     {results.aiSuggestions.map((suggestion, idx) => (

@@ -3,11 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import API from '../services/api';
-import {
-    Network, MessageSquare, HelpCircle, Send, Search, Trophy,
-    Sparkles, Plus, Check, Lock, Users, CheckCircle2, Building2,
-    Calendar, ArrowRight, ShieldAlert, BadgeInfo, LogOut, Loader2
-} from 'lucide-react';
+
 
 export default function CollegeAlumniPage() {
     const navigate = useNavigate();
@@ -463,7 +459,6 @@ export default function CollegeAlumniPage() {
     if (loading) {
         return (
             <div style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-                <Loader2 size={32} className="animate-spin text-amber-500" />
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Loading college network...</p>
             </div>
         );
@@ -474,9 +469,6 @@ export default function CollegeAlumniPage() {
         return (
             <div style={{ padding: '3rem 1.5rem', maxWidth: '600px', margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-                    <div style={{ display: 'inline-flex', padding: '0.75rem', borderRadius: '50%', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.3)', marginBottom: '1rem' }}>
-                        <Network size={28} color="#fbbf24" />
-                    </div>
                     <h1 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
                         College Alumni Network
                     </h1>
@@ -487,7 +479,6 @@ export default function CollegeAlumniPage() {
 
                 {formError && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', padding: '0.8rem 1rem', borderRadius: '8px', color: '#f87171', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
-                        <ShieldAlert size={16} />
                         {formError}
                     </div>
                 )}
@@ -788,10 +779,10 @@ export default function CollegeAlumniPage() {
                             <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>{college.name} Space</h2>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginTop: '0.25rem', flexWrap: 'wrap' }}>
                                 <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                    <Building2 size={12} /> {college.domain}
+                                    {college.domain}
                                 </span>
                                 <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                    <Users size={12} /> verified community
+                                    verified community
                                 </span>
                             </div>
                         </div>
@@ -801,7 +792,7 @@ export default function CollegeAlumniPage() {
                         onClick={async () => { if (confirm('Are you sure you want to leave this college space?')) { try { await API.delete('/alumni/membership'); loadMembership(); } catch (err) {} } }}
                         style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', padding: '0.45rem 0.85rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'transparent', color: '#f87171', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
                     >
-                        <LogOut size={13} /> Leave Network
+                        Leave Network
                     </button>
                 </div>
 
@@ -822,7 +813,6 @@ export default function CollegeAlumniPage() {
                                 onClick={() => setActiveTab(t.id)}
                                 style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', padding: '0.6rem 1rem', borderRadius: '8px 8px 0 0', border: 'none', background: 'transparent', color: active ? '#fbbf24' : 'var(--text-secondary)', borderBottom: active ? '2px solid #fbbf24' : '2px solid transparent', fontSize: '0.8rem', fontWeight: active ? 700 : 500, cursor: 'pointer', whiteSpace: 'nowrap' }}
                             >
-                                <t.icon size={14} />
                                 {t.label}
                             </button>
                         );
@@ -838,7 +828,6 @@ export default function CollegeAlumniPage() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
                             <div style={{ flex: 1, minWidth: '220px', position: 'relative' }}>
-                                <Search size={16} style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                                 <input
                                     type="text"
                                     placeholder="Search by company or role..."
@@ -876,7 +865,7 @@ export default function CollegeAlumniPage() {
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                                         <div>
                                             <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
-                                                {m.role === 'alumnus' ? '💼' : '🎓'} {m.name || `${m.branch} Member`}
+                                                {m.role === 'alumnus' ? '' : '🎓'} {m.name || `${m.branch} Member`}
                                             </h4>
                                             <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Class of {m.batchYear} • {m.branch}{m.rollNo ? ` • Roll No: ${m.rollNo}` : ''}</span>
                                         </div>
@@ -965,7 +954,7 @@ export default function CollegeAlumniPage() {
                                             style={{ flex: 1, padding: '0.6rem 0.8rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.82rem' }}
                                         />
                                         <button type="submit" className="btn-primary" style={{ padding: '0.55rem 1rem', borderRadius: '8px' }}>
-                                            <Send size={14} />
+                                            Send
                                         </button>
                                     </form>
                                 </>
@@ -991,7 +980,7 @@ export default function CollegeAlumniPage() {
                                 style={{ flex: 1, padding: '0.6rem 0.8rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
                             />
                             <button type="submit" className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', padding: '0.55rem 1.1rem' }}>
-                                <Plus size={14} /> Post
+                                Post
                             </button>
                         </form>
 
@@ -1110,7 +1099,7 @@ export default function CollegeAlumniPage() {
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem' }}>
                                         <div>
                                             <h4 style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-                                                💼 Referral at {r.targetCompany}
+                                                Referral at {r.targetCompany}
                                             </h4>
                                             <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Role: {r.targetRole} • Requested by {r.studentName}</span>
                                         </div>
@@ -1170,7 +1159,7 @@ export default function CollegeAlumniPage() {
                                                 onClick={() => handleUpdateReferralStatus(r.id, 'fulfilled')}
                                                 style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.45rem 0.85rem', borderRadius: '6px', border: 'none', background: '#10b981', color: '#111827', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
                                             >
-                                                <Check size={12} /> Mark Fulfilled
+                                                Mark Fulfilled
                                             </button>
                                         )}
                                     </div>
@@ -1184,7 +1173,6 @@ export default function CollegeAlumniPage() {
                 {activeTab === 'leaderboard' && (
                     <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', padding: '1.5rem', overflow: 'hidden' }}>
                         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '1.5rem' }}>
-                            <Trophy size={18} color="#fbbf24" />
                             <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>Top Alumni Contributors</h3>
                         </div>
 
@@ -1222,15 +1210,15 @@ export default function CollegeAlumniPage() {
                 {activeTab === 'ai' && (
                     <div style={{ display: 'flex', flexDirection: 'column', height: '62vh', minHeight: '440px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden' }}>
                         <div style={{ padding: '0.8rem 1.25rem', borderBottom: '1px solid var(--border)', fontWeight: 700, fontSize: '0.88rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                            <Sparkles size={14} color="#fbbf24" /> AI Alumni Assistant
+                            AI Alumni Assistant
                         </div>
                         {/* Conversation list */}
                         <div style={{ flex: 1, padding: '1rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
                             {aiMessages.map((m, idx) => (
                                 <div key={idx} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start', alignSelf: m.sender === 'user' ? 'flex-end' : 'flex-start', maxWidth: '75%' }}>
                                     {m.sender === 'ai' && (
-                                        <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                            <Sparkles size={12} color="#fbbf24" />
+                                        <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', fontSize: '0.8rem', color: '#fbbf24' }}>
+                                            AI
                                         </div>
                                     )}
                                     <div style={{ background: m.sender === 'user' ? '#fbbf24' : 'rgba(255,255,255,0.06)', color: m.sender === 'user' ? '#111' : 'var(--text-primary)', border: m.sender === 'user' ? 'none' : '1px solid var(--border)', borderRadius: '12px', padding: '0.6rem 0.85rem', fontSize: '0.82rem' }}>
@@ -1240,7 +1228,7 @@ export default function CollegeAlumniPage() {
                             ))}
                             {aiLoading && (
                                 <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', color: 'var(--text-muted)', fontSize: '0.78rem' }}>
-                                    <Loader2 size={12} className="animate-spin" /> Thinking...
+                                    Thinking...
                                 </div>
                             )}
                         </div>
@@ -1254,7 +1242,7 @@ export default function CollegeAlumniPage() {
                                 style={{ flex: 1, padding: '0.6rem 0.8rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-input)', color: 'var(--text-primary)', fontSize: '0.82rem' }}
                             />
                             <button type="submit" className="btn-primary" style={{ padding: '0.55rem 1rem', borderRadius: '8px' }}>
-                                <Send size={14} />
+                                Send
                             </button>
                         </form>
                     </div>

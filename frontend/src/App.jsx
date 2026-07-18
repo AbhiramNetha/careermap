@@ -36,9 +36,7 @@ import AdminAnalytics from './pages/admin/AdminAnalytics';
 import WebsitePreloader from './components/WebsitePreloader';
 import ScrollToTop from './components/ScrollToTop';
 import AdminBackgrounds from './components/AdminBackgrounds';
-import FloatingDotsBackground from './components/Backgrounds/FloatingDotsBackground';
 import './index.css';
-
 
 const pageVariants = {
   initial: { opacity: 0, y: 16 },
@@ -51,7 +49,6 @@ function PublicSite() {
   const hideFooter = ['/premium', '/courses', '/careers', '/quiz', '/alumni'].some(p => location.pathname.startsWith(p));
   return (
     <>
-      <FloatingDotsBackground />
       <div className="app-layout">
         {/* Fixed Sidebar */}
         <Sidebar />

@@ -62,13 +62,13 @@ export default function BranchSelectionPage({ onSelect }) {
                     textAlign: 'center',
                 }}>
                     <h3 style={{ fontFamily: 'Poppins', fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem' }}>
-                        Not Sure Which Branch Suits You? 🤔
+                        Not Sure Which Branch Suits You?
                     </h3>
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
                         Our career quiz considers your branch + interests to find your perfect path
                     </p>
                     <button className="btn-primary" onClick={() => navigate('/quiz')}>
-                        ✨ Take the 7-Question Quiz
+                        Take the 7-Question Quiz
                     </button>
                 </div>
             </div>

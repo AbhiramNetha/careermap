@@ -51,8 +51,8 @@ export default function CareerDetailPage() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1.5rem' }}>
                         <div style={{ flex: 1, minWidth: 0 }}>
                             <div style={{ display: 'flex', gap: '10px', marginBottom: '1rem', flexWrap: 'wrap' }}>
-                                <span className="chip chip-purple">📂 {career.category}</span>
-                                {career.isTrending && <span className="chip chip-yellow">🔥 Trending</span>}
+                                <span className="chip chip-purple">{career.category}</span>
+                                {career.isTrending && <span className="chip chip-yellow">Trending</span>}
                             </div>
                             <h1 style={{ fontFamily: 'Poppins', fontSize: 'clamp(1.8rem, 3vw, 2.8rem)', fontWeight: 800, marginBottom: '0.75rem' }}>
                                 {career.icon} {career.title}
@@ -72,12 +72,12 @@ export default function CareerDetailPage() {
                             boxShadow: 'var(--shadow-md)',
                         }}>
                             {[
-                                ['💰 Salary Range', career.salaryRange || 'N/A'],
-                                ['📈 Demand Level', career.demandLevel || 'N/A'],
-                                ['⚡ Risk Level', career.riskLevel || 'N/A'],
-                                ['📝 Exam Route', career.examRoute || 'Direct/Skills'],
-                                ['⏳ Duration', career.duration || 'N/A'],
-                                ['💳 Capital Needed', career.capitalNeeded || 'None'],
+                                ['Salary Range', career.salaryRange || 'N/A'],
+                                ['Demand Level', career.demandLevel || 'N/A'],
+                                ['Risk Level', career.riskLevel || 'N/A'],
+                                ['Exam Route', career.examRoute || 'Direct/Skills'],
+                                ['Duration', career.duration || 'N/A'],
+                                ['Capital Needed', career.capitalNeeded || 'None'],
                             ].map(([label, value]) => (
                                 <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid var(--border)', fontSize: '0.88rem' }}>
                                     <span style={{ color: 'var(--text-muted)' }}>{label}</span>
@@ -99,7 +99,7 @@ export default function CareerDetailPage() {
                             className="btn-secondary"
                             onClick={() => alreadyInCompare ? navigate('/compare') : addToCompare(career)}
                         >
-                            {alreadyInCompare ? '✓ Added to Compare' : '⚖️ Add to Compare'}
+                            {alreadyInCompare ? '✓ Added to Compare' : 'Add to Compare'}
                         </button>
                     </div>
                 </div>
@@ -112,7 +112,7 @@ export default function CareerDetailPage() {
                         borderRadius: 'var(--radius-lg)',
                         padding: '1.75rem',
                     }}>
-                        <div className="detail-section-title" style={{ fontWeight: 700, fontSize: '1.15rem', marginBottom: '1.25rem' }}>🛠️ Recommended Skills & Tools</div>
+                        <div className="detail-section-title" style={{ fontWeight: 700, fontSize: '1.15rem', marginBottom: '1.25rem' }}>Recommended Skills & Tools</div>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
                             {career.skills && career.skills.length > 0 ? (
                                 career.skills.map(skill => (
@@ -139,11 +139,11 @@ export default function CareerDetailPage() {
                         borderRadius: 'var(--radius-lg)',
                         padding: '1.75rem',
                     }}>
-                        <div className="detail-section-title" style={{ fontWeight: 700, fontSize: '1.15rem', marginBottom: '1.25rem' }}>🎓 B.Tech Branch Compatibility</div>
+                        <div className="detail-section-title" style={{ fontWeight: 700, fontSize: '1.15rem', marginBottom: '1.25rem' }}>B.Tech Branch Compatibility</div>
                         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                             {career.branches && career.branches.length > 0 ? (
                                 career.branches.includes('ALL') ? (
-                                    <span className="chip chip-green" style={{ fontSize: '0.9rem', padding: '6px 14px' }}>✅ All Engineering Branches Eligible</span>
+                                    <span className="chip chip-green" style={{ fontSize: '0.9rem', padding: '6px 14px' }}>All Engineering Branches Eligible</span>
                                 ) : (
                                     career.branches.map(b => (
                                         <span key={b} className="chip chip-purple" style={{
@@ -171,7 +171,6 @@ export default function CareerDetailPage() {
                     alignItems: 'center',
                     gap: '12px',
                 }}>
-                    <span style={{ fontSize: '1.5rem' }}>🗺️</span>
                     <div>
                         <div style={{ fontWeight: 600, color: '#f59e0b', fontSize: '0.95rem' }}>Looking for a step-by-step roadmap?</div>
                         <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '2px' }}>

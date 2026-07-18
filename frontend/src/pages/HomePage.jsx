@@ -28,131 +28,6 @@ function CountUpStat({ end, suffix, label }) {
   );
 }
 
-function BubblesCanvas() {
-    const canvasRef = useRef(null);
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-
-        let width, height, bubbles, animId;
-
-        const COLORS = [
-            [99, 102, 241],   
-            [139, 92, 246],   
-            [6, 182, 212],   
-            [16, 185, 129],   
-            [248, 113, 113],   
-        ];
-
-        function rnd(min, max) { return Math.random() * (max - min) + min; }
-
-        function makeBubble(startAtBottom = false) {
-            const [r, g, b] = COLORS[Math.floor(Math.random() * COLORS.length)];
-            const radius = rnd(2, 9);
-            return {
-                x: rnd(0, width),
-                y: startAtBottom ? rnd(height * 0.6, height + radius) : rnd(-radius, height + radius),
-                r: radius,
-                speed: rnd(0.4, 1.4),           
-                wobble: rnd(0, Math.PI * 2),    
-                wobbleAmp: rnd(0.2, 0.8),       
-                wobbleSpeed: rnd(0.012, 0.03),
-                alpha: rnd(0.25, 0.65),
-                r_: r, g_: g, b_: b,
-            };
-        }
-
-        function resize() {
-            width = canvas.width = canvas.offsetWidth;
-            height = canvas.height = canvas.offsetHeight;
-        }
-
-        function init() {
-            resize();
-            
-            const count = Math.max(60, Math.floor((width * height) / 4000));
-            bubbles = Array.from({ length: count }, () => makeBubble(false));
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, width, height);
-
-            bubbles.forEach(b => {
-                
-                b.wobble += b.wobbleSpeed;
-                b.x += Math.sin(b.wobble) * b.wobbleAmp;
-
-                
-                b.y -= b.speed;
-
-                
-                if (b.y + b.r < 0) {
-                    Object.assign(b, makeBubble(true));
-                    b.y = height + b.r;
-                }
-
-                
-                if (b.x < -b.r) b.x = width + b.r;
-                if (b.x > width + b.r) b.x = -b.r;
-
-                
-                ctx.save();
-                ctx.globalAlpha = b.alpha;
-
-                ctx.beginPath();
-                ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${b.r_},${b.g_},${b.b_},0.35)`;
-                ctx.fill();
-
-                
-                ctx.beginPath();
-                ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(${b.r_},${b.g_},${b.b_},0.8)`;
-                ctx.lineWidth = 0.8;
-                ctx.stroke();
-
-                
-                ctx.beginPath();
-                ctx.arc(b.x - b.r * 0.28, b.y - b.r * 0.28, b.r * 0.22, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255,255,255,0.55)';
-                ctx.fill();
-
-                ctx.restore();
-            });
-
-            animId = requestAnimationFrame(draw);
-        }
-
-        init();
-        draw();
-
-        const ro = new ResizeObserver(init);
-        ro.observe(canvas);
-
-        return () => {
-            cancelAnimationFrame(animId);
-            ro.disconnect();
-        };
-    }, []);
-
-    return (
-        <canvas
-            ref={canvasRef}
-            style={{
-                position: 'absolute',
-                inset: 0,
-                width: '100%',
-                height: '100%',
-                pointerEvents: 'none',
-                zIndex: 0,
-            }}
-        />
-    );
-}
-
-
 function CareerCard({ career, onCompare, onView }) {
     const riskClass = `risk-${career.riskLevel?.toLowerCase()}`;
     return (
@@ -162,19 +37,19 @@ function CareerCard({ career, onCompare, onView }) {
                     <div className="career-name">{career.name}</div>
                     <div className="career-subcategory">{career.subCategory}</div>
                 </div>
-                {career.isTrending && <span className="trend-badge">🔥 Trending</span>}
+                {career.isTrending && <span className="trend-badge">Trending</span>}
             </div>
             <p className="career-overview">{career.overview}</p>
             <div className="career-meta">
-                <span className={`meta-tag ${riskClass}`}>⚡ {career.riskLevel} Risk</span>
-                <span className="meta-tag">📊 {career.demandLevel} Demand</span>
+                <span className={`meta-tag ${riskClass}`}>{career.riskLevel} Risk</span>
+                <span className="meta-tag">{career.demandLevel} Demand</span>
                 {career.studyRequired
-                    ? <span className="meta-tag">📚 Study Required</span>
-                    : <span className="meta-tag">✅ No Extra Degree</span>}
+                    ? <span className="meta-tag">Study Required</span>
+                    : <span className="meta-tag">No Extra Degree</span>}
             </div>
-            <div className="career-salary">💰 Fresher: {career.salary?.fresher}</div>
+            <div className="career-salary">Fresher: {career.salary?.fresher}</div>
             <div className="career-card-footer">
-                <button className="btn-sm btn-outline" onClick={() => onCompare(career)}>⚖️ Compare</button>
+                <button className="btn-sm btn-outline" onClick={() => onCompare(career)}>Compare</button>
                 <button className="btn-sm btn-filled" onClick={() => onView(career.id)}>View Details →</button>
             </div>
         </div>
@@ -182,32 +57,32 @@ function CareerCard({ career, onCompare, onView }) {
 }
 
 const TRENDING = [
-    { emoji: '📊', name: 'Data Scientist', salary: '₹6–15 LPA', id: 'data-scientist', color: '#6366f1' },
-    { emoji: '💻', name: 'Software Dev', salary: '₹5–12 LPA', id: 'software-developer', color: '#8b5cf6' },
-    { emoji: '🎓', name: 'MBA via CAT', salary: '₹15–50 LPA', id: 'mba-iim-xlri', color: '#f59e0b' },
-    { emoji: '🌍', name: 'MS Abroad', salary: '₹40–100 LPA', id: 'ms-abroad', color: '#06b6d4' },
-    { emoji: '🚀', name: 'SaaS Startup', salary: 'Variable', id: 'saas-startup', color: '#10b981' },
-    { emoji: '🏛️', name: 'PSU Engineer', salary: '₹7–15 LPA', id: 'psu-engineer', color: '#059669' },
+    { name: 'Data Scientist', salary: '₹6–15 LPA', id: 'data-scientist', color: '#6366f1' },
+    { name: 'Software Dev', salary: '₹5–12 LPA', id: 'software-developer', color: '#8b5cf6' },
+    { name: 'MBA via CAT', salary: '₹15–50 LPA', id: 'mba-iim-xlri', color: '#f59e0b' },
+    { name: 'MS Abroad', salary: '₹40–100 LPA', id: 'ms-abroad', color: '#06b6d4' },
+    { name: 'SaaS Startup', salary: 'Variable', id: 'saas-startup', color: '#10b981' },
+    { name: 'PSU Engineer', salary: '₹7–15 LPA', id: 'psu-engineer', color: '#059669' },
 ];
 
 const TEAM = [
-    { name: 'Aarup', role: 'Full-Stack Developer', emoji: '👨‍💻', color: '#6366f1' },
-    { name: 'way2fresher', role: 'Platform Mission', emoji: '🚀', color: '#8b5cf6' },
-    { name: 'India Focus', role: 'All Degrees Welcome', emoji: '🇮🇳', color: '#10b981' },
+    { name: 'Aarup', role: 'Full-Stack Developer', color: '#6366f1' },
+    { name: 'way2fresher', role: 'Platform Mission', color: '#8b5cf6' },
+    { name: 'India Focus', role: 'All Degrees Welcome', color: '#10b981' },
 ];
 
 const ABOUT_STATS = [
-    { value: '56+', label: 'Career Paths', icon: '🗺️' },
-    { value: '6', label: 'Degree Sectors', icon: '🎓' },
-    { value: '6+', label: 'Quiz Parameters', icon: '✨' },
-    { value: '100%', label: 'India Focused', icon: '🇮🇳' },
+    { value: '56+', label: 'Career Paths' },
+    { value: '6', label: 'Degree Sectors' },
+    { value: '6+', label: 'Quiz Parameters' },
+    { value: '100%', label: 'India Focused' },
 ];
 
 const VALUES = [
-    { icon: '🎯', title: 'Personalization', desc: 'Career recommendations tailored to your degree, skills, risk appetite, and personal goals.' },
-    { icon: '📊', title: 'Data-Driven', desc: 'Every suggestion is backed by real salary data, market trends, and growth projections.' },
-    { icon: '🇮🇳', title: 'India-First', desc: 'Built for the entire Indian student ecosystem — Engineering, Commerce, Arts, Sciences, Management & more.' },
-    { icon: '🔓', title: 'Completely Free', desc: 'No subscriptions, no paywalls. Every feature — quiz, roadmaps, comparisons — is free forever.' },
+    { title: 'Personalization', desc: 'Career recommendations tailored to your degree, skills, risk appetite, and personal goals.' },
+    { title: 'Data-Driven', desc: 'Every suggestion is backed by real salary data, market trends, and growth projections.' },
+    { title: 'India-First', desc: 'Built for the entire Indian student ecosystem — Engineering, Commerce, Arts, Sciences, Management & more.' },
+    { title: 'Completely Free', desc: 'No subscriptions, no paywalls. Every feature — quiz, roadmaps, comparisons — is free forever.' },
 ];
 
 export default function HomePage() {
@@ -239,12 +114,11 @@ export default function HomePage() {
         <>
             <GifScrollSequence />
 
-            {}
             <section className="hero" id="home">
                 <div className="hero-bg-glow" />
                 <div className="hero-bg-glow-2" />
                 <div className="container hero-content">
-                    <div className="hero-badge">✨ India's #1 Career Decision Platform for Students</div>
+                    <div className="hero-badge">India's #1 Career Decision Platform for Students</div>
                     <BlurText
                         text="Find Your Perfect Career Path After Graduation"
                         delay={100}
@@ -264,7 +138,6 @@ export default function HomePage() {
                             <button className="btn-secondary" onClick={() => navigate('/careers')}>Explore All Careers</button>
                         </div>
                     </ScrollReveal>
-            {/* Aurora glow orbs */}
             <div className="aurora-orb aurora-orb-1" />
             <div className="aurora-orb aurora-orb-2" />
             <div className="aurora-orb aurora-orb-3" />
@@ -280,7 +153,6 @@ export default function HomePage() {
                 </div>
             </section>
 
-            {/* ══════ CATEGORIES ══════ */}
             <section className="section">
                 <div className="container">
                     <ScrollReveal>
@@ -292,14 +164,13 @@ export default function HomePage() {
                     </ScrollReveal>
                     <div className="categories-grid">
                         {[
-                            { id: 'private', icon: '💼', name: 'Private Sector Jobs', desc: 'IT, Analytics, Finance, Design & Product roles across top companies', count: '50+ careers', color: '#6366f1' },
-                            { id: 'higher-studies', icon: '🎓', name: 'Higher Studies', desc: 'MBA, M.Tech, MS Abroad, PhD, LLB & professional certifications', count: '15+ paths', color: '#8b5cf6' },
-                            { id: 'government', icon: '🏛️', name: 'Government Jobs', desc: 'PSU, SSC, UPSC, Banking PO, RBI, ISRO for all degree backgrounds', count: '20+ exams', color: '#059669' },
-                            { id: 'entrepreneurship', icon: '🚀', name: 'Entrepreneurship', desc: "Launch startups, freelance agencies, or creative ventures using your skills", count: 'Unlimited potential', color: '#f59e0b' },
+                            { id: 'private', name: 'Private Sector Jobs', desc: 'IT, Analytics, Finance, Design & Product roles across top companies', count: '50+ careers', color: '#6366f1' },
+                            { id: 'higher-studies', name: 'Higher Studies', desc: 'MBA, M.Tech, MS Abroad, PhD, LLB & professional certifications', count: '15+ paths', color: '#8b5cf6' },
+                            { id: 'government', name: 'Government Jobs', desc: 'PSU, SSC, UPSC, Banking PO, RBI, ISRO for all degree backgrounds', count: '20+ exams', color: '#059669' },
+                            { id: 'entrepreneurship', name: 'Entrepreneurship', desc: "Launch startups, freelance agencies, or creative ventures using your skills", count: 'Unlimited potential', color: '#f59e0b' },
                         ].map((cat, idx) => (
                             <ScrollReveal key={cat.id} delay={idx * 0.1} yOffset={25}>
                                 <SpotlightCard className="category-card" onClick={() => navigate(`/careers?category=${cat.id}`)} spotlightColor={cat.color}>
-                                    <div className="category-icon">{cat.icon}</div>
                                     <div className="category-name">{cat.name}</div>
                                     <div className="category-desc">{cat.desc}</div>
                                     <div className="category-count" style={{ color: cat.color }}>→ {cat.count}</div>
@@ -321,10 +192,10 @@ export default function HomePage() {
                     </ScrollReveal>
                     <div className="categories-grid">
                         {[
-                            { step: '01', icon: '✨', title: 'Take the Quiz', desc: '7 personalized questions about your branch, interests & preferences' },
-                            { step: '02', icon: '🎯', title: 'Get Recommendations', desc: 'Our scoring engine finds your top 3 career matches with match %' },
-                            { step: '03', icon: '⚖️', title: 'Compare Options', desc: 'Side-by-side comparison of salary, risk, growth & stability' },
-                            { step: '04', icon: '🗺️', title: 'Follow the Roadmap', desc: 'Month-by-month preparation plan with skills, tools & projects' },
+                            { step: '01', icon: '', title: 'Take the Quiz', desc: '7 personalized questions about your branch, interests & preferences' },
+                            { step: '02', icon: '', title: 'Get Recommendations', desc: 'Our scoring engine finds your top 3 career matches with match %' },
+                            { step: '03', icon: '', title: 'Compare Options', desc: 'Side-by-side comparison of salary, risk, growth & stability' },
+                            { step: '04', icon: '', title: 'Follow the Roadmap', desc: 'Month-by-month preparation plan with skills, tools & projects' },
                         ].map((item, idx) => (
                             <ScrollReveal key={item.step} delay={idx * 0.1} yOffset={25}>
                                 <SpotlightCard className="category-card" style={{ textAlign: 'center' }} spotlightColor="rgba(99, 102, 241, 0.15)">
@@ -363,7 +234,7 @@ export default function HomePage() {
                                     }}
                                     spotlightColor={item.color}
                                 >
-                                    <div className="category-icon" style={{ fontSize: '2.5rem' }}>{item.emoji}</div>
+                                    {item.emoji && <div className="category-icon" style={{ fontSize: '2.5rem' }}>{item.emoji}</div>}
                                     <div className="category-name" style={{ fontSize: '1.25rem' }}>{item.name}</div>
                                     <div className="category-count" style={{ color: item.color, fontSize: '1.1rem' }}>{item.salary}</div>
                                 </SpotlightCard>
@@ -396,10 +267,10 @@ export default function HomePage() {
                                 <div className="about-story-tag">Our Platform</div>
                                 <h3 className="about-story-title">How It Helps You</h3>
                                 <div className="about-story-text">
-                                    <p><strong>🎯 Personalized Career Quiz:</strong> Stop following the crowd. Our intelligent quiz analyzes your degree sector, specialization, risk appetite, and personal interests to suggest the top 3 career paths where you are most likely to succeed.</p>
-                                    <p><strong>🔍 Detailed Career Database:</strong> Dive into 50+ mapped careers. Each page covers salary ranges (fresher to senior), future demand, stability, and typical work-life balance — all tailored to the Indian market.</p>
-                                    <p><strong>⚖️ Strategic Comparison:</strong> Should you do an MBA or join an IT firm? Use our comparison tool to weigh the long-term ROI, effort required, and risk of different paths side-by-side.</p>
-                                    <p><strong>🗺️ Master Roadmaps:</strong> Once you decide, we don't leave you hanging. Follow month-by-month skill-building plans, discover the best certifications, and find exactly what projects you need to build to get hired.</p>
+                                    <p><strong>Personalized Career Quiz:</strong> Stop following the crowd. Our intelligent quiz analyzes your degree sector, specialization, risk appetite, and personal interests to suggest the top 3 career paths where you are most likely to succeed.</p>
+                                    <p><strong>Detailed Career Database:</strong> Dive into 50+ mapped careers. Each page covers salary ranges (fresher to senior), future demand, stability, and typical work-life balance — all tailored to the Indian market.</p>
+                                    <p><strong>Strategic Comparison:</strong> Should you do an MBA or join an IT firm? Use our comparison tool to weigh the long-term ROI, effort required, and risk of different paths side-by-side.</p>
+                                    <p><strong>Master Roadmaps:</strong> Once you decide, we don't leave you hanging. Follow month-by-month skill-building plans, discover the best certifications, and find exactly what projects you need to build to get hired.</p>
                                 </div>
                             </div>
                         </ScrollReveal>
@@ -470,7 +341,7 @@ export default function HomePage() {
                                 Takes only 3 minutes. Join thousands of students across all disciplines making data-backed career decisions.
                             </p>
                             <button className="btn-primary" onClick={() => navigate('/quiz')} style={{ fontSize: '1.2rem', padding: '18px 48px' }}>
-                                🎯 Start Your Career Quiz Now
+                                Start Your Career Quiz Now
                             </button>
                         </div>
                     </ScrollReveal>
@@ -481,7 +352,7 @@ export default function HomePage() {
                 <div className="quiz-popup-message-container">
                     <div className="quiz-popup-message-header">
                         <div className="quiz-popup-message-info">
-                            <span className="quiz-popup-message-icon">🎯</span>
+                            <span className="quiz-popup-message-icon"></span>
                             <h4 className="quiz-popup-message-title">Career Decision Quiz</h4>
                         </div>
                         <button className="quiz-popup-message-close" onClick={handleCloseModal} aria-label="Close message">✕</button>

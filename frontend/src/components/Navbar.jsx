@@ -5,7 +5,6 @@ import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
 
 import {
-  BriefcaseIcon,
   BuildingOfficeIcon,
   WalletIcon,
   DocumentTextIcon,
@@ -22,6 +21,7 @@ import {
   ChevronDownIcon,
   Bars2Icon,
   MagnifyingGlassIcon,
+  MapIcon,
 } from "@heroicons/react/24/solid";
 
 
@@ -121,12 +121,12 @@ export function Way2FresherNavbar() {
 
   
   const primaryNavItems = [
-    { label: "Careers", icon: BriefcaseIcon, href: "/careers", type: "route" },
+    { label: "Careers", icon: MapIcon, href: "/careers", type: "route" },
     { label: "Courses", icon: BuildingOfficeIcon, href: "/courses", type: "route" },
     { label: "Branch Guide", icon: WalletIcon, href: "/branches", type: "route" },
     { label: "Quiz", icon: WalletIcon, href: "/quiz", type: "route" },
     { label: "Compare", icon: WalletIcon, href: "/compare", type: "route", countBadge: selectedCareers.length },
-    { label: "Jobs", icon: BriefcaseIcon, href: "#", type: "action", msg: "Jobs board is coming soon! Partnering with companies." },
+    { label: "Jobs", icon: BuildingOfficeIcon, href: "#", type: "action", msg: "Jobs board is coming soon! Partnering with companies." },
     { label: "Internships", icon: BuildingOfficeIcon, href: "#", type: "action", msg: "Internships coming soon!" },
     { label: "Walk-ins", icon: WalletIcon, href: "#", type: "action", msg: "Walk-ins listing coming soon!" },
   ];

@@ -9,22 +9,22 @@ function CareerCard({ career, onCompare, onView }) {
         <div className="career-card fade-in">
             <div className="career-card-header">
                 <div>
-                    <div className="career-name">{career.icon} {career.title}</div>
+                    <div className="career-name">{career.title}</div>
                     <div className="career-subcategory">{career.category}</div>
                 </div>
-                {career.isTrending && <span className="trend-badge">🔥 Trending</span>}
+                {career.isTrending && <span className="trend-badge">Trending</span>}
             </div>
             <p className="career-overview">{career.description}</p>
             <div className="career-meta">
-                {career.riskLevel && <span className={`meta-tag ${riskClass}`}>⚡ {career.riskLevel} Risk</span>}
-                {career.demandLevel && <span className="meta-tag">📊 {career.demandLevel} Demand</span>}
-                {career.examRoute && <span className="meta-tag">📝 {career.examRoute}</span>}
-                {career.duration && <span className="meta-tag">⏳ {career.duration}</span>}
-                {career.capitalNeeded && <span className="meta-tag">💰 Capital: {career.capitalNeeded}</span>}
+                {career.riskLevel && <span className={`meta-tag ${riskClass}`}>{career.riskLevel} Risk</span>}
+                {career.demandLevel && <span className="meta-tag">{career.demandLevel} Demand</span>}
+                {career.examRoute && <span className="meta-tag">{career.examRoute}</span>}
+                {career.duration && <span className="meta-tag">{career.duration}</span>}
+                {career.capitalNeeded && <span className="meta-tag">Capital: {career.capitalNeeded}</span>}
             </div>
-            {career.salaryRange && <div className="career-salary">💰 Salary Range: {career.salaryRange}</div>}
+            {career.salaryRange && <div className="career-salary">Salary Range: {career.salaryRange}</div>}
             <div className="career-card-footer">
-                <button className="btn-sm btn-outline" onClick={() => onCompare(career)}>⚖️ Compare</button>
+                <button className="btn-sm btn-outline" onClick={() => onCompare(career)}>Compare</button>
                 <button className="btn-sm btn-filled" onClick={() => onView(career.slug)}>View Details →</button>
             </div>
         </div>
@@ -33,10 +33,10 @@ function CareerCard({ career, onCompare, onView }) {
 
 const CATEGORIES = [
     { id: '', label: 'All Careers' },
-    { id: 'Private Sector', label: '💼 Private Sector' },
-    { id: 'Government', label: '🏛️ Government' },
-    { id: 'Higher Studies', label: '🎓 Higher Studies' },
-    { id: 'Entrepreneurship', label: '🚀 Entrepreneurship' },
+    { id: 'Private Sector', label: 'Private Sector' },
+    { id: 'Government', label: 'Government' },
+    { id: 'Higher Studies', label: 'Higher Studies' },
+    { id: 'Entrepreneurship', label: 'Entrepreneurship' },
 ];
 
 const RISK_LEVELS = ['', 'Low', 'Medium', 'High'];
@@ -94,7 +94,7 @@ export default function CareerCategoryPage() {
                 <div className="career-browse-layout">
                     {}
                     <div className="filter-panel" style={{ position: 'sticky', top: '90px' }}>
-                        <div className="filter-title">🔍 Filter Careers</div>
+                        <div className="filter-title">Filter Careers</div>
 
                         {}
                         <div className="filter-group">
@@ -155,7 +155,7 @@ export default function CareerCategoryPage() {
 
                         <div className="filter-group">
                             <div className="filter-label">Study Requirement</div>
-                            {[['', 'All'], ['false', '✅ No extra degree'], ['true', '📚 Study required']].map(([val, label]) => (
+                            {[['', 'All'], ['false', 'No extra degree'], ['true', 'Study required']].map(([val, label]) => (
                                 <div
                                     key={val}
                                     className={`filter-option ${filters.studyRequired === val ? 'active' : ''}`}
@@ -197,7 +197,7 @@ export default function CareerCategoryPage() {
                             </div>
                         ) : careers.length === 0 ? (
                             <div style={{ textAlign: 'center', padding: '4rem 0' }}>
-                                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔍</div>
+                                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}></div>
                                 <h3 style={{ marginBottom: '0.5rem' }}>No careers found</h3>
                                 <p style={{ color: 'var(--text-secondary)' }}>Try adjusting your filters</p>
                             </div>

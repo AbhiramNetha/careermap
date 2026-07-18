@@ -47,7 +47,7 @@ export default function Footer() {
             </div>
 
             <div className="footer-bottom">
-                <p>© 2025 way2fresher — Built for students across all degrees in India 🇮🇳</p>
+                <p>© 2025 way2fresher — Built for students across all degrees in India</p>
                 <p style={{ marginTop: '4px', color: 'var(--text-muted)' }}>
                     Data is indicative. Career outcomes are not guaranteed.
                 </p>

@@ -19,10 +19,10 @@ function buildItemKeys(roadmap) {
 }
 
 const CATEGORY_META = {
-    skills: { label: '🛠️ Skills to Learn', color: 'rgba(99,102,241,0.15)', border: 'rgba(99,102,241,0.3)', text: 'var(--primary-light)' },
-    tools: { label: '🔧 Tools & Resources', color: 'rgba(16,185,129,0.1)', border: 'rgba(16,185,129,0.3)', text: '#10b981' },
-    projects: { label: '📂 Projects to Build', color: 'rgba(245,158,11,0.1)', border: 'rgba(245,158,11,0.3)', text: '#f59e0b' },
-    interviewPrep: { label: '🎯 Interview Preparation', color: 'rgba(236,72,153,0.1)', border: 'rgba(236,72,153,0.3)', text: '#ec4899' },
+    skills: { label: 'Skills to Learn', color: 'rgba(99,102,241,0.15)', border: 'rgba(99,102,241,0.3)', text: 'var(--primary-light)' },
+    tools: { label: 'Tools & Resources', color: 'rgba(16,185,129,0.1)', border: 'rgba(16,185,129,0.3)', text: '#10b981' },
+    projects: { label: 'Projects to Build', color: 'rgba(245,158,11,0.1)', border: 'rgba(245,158,11,0.3)', text: '#f59e0b' },
+    interviewPrep: { label: 'Interview Preparation', color: 'rgba(236,72,153,0.1)', border: 'rgba(236,72,153,0.3)', text: '#ec4899' },
 };
 
 export default function RoadmapPage() {
@@ -131,19 +131,19 @@ export default function RoadmapPage() {
                     </div>
 
                     <h1 style={{ fontFamily: 'Poppins', fontSize: 'clamp(1.8rem,3vw,2.5rem)', fontWeight: 800, marginBottom: '0.5rem' }}>
-                        🗺️ {career.title} Roadmap
+                        {career.title} Roadmap
                     </h1>
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
                         {career.duration || 'Custom'} structured preparation plan with skills, tools &amp; projects
                     </p>
                     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                        {career.duration && <span className="chip chip-purple">⏰ {career.duration}</span>}
+                        {career.duration && <span className="chip chip-purple">{career.duration}</span>}
                         {career.riskLevel && (
                             <span className={`chip ${career.riskLevel === 'Low' ? 'chip-green' : career.riskLevel === 'High' ? 'chip-red' : 'chip-yellow'}`}>
-                                ⚡ {career.riskLevel} Risk
+                                {career.riskLevel} Risk
                             </span>
                         )}
-                        {career.salaryRange && <span className="chip chip-green">💰 {career.salaryRange}</span>}
+                        {career.salaryRange && <span className="chip chip-green">{career.salaryRange}</span>}
                     </div>
 
                     <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
@@ -151,7 +151,7 @@ export default function RoadmapPage() {
                             ← View Career Details
                         </button>
                         <button className="btn-secondary" onClick={() => { addToCompare(career); navigate('/compare'); }}>
-                            ⚖️ Compare This Career
+                            Compare This Career
                         </button>
                     </div>
                 </div>
@@ -177,8 +177,7 @@ export default function RoadmapPage() {
                                             className="btn-ghost-sm"
                                             onClick={resetProgress}
                                             title="Reset all progress"
-                                        >
-                                            🔄 Reset
+                                        >Reset
                                         </button>
                                     )}
                                 </div>
@@ -191,7 +190,7 @@ export default function RoadmapPage() {
                             </div>
                             {progress === 100 && (
                                 <div className="roadmap-complete-banner">
-                                    🎉 Congratulations! You've completed the entire roadmap!
+                                    Congratulations! You've completed the entire roadmap!
                                 </div>
                             )}
                         </div>
@@ -209,7 +208,7 @@ export default function RoadmapPage() {
                                         onClick={() => document.getElementById(`step-${i}`)?.scrollIntoView({ behavior: 'smooth' })}
                                     >
                                         <div style={{ fontWeight: 700, color: pct === 100 ? '#10b981' : 'var(--primary-light)', fontSize: '0.82rem', marginBottom: '4px' }}>
-                                            {pct === 100 ? '✅ ' : ''}{step.month}
+                                            {step.month}
                                         </div>
                                         <div style={{ height: '4px', borderRadius: '99px', background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
                                             <div style={{ height: '100%', width: `${pct}%`, background: pct === 100 ? '#10b981' : 'var(--gradient-primary)', borderRadius: '99px', transition: 'width 0.4s ease' }} />
@@ -271,7 +270,7 @@ export default function RoadmapPage() {
                                             onClick={() => toggleStep(si)}
                                         >
                                             <span>
-                                                {isComplete ? '✅' : '📅'} {step.month}
+                                                {step.month}
                                                 <span style={{ marginLeft: '0.75rem', fontSize: '0.75rem', fontWeight: 600, color: isComplete ? '#10b981' : 'var(--text-muted)' }}>
                                                     {sp.done}/{sp.total}
                                                 </span>
@@ -351,7 +350,7 @@ export default function RoadmapPage() {
                         boxShadow: 'var(--shadow-md)',
                         marginBottom: '2rem',
                     }}>
-                        <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>🗺️</div>
+                        <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}></div>
                         <h2 style={{ marginBottom: '0.75rem', fontWeight: 700, fontFamily: 'Poppins' }}>Structured Roadmap Coming Soon!</h2>
                         <p style={{ color: 'var(--text-secondary)', maxWidth: '520px', margin: '0 auto 1.75rem', lineHeight: 1.6, fontSize: '0.92rem' }}>
                             Our team is currently designing the custom month-by-month learning roadmaps for our newly added career paths. You can view the recommended skills and tools on the Career Details page.
@@ -364,7 +363,7 @@ export default function RoadmapPage() {
 
                 {/* ── All Skills Summary ── */}
                 <div className="detail-section" style={{ marginTop: '2rem' }}>
-                    <div className="detail-section-title">🛠️ All Skills in This Roadmap</div>
+                    <div className="detail-section-title">All Skills in This Roadmap</div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                         {career.skills?.map(skill => (
                             <span key={skill} className="skill-tag">{skill}</span>

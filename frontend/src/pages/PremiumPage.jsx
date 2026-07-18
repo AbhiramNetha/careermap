@@ -7,58 +7,53 @@ import BranchDetailPage from './BranchDetailPage';
 import ComparePage from './ComparePage';
 import ResumeBuilder from './ResumeBuilder';
 import AtsCheckerPage from './AtsCheckerPage';
-import {
-  Crown, Network, GitCompare, FileText, BarChart3,
-  DollarSign, Newspaper, Mic, Lock, Sparkles,
-  CheckCircle2, ChevronRight, ArrowLeft,
-} from 'lucide-react';
 
 /* ── Section definitions ── */
 const SECTIONS = [
   {
-    id: 'branches', label: 'Branch Guide', icon: Network,
+    id: 'branches', label: 'Branch Guide',
     color: '#6366f1', glow: 'rgba(99,102,241,0.12)',
     desc: 'Explore career paths, salary ranges, top recruiters & growth forecasts by degree sector and specialization.',
     highlights: ['Branch-wise career breakdown', 'Top company recruiters', 'Salary benchmarks', 'Growth trajectory charts'],
     comingSoon: false,
   },
   {
-    id: 'compare', label: 'Career Compare', icon: GitCompare,
+    id: 'compare', label: 'Career Compare',
     color: '#10b981', glow: 'rgba(16,185,129,0.12)',
     desc: 'Side-by-side comparison of up to 3 careers on salary, demand, skills, and growth outlook.',
     highlights: ['Compare up to 3 careers', 'Skill gap analysis', 'Market demand score', 'Work-life balance index'],
     comingSoon: false,
   },
   {
-    id: 'resume', label: 'Resume Builder', icon: FileText,
+    id: 'resume', label: 'Resume Builder',
     color: '#3b82f6', glow: 'rgba(59,130,246,0.12)',
     desc: 'Build an ATS-ready resume in minutes with guided steps, premium templates and PDF export.',
     highlights: ['ATS-optimised templates', 'AI content suggestions', 'PDF export', 'Real-time preview'],
     comingSoon: false,
   },
   {
-    id: 'ats', label: 'ATS Checker', icon: BarChart3,
+    id: 'ats', label: 'ATS Checker',
     color: '#f59e0b', glow: 'rgba(245,158,11,0.12)',
     desc: 'Instantly score your resume for ATS compatibility and get actionable feedback to fix issues.',
     highlights: ['Instant ATS score (0–100)', 'Keyword gap detection', 'Section analysis', 'Formatting feedback'],
     comingSoon: false,
   },
   {
-    id: 'salary', label: 'Salary Guide', icon: DollarSign,
+    id: 'salary', label: 'Salary Guide',
     color: '#8b5cf6', glow: 'rgba(139,92,246,0.12)',
     desc: 'Real-time salary intelligence by role, city and company tier. Negotiate with confidence.',
     highlights: ['City-wise salary data', 'Experience band filters', 'Company-tier insights', 'Negotiation benchmarks'],
     comingSoon: true,
   },
   {
-    id: 'blogs', label: 'Career Blogs', icon: Newspaper,
+    id: 'blogs', label: 'Career Blogs',
     color: '#ec4899', glow: 'rgba(236,72,153,0.12)',
     desc: 'Expert articles, interview experiences and career tips curated for freshers every week.',
     highlights: ['Expert articles weekly', 'Interview experiences', 'Industry trend reports', 'Career growth tips'],
     comingSoon: true,
   },
   {
-    id: 'mock', label: 'Mock Interview', icon: Mic,
+    id: 'mock', label: 'Mock Interview',
     color: '#14b8a6', glow: 'rgba(20,184,166,0.12)',
     desc: 'AI-powered mock interview practice with real-time feedback and company-specific question sets.',
     highlights: ['AI-driven questions', 'Real-time feedback', 'Company-specific rounds', 'Performance analytics'],
@@ -75,13 +70,6 @@ function SectionLock({ onUpgrade, isLoggedIn }) {
         border: '1px solid rgba(251,191,36,0.25)', borderRadius: '16px',
         padding: '2rem', textAlign: 'center', boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
       }}>
-        <div style={{
-          width: '54px', height: '54px', borderRadius: '50%',
-          background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.3)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem',
-        }}>
-          <Lock size={22} color="#fbbf24" />
-        </div>
         <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
           {isLoggedIn ? 'Upgrade to PRO' : 'Login Required'}
         </h3>
@@ -100,7 +88,7 @@ function SectionLock({ onUpgrade, isLoggedIn }) {
           onMouseEnter={e => e.currentTarget.style.opacity = '0.88'}
           onMouseLeave={e => e.currentTarget.style.opacity = '1'}
         >
-          {isLoggedIn ? '⚡ Upgrade to PRO' : '→ Log In to Upgrade'}
+          {isLoggedIn ? 'Upgrade to PRO' : '→ Log In to Upgrade'}
         </button>
       </div>
     </div>
@@ -111,7 +99,7 @@ function SectionLock({ onUpgrade, isLoggedIn }) {
 function ComingSoonBlock({ label }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '3.5rem 1rem', textAlign: 'center' }}>
-      <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>🚀</div>
+      <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}></div>
       <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
         {label} — Coming Soon
       </h3>
@@ -226,7 +214,7 @@ export default function PremiumPage() {
             onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'}
             onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
           >
-            <ArrowLeft size={13} /> Overview
+            Overview
           </button>
 
           {/* Divider */}
@@ -234,7 +222,6 @@ export default function PremiumPage() {
 
           {/* Section links */}
           {SECTIONS.map((s) => {
-            const Icon = s.icon;
             const isActive = activeNav === s.id;
             return (
               <button
@@ -256,7 +243,6 @@ export default function PremiumPage() {
                 onMouseEnter={e => { if (!isActive) e.currentTarget.style.color = 'var(--text-primary)'; }}
                 onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = 'var(--text-secondary)'; }}
               >
-                <Icon size={13} />
                 {s.label}
               </button>
             );
@@ -265,7 +251,6 @@ export default function PremiumPage() {
 
         {/* All sections stacked */}
         {SECTIONS.map((section) => {
-          const Icon = section.icon;
           return (
             <section
               key={section.id}
@@ -278,13 +263,6 @@ export default function PremiumPage() {
                 padding: '1.25rem 1.5rem 0.85rem',
                 display: 'flex', alignItems: 'center', gap: '0.8rem',
               }}>
-                <div style={{
-                  width: '40px', height: '40px', borderRadius: '10px',
-                  background: section.glow, border: `1px solid ${section.color}40`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                }}>
-                  <Icon size={19} color={section.color} />
-                </div>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                     <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
@@ -297,7 +275,7 @@ export default function PremiumPage() {
                     )}
                     {!section.comingSoon && !isUnlocked && (
                       <span style={{ fontSize: '0.62rem', fontWeight: 700, textTransform: 'uppercase', color: '#fbbf24', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.25)', padding: '2px 8px', borderRadius: '99px', display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
-                        <Lock size={9} /> PRO
+                        PRO
                       </span>
                     )}
                   </div>
@@ -330,7 +308,6 @@ export default function PremiumPage() {
           border: '1px solid rgba(251,191,36,0.35)', borderRadius: '99px',
           padding: '0.35rem 1rem', marginBottom: '1.1rem',
         }}>
-          <Crown size={14} color="#fbbf24" />
           <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#fbbf24', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
             Way2Fresher PRO
           </span>
@@ -361,7 +338,6 @@ export default function PremiumPage() {
             onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.03)'}
             onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
           >
-            <Sparkles size={17} />
             {!currentUser ? 'Log In to Unlock PRO' : 'Upgrade to PRO'}
           </button>
         ) : (
@@ -371,7 +347,7 @@ export default function PremiumPage() {
             borderRadius: '12px', padding: '0.7rem 1.4rem',
             color: '#10b981', fontWeight: 700, fontSize: '0.88rem',
           }}>
-            <CheckCircle2 size={17} /> PRO Active — select a feature to get started
+            PRO Active — select a feature to get started
           </div>
         )}
       </div>
@@ -379,7 +355,6 @@ export default function PremiumPage() {
       {/* Feature Cards Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(320px, 100%), 1fr))', gap: '1.25rem' }}>
         {SECTIONS.map((s) => {
-          const Icon = s.icon;
           const isCardInteractive = !s.comingSoon;
           return (
             <div
@@ -417,20 +392,9 @@ export default function PremiumPage() {
 
                 {/* Header */}
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                  <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: s.glow, border: `1px solid ${s.color}33`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Icon size={22} color={s.color} />
-                  </div>
                   <div>
-                    {s.comingSoon ? (
+                    {s.comingSoon && (
                       <span style={{ fontSize: '0.65rem', fontWeight: 700, color: '#94a3b8', background: 'rgba(148,163,184,0.12)', border: '1px solid rgba(148,163,184,0.2)', padding: '2px 8px', borderRadius: '99px', textTransform: 'uppercase' }}>Soon</span>
-                    ) : !isUnlocked ? (
-                      <span style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Lock size={13} color="#fbbf24" />
-                      </span>
-                    ) : (
-                      <span style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <ChevronRight size={14} color="#10b981" />
-                      </span>
                     )}
                   </div>
                 </div>
@@ -498,7 +462,6 @@ export default function PremiumPage() {
                     }}
                   >
                     <span>Open Feature</span>
-                    <ChevronRight size={14} />
                   </button>
                 ) : (
                   <button
@@ -532,7 +495,6 @@ export default function PremiumPage() {
                     }}
                   >
                     <span>Unlock with PRO</span>
-                    <Sparkles size={13} />
                   </button>
                 )}
               </div>

@@ -767,7 +767,7 @@ export default function ResumeBuilderPage() {
                 onClick={() => setActiveFormTab(activeFormTab === 'experience' ? '' : 'experience')}
                 className="w-full bg-slate-950/40 px-4 py-3 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-200"
               >
-                <span>💼 Work Experience</span>
+                <span>Work Experience</span>
                 {activeFormTab === 'experience' ? <ChevronUpIcon className="w-4 h-4 text-slate-400" /> : <ChevronDownIcon className="w-4 h-4 text-slate-400" />}
               </button>
               {activeFormTab === 'experience' && (
@@ -832,7 +832,7 @@ export default function ResumeBuilderPage() {
                 onClick={() => setActiveFormTab(activeFormTab === 'projects' ? '' : 'projects')}
                 className="w-full bg-slate-950/40 px-4 py-3 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-200"
               >
-                <span>🚀 Projects</span>
+                <span>Projects</span>
                 {activeFormTab === 'projects' ? <ChevronUpIcon className="w-4 h-4 text-slate-400" /> : <ChevronDownIcon className="w-4 h-4 text-slate-400" />}
               </button>
               {activeFormTab === 'projects' && (

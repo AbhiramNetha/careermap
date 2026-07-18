@@ -9,13 +9,13 @@ export default function QuizResultPage() {
         return (
             <div className="loader-container">
                 <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🤔</div>
+                    <div style={{ fontSize: '4rem', marginBottom: '1rem' }}></div>
                     <h2 style={{ marginBottom: '1rem' }}>No Results Found</h2>
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
                         Please complete the career quiz first to see your recommendations.
                     </p>
                     <button className="btn-primary" onClick={() => navigate('/quiz')}>
-                        ✨ Take the Quiz
+                        Take the Quiz
                     </button>
                 </div>
             </div>
@@ -25,9 +25,9 @@ export default function QuizResultPage() {
     const { recommendations, answers } = quizResults;
 
     const RANK_STYLES = {
-        1: { medal: '🥇', gradientText: 'gradient-text-gold', badge: 'rank-1', label: 'Best Match' },
-        2: { medal: '🥈', gradientText: 'gradient-text', badge: 'rank-2', label: '2nd Best' },
-        3: { medal: '🥉', gradientText: '', badge: 'rank-3', label: '3rd Best' },
+        1: { medal: '', gradientText: 'gradient-text-gold', badge: 'rank-1', label: 'Best Match' },
+        2: { medal: '', gradientText: 'gradient-text', badge: 'rank-2', label: '2nd Best' },
+        3: { medal: '', gradientText: '', badge: 'rank-3', label: '3rd Best' },
     };
 
     const degree = answers?.degree || 'Engineering';
@@ -54,7 +54,7 @@ export default function QuizResultPage() {
                 <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
                     <div className="section-tag">Quiz Results</div>
                     <h1 className="section-title" style={{ marginTop: '1rem' }}>
-                        Your <span className="gradient-text">Career Matches</span> Are Ready 🎯
+                        Your <span className="gradient-text">Career Matches</span> Are Ready
                     </h1>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', marginTop: '0.5rem' }}>
                         Based on your profile: <strong style={{ color: 'var(--text-primary)' }}>
@@ -88,7 +88,7 @@ export default function QuizResultPage() {
                                     {/* Recommendation Info */}
                                     <div style={{ flex: 1 }}>
                                         <h3 style={{ fontFamily: 'Poppins', fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.25rem' }}>
-                                            {career.icon} {career.title}
+                                            {career.title}
                                         </h3>
                                         <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
                                             {career.category}
@@ -105,17 +105,17 @@ export default function QuizResultPage() {
                                             marginBottom: '1rem',
                                             fontStyle: 'italic',
                                         }}>
-                                            💡 {rec.explanation}
+                                            {rec.explanation}
                                         </div>
 
                                         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-                                            {career.salaryRange && <span className="chip chip-green">💰 {career.salaryRange}</span>}
+                                            {career.salaryRange && <span className="chip chip-green">{career.salaryRange}</span>}
                                             {career.riskLevel && (
                                                 <span className={`chip ${career.riskLevel === 'Low' ? 'chip-green' : career.riskLevel === 'High' ? 'chip-red' : 'chip-yellow'}`}>
-                                                    ⚡ {career.riskLevel} Risk
+                                                    {career.riskLevel} Risk
                                                 </span>
                                             )}
-                                            {career.demandLevel && <span className="chip chip-purple">📈 {career.demandLevel} Demand</span>}
+                                            {career.demandLevel && <span className="chip chip-purple">{career.demandLevel} Demand</span>}
                                         </div>
 
                                         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
@@ -123,19 +123,19 @@ export default function QuizResultPage() {
                                                 className="btn-sm btn-filled"
                                                 onClick={() => navigate(`/careers/${career.slug}`)}
                                             >
-                                                📖 View Full Details
+                                                View Full Details
                                             </button>
                                             <button
                                                 className="btn-sm btn-outline"
                                                 onClick={() => { addToCompare(career); navigate('/compare'); }}
                                             >
-                                                ⚖️ Add to Compare
+                                                Add to Compare
                                             </button>
                                             <button
                                                 className="btn-sm btn-outline"
                                                 onClick={() => navigate(`/roadmap/${career.slug}`)}
                                             >
-                                                🗺️ View Roadmap
+                                                View Roadmap
                                             </button>
                                         </div>
                                     </div>
@@ -148,13 +148,13 @@ export default function QuizResultPage() {
                 {}
                 <div style={{ textAlign: 'center', marginTop: '3rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                     <button className="btn-secondary" onClick={() => navigate('/quiz')}>
-                        🔁 Retake Quiz
+                        Retake Quiz
                     </button>
                     <button className="btn-primary" onClick={() => navigate('/careers')}>
-                        🗺️ Explore All Careers
+                        Explore All Careers
                     </button>
                     <button className="btn-secondary" onClick={() => navigate('/compare')}>
-                        ⚖️ Compare Careers
+                        Compare Careers
                     </button>
                 </div>
             </div>

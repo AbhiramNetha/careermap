@@ -136,7 +136,7 @@ We are looking for a Full Stack Developer with experience in React.js, Node.js, 
           ) : (
             <>
               <SparklesIcon className="w-4 h-4" />
-              🚀 Generate My Resume
+              Generate My Resume
             </>
           )}
         </button>
