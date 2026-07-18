@@ -1,10 +1,8 @@
 import { useForm, useFieldArray } from 'react-hook-form';
 import { PlusIcon, TrashIcon } from '@heroicons/react/24/solid';
 
-const inputCls =
-  'w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all placeholder-slate-600';
-const textareaCls =
-  'w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all placeholder-slate-600 resize-none';
+const inputCls = 'resume-builder-input';
+const textareaCls = 'resume-builder-input';
 const labelCls = 'block text-slate-400 text-[10px] uppercase font-bold tracking-wider mb-1.5';
 const errorCls = 'text-red-400 text-xs mt-1';
 

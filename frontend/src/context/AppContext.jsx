@@ -9,7 +9,7 @@ export function AppProvider({ children }) {
     const [selectedBranch, setSelectedBranch] = useState(null);
     const [isPremium, setIsPremium] = useState(() => {
         const saved = typeof window !== 'undefined' ? localStorage.getItem('w2f-premium') : null;
-        return saved === 'true';
+        return saved === null ? true : saved === 'true';
     });
 
     const togglePremium = useCallback(() => {

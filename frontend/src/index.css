@@ -6061,4 +6061,246 @@ button[type="submit"]:active:not(:disabled) {
   }
 }
 
+/* ── ATS Checker Page Switcher ── */
+.ats-mode-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  background: rgba(30, 41, 59, 0.7);
+  padding: 0.35rem;
+  border-radius: 12px;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+[data-theme='light'] .ats-mode-container {
+  background: rgba(241, 245, 249, 0.9);
+  border-color: rgba(217, 130, 43, 0.2);
+}
+
+.ats-mode-btn {
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: transparent;
+  color: #f59e0b;
+}
+
+.ats-mode-btn:hover {
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.ats-mode-btn--active {
+  background: rgba(245, 158, 11, 0.2) !important;
+  color: #fef08a !important;
+  border-color: #f59e0b !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+}
+
+[data-theme='light'] .ats-mode-btn {
+  color: #b45309;
+}
+
+[data-theme='light'] .ats-mode-btn:hover {
+  background: rgba(217, 130, 43, 0.06);
+}
+
+[data-theme='light'] .ats-mode-btn--active {
+  background: #d9822b !important;
+  color: #ffffff !important;
+  border-color: #d9822b !important;
+  box-shadow: 0 4px 12px rgba(217, 130, 43, 0.25);
+}
+
+/* ── General disabled submit button styling fixes ── */
+button[type="submit"]:disabled {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.35) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+[data-theme='light'] button[type="submit"]:disabled {
+  background: rgba(0, 0, 0, 0.06) !important;
+  color: rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ── Resume Builder Inputs ── */
+.resume-builder-input {
+  width: 100%;
+  background: rgba(2, 6, 23, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  color: #e2e8f0 !important;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.resume-builder-input::placeholder {
+  color: #4b5563 !important;
+}
+
+.resume-builder-input:focus {
+  border-color: #10b981 !important;
+}
+
+[data-theme='light'] .resume-builder-input {
+  background: #f1f5f9 !important;
+  border-color: rgba(15, 23, 42, 0.15) !important;
+  color: #0f172a !important;
+}
+
+[data-theme='light'] .resume-builder-input::placeholder {
+  color: #94a3b8 !important;
+}
+
+[data-theme='light'] .resume-builder-input:focus {
+  border-color: #10b981 !important;
+}
+
+/* ── Resume Builder Page Theme-Aware Classes ── */
+
+/* Card containers (form panel, preview panel) */
+.rb-card {
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+[data-theme='light'] .rb-card {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+/* Page heading */
+.rb-heading {
+  color: #f1f5f9;
+}
+[data-theme='light'] .rb-heading {
+  color: #0f172a !important;
+}
+
+/* Subtext (descriptions, secondary text) */
+.rb-subtext {
+  color: #94a3b8;
+}
+[data-theme='light'] .rb-subtext {
+  color: #475569 !important;
+}
+
+/* Meta text (smallest, muted text) */
+.rb-meta {
+  color: #64748b;
+}
+[data-theme='light'] .rb-meta {
+  color: #64748b !important;
+}
+
+/* Icon box (preview panel empty state icon container) */
+.rb-icon-box {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+[data-theme='light'] .rb-icon-box {
+  background: #f1f5f9 !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Muted icon color */
+.rb-icon-muted {
+  color: #334155;
+}
+[data-theme='light'] .rb-icon-muted {
+  color: #cbd5e1 !important;
+}
+
+/* Steps list container */
+.rb-steps-list {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+[data-theme='light'] .rb-steps-list {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Inactive step dot */
+.rb-step-inactive {
+  background: #1e293b;
+  color: #64748b;
+}
+[data-theme='light'] .rb-step-inactive {
+  background: #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+/* Regenerate button */
+.rb-regen-btn {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.rb-regen-btn:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #cbd5e1;
+}
+[data-theme='light'] .rb-regen-btn {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+[data-theme='light'] .rb-regen-btn:hover {
+  border-color: rgba(15, 23, 42, 0.25) !important;
+  color: #0f172a !important;
+}
+
+/* ── Light mode overrides for hardcoded Tailwind classes inside resume form ── */
+[data-theme='light'] .resume-builder-form h2 {
+  color: #0f172a !important;
+}
+[data-theme='light'] .resume-builder-form label {
+  color: #475569 !important;
+}
+[data-theme='light'] .resume-builder-form p {
+  color: #64748b !important;
+}
+[data-theme='light'] .resume-builder-form .text-slate-600 {
+  color: #94a3b8 !important;
+}
+[data-theme='light'] .resume-builder-form button[type="submit"] {
+  color: #fff !important;
+}
+
+/* ── Light mode overrides for the glassmorphic inputs inside resume form ── */
+[data-theme='light'] .resume-builder-form input[type="text"],
+[data-theme='light'] .resume-builder-form input[type="email"],
+[data-theme='light'] .resume-builder-form input[type="tel"],
+[data-theme='light'] .resume-builder-form input[type="url"],
+[data-theme='light'] .resume-builder-form textarea,
+[data-theme='light'] .resume-builder-form select {
+  background-color: #f1f5f9 !important;
+  border-color: rgba(15, 23, 42, 0.15) !important;
+  color: #0f172a !important;
+}
+
+[data-theme='light'] .resume-builder-form input::placeholder,
+[data-theme='light'] .resume-builder-form textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+[data-theme='light'] .resume-builder-form input[type="text"]:focus,
+[data-theme='light'] .resume-builder-form input[type="email"]:focus,
+[data-theme='light'] .resume-builder-form input[type="tel"]:focus,
+[data-theme='light'] .resume-builder-form input[type="url"]:focus,
+[data-theme='light'] .resume-builder-form textarea:focus,
+[data-theme='light'] .resume-builder-form select:focus {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2) !important;
+}
+
+
 

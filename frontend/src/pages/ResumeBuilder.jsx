@@ -132,14 +132,14 @@ export default function ResumeBuilder() {
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Page Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-100 flex items-center justify-center gap-2 mb-2">
+          <h1 className="text-3xl sm:text-4xl font-extrabold rb-heading flex items-center justify-center gap-2 mb-2">
             <DocumentTextIcon className="w-8 h-8 text-amber-400" />
             AI <span className="text-amber-400">Resume</span> Builder
           </h1>
-          <p className="text-slate-400 text-sm max-w-xl mx-auto">
+          <p className="rb-subtext text-sm max-w-xl mx-auto">
             Fill your details → Paste any Job Description → Gemini AI tailors a ATS-optimized resume
           </p>
-          <div className="flex items-center justify-center gap-6 mt-3 text-slate-500 text-xs">
+          <div className="flex items-center justify-center gap-6 mt-3 rb-meta text-xs">
             <span className="flex items-center gap-1"><SparklesIcon className="w-3 h-3 text-amber-400" /> Gemini AI Powered</span>
             <span>•</span>
             <span>ATS Score Included</span>
@@ -154,7 +154,7 @@ export default function ResumeBuilder() {
         {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
           {/* LEFT — Form Panel */}
-          <div className="resume-builder-form bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-xl">
+          <div className="resume-builder-form rb-card rounded-3xl p-6 shadow-xl">
             {renderStep()}
           </div>
 
@@ -167,22 +167,22 @@ export default function ResumeBuilder() {
                 onDownload={handleDownload}
               />
             ) : (
-              <div className="bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col items-center justify-center gap-4 min-h-[500px]">
-                <div className="w-20 h-20 rounded-2xl bg-slate-800/60 border border-white/5 flex items-center justify-center">
-                  <DocumentTextIcon className="w-10 h-10 text-slate-700" />
+              <div className="rb-card rounded-3xl p-6 flex flex-col items-center justify-center gap-4 min-h-[500px]">
+                <div className="w-20 h-20 rounded-2xl rb-icon-box flex items-center justify-center">
+                  <DocumentTextIcon className="w-10 h-10 rb-icon-muted" />
                 </div>
                 <div className="text-center">
-                  <p className="text-slate-400 font-semibold mb-1">Resume Preview</p>
-                  <p className="text-slate-600 text-xs max-w-xs">
+                  <p className="rb-subtext font-semibold mb-1">Resume Preview</p>
+                  <p className="rb-meta text-xs max-w-xs">
                     Complete all 6 steps and click{' '}
                     <span className="text-amber-400 font-semibold">🚀 Generate My Resume</span> — your
                     live preview will appear here.
                   </p>
                 </div>
-                <div className="flex flex-col gap-2 text-xs text-slate-600 border border-white/5 rounded-2xl p-4 w-full max-w-sm">
+                <div className="flex flex-col gap-2 text-xs rb-meta rb-steps-list rounded-2xl p-4 w-full max-w-sm">
                   {STEPS.map((step, idx) => (
-                    <div key={step} className={`flex items-center gap-2 ${idx < currentStep ? 'text-emerald-400' : idx === currentStep ? 'text-amber-400' : 'text-slate-600'}`}>
-                      <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold flex-shrink-0 ${idx < currentStep ? 'bg-emerald-500 text-slate-950' : idx === currentStep ? 'bg-amber-500 text-slate-950' : 'bg-slate-800'}`}>
+                    <div key={step} className={`flex items-center gap-2 ${idx < currentStep ? 'text-emerald-400' : idx === currentStep ? 'text-amber-400' : 'rb-meta'}`}>
+                      <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold flex-shrink-0 ${idx < currentStep ? 'bg-emerald-500 text-white' : idx === currentStep ? 'bg-amber-500 text-white' : 'rb-step-inactive'}`}>
                         {idx < currentStep ? '✓' : idx + 1}
                       </span>
                       {step}
@@ -203,7 +203,7 @@ export default function ResumeBuilder() {
                 setResumeData(null);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="text-xs font-semibold text-slate-400 border border-white/10 px-4 py-2 rounded-xl hover:border-white/20 hover:text-slate-300 transition-all"
+              className="text-xs font-semibold rb-subtext rb-regen-btn px-4 py-2 rounded-xl transition-all"
             >
               ↩ Regenerate with different JD
             </button>

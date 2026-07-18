@@ -62,7 +62,7 @@ export default function StepSix_JD({ onGenerate, onBack, loading }) {
           value={targetRole}
           onChange={(e) => setTargetRole(e.target.value)}
           placeholder="e.g. Full Stack Developer, Data Analyst, Backend Engineer..."
-          className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all placeholder-slate-600"
+          className="resume-builder-input"
         />
       </div>
 
@@ -79,7 +79,7 @@ export default function StepSix_JD({ onGenerate, onBack, loading }) {
 
 Example:
 We are looking for a Full Stack Developer with experience in React.js, Node.js, and PostgreSQL. The candidate should be familiar with REST APIs, Docker, and Git. Experience with AWS is a plus...`}
-          className="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all placeholder-slate-600 resize-none"
+          className="resume-builder-input resize-none"
         />
         <p className="text-slate-600 text-[10px] mt-1">{jdText.length} characters</p>
       </div>

@@ -200,24 +200,18 @@ export default function AtsCheckerPage() {
           {/* Mode Switcher */}
           <div className="mb-6">
             <label className="block text-slate-300 text-xs uppercase font-bold tracking-wider mb-2">Scan Mode</label>
-            <div className="grid grid-cols-2 gap-2 bg-slate-800/80 p-1.5 rounded-xl border border-amber-500/20">
+            <div className="ats-mode-container">
               <button
                 type="button"
                 onClick={() => setMode('generic')}
-                className={`py-2.5 px-4 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all border ${mode === 'generic'
-                  ? 'bg-amber-500/25 text-amber-300 border-amber-400 shadow-lg shadow-amber-500/20'
-                  : 'text-amber-400 border-amber-400 bg-transparent hover:bg-amber-500/10'
-                  }`}
+                className={`ats-mode-btn ${mode === 'generic' ? 'ats-mode-btn--active' : ''}`}
               >
                 Generic Technology Check
               </button>
               <button
                 type="button"
                 onClick={() => setMode('jd')}
-                className={`py-2.5 px-4 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all border ${mode === 'jd'
-                  ? 'bg-amber-500/25 text-amber-300 border-amber-400 shadow-lg shadow-amber-500/20'
-                  : 'text-amber-400 border-amber-400 bg-transparent hover:bg-amber-500/10'
-                  }`}
+                className={`ats-mode-btn ${mode === 'jd' ? 'ats-mode-btn--active' : ''}`}
               >
                 Job Description Match
               </button>
