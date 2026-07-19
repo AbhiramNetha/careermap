@@ -108,11 +108,10 @@
     bottom: 20vh;
 }
 
-/* Neon text effect specifically for "LEVEL UP" section */
 .neon-text {
-    color: #4ade80 !important;
-    -webkit-text-fill-color: #4ade80 !important;
-    text-shadow: 0 0 10px #22c55e, 0 0 20px #22c55e, 0 0 40px #16a34a, 0 0 80px #15803d !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    text-shadow: none !important;
     letter-spacing: 5px;
     background: none !important;
 }
