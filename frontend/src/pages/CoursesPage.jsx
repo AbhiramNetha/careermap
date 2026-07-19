@@ -43,7 +43,7 @@ export default function CoursesPage() {
             {}
             <section className="courses-hero">
                 <div className="courses-hero-inner">
-                    <span className="courses-hero-badge">📚 Course Discovery</span>
+                    <span className="courses-hero-badge">Course Discovery</span>
                     <h1 className="courses-hero-title">
                         Find Your Perfect <span className="gradient-text">Course</span>
                     </h1>
@@ -53,7 +53,6 @@ export default function CoursesPage() {
 
                     {}
                     <div className="courses-search-bar">
-                        <span>🔍</span>
                         <input
                             type="text"
                             placeholder="Search courses, topics, platforms…"
@@ -85,7 +84,6 @@ export default function CoursesPage() {
                     </div>
                 ) : filtered.length === 0 ? (
                     <div className="courses-empty">
-                        <span>😕</span>
                         <h3>No courses found</h3>
                         <p>Try a different category or search term</p>
                     </div>
@@ -94,7 +92,7 @@ export default function CoursesPage() {
                         {}
                         {featured.length > 0 && filter === 'All' && !search && (
                             <section className="courses-section">
-                                <h2 className="courses-section-title">⭐ Featured Courses</h2>
+                                <h2 className="courses-section-title">Featured Courses</h2>
                                 <div className="courses-grid courses-grid-featured">
                                     {featured.map(c => (
                                         <CourseCard key={c._id || c.id} course={c} onGo={handleGoToCourse} featured />
@@ -127,7 +125,7 @@ function CourseCard({ course, onGo, featured = false }) {
 
     return (
         <div className={`course-card ${featured ? 'course-card-featured' : ''}`}>
-            {featured && <div className="course-featured-ribbon">⭐ Featured</div>}
+            {featured && <div className="course-featured-ribbon">Featured</div>}
 
             {course.image ? (
                 <div className="course-card-image">
@@ -135,21 +133,20 @@ function CourseCard({ course, onGo, featured = false }) {
                 </div>
             ) : (
                 <div className={`course-card-thumbnail course-thumb-${(course.category || 'Other').replace(/[\s/]/g, '-').toLowerCase()}`}>
-                    <span>{getCategoryEmoji(course.category)}</span>
+                    <span />
                 </div>
             )}
 
             <div className="course-card-body">
                 <div className="course-card-tags">
                     <span className="course-tag-cat">{course.category}</span>
-                    <span className="course-tag-platform">📦 {course.platform}</span>
+                    <span className="course-tag-platform">{course.platform}</span>
                 </div>
 
                 <h3 className="course-card-title">{course.title}</h3>
                 <p className="course-card-desc">{course.description?.slice(0, 110)}…</p>
 
                 <div className="course-card-rating">
-                    <span className="course-stars">{stars}</span>
                     <span className="course-rating-num">{(course.rating || 4.5).toFixed(1)}</span>
                     {course.totalStudents > 0 && (
                         <span className="course-students">({course.totalStudents.toLocaleString()} students)</span>
@@ -166,7 +163,7 @@ function CourseCard({ course, onGo, featured = false }) {
                         onClick={() => onGo(course)}
                         id={`course-go-${course._id || course.id}`}
                     >
-                        Go to Course →
+                        Go to Course
                     </button>
                 </div>
             </div>
@@ -174,11 +171,3 @@ function CourseCard({ course, onGo, featured = false }) {
     );
 }
 
-function getCategoryEmoji(cat) {
-    const map = {
-        'SDE': '💻', 'Web Development': '🌐', 'Data Science': '📊',
-        'Cloud': '☁️', 'DevOps': '⚙️', 'AI/ML': '🤖',
-        'UI/UX': '🎨', 'Other': '📚'
-    };
-    return map[cat] || '📚';
-}

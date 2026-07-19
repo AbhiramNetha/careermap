@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { fetchAllCareers } from '../services/api';
 import { useApp } from '../context/AppContext';
+import { toast } from 'react-hot-toast';
 
-function CareerCard({ career, onCompare, onView }) {
-    const riskClass = `risk-${career.riskLevel?.toLowerCase() || 'medium'}`;
+function CareerCard({ career, onCompare, onView, alreadyInCompare }) {
+    const risk = career.riskLevel || (career.category === 'Government' || career.category === 'Higher Studies' ? 'Low' : career.category === 'Entrepreneurship' ? 'High' : 'Medium');
+    const riskClass = `risk-${risk.toLowerCase()}`;
     return (
         <div className="career-card fade-in">
             <div className="career-card-header">
@@ -16,7 +18,7 @@ function CareerCard({ career, onCompare, onView }) {
             </div>
             <p className="career-overview">{career.description}</p>
             <div className="career-meta">
-                {career.riskLevel && <span className={`meta-tag ${riskClass}`}>{career.riskLevel} Risk</span>}
+                <span className={`meta-tag ${riskClass}`}>{risk} Risk</span>
                 {career.demandLevel && <span className="meta-tag">{career.demandLevel} Demand</span>}
                 {career.examRoute && <span className="meta-tag">{career.examRoute}</span>}
                 {career.duration && <span className="meta-tag">{career.duration}</span>}
@@ -24,7 +26,12 @@ function CareerCard({ career, onCompare, onView }) {
             </div>
             {career.salaryRange && <div className="career-salary">Salary Range: {career.salaryRange}</div>}
             <div className="career-card-footer">
-                <button className="btn-sm btn-outline" onClick={() => onCompare(career)}>Compare</button>
+                <button 
+                    className={`btn-sm ${alreadyInCompare ? 'btn-filled' : 'btn-outline'}`} 
+                    onClick={onCompare}
+                >
+                    {alreadyInCompare ? '✓ Compare' : '⚖️ Compare'}
+                </button>
                 <button className="btn-sm btn-filled" onClick={() => onView(career.slug)}>View Details →</button>
             </div>
         </div>
@@ -44,9 +51,10 @@ const RISK_LEVELS = ['', 'Low', 'Medium', 'High'];
 export default function CareerCategoryPage() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
-    const { addToCompare } = useApp();
+    const { addToCompare, removeFromCompare, selectedCareers } = useApp();
 
-    const [careers, setCareers] = useState([]);
+    const [allCareers, setAllCareers] = useState([]);
+    const [filteredCareers, setFilteredCareers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
     const [filters, setFilters] = useState({
@@ -57,17 +65,49 @@ export default function CareerCategoryPage() {
 
     useEffect(() => {
         setLoading(true);
-        const params = {};
-        if (filters.category) params.category = filters.category;
-        if (filters.riskLevel) params.riskLevel = filters.riskLevel;
-        if (filters.studyRequired !== '') params.studyRequired = filters.studyRequired;
-        if (search) params.search = search;
-
-        fetchAllCareers(params)
-            .then(res => setCareers(res.data.data))
-            .catch(() => setCareers([]))
+        fetchAllCareers()
+            .then(res => {
+                setAllCareers(res.data.data || []);
+            })
+            .catch(() => setAllCareers([]))
             .finally(() => setLoading(false));
-    }, [filters, search]);
+    }, []);
+
+    useEffect(() => {
+        let result = [...allCareers];
+
+        // 1. Category Filter
+        if (filters.category) {
+            result = result.filter(c => c.category === filters.category);
+        }
+        
+        // 2. Risk Level Filter
+        if (filters.riskLevel) {
+            result = result.filter(c => {
+                const risk = c.riskLevel || (c.category === 'Government' || c.category === 'Higher Studies' ? 'Low' : c.category === 'Entrepreneurship' ? 'High' : 'Medium');
+                return risk === filters.riskLevel;
+            });
+        }
+        
+        // 3. Study Required Filter
+        if (filters.studyRequired !== '') {
+            const isStudy = filters.studyRequired === 'true';
+            result = result.filter(c => (c.category === 'Higher Studies') === isStudy);
+        }
+        
+        // 4. Search Filter (checks title, description, category, and skills)
+        if (search) {
+            const query = search.toLowerCase();
+            result = result.filter(c => 
+                c.title.toLowerCase().includes(query) || 
+                (c.description && c.description.toLowerCase().includes(query)) ||
+                (c.category && c.category.toLowerCase().includes(query)) ||
+                (c.skills && c.skills.some(s => s.toLowerCase().includes(query)))
+            );
+        }
+
+        setFilteredCareers(result);
+    }, [allCareers, filters, search]);
 
     function setFilter(key, val) {
         setFilters(prev => ({ ...prev, [key]: val }));
@@ -75,7 +115,6 @@ export default function CareerCategoryPage() {
 
     return (
         <div style={{ padding: '0 0 5rem' }}>
-            {}
             <div className="page-header">
                 <div className="container">
                     <div className="breadcrumb">
@@ -85,18 +124,16 @@ export default function CareerCategoryPage() {
                         Explore <span className="gradient-text">Career Paths</span>
                     </h1>
                     <p style={{ color: 'var(--text-secondary)' }}>
-                        Browse {careers.length} career paths tailored for Indian graduates across all degree backgrounds
+                        Browse {allCareers.length} career paths tailored for Indian graduates across all degree backgrounds
                     </p>
                 </div>
             </div>
 
             <div className="container">
                 <div className="career-browse-layout">
-                    {}
                     <div className="filter-panel" style={{ position: 'sticky', top: '90px' }}>
                         <div className="filter-title">Filter Careers</div>
 
-                        {}
                         <div className="filter-group">
                             <input
                                 type="text"
@@ -183,11 +220,10 @@ export default function CareerCategoryPage() {
                         )}
                     </div>
 
-                    {}
                     <div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                             <div style={{ fontWeight: 700, fontSize: '1rem' }}>
-                                {loading ? 'Loading...' : `${careers.length} careers found`}
+                                {loading ? 'Loading...' : `${filteredCareers.length} careers found`}
                             </div>
                         </div>
 
@@ -195,22 +231,38 @@ export default function CareerCategoryPage() {
                             <div className="loader-container" style={{ minHeight: '300px' }}>
                                 <div className="loader" />
                             </div>
-                        ) : careers.length === 0 ? (
+                        ) : filteredCareers.length === 0 ? (
                             <div style={{ textAlign: 'center', padding: '4rem 0' }}>
-                                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}></div>
+                                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>😕</div>
                                 <h3 style={{ marginBottom: '0.5rem' }}>No careers found</h3>
                                 <p style={{ color: 'var(--text-secondary)' }}>Try adjusting your filters</p>
                             </div>
                         ) : (
                             <div className="careers-grid">
-                                {careers.map(career => (
-                                    <CareerCard
-                                        key={career.id}
-                                        career={career}
-                                        onCompare={addToCompare}
-                                        onView={(slug) => navigate(`/careers/${slug}`)}
-                                    />
-                                ))}
+                                {filteredCareers.map(career => {
+                                    const alreadyInCompare = selectedCareers.some(c => c.id === career.id);
+                                    return (
+                                        <CareerCard
+                                            key={career.id}
+                                            career={career}
+                                            alreadyInCompare={alreadyInCompare}
+                                            onCompare={() => {
+                                                if (alreadyInCompare) {
+                                                    removeFromCompare(career.id);
+                                                    toast.success(`Removed ${career.title} from compare`);
+                                                } else {
+                                                    if (selectedCareers.length >= 3) {
+                                                        toast.error('You can compare up to 3 careers at a time.');
+                                                    } else {
+                                                        addToCompare(career);
+                                                        toast.success(`Added ${career.title} to compare. Go to "PRO Features" in the sidebar to view!`);
+                                                    }
+                                                }
+                                            }}
+                                            onView={(slug) => navigate(`/careers/${slug}`)}
+                                        />
+                                    );
+                                })}
                             </div>
                         )}
                     </div>

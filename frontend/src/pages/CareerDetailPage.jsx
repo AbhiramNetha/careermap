@@ -55,7 +55,7 @@ export default function CareerDetailPage() {
                                 {career.isTrending && <span className="chip chip-yellow">Trending</span>}
                             </div>
                             <h1 style={{ fontFamily: 'Poppins', fontSize: 'clamp(1.8rem, 3vw, 2.8rem)', fontWeight: 800, marginBottom: '0.75rem' }}>
-                                {career.icon} {career.title}
+                                {career.title}
                             </h1>
                             <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: 1.7, maxWidth: '700px' }}>
                                 {career.description}
@@ -93,7 +93,7 @@ export default function CareerDetailPage() {
                             className="btn-primary"
                             onClick={() => navigate('/careers')}
                         >
-                            ← Back to Explore
+                            Back to Explore
                         </button>
                         <button
                             className="btn-secondary"

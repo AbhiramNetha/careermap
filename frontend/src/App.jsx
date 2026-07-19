@@ -5,6 +5,7 @@ import { AppProvider } from './context/AppContext';
 import { AuthProvider } from './context/AuthContext';
 import { AdminAuthProvider } from './context/AdminAuthContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { Toaster } from 'react-hot-toast';
 import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
 import Footer from './components/Footer';
@@ -148,6 +149,7 @@ function App() {
         <AdminAuthProvider>
           <AuthProvider>
             <AppProvider>
+              <Toaster position="top-center" reverseOrder={false} />
               <BrowserRouter>
                 <ScrollToTop />
                 <AdminBackgrounds />
