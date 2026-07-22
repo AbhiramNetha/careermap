@@ -3,7 +3,6 @@ export default function AdminTrafficChart({ dailyData = [] }) {
     if (!dailyData || dailyData.length === 0) {
         return (
             <div className="admin-chart-empty">
-                <span>📈</span>
                 <p>No traffic data yet. Data will appear here once visitors start accessing the site.</p>
             </div>
         );

@@ -123,14 +123,14 @@ export default function AdminCourses() {
                     <p className="admin-page-desc">{courses.length} course{courses.length !== 1 ? 's' : ''} total</p>
                 </div>
                 <button className="admin-btn admin-btn-primary" onClick={openAdd} id="add-course-btn">
-                    + Add Course
+                    Add Course
                 </button>
             </div>
 
             {}
             <div className="admin-filters">
                 <div className="admin-search-box">
-                    <span>🔍</span>
+                    <span>Search:</span>
                     <input
                         type="text"
                         placeholder="Search courses…"
@@ -157,10 +157,9 @@ export default function AdminCourses() {
                 <div className="admin-courses-grid">
                     {filtered.length === 0 ? (
                         <div className="admin-empty-state-full">
-                            <span>📚</span>
                             <h3>No courses found</h3>
                             <p>Add your first course to get started</p>
-                            <button className="admin-btn admin-btn-primary" onClick={openAdd}>+ Add Course</button>
+                            <button className="admin-btn admin-btn-primary" onClick={openAdd}>Add Course</button>
                         </div>
                     ) : (
                         filtered.map(course => (
@@ -168,22 +167,22 @@ export default function AdminCourses() {
                                 <div className="admin-course-card-header">
                                     <div className="admin-course-badges">
                                         <span className="admin-tag admin-tag-cat">{course.category}</span>
-                                        {course.isFeatured && <span className="admin-tag admin-tag-featured">⭐ Featured</span>}
+                                        {course.isFeatured && <span className="admin-tag admin-tag-featured">Featured</span>}
                                         <span className={`admin-status ${course.isActive ? 'active' : 'inactive'}`}>
                                             {course.isActive ? '● Active' : '● Inactive'}
                                         </span>
                                     </div>
                                     <div className="admin-course-actions">
-                                        <button className="admin-icon-btn edit-btn" onClick={() => openEdit(course)} title="Edit">✏️</button>
-                                        <button className="admin-icon-btn delete-btn" onClick={() => setDeleteId(course._id)} title="Delete">🗑️</button>
+                                        <button className="edit-btn" onClick={() => openEdit(course)} title="Edit">Edit</button>
+                                        <button className="delete-btn" onClick={() => setDeleteId(course._id)} title="Delete">Delete</button>
                                     </div>
                                 </div>
                                 <h3 className="admin-course-title">{course.title}</h3>
                                 <p className="admin-course-desc">{course.description?.slice(0, 100)}…</p>
                                 <div className="admin-course-meta">
                                     <span className="admin-course-price">₹{course.price}</span>
-                                    <span className="admin-course-platform">📦 {course.platform}</span>
-                                    <span className="admin-course-clicks">🖱️ {course.clickCount || 0} clicks</span>
+                                    <span className="admin-course-platform">{course.platform}</span>
+                                    <span className="admin-course-clicks">{course.clickCount || 0} clicks</span>
                                 </div>
                                 {course.affiliateLink && (
                                     <a
@@ -192,7 +191,7 @@ export default function AdminCourses() {
                                         rel="noopener noreferrer"
                                         className="admin-course-link"
                                     >
-                                        🔗 View Link
+                                        View Link
                                     </a>
                                 )}
                             </div>
@@ -206,7 +205,7 @@ export default function AdminCourses() {
                 <div className="admin-modal-overlay" onClick={e => { if (e.target === e.currentTarget) setModalOpen(false); }}>
                     <div className="admin-modal">
                         <div className="admin-modal-header">
-                            <h3>{editingCourse ? '✏️ Edit Course' : '+ Add New Course'}</h3>
+                            <h3>{editingCourse ? 'Edit Course' : 'Add New Course'}</h3>
                             <button className="admin-modal-close" onClick={() => setModalOpen(false)}>✕</button>
                         </div>
                         <form onSubmit={handleSave} className="admin-modal-form">
@@ -305,7 +304,7 @@ export default function AdminCourses() {
                                         checked={form.isFeatured}
                                         onChange={e => setForm(f => ({ ...f, isFeatured: e.target.checked }))}
                                     />
-                                    ⭐ Mark as Featured
+                                    Mark as Featured
                                 </label>
                                 <label className="admin-checkbox-label">
                                     <input
@@ -313,7 +312,7 @@ export default function AdminCourses() {
                                         checked={form.isActive}
                                         onChange={e => setForm(f => ({ ...f, isActive: e.target.checked }))}
                                     />
-                                    ✅ Active (visible on site)
+                                    Active (visible on site)
                                 </label>
                             </div>
 
@@ -322,7 +321,7 @@ export default function AdminCourses() {
                                     Cancel
                                 </button>
                                 <button type="submit" className="admin-btn admin-btn-primary" disabled={saving}>
-                                    {saving ? <span className="admin-spinner" /> : (editingCourse ? '💾 Save Changes' : '➕ Create Course')}
+                                    {saving ? <span className="admin-spinner" /> : (editingCourse ? 'Save Changes' : 'Create Course')}
                                 </button>
                             </div>
                         </form>
@@ -335,7 +334,7 @@ export default function AdminCourses() {
                 <div className="admin-modal-overlay">
                     <div className="admin-modal admin-modal-sm">
                         <div className="admin-modal-header">
-                            <h3>🗑️ Delete Course</h3>
+                            <h3>Delete Course</h3>
                             <button className="admin-modal-close" onClick={() => setDeleteId(null)}>✕</button>
                         </div>
                         <div className="admin-modal-body">
@@ -343,7 +342,7 @@ export default function AdminCourses() {
                         </div>
                         <div className="admin-modal-footer">
                             <button className="admin-btn admin-btn-ghost" onClick={() => setDeleteId(null)}>Cancel</button>
-                            <button className="admin-btn admin-btn-danger" onClick={() => handleDelete(deleteId)}>🗑️ Delete</button>
+                            <button className="admin-btn admin-btn-danger" onClick={() => handleDelete(deleteId)}>Delete</button>
                         </div>
                     </div>
                 </div>

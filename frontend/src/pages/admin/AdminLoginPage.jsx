@@ -1,9 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../admin.css';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 
 export default function AdminLoginPage() {
+    // Force Dark Mode for Admin Panel Login Page
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('w2f-theme', 'dark');
+        return () => {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('w2f-theme', 'light');
+        };
+    }, []);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPass, setShowPass] = useState(false);
@@ -18,7 +28,7 @@ export default function AdminLoginPage() {
 
     return (
         <div className="admin-login-page">
-
+ 
             <div className="admin-login-card">
                 {}
                 <div className="admin-login-logo">
@@ -30,14 +40,13 @@ export default function AdminLoginPage() {
                         <p className="admin-login-subtitle">Admin Portal</p>
                     </div>
                 </div>
-
+ 
                 <div className="admin-login-divider" />
-
+ 
                 <form onSubmit={handleSubmit} className="admin-login-form">
                     <div className="admin-form-group">
                         <label htmlFor="admin-email">Admin Email</label>
                         <div className="admin-input-wrapper">
-                            <span className="admin-input-icon">✉️</span>
                             <input
                                 id="admin-email"
                                 type="email"
@@ -45,15 +54,15 @@ export default function AdminLoginPage() {
                                 placeholder="admin@careermap.in"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
+                                style={{ paddingLeft: '14px' }}
                                 required
                             />
                         </div>
                     </div>
-
+ 
                     <div className="admin-form-group">
                         <label htmlFor="admin-password">Password</label>
                         <div className="admin-input-wrapper">
-                            <span className="admin-input-icon">🔒</span>
                             <input
                                 id="admin-password"
                                 type={showPass ? 'text' : 'password'}
@@ -61,24 +70,26 @@ export default function AdminLoginPage() {
                                 placeholder="Enter your password"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
+                                style={{ paddingLeft: '14px' }}
                                 required
                             />
                             <button
                                 type="button"
                                 className="admin-pass-toggle"
                                 onClick={() => setShowPass(v => !v)}
+                                style={{ color: 'var(--admin-indigo)', fontWeight: '600', fontSize: '0.8rem' }}
                             >
-                                {showPass ? '🙈' : '👁️'}
+                                {showPass ? 'Hide' : 'Show'}
                             </button>
                         </div>
                     </div>
-
+ 
                     {error && (
                         <div className="admin-login-error">
-                            ⚠️ {error}
+                            {error}
                         </div>
                     )}
-
+ 
                     <button
                         type="submit"
                         className="admin-login-btn"
@@ -87,7 +98,7 @@ export default function AdminLoginPage() {
                         {loading ? (
                             <span className="admin-spinner" />
                         ) : (
-                            <>🔑 Access Dashboard</>
+                            <>Access Dashboard</>
                         )}
                     </button>
                 </form>

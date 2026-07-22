@@ -37,7 +37,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
+    background: var(--admin-bg);
     position: relative;
     overflow: hidden;
     font-family: 'Inter', 'Segoe UI', sans-serif;
@@ -308,7 +308,7 @@
 .admin-layout {
     display: flex;
     min-height: 100vh;
-    background: transparent;
+    background: var(--admin-bg);
     font-family: 'Inter', 'Segoe UI', sans-serif;
     color: var(--admin-text);
 }
@@ -533,6 +533,10 @@
     color: var(--admin-text-2);
     cursor: pointer;
     padding: 4px;
+}
+
+.admin-layout.sidebar-closed .mobile-sidebar-toggle {
+    display: block !important;
 }
 
 #admin-breadcrumb {
@@ -1036,13 +1040,39 @@
     transition: all 0.15s;
 }
 
+.edit-btn {
+    padding: 5px 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid var(--admin-border-2);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--admin-text-2);
+}
+
+.delete-btn {
+    padding: 5px 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid var(--admin-border-2);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--admin-text-2);
+}
+
 .edit-btn:hover {
-    background: rgba(99, 102, 241, 0.2);
+    background: rgba(99, 102, 241, 0.15);
+    color: #a5b4fc;
     border-color: rgba(99, 102, 241, 0.3);
 }
 
 .delete-btn:hover {
     background: rgba(244, 63, 94, 0.15);
+    color: #fca5a5;
     border-color: rgba(244, 63, 94, 0.3);
 }
 
@@ -1500,7 +1530,15 @@
 }
 
 /* ─── Responsive ─────────────────────────────────────────────── */
-@media (max-width: 768px) {
+.admin-sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 45;
+}
+
+@media (max-width: 1024px) {
     .admin-sidebar {
         transform: translateX(-100%);
         transition: transform 0.3s;
@@ -1537,9 +1575,10 @@
     }
 
     /* Grids */
-    .admin-stats-grid,
     .admin-dashboard-grid,
-    .admin-form-row {
+    .admin-form-row,
+    .admin-form-row2,
+    .admin-form-row3 {
         grid-template-columns: 1fr !important;
     }
     
@@ -1560,4 +1599,7 @@
 @media (max-width: 480px) {
     .admin-topbar { padding: 0 16px; }
     .admin-page-title { font-size: 1.3rem; }
+    .admin-stats-grid {
+        grid-template-columns: 1fr !important;
+    }
 }

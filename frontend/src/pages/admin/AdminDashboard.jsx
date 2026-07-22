@@ -46,28 +46,24 @@ export default function AdminDashboard() {
 
     const statCards = [
         {
-            icon: '👥',
             label: 'Total Visitors',
             value: (stats.totalVisitors || 0).toLocaleString(),
             color: 'indigo',
             trend: '+12%',
         },
         {
-            icon: '📚',
             label: 'Active Courses',
             value: (analytics?.totalCourses || courses.length || 0).toLocaleString(),
             color: 'violet',
             trend: null,
         },
         {
-            icon: '🖱️',
             label: 'Course Clicks',
             value: (stats.totalCourseClicks || 0).toLocaleString(),
             color: 'cyan',
             trend: '+8%',
         },
         {
-            icon: '📄',
             label: 'Page Views',
             value: (stats.totalPageViews || 0).toLocaleString(),
             color: 'emerald',
@@ -83,21 +79,20 @@ export default function AdminDashboard() {
                     <p className="admin-page-desc">Welcome back, Administrator! Here's what's happening today.</p>
                 </div>
                 <Link to="/admin/courses" className="admin-btn admin-btn-primary">
-                    + Add New Course
+                    Add New Course
                 </Link>
             </div>
 
             {}
             <div className="admin-stats-grid">
                 {statCards.map((card, i) => (
-                    <div key={i} className={`admin-stat-card admin-stat-${card.color}`}>
-                        <div className="admin-stat-icon">{card.icon}</div>
+                    <div key={i} className={`admin-stat-card admin-stat-${card.color}`} style={{ paddingLeft: '24px' }}>
                         <div className="admin-stat-body">
                             <div className="admin-stat-value">{card.value}</div>
                             <div className="admin-stat-label">{card.label}</div>
                         </div>
                         {card.trend && (
-                            <div className="admin-stat-trend positive">{card.trend} ↑</div>
+                            <div className="admin-stat-trend positive">{card.trend}</div>
                         )}
                     </div>
                 ))}
@@ -108,7 +103,7 @@ export default function AdminDashboard() {
                 {}
                 <div className="admin-card admin-chart-card">
                     <div className="admin-card-header">
-                        <h3>📈 Daily Traffic (Last 30 Days)</h3>
+                        <h3>Daily Traffic (Last 30 Days)</h3>
                     </div>
                     <AdminTrafficChart dailyData={analytics?.dailyData || []} />
                 </div>
@@ -116,13 +111,12 @@ export default function AdminDashboard() {
                 {}
                 <div className="admin-card">
                     <div className="admin-card-header">
-                        <h3>🏆 Top Clicked Courses</h3>
-                        <Link to="/admin/analytics" className="admin-card-link">View All →</Link>
+                        <h3>Top Clicked Courses</h3>
+                        <Link to="/admin/analytics" className="admin-card-link">View All</Link>
                     </div>
                     <div className="admin-top-courses">
                         {topCourses.length === 0 ? (
                             <div className="admin-empty-state">
-                                <span>🖱️</span>
                                 <p>No clicks tracked yet</p>
                             </div>
                         ) : (
@@ -141,8 +135,8 @@ export default function AdminDashboard() {
             {}
             <div className="admin-card admin-recent-courses">
                 <div className="admin-card-header">
-                    <h3>📚 Recent Courses</h3>
-                    <Link to="/admin/courses" className="admin-card-link">Manage All →</Link>
+                    <h3>Recent Courses</h3>
+                    <Link to="/admin/courses" className="admin-card-link">Manage All</Link>
                 </div>
                 <div className="admin-courses-table-wrapper">
                     <table className="admin-table">

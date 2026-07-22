@@ -39,11 +39,10 @@ export default function AdminAnalytics() {
     const { summary = {}, dailyData = [], topCourses = [] } = analytics || {};
 
     const metricCards = [
-        { icon: '👥', label: 'Total Visitors', value: (summary.totalVisitors || 0).toLocaleString(), color: 'indigo' },
-        { icon: '📄', label: 'Page Views', value: (summary.totalPageViews || 0).toLocaleString(), color: 'violet' },
-        { icon: '🖱️', label: 'Course Clicks', value: (summary.totalCourseClicks || 0).toLocaleString(), color: 'cyan' },
+        { label: 'Total Visitors', value: (summary.totalVisitors || 0).toLocaleString(), color: 'indigo' },
+        { label: 'Page Views', value: (summary.totalPageViews || 0).toLocaleString(), color: 'violet' },
+        { label: 'Course Clicks', value: (summary.totalCourseClicks || 0).toLocaleString(), color: 'cyan' },
         {
-            icon: '📊',
             label: 'Avg. CTR',
             value: summary.totalVisitors
                 ? ((summary.totalCourseClicks / summary.totalVisitors) * 100).toFixed(1) + '%'
@@ -76,8 +75,7 @@ export default function AdminAnalytics() {
             {}
             <div className="admin-stats-grid">
                 {metricCards.map((card, i) => (
-                    <div key={i} className={`admin-stat-card admin-stat-${card.color}`}>
-                        <div className="admin-stat-icon">{card.icon}</div>
+                    <div key={i} className={`admin-stat-card admin-stat-${card.color}`} style={{ paddingLeft: '24px' }}>
                         <div className="admin-stat-body">
                             <div className="admin-stat-value">{card.value}</div>
                             <div className="admin-stat-label">{card.label}</div>
@@ -89,7 +87,7 @@ export default function AdminAnalytics() {
             {}
             <div className="admin-card admin-chart-card-full">
                 <div className="admin-card-header">
-                    <h3>📈 Visitor Traffic — Last {range} Days</h3>
+                    <h3>Visitor Traffic — Last {range} Days</h3>
                 </div>
                 <AdminTrafficChart dailyData={visitorData} />
             </div>
@@ -97,7 +95,7 @@ export default function AdminAnalytics() {
             {}
             <div className="admin-card">
                 <div className="admin-card-header">
-                    <h3>🏆 Top Performing Courses</h3>
+                    <h3>Top Performing Courses</h3>
                 </div>
                 <div className="admin-courses-table-wrapper">
                     <table className="admin-table">
@@ -150,7 +148,7 @@ export default function AdminAnalytics() {
             {}
             <div className="admin-card">
                 <div className="admin-card-header">
-                    <h3>📅 Daily Breakdown</h3>
+                    <h3>Daily Breakdown</h3>
                 </div>
                 <div className="admin-courses-table-wrapper">
                     <table className="admin-table">
