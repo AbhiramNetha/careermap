@@ -1504,10 +1504,30 @@ async function seedDatabase(forceReseed = false) {
             console.log(`ℹ️ Database already has ${careerCount} careers — skipping seed`);
         }
 
+        // Helper to strip emojis and symbols from text
+        const stripEmojisAndSymbols = (text) => {
+            if (typeof text !== 'string') return text;
+            let clean = text.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '');
+            clean = clean.replace(/[\u2600-\u27BF\u2300-\u23FF\u2B00-\u2BFF\u2190-\u21FF]/g, '');
+            clean = clean.replace(/[✓✕✔✖]/g, '');
+            return clean.replace(/\s+/g, ' ').trim();
+        };
+
+        const cleanQuizQuestions = quizQuestions.map(q => ({
+            ...q,
+            icon: '', // Remove icons completely
+            question: stripEmojisAndSymbols(q.question),
+            subtitle: stripEmojisAndSymbols(q.subtitle),
+            options: q.options?.map(opt => ({
+                ...opt,
+                label: stripEmojisAndSymbols(opt.label)
+            }))
+        }));
+
         // Re-seed quiz questions automatically to keep dynamic branched questions up-to-date
         await QuizQuestion.destroy({ where: {} });
-        await QuizQuestion.bulkCreate(quizQuestions);
-        console.log(`✅ Seeded ${quizQuestions.length} quiz questions`);
+        await QuizQuestion.bulkCreate(cleanQuizQuestions);
+        console.log(`✅ Seeded ${cleanQuizQuestions.length} quiz questions (emojis & symbols removed)`);
 
         const courseCount = await Course.count();
         if (courseCount === 0 || forceReseed) {

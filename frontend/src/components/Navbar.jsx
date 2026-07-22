@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { useAuth } from "../context/AuthContext";
-import { useTheme } from "../context/ThemeContext";
+// import { useTheme } from "../context/ThemeContext";
 
 import {
   BuildingOfficeIcon,
@@ -36,7 +36,7 @@ const profileMenuItems = [
 export function Way2FresherNavbar() {
   const { selectedCareers } = useApp();
   const { currentUser, logOut } = useAuth();
-  const { isDark, toggleTheme } = useTheme();
+  // const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
 

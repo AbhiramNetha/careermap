@@ -65,15 +65,13 @@ export default function Sidebar({ visible = true }) {
   useEffect(() => {
     const handleResize = () => {
       const w = window.innerWidth;
-      if (w <= 768) {
-        setIsCollapsed(false); // mobile uses full drawer, not collapsed
-      } else if (w <= 1024) {
-        setIsCollapsed(true);
+      if (w <= 1024) {
+        setIsCollapsed(false); // screens up to 1024px use full overlay drawer, not collapsed
       } else {
         setIsCollapsed(false);
       }
       // Close mobile drawer on resize up
-      if (w > 768) setMobileOpen(false);
+      if (w > 1024) setMobileOpen(false);
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -240,9 +238,9 @@ export default function Sidebar({ visible = true }) {
           className="sidebar-mobile-toggle"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle sidebar"
-          style={{ fontSize: '0.8rem', fontWeight: 'bold' }}
+          style={{ fontSize: '1.25rem', fontWeight: 'bold' }}
         >
-          {mobileOpen ? 'Close' : 'Menu'}
+          {mobileOpen ? '✕' : '☰'}
         </button>
       )}
 

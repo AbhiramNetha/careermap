@@ -1,8 +1,30 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { fetchQuizQuestions, submitQuizAnswers } from '../services/api';
 import { useApp } from '../context/AppContext';
+
+const stripEmojisAndSymbols = (text) => {
+    if (typeof text !== 'string') return text;
+    let clean = text.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '');
+    clean = clean.replace(/[\u2600-\u27BF\u2300-\u23FF\u2B00-\u2BFF\u2190-\u21FF]/g, '');
+    clean = clean.replace(/[✓✕✔✖]/g, '');
+    return clean.replace(/\s+/g, ' ').trim();
+};
+
+const cleanQuestions = (questionsList) => {
+    if (!questionsList) return [];
+    return questionsList.map(q => ({
+        ...q,
+        icon: '', // Remove icons completely
+        question: stripEmojisAndSymbols(q.question),
+        subtitle: stripEmojisAndSymbols(q.subtitle),
+        options: q.options?.map(opt => ({
+            ...opt,
+            label: stripEmojisAndSymbols(opt.label)
+        }))
+    }));
+};
 
 export default function QuizPage() {
     const navigate = useNavigate();
@@ -31,13 +53,13 @@ export default function QuizPage() {
             .then(res => {
                 const data = res.data.data;
                 if (data && data.length > 0) {
-                    setQuestions(data);
+                    setQuestions(cleanQuestions(data));
                 } else {
-                    setQuestions(FALLBACK_QUESTIONS);
+                    setQuestions(cleanQuestions(FALLBACK_QUESTIONS));
                 }
             })
             .catch(() => {
-                setQuestions(FALLBACK_QUESTIONS);
+                setQuestions(cleanQuestions(FALLBACK_QUESTIONS));
             })
             .finally(() => setLoading(false));
     }, []);
@@ -225,9 +247,7 @@ export default function QuizPage() {
                             className={`quiz-option ${selectedValue === opt.value ? 'selected' : ''}`}
                             onClick={() => handleSelect(opt.value)}
                         >
-                            <div className="quiz-option-check">
-                                {selectedValue === opt.value && '✓'}
-                            </div>
+                            <div className="quiz-option-check" />
                             {opt.label}
                         </button>
                     ))}
@@ -256,14 +276,14 @@ export default function QuizPage() {
                         disabled={currentStep === 0}
                         style={{ opacity: currentStep === 0 ? 0.3 : 1 }}
                     >
-                        ← Back
+                        Back
                     </button>
                     <button
                         className="btn-primary"
                         onClick={handleNext}
                         style={{ minWidth: '140px' }}
                     >
-                        {isLastStep ? 'Get Results' : 'Next →'}
+                        {isLastStep ? 'Get Results' : 'Next'}
                     </button>
                 </div>
             </div>

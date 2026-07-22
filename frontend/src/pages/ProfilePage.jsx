@@ -1,11 +1,11 @@
 import { useAuth } from '../context/AuthContext';
-import { useTheme } from '../context/ThemeContext';
+// import { useTheme } from '../context/ThemeContext';
 import { useApp } from '../context/AppContext';
 
 
 export default function ProfilePage() {
     const { currentUser } = useAuth();
-    const { isDark, toggleTheme } = useTheme();
+    // const { isDark, toggleTheme } = useTheme();
     const { isPremium, togglePremium } = useApp();
 
     return (
@@ -127,7 +127,8 @@ export default function ProfilePage() {
                         </div>
                     </div>
 
-                    {/* Appearance Section */}
+                    {/* Appearance Section (Commented Out) */}
+                    {/*
                     <div className="profile-field">
                         <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>
                             Appearance
@@ -163,6 +164,7 @@ export default function ProfilePage() {
                             </button>
                         </div>
                     </div>
+                    */}
 
                     <div className="mt-8 flex flex-col sm:flex-row gap-4">
                         <button className="btn-filled w-full sm:w-auto px-6 py-3 rounded-xl text-sm font-bold">
