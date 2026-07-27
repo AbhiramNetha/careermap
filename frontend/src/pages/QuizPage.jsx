@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { fetchQuizQuestions, submitQuizAnswers } from '../services/api';
 import { useApp } from '../context/AppContext';
+import posthog from '../posthog.js';
 
 const stripEmojisAndSymbols = (text) => {
     if (typeof text !== 'string') return text;
@@ -37,6 +38,7 @@ export default function QuizPage() {
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState('');
     const [showLoginToast, setShowLoginToast] = useState(false);
+    const quizStartedRef = useRef(false);
 
     useEffect(() => {
         const flag = sessionStorage.getItem('justLoggedInForQuiz');
@@ -89,6 +91,10 @@ export default function QuizPage() {
 
     function handleSelect(value) {
         const field = currentQuestion.field;
+        if (!quizStartedRef.current) {
+            quizStartedRef.current = true;
+            posthog.capture('quiz_started');
+        }
         if (field === 'degree') {
             // When changing degree selection, clear other answers to prevent stale data
             setLocalAnswers({ degree: value });
@@ -118,10 +124,12 @@ export default function QuizPage() {
         try {
             const res = await submitQuizAnswers(localAnswers);
             setQuizResults(res.data);
+            posthog.capture('quiz_completed', { degree: localAnswers.degree, top_career: res.data?.recommendations?.[0]?.career?.id });
             navigate('/quiz/results');
         } catch {
             const local = runLocalScoring(localAnswers);
             setQuizResults(local);
+            posthog.capture('quiz_completed', { degree: localAnswers.degree, top_career: local?.recommendations?.[0]?.career?.id });
             navigate('/quiz/results');
         } finally {
             setSubmitting(false);

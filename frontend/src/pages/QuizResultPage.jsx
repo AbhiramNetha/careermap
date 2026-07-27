@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
+import posthog from '../posthog.js';
 
 export default function QuizResultPage() {
     const navigate = useNavigate();
@@ -121,7 +122,10 @@ export default function QuizResultPage() {
                                         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                                             <button
                                                 className="btn-sm btn-filled"
-                                                onClick={() => navigate(`/careers/${career.slug}`)}
+                                                onClick={() => {
+                                                    posthog.capture('career_result_viewed', { career_id: career.id, career_title: career.title, rank });
+                                                    navigate(`/careers/${career.slug}`);
+                                                }}
                                             >
                                                 View Full Details
                                             </button>

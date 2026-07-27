@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import axios from 'axios';
+import posthog from '../posthog.js';
 
 import StepIndicator from '../components/resumebuilder/StepIndicator';
 import StepOne_Personal from '../components/resumebuilder/steps/StepOne_Personal';
@@ -29,7 +30,11 @@ export default function ResumeBuilder() {
 
   const handleNext = (stepData) => {
     updateFormData(stepData);
-    setCurrentStep((prev) => prev + 1);
+    const nextStep = currentStep + 1;
+    if (currentStep === 0) {
+      posthog.capture('resume_builder_started');
+    }
+    setCurrentStep(nextStep);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -53,11 +58,13 @@ export default function ResumeBuilder() {
       if (res.data.success) {
         setResumeData(res.data.resumeData);
         setKeywords(res.data.extractedKeywords || []);
+        posthog.capture('resume_generated', { keywords_count: (res.data.extractedKeywords || []).length });
         toast.success('✅ Resume generated successfully!', { duration: 4000 });
       } else {
         throw new Error(res.data.error || 'Generation failed');
       }
     } catch (error) {
+      posthog.captureException(error);
       const msg = error.response?.data?.error || error.message || 'Generation failed.';
       toast.error(msg, { duration: 5000 });
     } finally {
@@ -66,6 +73,7 @@ export default function ResumeBuilder() {
   };
 
   const handleDownload = async (format) => {
+    posthog.capture('resume_downloaded', { format });
     // PDF is handled by ResumePreview via window.print() — this is for DOCX
     if (format === 'docx') {
       const toastId = toast.loading('Generating DOCX file...');
@@ -86,6 +94,7 @@ export default function ResumeBuilder() {
         window.URL.revokeObjectURL(url);
         toast.success('DOCX downloaded!', { id: toastId });
       } catch (error) {
+        posthog.captureException(error, { format: 'docx' });
         toast.error('DOCX download failed. Make sure the backend is running.', { id: toastId });
       }
     }

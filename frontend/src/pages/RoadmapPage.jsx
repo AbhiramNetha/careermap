@@ -1,9 +1,10 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { fetchCareerById } from '../services/api';
 import { useApp } from '../context/AppContext';
 import { RoadmapSkeleton } from '../components/SkeletonLoader';
+import posthog from '../posthog.js';
 
 
 function buildItemKeys(roadmap) {
@@ -34,16 +35,17 @@ export default function RoadmapPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [expandedSteps, setExpandedSteps] = useState({});
-    const [checked, setChecked] = useState({});     
+    const [checked, setChecked] = useState({});
+    const roadmapCompletedFiredRef = useRef(false);
 
-    
+
     useEffect(() => {
         setLoading(true);
         fetchCareerById(id)
             .then(res => {
                 const data = res.data.data;
                 setCareer(data);
-                
+                posthog.capture('roadmap_viewed', { career_id: id, career_title: data.title });
                 const init = {};
                 data.roadmap?.forEach((_, i) => { init[i] = true; });
                 setExpandedSteps(init);
@@ -93,7 +95,16 @@ export default function RoadmapPage() {
     }, [career, checked]);
 
     const toggleItem = (key) => {
+        const isChecking = !checked[key];
         setChecked(prev => ({ ...prev, [key]: !prev[key] }));
+        if (isChecking) {
+            posthog.capture('roadmap_item_completed', { career_id: id, item_key: key });
+            const newDoneCount = allKeys.filter(k => (k === key ? true : checked[k])).length;
+            if (newDoneCount === totalCount && totalCount > 0 && !roadmapCompletedFiredRef.current) {
+                roadmapCompletedFiredRef.current = true;
+                posthog.capture('roadmap_completed', { career_id: id, career_title: career?.title });
+            }
+        }
     };
 
     const toggleStep = (i) => setExpandedSteps(prev => ({ ...prev, [i]: !prev[i] }));
