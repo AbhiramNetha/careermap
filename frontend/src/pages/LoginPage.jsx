@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AuthenticationLayout from '../components/auth/AuthenticationLayout';
 import LoginForm from '../components/auth/LoginForm';
 import { loginWithEmail, signInWithGoogle } from '../firebase';
+import posthog from '../posthog.js';
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -16,10 +17,13 @@ export default function LoginPage() {
         setError('');
         setLoading(true);
         try {
-            await loginWithEmail(email, password);
+            const { user } = await loginWithEmail(email, password);
+            posthog.identify(user.uid, { email: user.email, name: user.displayName });
+            posthog.capture('user_logged_in', { method: 'email' });
             sessionStorage.setItem('justLoggedInForQuiz', 'true');
             navigate(from, { replace: true });
         } catch (err) {
+            posthog.captureException(err, { method: 'email' });
             setError(friendlyError(err.code));
         } finally {
             setLoading(false);
@@ -30,11 +34,14 @@ export default function LoginPage() {
         setError('');
         setLoading(true);
         try {
-            await signInWithGoogle();
+            const { user } = await signInWithGoogle();
+            posthog.identify(user.uid, { email: user.email, name: user.displayName });
+            posthog.capture('user_logged_in', { method: 'google' });
             sessionStorage.setItem('justLoggedInForQuiz', 'true');
             navigate(from, { replace: true });
         } catch (err) {
             if (err.code !== 'auth/popup-closed-by-user') {
+                posthog.captureException(err, { method: 'google' });
                 setError(friendlyError(err.code));
             }
         } finally {

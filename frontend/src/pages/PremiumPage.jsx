@@ -7,6 +7,7 @@ import BranchDetailPage from './BranchDetailPage';
 import ComparePage from './ComparePage';
 import ResumeBuilder from './ResumeBuilder';
 import AtsCheckerPage from './AtsCheckerPage';
+import posthog from '../posthog.js';
 
 /* ── Section definitions ── */
 const SECTIONS = [
@@ -127,6 +128,7 @@ export default function PremiumPage() {
   const isUnlocked = !!(currentUser && isPremium);
 
   const handleUpgrade = () => {
+    posthog.capture('premium_upgrade_clicked', { is_logged_in: !!currentUser });
     if (!currentUser) navigate('/login');
     else togglePremium();
   };
@@ -137,6 +139,7 @@ export default function PremiumPage() {
       handleUpgrade();
       return;
     }
+    posthog.capture('premium_feature_opened', { feature: sectionId });
     setScrollTarget(sectionId);
     setView('sections');
   };

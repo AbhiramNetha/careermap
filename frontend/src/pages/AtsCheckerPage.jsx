@@ -10,6 +10,7 @@ import {
   ArrowPathIcon
 } from '@heroicons/react/24/solid';
 import { analyzeResume } from '../services/api';
+import posthog from '../posthog.js';
 
 const factorConfig = {
   keywordMatch: { label: "Keyword Match", weight: "25%", color: "emerald" },
@@ -130,6 +131,8 @@ export default function AtsCheckerPage() {
       formData.append('jobDescription', jobDescription);
     }
 
+    posthog.capture('ats_scan_submitted', { mode, file_type: file.name.split('.').pop().toLowerCase() });
+
     try {
       // Minimum duration of 2.5s to let users appreciate the high-tech scanning process!
       const [res] = await Promise.all([
@@ -138,7 +141,9 @@ export default function AtsCheckerPage() {
       ]);
 
       setResults(res.data);
+      posthog.capture('ats_results_received', { score: res.data.overallScore, mode, issues_count: res.data.issues?.length });
     } catch (err) {
+      posthog.captureException(err, { mode });
       console.error(err);
       setError(err.response?.data?.error || "Failed to analyze the resume. Please make sure the file is valid and try again.");
     } finally {
