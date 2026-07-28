@@ -43,7 +43,7 @@ async function startServer() {
     try {
         await sequelize.authenticate();
         // Sync all models (creates tables if they don't exist)
-        await sequelize.sync({ alter: false });
+        await sequelize.sync({ alter: true });
         console.log('✅ Database tables synced');
 
         // Seed data on first run
