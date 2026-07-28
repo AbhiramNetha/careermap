@@ -126,9 +126,9 @@ export function Way2FresherNavbar() {
     { label: "Branch Guide", icon: WalletIcon, href: "/branches", type: "route" },
     { label: "Quiz", icon: WalletIcon, href: "/quiz", type: "route" },
     { label: "Compare", icon: WalletIcon, href: "/compare", type: "route", countBadge: selectedCareers.length },
-    { label: "Jobs", icon: BuildingOfficeIcon, href: "#", type: "action", msg: "Jobs board is coming soon! Partnering with companies." },
-    { label: "Internships", icon: BuildingOfficeIcon, href: "#", type: "action", msg: "Internships coming soon!" },
-    { label: "Walk-ins", icon: WalletIcon, href: "#", type: "action", msg: "Walk-ins listing coming soon!" },
+    { label: "Jobs", icon: BuildingOfficeIcon, href: "/jobs", type: "route" },
+    { label: "Internships", icon: BuildingOfficeIcon, href: "/internships", type: "route" },
+    { label: "Walk-ins", icon: WalletIcon, href: "/walkins", type: "route" },
   ];
 
   
@@ -154,7 +154,7 @@ export function Way2FresherNavbar() {
       <div className="fixed top-2 sm:top-3 left-0 right-0 z-50 pointer-events-none flex flex-col items-center gap-0 px-2 sm:px-4">
         
         {}
-        <nav className="w2f-navbar mx-auto w-[98%] max-w-[1280px] pointer-events-auto rounded-t-full rounded-b-none px-6 py-2 sm:py-2.5 flex items-center justify-between transition-all backdrop-blur-xl relative z-30" style={{borderBottom: 'none'}}>
+        <nav className="w2f-navbar mx-auto w-[98%] max-w-[1280px] pointer-events-auto rounded-t-full rounded-b-none px-6 py-2 sm:py-2.5 flex items-center justify-between transition-all relative z-30" style={{borderBottom: 'none'}}>
           
           {}
           <Link
@@ -242,7 +242,7 @@ export function Way2FresherNavbar() {
                   />
                 </button>
                 {isMenuOpen && (
-                  <div className="w2f-profile-menu-dropdown absolute right-0 mt-2 w-48 rounded-xl p-1 shadow-2xl backdrop-blur-xl z-[999]">
+                  <div className="w2f-profile-menu-dropdown absolute right-0 mt-2 w-48 rounded-xl p-1 shadow-2xl z-[999]">
                     <div className="px-4 py-2 border-b border-white/5 mb-1">
                       <p className="text-xs font-bold text-slate-200">{currentUser.displayName || "User"}</p>
                       <p className="text-[10px] text-slate-400 truncate">{currentUser.email}</p>
@@ -297,7 +297,7 @@ export function Way2FresherNavbar() {
         </nav>
 
         {}
-        <div className="w2f-tools-strip hidden w-[98%] max-w-[1280px] pointer-events-auto rounded-b-full rounded-t-none px-6 py-1.5 shadow-xl backdrop-blur-md lg:block relative z-20" style={{borderTop: 'none'}}>
+        <div className="w2f-tools-strip hidden w-[98%] max-w-[1280px] pointer-events-auto rounded-b-full rounded-t-none px-6 py-1.5 shadow-xl lg:block relative z-20" style={{borderTop: 'none'}}>
           <div className="flex items-center justify-between">
             <ul className="flex items-center gap-1 list-none m-0 p-0 w-full justify-around">
               {toolNavItems.map((item) => (
@@ -331,7 +331,7 @@ export function Way2FresherNavbar() {
       {}
       {isNavOpen && (
         <div className="fixed inset-x-0 top-[72px] sm:top-[90px] z-40 lg:hidden pointer-events-auto">
-          <div className="w2f-mobile-drawer mx-auto w-[95%] rounded-3xl p-6 shadow-2xl backdrop-blur-2xl flex flex-col gap-4 overflow-y-auto max-h-[80vh]">
+          <div className="w2f-mobile-drawer mx-auto w-[95%] rounded-3xl p-6 shadow-2xl flex flex-col gap-4 overflow-y-auto max-h-[80vh]">
             
             {}
             <div className="w2f-search-container flex w-full items-center gap-2 rounded-full px-4 py-2">
@@ -378,14 +378,15 @@ export function Way2FresherNavbar() {
                 Opportunities
               </p>
               <ul className="flex flex-col gap-1 list-none m-0 p-0">
-                {primaryNavItems.slice(5).map(({ label, msg }) => (
+                {primaryNavItems.slice(5).map(({ label, href }) => (
                   <li key={label}>
-                    <button
-                      onClick={() => triggerToast(msg)}
-                      className="w2f-tool-btn flex w-full items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-all text-left"
+                    <Link
+                      to={href}
+                      onClick={() => handleNavClick(href)}
+                      className="w2f-navlink flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-all"
                     >
                       <span>{label}</span>
-                    </button>
+                    </Link>
                   </li>
                 ))}
               </ul>

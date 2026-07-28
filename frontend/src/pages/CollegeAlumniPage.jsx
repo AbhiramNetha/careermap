@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
+import { useLoginGate } from '../hooks/useLoginGate';
 import API from '../services/api';
 
 
@@ -9,6 +10,7 @@ export default function CollegeAlumniPage() {
     const navigate = useNavigate();
     const { currentUser } = useAuth();
     const { isDark } = useTheme();
+    const { requireLogin } = useLoginGate();
     const reqUserId = currentUser?.uid;
 
     const optionStyle = {
@@ -399,60 +401,63 @@ export default function CollegeAlumniPage() {
     const handleJoinSubmit = async (e) => {
         e.preventDefault();
         setFormError('');
+        requireLogin(async () => {
+            let targetCollegeId = onboardingForm.collegeId;
 
-        let targetCollegeId = onboardingForm.collegeId;
-
-        // Auto-resolve if user typed the name but didn't select from dropdown
-        if (!targetCollegeId && searchQuery.trim()) {
-            try {
-                const searchRes = await API.get(`/alumni/colleges/search?q=${searchQuery.trim()}`);
-                if (searchRes.data.success && searchRes.data.colleges.length > 0) {
-                    const exactMatch = searchRes.data.colleges.find(
-                        c => c.name.toLowerCase() === searchQuery.trim().toLowerCase()
-                    );
-                    if (exactMatch) {
-                        targetCollegeId = exactMatch.id;
-                    } else {
-                        targetCollegeId = searchRes.data.colleges[0].id;
+            // Auto-resolve if user typed the name but didn't select from dropdown
+            if (!targetCollegeId && searchQuery.trim()) {
+                try {
+                    const searchRes = await API.get(`/alumni/colleges/search?q=${searchQuery.trim()}`);
+                    if (searchRes.data.success && searchRes.data.colleges.length > 0) {
+                        const exactMatch = searchRes.data.colleges.find(
+                            c => c.name.toLowerCase() === searchQuery.trim().toLowerCase()
+                        );
+                        if (exactMatch) {
+                            targetCollegeId = exactMatch.id;
+                        } else {
+                            targetCollegeId = searchRes.data.colleges[0].id;
+                        }
                     }
+                } catch (err) {
+                    console.error('Error auto-resolving college:', err);
+                }
+            }
+
+            if (!targetCollegeId) {
+                setFormError('Please select a college.');
+                return;
+            }
+
+            try {
+                const res = await API.post('/alumni/join', { ...onboardingForm, collegeId: targetCollegeId });
+                if (res.data.success) {
+                    setMembership({ joined: true, ...res.data });
+                    loadDashboardData(res.data.member);
                 }
             } catch (err) {
-                console.error('Error auto-resolving college:', err);
+                setFormError(err.response?.data?.error || 'Join college failed.');
             }
-        }
-
-        if (!targetCollegeId) {
-            setFormError('Please select a college.');
-            return;
-        }
-
-        try {
-            const res = await API.post('/alumni/join', { ...onboardingForm, collegeId: targetCollegeId });
-            if (res.data.success) {
-                setMembership({ joined: true, ...res.data });
-                loadDashboardData(res.data.member);
-            }
-        } catch (err) {
-            setFormError(err.response?.data?.error || 'Join college failed.');
-        }
+        });
     };
 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
         setFormError('');
-        if (!registerForm.name || !registerForm.slug || !registerForm.domain) {
-            setFormError('Please fill in name, slug, and email domain.');
-            return;
-        }
-        try {
-            const res = await API.post('/alumni/colleges', registerForm);
-            if (res.data.success) {
-                setMembership({ joined: true, ...res.data });
-                loadDashboardData(res.data.member);
+        requireLogin(async () => {
+            if (!registerForm.name || !registerForm.slug || !registerForm.domain) {
+                setFormError('Please fill in name, slug, and email domain.');
+                return;
             }
-        } catch (err) {
-            setFormError(err.response?.data?.error || 'Register college failed.');
-        }
+            try {
+                const res = await API.post('/alumni/colleges', registerForm);
+                if (res.data.success) {
+                    setMembership({ joined: true, ...res.data });
+                    loadDashboardData(res.data.member);
+                }
+            } catch (err) {
+                setFormError(err.response?.data?.error || 'Register college failed.');
+            }
+        });
     };
 
     // Render loading
@@ -469,7 +474,7 @@ export default function CollegeAlumniPage() {
         return (
             <div style={{ padding: '3rem 1.5rem', maxWidth: '600px', margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-                    <h1 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+                    <h1 className="alumni-hero-title">
                         College Alumni Network
                     </h1>
                     <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', maxWidth: '520px', margin: '0 auto' }}>

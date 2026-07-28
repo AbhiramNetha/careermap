@@ -6,6 +6,7 @@ const sequelize = require('./config/database');
 const careerRoutes = require('./routes/careerRoutes');
 const quizRoutes = require('./routes/quizRoutes');
 const courseRoutes = require('./routes/courseRoutes');
+const opportunityRoutes = require('./routes/opportunityRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
 const atsRoutes = require('./routes/atsRoutes');
 const resumeRoutes = require('./routes/resumeRoutes');
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use('/api/careers', careerRoutes);
 app.use('/api/quiz', quizRoutes);
 app.use('/api', courseRoutes);           // /api/courses, /api/admin/...
+app.use('/api', opportunityRoutes);      // /api/opportunities, /api/admin/...
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/ats', atsRoutes);
 app.use('/api/resumes', resumeRoutes);

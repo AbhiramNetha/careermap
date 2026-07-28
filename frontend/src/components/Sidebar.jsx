@@ -13,9 +13,9 @@ const mainLinks = [
 ];
 
 const opportunityLinks = [
-  { label: 'Internships', href: '#', comingSoon: true, msg: 'Internships coming soon!' },
-  { label: 'Jobs', href: '#', comingSoon: true, msg: 'Jobs board is coming soon! Partnering with companies.' },
-  { label: 'Walk-ins', href: '#', comingSoon: true, msg: 'Walk-ins listing coming soon!' },
+  { label: 'Internships', href: '/internships' },
+  { label: 'Jobs', href: '/jobs' },
+  { label: 'Walk-ins', href: '/walkins' },
 ];
 
 /* ── Single nav item ── */

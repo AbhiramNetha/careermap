@@ -3,7 +3,7 @@
 
 const jwt = require('jsonwebtoken');
 
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@way2fresher.in';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@careermap.in';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Admin@123';
 const JWT_SECRET = process.env.JWT_SECRET || 'way2fresher_admin_secret_2024';
 
@@ -14,7 +14,8 @@ function adminLogin(req, res) {
         return res.status(400).json({ error: 'Email and password are required' });
     }
 
-    if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
+    const isValidEmail = email === ADMIN_EMAIL || email === 'admin@careermap.in' || email === 'admin@way2fresher.in';
+    if (!isValidEmail || password !== ADMIN_PASSWORD) {
         return res.status(401).json({ error: 'Invalid admin credentials' });
     }
 

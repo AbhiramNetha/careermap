@@ -11,6 +11,7 @@ import StepFive_Projects from '../components/resumebuilder/steps/StepFive_Projec
 import StepSix_JD from '../components/resumebuilder/steps/StepSix_JD';
 import ResumePreview from '../components/resumebuilder/ResumePreview';
 import { SparklesIcon, DocumentTextIcon } from '@heroicons/react/24/solid';
+import { useLoginGate } from '../hooks/useLoginGate';
 
 const STEPS = ['Personal', 'Education', 'Skills', 'Experience', 'Projects', 'Job Description'];
 
@@ -22,6 +23,7 @@ export default function ResumeBuilder() {
   const [resumeData, setResumeData] = useState(null);
   const [keywords, setKeywords] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { requireLogin } = useLoginGate();
 
   const updateFormData = (stepData) => {
     setFormData((prev) => ({ ...prev, ...stepData }));
@@ -40,6 +42,10 @@ export default function ResumeBuilder() {
 
   const handleGenerate = async (jdData) => {
     updateFormData(jdData);
+    requireLogin(() => doGenerate(jdData));
+  };
+
+  const doGenerate = async (jdData) => {
     setLoading(true);
 
     try {
@@ -53,7 +59,7 @@ export default function ResumeBuilder() {
       if (res.data.success) {
         setResumeData(res.data.resumeData);
         setKeywords(res.data.extractedKeywords || []);
-        toast.success('✅ Resume generated successfully!', { duration: 4000 });
+        toast.success('Resume generated successfully!', { duration: 4000 });
       } else {
         throw new Error(res.data.error || 'Generation failed');
       }

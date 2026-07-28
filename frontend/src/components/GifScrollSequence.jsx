@@ -127,49 +127,51 @@ export default function GifScrollSequence() {
 
                 <div className="parallax-text-overlay">
                     <div className="parallax-text-step" style={{ 
-                        opacity: progress < 0.3 ? 1 : Math.max(0, 1 - (progress - 0.3)*5),
-                        transform: `translateY(${mapVal(0, -30)}px)`
+                        opacity: progress < 0.3 ? 1 : Math.max(0, 1 - (progress - 0.3)*5)
                     }}>
-                        <h3>
-                            {"Confused About Your Future?".split(" ").map((word, wordIdx, arr) => {
-                                const charOffset = arr.slice(0, wordIdx).join(" ").length + (wordIdx > 0 ? 1 : 0);
-                                return (
-                                    <React.Fragment key={wordIdx}>
-                                        <span className="wave-word" style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
-                                            {word.split("").map((char, charIdx) => {
-                                                const globalIdx = charOffset + charIdx;
-                                                return (
-                                                    <span
-                                                        key={charIdx}
-                                                        className="wave-letter"
-                                                        style={{ animationDelay: `${globalIdx * 0.05}s` }}
-                                                    >
-                                                        {char}
-                                                    </span>
-                                                );
-                                            })}
-                                        </span>
-                                        {wordIdx < arr.length - 1 && ' '}
-                                    </React.Fragment>
-                                );
-                            })}
-                        </h3>
-                        <p>Stop guessing. Make data-driven career choices that match your degree, strengths, and goals.</p>
+                        <div style={{ transform: `translateY(${mapVal(0, -30)}px)` }}>
+                            <h3>
+                                {"Confused About Your Future?".split(" ").map((word, wordIdx, arr) => {
+                                    const charOffset = arr.slice(0, wordIdx).join(" ").length + (wordIdx > 0 ? 1 : 0);
+                                    return (
+                                        <React.Fragment key={wordIdx}>
+                                            <span className="wave-word" style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+                                                {word.split("").map((char, charIdx) => {
+                                                    const globalIdx = charOffset + charIdx;
+                                                    return (
+                                                        <span
+                                                            key={charIdx}
+                                                            className="wave-letter"
+                                                            style={{ animationDelay: `${globalIdx * 0.05}s` }}
+                                                        >
+                                                            {char}
+                                                        </span>
+                                                    );
+                                                })}
+                                            </span>
+                                            {wordIdx < arr.length - 1 && ' '}
+                                        </React.Fragment>
+                                    );
+                                })}
+                            </h3>
+                            <p>Stop guessing. Make data-driven career choices that match your degree, strengths, and goals.</p>
+                        </div>
                     </div>
                     
-                    <div className="parallax-text-step p-mid" style={{ 
+                    <div className="parallax-text-step" style={{ 
                         opacity: progress > 0.4 && progress < 0.8 ? Math.sin((progress - 0.4)*2.5 * Math.PI) : 0 
                     }}>
                         <h3 className="neon-text">LEVEL UP</h3>
                         <p>Discover personalized roadmaps tailored to your degree, interests, and career ambitions.</p>
                     </div>
 
-                    <div className="parallax-text-step p-final" style={{ 
-                        opacity: progress > 0.8 ? mapVal(-1, 2) : 0, 
-                        transform: `translateY(${mapVal(20, 0)}px)` 
+                    <div className="parallax-text-step" style={{ 
+                        opacity: progress > 0.8 ? mapVal(-1, 2) : 0
                     }}>
-                        <h3 className="neon-text">Your Journey Begins</h3>
-                        <p>Take the quiz and unlock career paths built specifically for your field of study.</p>
+                        <div style={{ transform: `translateY(${mapVal(20, 0)}px)` }}>
+                            <h3 className="neon-text">Your Journey Begins</h3>
+                            <p>Take the quiz and unlock career paths built specifically for your field of study.</p>
+                        </div>
                     </div>
                 </div>
 

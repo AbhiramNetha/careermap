@@ -40,6 +40,7 @@ export default function AdminLayout() {
     const navItems = [
         { to: '/admin/dashboard', label: 'Dashboard' },
         { to: '/admin/courses', label: 'Courses' },
+        { to: '/admin/opportunities', label: 'Opportunities' },
         { to: '/admin/analytics', label: 'Analytics' },
     ];
 

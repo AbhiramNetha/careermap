@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { fetchQuizQuestions, submitQuizAnswers } from '../services/api';
 import { useApp } from '../context/AppContext';
+import { useLoginGate } from '../hooks/useLoginGate';
 
 const stripEmojisAndSymbols = (text) => {
     if (typeof text !== 'string') return text;
@@ -29,6 +30,7 @@ const cleanQuestions = (questionsList) => {
 export default function QuizPage() {
     const navigate = useNavigate();
     const { updateQuizAnswer, setQuizResults, setQuizAnswers } = useApp();
+    const { requireLogin } = useLoginGate();
 
     const [questions, setQuestions] = useState([]);
     const [currentStep, setCurrentStep] = useState(0);
@@ -105,7 +107,7 @@ export default function QuizPage() {
         if (currentStep < activeQuestions.length - 1) {
             setCurrentStep(s => s + 1);
         } else {
-            await handleSubmit();
+            requireLogin(() => handleSubmit());
         }
     }
 
@@ -171,45 +173,7 @@ export default function QuizPage() {
                 </div>
             )}
             <div className="container" style={{ maxWidth: '680px', margin: '0 auto' }}>
-                {/* ── Step dots ── */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0', marginBottom: '1.25rem', justifyContent: 'center' }}>
-                    {Array.from({ length: displayTotal }).map((_, i) => {
-                        const isDone = i < currentStep;
-                        const isCurrent = i === currentStep;
-                        return (
-                            <div key={i} style={{ display: 'flex', alignItems: 'center' }}>
-                                <motion.div
-                                    animate={{
-                                        scale: isCurrent ? 1.25 : 1,
-                                        background: isDone
-                                            ? 'linear-gradient(135deg,#10b981,#3b82f6)'
-                                            : isCurrent
-                                            ? 'linear-gradient(135deg,#10b981,#3b82f6)'
-                                            : 'rgba(255,255,255,0.1)',
-                                        boxShadow: isCurrent ? '0 0 10px rgba(16,185,129,0.6)' : 'none',
-                                    }}
-                                    transition={{ duration: 0.3 }}
-                                    style={{
-                                        width: isCurrent ? '10px' : '8px',
-                                        height: isCurrent ? '10px' : '8px',
-                                        borderRadius: '50%',
-                                        border: isDone || isCurrent ? 'none' : '1px solid rgba(255,255,255,0.25)',
-                                    }}
-                                />
-                                {i < displayTotal - 1 && (
-                                    <div style={{
-                                        width: '24px',
-                                        height: '2px',
-                                        background: isDone
-                                            ? 'linear-gradient(90deg,#10b981,#3b82f6)'
-                                            : 'rgba(255,255,255,0.1)',
-                                        transition: 'background 0.4s ease',
-                                    }} />
-                                )}
-                            </div>
-                        );
-                    })}
-                </div>
+
 
                 {/* ── Step label ── */}
                 <div className="quiz-step-label" style={{ textAlign: 'center', marginBottom: '0.75rem' }}>

@@ -54,10 +54,14 @@
 
 .parallax-text-step {
     position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
     text-align: center;
     color: #fff;
-    width: 100%;
     padding: 2rem;
+    box-sizing: border-box;
     will-change: transform, opacity;
 }
 
@@ -77,15 +81,6 @@
     margin: 0 auto;
     text-shadow: 0 2px 8px rgba(0,0,0,1);
     font-weight: 500;
-}
-
-.p-mid {
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.p-final {
-    bottom: 20vh;
 }
 
 .neon-text {
@@ -171,6 +166,82 @@
     }
     50% {
         transform: translateY(-8px);
+    }
+}
+
+/* ── Mobile & 320px/375px Optimizations ── */
+@media (max-width: 600px) {
+    .sequence-container {
+        height: 250vh !important; /* Shorter scroll area on mobile for a faster, better touch scroll experience */
+    }
+
+    .parallax-text-overlay {
+        padding-top: 4rem !important;
+        box-sizing: border-box !important;
+    }
+
+    .parallax-text-step {
+        padding: 0.75rem 1rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .parallax-text-step h3 {
+        font-size: clamp(1.4rem, 6.5vw, 1.85rem) !important;
+        margin-bottom: 0.5rem !important;
+        line-height: 1.25 !important;
+        word-break: break-word !important;
+    }
+
+    .parallax-text-step p {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+        max-width: 290px !important;
+        margin: 0 auto !important;
+        word-break: break-word !important;
+    }
+
+    .neon-text {
+        letter-spacing: 2px !important;
+    }
+
+    .scroll-hint {
+        bottom: 1.25rem !important;
+    }
+
+    .wave-letter {
+        animation-name: wave-motion-animation-mobile !important;
+    }
+}
+
+@keyframes wave-motion-animation-mobile {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+/* Extra small mobile screens (320px) */
+@media (max-width: 380px) {
+    .sequence-container {
+        height: 220vh !important;
+    }
+
+    .parallax-text-step h3 {
+        font-size: 1.3rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .parallax-text-step p {
+        font-size: 0.78rem !important;
+        max-width: 250px !important;
+    }
+
+    .scroll-hint {
+        bottom: 0.75rem !important;
     }
 }
 

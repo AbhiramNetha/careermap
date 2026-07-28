@@ -82,3 +82,54 @@ export async function trackVisit() {
         void 0;
     }
 }
+
+export async function fetchOpportunities(params = {}) {
+    const qs = new URLSearchParams(params).toString();
+    const res = await fetch(`${BASE}/opportunities?${qs}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to fetch opportunities');
+    return data;
+}
+
+export async function createOpportunity(opportunityData, token) {
+    const res = await fetch(`${BASE}/admin/opportunities`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(opportunityData),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to create opportunity');
+    return data;
+}
+
+export async function updateOpportunity(id, opportunityData, token) {
+    const res = await fetch(`${BASE}/admin/opportunities/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(opportunityData),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to update opportunity');
+    return data;
+}
+
+export async function deleteOpportunity(id, token) {
+    const res = await fetch(`${BASE}/admin/opportunities/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to delete opportunity');
+    return data;
+}
+
+export async function trackOpportunityClick(id, userEmail = 'anonymous') {
+    const res = await fetch(`${BASE}/opportunities/${id}/click`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userEmail }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to track opportunity click');
+    return data;
+}

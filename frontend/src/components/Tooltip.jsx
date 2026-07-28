@@ -46,7 +46,6 @@ export default function Tooltip({ text, children, position = 'top' }) {
             fontWeight: 500,
             padding: '6px 10px',
             borderRadius: '8px',
-            whiteSpace: 'nowrap',
             zIndex: 9999,
             backdropFilter: 'blur(8px)',
             boxShadow: '0 4px 20px rgba(0,0,0,0.4)',

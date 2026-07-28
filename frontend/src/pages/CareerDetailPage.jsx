@@ -35,7 +35,6 @@ export default function CareerDetailPage() {
     }
 
     const alreadyInCompare = selectedCareers.find(c => c.id === career.id || c.slug === career.slug);
-    const riskColor = career.riskLevel === 'Low' ? '#10b981' : career.riskLevel === 'High' ? '#ef4444' : '#f59e0b';
 
     return (
         <div className="career-detail-page" style={{ padding: '2rem 0 6rem' }}>
@@ -51,8 +50,15 @@ export default function CareerDetailPage() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1.5rem' }}>
                         <div style={{ flex: 1, minWidth: 0 }}>
                             <div style={{ display: 'flex', gap: '10px', marginBottom: '1rem', flexWrap: 'wrap' }}>
-                                <span className="chip chip-purple">{career.category}</span>
-                                {career.isTrending && <span className="chip chip-yellow">Trending</span>}
+                                <span style={{
+                                    fontSize: '0.82rem',
+                                    fontWeight: 600,
+                                    padding: '4px 14px',
+                                    borderRadius: '99px',
+                                    background: 'rgba(148, 163, 184, 0.08)',
+                                    color: '#64748b',
+                                    border: '1px solid #cbd5e1'
+                                }}>{career.category}</span>
                             </div>
                             <h1 style={{ fontFamily: 'Poppins', fontSize: 'clamp(1.8rem, 3vw, 2.8rem)', fontWeight: 800, marginBottom: '0.75rem' }}>
                                 {career.title}
@@ -90,7 +96,18 @@ export default function CareerDetailPage() {
                     {/* Action Buttons */}
                     <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
                         <button
-                            className="btn-primary"
+                            style={{
+                                background: '#000000',
+                                color: '#ffffff',
+                                border: '1px solid #000000',
+                                padding: '10px 24px',
+                                borderRadius: 'var(--radius-md)',
+                                fontWeight: 600,
+                                cursor: 'pointer',
+                                transition: 'all 0.2s',
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.background = '#1e293b'}
+                            onMouseLeave={e => e.currentTarget.style.background = '#000000'}
                             onClick={() => navigate('/careers')}
                         >
                             Back to Explore
@@ -117,13 +134,13 @@ export default function CareerDetailPage() {
                             {career.skills && career.skills.length > 0 ? (
                                 career.skills.map(skill => (
                                     <span key={skill} className="skill-tag" style={{
-                                        background: 'rgba(99,102,241,0.08)',
-                                        border: '1px solid rgba(99,102,241,0.2)',
-                                        color: 'var(--primary-light)',
-                                        padding: '6px 12px',
-                                        borderRadius: 'var(--radius-sm)',
-                                        fontSize: '0.85rem',
-                                        fontWeight: 500,
+                                        background: 'rgba(148, 163, 184, 0.08)',
+                                        border: '1px solid #cbd5e1',
+                                        color: '#64748b',
+                                        padding: '6px 14px',
+                                        borderRadius: '99px',
+                                        fontSize: '0.82rem',
+                                        fontWeight: 600,
                                     }}>{skill}</span>
                                 ))
                             ) : (
@@ -143,12 +160,25 @@ export default function CareerDetailPage() {
                         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                             {career.branches && career.branches.length > 0 ? (
                                 career.branches.includes('ALL') ? (
-                                    <span className="chip chip-green" style={{ fontSize: '0.9rem', padding: '6px 14px' }}>All Engineering Branches Eligible</span>
+                                    <span style={{
+                                        fontSize: '0.82rem',
+                                        fontWeight: 600,
+                                        padding: '6px 14px',
+                                        borderRadius: '99px',
+                                        background: 'rgba(148, 163, 184, 0.08)',
+                                        color: '#64748b',
+                                        border: '1px solid #cbd5e1',
+                                    }}>All Engineering Branches Eligible</span>
                                 ) : (
                                     career.branches.map(b => (
-                                        <span key={b} className="chip chip-purple" style={{
-                                            fontSize: '0.85rem',
-                                            padding: '6px 12px',
+                                        <span key={b} style={{
+                                            fontSize: '0.82rem',
+                                            fontWeight: 600,
+                                            padding: '6px 14px',
+                                            borderRadius: '99px',
+                                            background: 'rgba(148, 163, 184, 0.08)',
+                                            color: '#64748b',
+                                            border: '1px solid #cbd5e1',
                                             cursor: 'pointer',
                                         }} onClick={() => navigate(`/branches/${b}`)}>{b}</span>
                                     ))

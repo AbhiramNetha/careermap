@@ -10,6 +10,7 @@ import {
   ArrowPathIcon
 } from '@heroicons/react/24/solid';
 import { analyzeResume } from '../services/api';
+import { useLoginGate } from '../hooks/useLoginGate';
 
 const factorConfig = {
   keywordMatch: { label: "Keyword Match", weight: "25%", color: "emerald" },
@@ -35,6 +36,7 @@ export default function AtsCheckerPage() {
   const [isDragActive, setIsDragActive] = useState(false);
 
   const fileInputRef = useRef(null);
+  const { requireLogin } = useLoginGate();
 
   // Steps shown during fake scan progress
   const scanningSteps = [
@@ -119,6 +121,10 @@ export default function AtsCheckerPage() {
       return;
     }
 
+    requireLogin(() => runAnalysis());
+  };
+
+  const runAnalysis = async () => {
     setLoading(true);
     setError(null);
     setResults(null);

@@ -8,7 +8,7 @@ export default function AuthenticationLayout({
   bottom,
 }) {
   return (
-    <div className="auth-shell">
+    <div className="auth-shell" style={{ position: 'relative' }}>
       <div className="auth-orb auth-orb-1" />
       <div className="auth-orb auth-orb-2" />
 

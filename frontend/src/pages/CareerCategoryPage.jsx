@@ -14,7 +14,6 @@ function CareerCard({ career, onCompare, onView, alreadyInCompare }) {
                     <div className="career-name">{career.title}</div>
                     <div className="career-subcategory">{career.category}</div>
                 </div>
-                {career.isTrending && <span className="trend-badge">Trending</span>}
             </div>
             <p className="career-overview">{career.description}</p>
             <div className="career-meta">
@@ -26,13 +25,7 @@ function CareerCard({ career, onCompare, onView, alreadyInCompare }) {
             </div>
             {career.salaryRange && <div className="career-salary">Salary Range: {career.salaryRange}</div>}
             <div className="career-card-footer">
-                <button 
-                    className={`btn-sm ${alreadyInCompare ? 'btn-filled' : 'btn-outline'}`} 
-                    onClick={onCompare}
-                >
-                    {alreadyInCompare ? '✓ Compare' : '⚖️ Compare'}
-                </button>
-                <button className="btn-sm btn-filled" onClick={() => onView(career.slug)}>View Details →</button>
+                <button className="btn-sm btn-filled" style={{ width: '100%' }} onClick={() => onView(career.slug)}>View Details →</button>
             </div>
         </div>
     );
@@ -120,7 +113,7 @@ export default function CareerCategoryPage() {
                     <div className="breadcrumb">
                         <a href="/">Home</a> <span>/</span> Explore Careers
                     </div>
-                    <h1 className="section-title" style={{ marginBottom: '0.5rem' }}>
+                    <h1 className="section-title careers-hero-title">
                         Explore <span className="gradient-text">Career Paths</span>
                     </h1>
                     <p style={{ color: 'var(--text-secondary)' }}>

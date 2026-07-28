@@ -14,6 +14,9 @@
   --bg: #020a06;
   --bg-card: rgba(13, 17, 23, 0.7);
   --bg-glass: rgba(15, 23, 42, 0.6);
+  --bg-navbar: #09130f;
+  --bg-navbar-strip: #0d1b15;
+  --bg-navbar-mobile: #09130f;
   --border: rgba(255, 255, 255, 0.08);
   --border-active: rgba(16, 185, 129, 0.4);
 
@@ -62,6 +65,9 @@
   --bg: #f8fafc;
   --bg-card: rgba(255, 255, 255, 0.85);
   --bg-glass: rgba(255, 255, 255, 0.7);
+  --bg-navbar: #ffffff;
+  --bg-navbar-strip: #f1f5f9;
+  --bg-navbar-mobile: #ffffff;
   --border: rgba(15, 23, 42, 0.08);
   --border-active: rgba(16, 185, 129, 0.3);
 
@@ -711,10 +717,10 @@ textarea {
   display: inline-flex;
   align-items: center;
   padding: 0.6rem 1.4rem;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid #000000;
   border-radius: 100px;
-  color: var(--primary-light);
+  color: #000000;
   font-size: 0.85rem;
   font-weight: 700;
   margin-bottom: 2.5rem;
@@ -980,7 +986,11 @@ textarea {
 .career-salary {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #10b981;
+  color: #000000 !important;
+}
+
+[data-theme='light'] .career-salary {
+  color: #000000 !important;
 }
 
 .career-card-footer {
@@ -1011,13 +1021,15 @@ textarea {
 }
 
 .btn-filled {
-  background: var(--gradient-primary);
-  color: white;
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
 }
 
 .btn-filled:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+  background: #1e293b;
+  color: #ffffff;
+  opacity: 1;
 }
 
 /* ===== SECTION HEADINGS ===== */
@@ -1028,9 +1040,9 @@ textarea {
 
 .section-tag {
   display: inline-block;
-  background: rgba(99, 102, 241, 0.15);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  color: var(--primary-light);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid #000000;
+  color: #000000;
   padding: 6px 14px;
   border-radius: 99px;
   font-size: 0.78rem;
@@ -2261,10 +2273,14 @@ textarea {
 /* full-page layout on the same dark canvas */
 .auth-shell {
   min-height: 100vh;
-  padding: 5rem 1.5rem 2rem;
+  height: 100vh;
+  padding: 1.5rem;
   position: relative;
   overflow: hidden;
-  overflow-x: hidden;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--gradient-hero);
 }
 
@@ -2272,14 +2288,15 @@ textarea {
 .auth-grid {
   position: relative;
   z-index: 2;
-  max-width: min(1240px, 100%);
+  max-width: min(1200px, 100%);
+  width: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 2.5rem;
   align-items: center;
-  min-height: calc(100vh - 7rem);
-  overflow: hidden;
+  max-height: calc(100vh - 3rem);
+  box-sizing: border-box;
 }
 
 .auth-left {
@@ -2335,7 +2352,7 @@ textarea {
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: var(--radius-xl);
-  padding: 2.5rem;
+  padding: 1.75rem 2rem;
   box-sizing: border-box;
   overflow: hidden;
   box-shadow:
@@ -2346,7 +2363,7 @@ textarea {
 }
 
 .auth-card--wide {
-  max-width: min(520px, calc(100vw - 2rem));
+  max-width: min(500px, calc(100vw - 2rem));
 }
 
 /* logo inside card */
@@ -2356,18 +2373,18 @@ textarea {
   gap: 8px;
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1rem;
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
   text-decoration: none;
 }
 
 .auth-logo-img {
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
   border-radius: 0;
   filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.25));
@@ -2381,19 +2398,19 @@ textarea {
 
 /* card header text */
 .auth-card-header {
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.25rem;
 }
 
 .auth-title {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 800;
   line-height: 1.2;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.25rem;
 }
 
 .auth-subtitle {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: var(--text-secondary);
 }
 
@@ -3547,12 +3564,16 @@ textarea {
   overflow: hidden;
 }
 
+[data-theme='light'] .courses-hero {
+  background: linear-gradient(160deg, #e0f2fe 0%, #bae6fd 50%, #f0f9ff 100%);
+}
+
 .courses-hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 30% 50%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
-    radial-gradient(circle at 70% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 60%);
+  background-image: radial-gradient(circle at 30% 50%, rgba(99, 102, 241, 0.2) 0%, transparent 60%),
+    radial-gradient(circle at 70% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -3565,9 +3586,9 @@ textarea {
 
 .courses-hero-badge {
   display: inline-block;
-  background: rgba(99, 102, 241, 0.15);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  color: #a5b4fc;
+  background: rgba(148, 163, 184, 0.08);
+  border: 1px solid #cbd5e1;
+  color: #64748b;
   padding: 6px 16px;
   border-radius: 99px;
   font-size: 0.82rem;
@@ -3575,12 +3596,39 @@ textarea {
   margin-bottom: 1.2rem;
 }
 
+[data-theme='light'] .courses-hero-badge {
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  background: rgba(148, 163, 184, 0.08);
+}
+
 .courses-hero-title {
   font-family: 'Poppins', sans-serif;
-  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-size: clamp(1.4rem, 4.2vw, 3.2rem);
+  line-height: 1.05;
   font-weight: 800;
-  line-height: 1.15;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  letter-spacing: -0.04em;
+}
+
+.careers-hero-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.4rem, 4.2vw, 3.2rem);
+  line-height: 1.05;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  letter-spacing: -0.04em;
+}
+
+.alumni-hero-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.4rem, 4.2vw, 3.2rem);
+  line-height: 1.05;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  letter-spacing: -0.04em;
+  text-align: center;
 }
 
 .courses-hero-sub {
@@ -3603,6 +3651,12 @@ textarea {
   transition: border-color 0.2s;
 }
 
+[data-theme='light'] .courses-search-bar {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.15);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
 .courses-search-bar:focus-within {
   border-color: var(--primary);
 }
@@ -3616,8 +3670,16 @@ textarea {
   width: 100%;
 }
 
+[data-theme='light'] .courses-search-bar input {
+  color: #0f172a;
+}
+
 .courses-search-bar input::placeholder {
   color: var(--text-muted);
+}
+
+[data-theme='light'] .courses-search-bar input::placeholder {
+  color: #64748b;
 }
 
 /* Main */
@@ -3716,9 +3778,9 @@ textarea {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: rgba(245, 158, 11, 0.15);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  color: #fcd34d;
+  background: rgba(148, 163, 184, 0.08);
+  border: 1px solid #cbd5e1;
+  color: #64748b;
   font-size: 0.72rem;
   font-weight: 700;
   padding: 3px 10px;
@@ -3770,14 +3832,27 @@ textarea {
   font-weight: 600;
   padding: 3px 10px;
   border-radius: 99px;
-  background: rgba(6, 182, 212, 0.1);
-  color: #67e8f9;
-  border: 1px solid rgba(6, 182, 212, 0.2);
+  background: rgba(148, 163, 184, 0.08);
+  color: #64748b;
+  border: 1px solid #cbd5e1;
 }
 
 .course-tag-platform {
   font-size: 0.72rem;
-  color: var(--text-muted);
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: rgba(148, 163, 184, 0.08);
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+}
+
+[data-theme='light'] .course-tag-cat,
+[data-theme='light'] .course-tag-platform,
+[data-theme='light'] .course-featured-ribbon {
+  color: #64748b !important;
+  border: 1px solid #cbd5e1 !important;
+  background: rgba(148, 163, 184, 0.08) !important;
 }
 
 .course-card-title {
@@ -3855,21 +3930,22 @@ textarea {
 
 .course-go-btn {
   padding: 9px 16px;
-  background: var(--gradient-primary);
-  color: #fff;
-  border: none;
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
   border-radius: var(--radius-sm);
   font-size: 0.83rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 3px 12px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
   white-space: nowrap;
 }
 
 .course-go-btn:hover {
+  background: #1e293b;
+  border-color: #1e293b;
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(99, 102, 241, 0.5);
 }
 
 /* Loading / empty */
@@ -4187,7 +4263,6 @@ button[type="submit"] {
 
 /* Primary / Filled Button Style */
 .btn-primary,
-.btn-filled,
 .btn-quiz-cta,
 button[type="submit"] {
   background: var(--gradient-primary);
@@ -4195,13 +4270,27 @@ button[type="submit"] {
   box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2);
 }
 
+.btn-filled {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #000000 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+}
+
 .btn-primary:hover,
-.btn-filled:hover,
 .btn-quiz-cta:hover,
 button[type="submit"]:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
   filter: brightness(1.1);
+}
+
+.btn-filled:hover {
+  background: #1e293b !important;
+  border-color: #1e293b !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  filter: none !important;
 }
 
 .btn-primary:active,
@@ -4528,7 +4617,7 @@ button[type="submit"]:active:not(:disabled) {
    Way2Fresher Responsive Navbar Overhaul (Theme-Aware & Spacious Search)
    ========================================================================== */
 .w2f-navbar {
-  background: var(--bg-glass);
+  background: var(--bg-navbar);
   border: 1px solid var(--border);
   color: var(--text-primary);
   box-shadow: var(--shadow-premium);
@@ -4573,14 +4662,14 @@ button[type="submit"]:active:not(:disabled) {
 }
 
 .w2f-tools-strip {
-  background: rgba(15, 23, 42, 0.45);
+  background: var(--bg-navbar-strip);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-premium);
   position: relative;
   z-index: 20;
 }
 [data-theme='light'] .w2f-tools-strip {
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--bg-navbar-strip);
 }
 
 .w2f-tool-btn {
@@ -4604,7 +4693,7 @@ button[type="submit"]:active:not(:disabled) {
 }
 
 .w2f-profile-menu-dropdown {
-  background: var(--bg-card);
+  background: var(--bg-navbar);
   border: 1px solid var(--border);
 }
 [data-theme='light'] .w2f-profile-menu-dropdown {
@@ -4625,11 +4714,11 @@ button[type="submit"]:active:not(:disabled) {
 }
 
 .w2f-mobile-drawer {
-  background: var(--bg-glass);
+  background: var(--bg-navbar-mobile);
   border: 1px solid var(--border);
 }
 [data-theme='light'] .w2f-mobile-drawer {
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--bg-navbar-mobile);
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
 }
 
@@ -5272,6 +5361,10 @@ button[type="submit"]:active:not(:disabled) {
 
 [data-theme='light'] .topbar {
   background: rgba(255,255,255,0.85);
+}
+
+.topbar--no-sidebar {
+  padding-left: 1.5rem !important;
 }
 
 .topbar-search {
@@ -5997,6 +6090,8 @@ button[type="submit"]:active:not(:disabled) {
 .sidebar-premium-btn .sidebar-nav-label {
   color: #0f1d33 !important;
   font-weight: 700 !important;
+  text-align: center;
+  width: 100%;
 }
 
 /* Warm golden-orange color for icons */
@@ -6010,7 +6105,7 @@ button[type="submit"]:active:not(:disabled) {
 }
 
 .sidebar-premium-btn--expanded {
-  justify-content: flex-start;
+  justify-content: center;
   padding: 0.65rem 0.85rem;
 }
 
@@ -6305,6 +6400,201 @@ button[type="submit"]:disabled {
 [data-theme='light'] .resume-builder-form select:focus {
   border-color: #10b981 !important;
   box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2) !important;
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   ULTRA-RESPONSIVE MOBILE & SMALL SCREEN FIXES (down to 320px)
+   ═════════════════════════════════════════════════════════════════════ */
+
+html, body {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+@media (max-width: 380px) {
+  /* Container & Layout */
+  .container {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .page-header {
+    padding: 1.5rem 0.5rem !important;
+  }
+
+  .main-content {
+    padding: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Headings & Text */
+  .hero-title, .courses-hero-title, .careers-hero-title, .alumni-hero-title {
+    font-size: clamp(1.3rem, 7vw, 1.75rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: normal !important;
+    word-break: break-word !important;
+  }
+
+  .section-title {
+    font-size: clamp(1.2rem, 6vw, 1.5rem) !important;
+    word-break: break-word !important;
+  }
+
+  .hero-subtitle, .courses-hero-sub, .section-subtitle {
+    font-size: 0.85rem !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Badges & Tags */
+  .hero-badge, .courses-hero-badge, .section-tag, .trend-badge, .compare-badge {
+    font-size: 0.68rem !important;
+    padding: 4px 10px !important;
+    white-space: normal !important;
+    text-align: center !important;
+    max-width: 100% !important;
+    word-break: break-word !important;
+  }
+
+  /* Buttons & Actions */
+  .btn-primary, .btn-secondary, .btn-filled, .btn-outline, .btn-sm, .course-go-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 9px 12px !important;
+    font-size: 0.8rem !important;
+    box-sizing: border-box !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+  }
+
+  .hero-cta {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 0.6rem !important;
+  }
+
+  /* Cards & Grids */
+  .courses-grid, .categories-grid, .branch-grid, .about-stats-grid, .values-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.85rem !important;
+    width: 100% !important;
+  }
+
+  .career-card, .category-card, .course-card, .detail-section, .value-card, .about-stat-card {
+    padding: 1rem 0.85rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Stats Counter Grid */
+  .hero-stats {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.5rem !important;
+    padding: 1rem 0.5rem !important;
+  }
+
+  .stat-value {
+    font-size: 1.4rem !important;
+  }
+
+  .stat-label {
+    font-size: 0.7rem !important;
+  }
+
+  /* Table Scroll Wrappers */
+  .compare-table-wrapper, .table-container, .admin-table-wrapper {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Auth Screens on 320px */
+  .auth-shell {
+    padding: 0.75rem !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+  }
+
+  .auth-card, .auth-card--wide {
+    padding: 1.25rem 0.75rem !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .auth-title {
+    font-size: 1.2rem !important;
+  }
+
+  .auth-subtitle {
+    font-size: 0.78rem !important;
+  }
+
+  .auth-input-wrap input {
+    font-size: 0.82rem !important;
+    padding: 10px 12px !important;
+  }
+
+  .auth-provider-btn {
+    padding: 8px 10px !important;
+    font-size: 0.78rem !important;
+  }
+
+  /* TopBar Auth Buttons & Compact Search Icon on 320px */
+  .topbar {
+    padding: 0 0.4rem 0 3rem !important;
+    gap: 0.35rem !important;
+  }
+
+  .topbar--no-sidebar {
+    padding-left: 0.5rem !important;
+  }
+
+  .topbar-search {
+    display: flex !important;
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex: 0 0 30px !important;
+  }
+
+  .topbar-search-input {
+    display: none !important;
+  }
+
+  .topbar-auth-links {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
+  }
+
+  .topbar-auth-link {
+    padding: 3px 6px !important;
+    font-size: 0.68rem !important;
+    border-radius: 6px !important;
+    white-space: normal !important;
+    text-align: center !important;
+    line-height: 1.1 !important;
+    display: inline-flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-width: 34px !important;
+  }
 }
 
 

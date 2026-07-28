@@ -19,20 +19,20 @@ export default function ScrollReveal({
         // Use the app's custom scroll container as root so IntersectionObserver
         // fires against the right viewport. Falls back to null (window) if not found.
         const scrollRoot = document.getElementById('main-scroll-container') || null;
+        const isMobile = window.innerWidth <= 768;
 
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsVisible(true);
-                } else {
-                    // Reset so the animation re-plays every time the element re-enters
+                } else if (!isMobile) {
                     setIsVisible(false);
                 }
             },
             {
                 root: scrollRoot,
-                rootMargin: '-60px',
-                threshold: 0.1,
+                rootMargin: isMobile ? '0px' : '-40px',
+                threshold: isMobile ? 0.01 : 0.1,
             }
         );
 
@@ -43,10 +43,10 @@ export default function ScrollReveal({
     return (
         <Motion.div
             ref={ref}
-            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: yOffset }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: window.innerWidth <= 768 ? 10 : yOffset }}
             transition={{
-                delay: isVisible ? delay : 0,
-                duration: duration,
+                delay: isVisible ? (window.innerWidth <= 768 ? Math.min(delay, 0.1) : delay) : 0,
+                duration: window.innerWidth <= 768 ? 0.4 : duration,
                 ease: [0.16, 1, 0.3, 1],
             }}
             className={className}
