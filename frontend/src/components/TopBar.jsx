@@ -76,7 +76,7 @@ export default function TopBar({ sidebarHidden = false }) {
         {sidebarHidden && (
           <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', marginRight: '1rem', flexShrink: 0 }}>
             <img src="/logo.png" alt="logo" style={{ height: '32px', objectFit: 'contain' }} />
-            <span style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+            <span style={{ fontSize: '1rem', fontWeight: 800, color: '#1e293b' }}>
               Way2<span style={{ color: 'var(--primary)' }}>Fresher</span>
             </span>
           </Link>

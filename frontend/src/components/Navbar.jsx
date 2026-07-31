@@ -288,7 +288,7 @@ export function Way2FresherNavbar() {
           {}
           <button
             onClick={toggleIsNavOpen}
-            className="ml-auto h-8 w-8 flex items-center justify-center rounded-lg hover:bg-white/5 lg:hidden text-white outline-none"
+            className="ml-auto h-8 w-8 flex items-center justify-center rounded-lg hover:bg-black/5 lg:hidden text-slate-700 outline-none"
             aria-label="Toggle navigation"
           >
             <Bars2Icon className="h-6 w-6" style={{ color: "var(--text-primary)" }} />

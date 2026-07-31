@@ -14,7 +14,7 @@
   --bg: #020a06;
   --bg-card: rgba(13, 17, 23, 0.7);
   --bg-glass: rgba(15, 23, 42, 0.6);
-  --bg-navbar: #09130f;
+  --bg-navbar: #ffffff;
   --bg-navbar-strip: #0d1b15;
   --bg-navbar-mobile: #09130f;
   --border: rgba(255, 255, 255, 0.08);
@@ -767,6 +767,7 @@ textarea {
   border: 1px solid var(--border);
   transition: var(--transition);
 }
+
 
 .hero-stat-item:hover {
   transform: translateY(-8px);
@@ -4617,29 +4618,28 @@ button[type="submit"]:active:not(:disabled) {
    Way2Fresher Responsive Navbar Overhaul (Theme-Aware & Spacious Search)
    ========================================================================== */
 .w2f-navbar {
-  background: var(--bg-navbar);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  box-shadow: var(--shadow-premium);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #1e293b;
   position: relative;
   z-index: 30;
 }
 
 .w2f-navlink {
-  color: var(--text-secondary);
+  color: #475569;
   transition: var(--transition);
 }
 .w2f-navlink:hover, .w2f-navlink-active {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.08);
+  color: #0f172a;
+  background: rgba(15, 23, 42, 0.05);
 }
 [data-theme='light'] .w2f-navlink:hover, [data-theme='light'] .w2f-navlink-active {
   background: rgba(15, 23, 42, 0.05);
 }
 
 .w2f-search-container {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 [data-theme='light'] .w2f-search-container {
@@ -4655,16 +4655,15 @@ button[type="submit"]:active:not(:disabled) {
 }
 
 .w2f-search-input {
-  color: var(--text-primary);
+  color: #1e293b;
 }
 .w2f-search-input::placeholder {
-  color: var(--text-muted);
+  color: #94a3b8;
 }
 
 .w2f-tools-strip {
   background: var(--bg-navbar-strip);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-premium);
   position: relative;
   z-index: 20;
 }
@@ -4673,11 +4672,11 @@ button[type="submit"]:active:not(:disabled) {
 }
 
 .w2f-tool-btn {
-  color: var(--text-secondary);
+  color: #475569;
   transition: var(--transition);
 }
 .w2f-tool-btn:hover {
-  color: var(--text-primary);
+  color: #0f172a;
 }
 
 .w2f-tool-highlight {
@@ -4723,9 +4722,9 @@ button[type="submit"]:active:not(:disabled) {
 }
 
 .w2f-btn-secondary {
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: transparent;
+  color: #1e293b;
   transition: var(--transition);
 }
 [data-theme='light'] .w2f-btn-secondary {
@@ -5353,14 +5352,9 @@ button[type="submit"]:active:not(:disabled) {
   align-items: center;
   justify-content: space-between;
   padding: 0 1.5rem;
-  background: var(--sidebar-bg);
-  border-bottom: 1px solid var(--sidebar-border);
-  backdrop-filter: blur(16px);
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   gap: 1rem;
-}
-
-[data-theme='light'] .topbar {
-  background: rgba(255,255,255,0.85);
 }
 
 .topbar--no-sidebar {
@@ -5373,8 +5367,8 @@ button[type="submit"]:active:not(:disabled) {
   gap: 0.5rem;
   flex: 1;
   max-width: 480px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 10px;
   padding: 0.45rem 1rem;
   transition: all 0.25s ease;
@@ -5382,13 +5376,7 @@ button[type="submit"]:active:not(:disabled) {
 .topbar-search:focus-within {
   border-color: var(--primary);
   box-shadow: 0 0 12px rgba(16, 185, 129, 0.15);
-  background: rgba(255,255,255,0.08);
-}
-[data-theme='light'] .topbar-search {
-  background: rgba(15, 23, 42, 0.04);
-}
-[data-theme='light'] .topbar-search:focus-within {
-  background: rgba(255,255,255,0.9);
+  background: #ffffff;
 }
 
 .topbar-search-icon {
@@ -5402,11 +5390,11 @@ button[type="submit"]:active:not(:disabled) {
   border: none;
   outline: none;
   font-size: 0.85rem;
-  color: var(--text-primary);
+  color: #1e293b;
   font-family: var(--font-main);
 }
 .topbar-search-input::placeholder {
-  color: var(--text-muted);
+  color: #94a3b8;
 }
 
 .topbar-actions {
@@ -5564,14 +5552,14 @@ button[type="submit"]:active:not(:disabled) {
   border-radius: 8px;
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: #475569;
   text-decoration: none;
   transition: all 0.2s ease;
   border: 1px solid transparent;
 }
 .topbar-auth-link:hover {
-  color: var(--text-primary);
-  background: var(--sidebar-hover);
+  color: #0f172a;
+  background: rgba(15, 23, 42, 0.05);
 }
 
 .topbar-auth-link--primary {
